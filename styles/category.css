@@ -1,0 +1,53 @@
+/* For all items in articles */
+.category__items,
+.new__items,
+.blog__articles {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 3%;
+}
+
+.category__item,
+.new__item,
+.blog__article {
+    max-width: 30%;
+}
+
+/* ------------------ */
+
+.caption {
+    text-align: center;
+}
+
+.category__item img {
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    background: rgb(115, 93, 120);
+    background: linear-gradient(180deg, rgba(115, 93, 120, 0.5) 0%, rgba(179, 146, 172, 0.3) 30%, rgba(226, 226, 226, 0.2) 100%);
+    /* FIXME */
+    width: 30%;
+    height: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 2.5vw;
+    font-style: italic;
+    font-weight: 700;
+    padding: 1em;
+    text-align: center;
+}
+
+.overlay p {
+    border: 2px solid white;
+}
+
+.category__item:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+}

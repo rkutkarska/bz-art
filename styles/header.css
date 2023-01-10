@@ -1,0 +1,85 @@
+.navigation__links li a {
+    color: var(--clr-white);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navigation__buttons {
+    font-weight: 700;
+}
+
+.header__info {
+    background-color: var(--clr-purple-dark);
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0 1rem 0;
+}
+
+.phone,
+.location,
+.email,
+.email a,
+.social-media,
+.social-media a {
+    color: var(--clr-white);
+}
+
+.fa-magnifying-glass {
+    padding-right: 0.5rem;
+}
+
+.logo {
+    margin: 0 auto;
+    padding: 1rem 0 1rem 0;
+}
+
+.navigation {
+    border-top: 5px solid var(--clr-yellow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    background: linear-gradient(180deg, rgba(115, 93, 120, 0.5) 0%, rgba(179, 146, 172, 0.3) 60%, rgba(226, 226, 226, 0.2) 100%);
+    position: absolute;
+    width: 100%;
+    padding: 0 2rem 0 2rem;
+}
+
+.hero img {
+    z-index: -1;
+}
+
+.navigation__search-bar i {
+    position: relative;
+    left: 30px;
+}
+
+.navigation__links,
+.navigation__buttons {
+    display: flex;
+    gap: 40px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navigation__buttons button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: var(--clr-white);
+    border: 1px solid var(--clr-white);
+    padding: 2px 6px;
+}
+
+.navigation__buttons button:hover {
+    border: 1px solid var(--clr-yellow);
+    color: var(--clr-yellow);
+}
+
+.navigation__links li a:hover {
+    color: var(--clr-yellow);
+}

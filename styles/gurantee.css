@@ -1,0 +1,23 @@
+.guarantee__list {
+    display: flex;
+    justify-content: space-evenly;
+}
+.guarantee__list li {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    text-align: center;
+}
+.guarantee__list li i {
+    padding: 2rem;
+    border-radius: 100%;
+    align-items: center;
+    font-size: 3rem;
+    /* color: var(--clr-white); */
+}
+
+.guarantee__list li p {
+    background-color: var(--clr-rose-ash);
+    min-height: 120px;
+    padding: 1rem;
+}

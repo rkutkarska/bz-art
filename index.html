@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__info">
+            <p class="location"><i class="fa-sharp fa-solid fa-location-dot"></i>гр. Сливен, бул. "Цар Освободител" 0
+            </p>
+            <p class="phone"><i class="fa-solid fa-phone"></i>+359 1234 6789</p>
+            <p class="email"><i class="fa-regular fa-envelope"></i><a
+                    href="mailto:sales@bz-art.com">sales@bz-art.com</a></p>
+            <p class="social-media">Последвай ни:
+                <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </p>
+        </div>
+        <img class="logo" src="/src/logo.png" alt="logo">
+        <nav class="navigation">
+            <ul class="navigation__links ul-clear">
+                <li><a href="/home">Начало</a></li>
+                <li><a href="/products">Продукти</a></li>
+                <li><a href="/blog">Блог</a></li>
+                <li><a href="/contacts">Контакти</a></li>
+            </ul>
+            <!-- <div class="navigation__search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i><input type="text" />
+            </div> -->
+            <div class="navigation__buttons">
+                <button>Вход</button>
+                <button>Изход</button>
+                <button>Количка</button>
+            </div>
+        </nav>
+        <div class="hero">
+            <img src="/src/index-banner.png" alt="woman with jewellery">
+        </div>
+    </header>
+
+    <main>
+        <article class="category">
+            <h1 class="caption">Категория</h1>
+            <div class="category__items">
+                <section class="category__item">
+                    <img src="/src/items/item_jewellery-3.jpg" alt="ring">
+                    <div class="overlay">
+                        <p>Пръстени</p>
+                    </div>
+                </section>
+                <section class="category__item">
+                    <img src="/src/items/item_jewellery-5.jpg" alt="earings">
+                    <div class="overlay">
+                        <p>Обеци</p>
+                    </div>
+                </section>
+                <section class="category__item">
+                    <img src="/src/items/item_jewellery-7.jpg" alt="necklace">
+                    <div class="overlay">
+                        <p>Колиета</p>
+                    </div>
+                </section>
+            </div>
+            <div class="category__items">
+                <section class="category__item">
+                    <img src="/src/items/item_jewellery-1.jpg" alt="set">
+                    <div class="overlay">
+                        <p>Комплекти</p>
+                    </div>
+                </section>
+                <section class="category__item">
+                    <img src="/src/items/item_other.jpg" alt="gnome">
+                    <div class="overlay">
+                        <p>Други аксесоари</p>
+                    </div>
+                </section>
+                <section class="category__item">
+                    <img src="/src/items/item_home.jpg" alt="home">
+                    <div class="overlay">
+                        <p>За дома</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <article class="new">
+            <h1 class="caption">Ново</h1>
+            <div class="new__items">
+                <section class="new__item">
+                    <img src="/src/items/item_jewellery-2.jpg" alt="ring">
+                    <div class="new__actions">
+                        <p>Артикул: Infinissima</p>
+                        <p>Цена: 15 лв.</p>
+                        <button><i class="fa-solid fa-eye"></i>Виж повече</button>
+                        <button><i class="fa-solid fa-cart-shopping"></i>Добави в количката</button>
+                    </div>
+                </section>
+                <section class="new__item">
+                    <img src="/src/items/item_jewellery-4.jpg" alt="ring">
+                    <div class="new__actions">
+                        <p>Артикул: Amara</p>
+                        <p>Цена: 15 лв.</p>
+                        <button><i class="fa-solid fa-eye"></i>Виж повече</button>
+                        <button><i class="fa-solid fa-cart-shopping"></i>Добави в количката</button>
+                    </div>
+
+                </section>
+                <section class="new__item">
+                    <img src="/src/items/item_jewellery-6.jpg" alt="ring">
+                    <div class="new__actions">
+                        <p>Артикул: Jezelle</p>
+                        <p>Цена: 15 лв.</p>
+                        <button><i class="fa-solid fa-eye"></i>Виж повече</button>
+                        <button><i class="fa-solid fa-cart-shopping"></i>Добави в количката</button>
+                    </div>
+
+                </section>
+            </div>
+        </article>
+
+        <article class="blog">
+            <h1 class="caption">Блог</h1>
+            <div class="blog__articles">
+                <section class="blog__article">
+                    <img src="/src/items/blog_article-1.jpg" alt="ring">
+                    <div class="blog__article__actions">
+                        <p>Тенденции при бижутата през 2023 г.</p>
+                        <p>Бижутата винаги са добра идея! Визията никога не е напълно завършена, ако не добавим стилни
+                            обеци, гривни и колие към тоалета.</p>
+                        <button><i class="fa-solid fa-eye"></i>Цялата статия</button>
+                    </div>
+
+                </section>
+                <section class="blog__article">
+                    <img src="/src/items/blog_article-2.jpg" alt="ring">
+                    <div class="blog__article__actions">
+                        <p>Флорални мотиви</p>
+                        <p>Според Китайския зодиак 2023 г. ще бъде годината на Водния Заек. Според филосифията на Фън
+                            Шуй
+                            късметлийският елемент през тази година е огънят, а цветът, който ще носи щастие и късмет е
+                            един
+                            особен вид розово. </p>
+                        <button><i class="fa-solid fa-eye"></i>Цялата статия</button>
+                    </div>
+                </section>
+                <section class="blog__article">
+                    <img src="/src/items/blog_article-3.jpg" alt="ring">
+                    <div class="blog__article__actions">
+                        <p>Тенденции при модните аксесоари през зимата</p>
+                        <p>Темата на тазгодишните зимни модни тенденции е "очаквайте неочакваното". Въпреки че, разбира
+                            се,
+                            все още търсим да останем стоплени, ние също така искаме да направим и впечатление.</p>
+                        <button><i class="fa-solid fa-eye"></i>Цялата статия</button>
+                    </div>
+
+                </section>
+        </article>
+
+        <article class="guarantee">
+            <h1 class="caption">Ако ни се доверите ще получите:</h1>
+            <section class="guarantee__article">
+                <ul class="guarantee__list ul-clear">
+                    <li><i class="fa-sharp fa-solid fa-gem"></i>
+                        <p>100% ръчна изработка, получавате бутиково бижу.</p>
+                    </li>
+                    <li><i class="fa-solid fa-thumbs-up"></i>
+                        <p>Качество без компромиси.</p>
+                    </li>
+                    <li><i class="fa-solid fa-truck"></i>
+                        <p>Доставка в рамките на 24 часа от поръчката.</p>
+                    </li>
+                    <li><i class="fa-solid fa-heart"></i>
+                        <p>Внимание в детайлите, защото обичаме работата си.</p>
+                    </li>
+                    <li><i class="fa-solid fa-hand-holding-heart"></i>
+                        <p>Изработка изцяло по Ваш вкус.</p>
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg"
+            class="transition duration-300 ease-in-out delay-150">
+            <path
+                d="M 0,600 C 0,600 0,200 0,200 C 130,172.53571428571428 260,145.07142857142858 365,154 C 470,162.92857142857142 550.0000000000001,208.25 673,205 C 795.9999999999999,201.75 962,149.92857142857142 1097,141 C 1232,132.07142857142858 1336,166.03571428571428 1440,200 C 1440,200 1440,600 1440,600 Z"
+                stroke="none" stroke-width="0" fill="#d1b3c4" fill-opacity="0.53"
+                class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
+            <path
+                d="M 0,600 C 0,600 0,400 0,400 C 115.60714285714289,381.42857142857144 231.21428571428578,362.85714285714283 334,374 C 436.7857142857142,385.14285714285717 526.7499999999998,425.9999999999999 664,440 C 801.2500000000002,454.0000000000001 985.7857142857144,441.1428571428572 1123,430 C 1260.2142857142856,418.8571428571428 1350.1071428571427,409.4285714285714 1440,400 C 1440,400 1440,600 1440,600 Z"
+                stroke="none" stroke-width="0" fill="#d1b3c4" fill-opacity="1"
+                class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
+        </svg>
+        <p>All rights reserved!</p>
+    </footer>
+</body>
+
+</html>
