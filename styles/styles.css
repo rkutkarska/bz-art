@@ -3,6 +3,7 @@
 @import url(category.css);
 @import url(gurantee.css);
 @import url(blog.css);
+@import url(new.css);
 
 @import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
@@ -10,10 +11,10 @@
     --clr-peach: rgb(247, 211, 207);
     --clr-pink: rgb(232, 194, 202);
     --clr-rose-ash: rgb(209, 179, 196);
-    --clr-purple-light: rgb(179, 146, 172);
+    --clr-purple-light: rgb(180, 147, 173);
     --clr-purple-dark: rgb(115, 93, 120);
     --clr-purple-font: rgb(80, 65, 84);
-    --clr-yellow: rgba(255, 204, 95);
+    --clr-yellow: rgb(255, 204, 95);
     --clr-gray: rgb(191, 191, 191);
     --clr-white: rgb(255, 255, 255);
 }

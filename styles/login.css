@@ -1,0 +1,48 @@
+.form input[type="text"],
+.form input[type="password"] {
+    border: 0;
+    outline: none;
+}
+
+.image-container {
+    width: 100wv;
+    height: 100vh;
+    background-image: url(/src/login/cover-image.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.container {
+    display: flex;
+}
+
+.image-container,
+.form-container {
+    width: 50%;
+}
+
+.form-container {
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(30%, -50%);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+    padding: 0.5em;
+    border-bottom: 2px solid purple;
+    margin-bottom: 2rem;
+}
+
+.form input[type="text"]:focus,
+.form input[type="password"]:focus {
+    border-bottom: 2px solid green;
+}

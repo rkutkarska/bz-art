@@ -9,17 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/styles/login.css">
     <title>Home</title>
 </head>
 
 <body>
     <header class="header">
         <div class="header__info">
-            <p class="location"><i class="fa-sharp fa-solid fa-location-dot"></i>гр. Сливен, бул. "Цар Освободител" 0
+            <p class="location"><a href="https://goo.gl/maps/wyrdQZtLAsJGPaxs8"><i
+                        class="fa-sharp fa-solid fa-location-dot"></i>гр. Сливен, бул. "Цар Освободител" 0</a>
             </p>
-            <p class="phone"><i class="fa-solid fa-phone"></i>+359 1234 6789</p>
-            <p class="email"><i class="fa-regular fa-envelope"></i><a
-                    href="mailto:sales@bz-art.com">sales@bz-art.com</a></p>
+            <p class="phone"><a href="tel:+35912346789"><i class="fa-solid fa-phone"></i>+359 1234 6789</a></p>
+            <p class="email"><a href="mailto:sales@bz-art.com"><i
+                        class="fa-regular fa-envelope"></i>sales@bz-art.com</a></p>
             <p class="social-media">Последвай ни:
                 <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
                 <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
@@ -38,9 +40,9 @@
                 <i class="fa-solid fa-magnifying-glass"></i><input type="text" />
             </div> -->
             <div class="navigation__buttons">
-                <button>Вход</button>
-                <button>Изход</button>
-                <button>Количка</button>
+                <a class="button" href="/login.html">Вход</a>
+                <a class="button" href="">Изход</a>
+                <a class="button" href="">Количка</a>
             </div>
         </nav>
         <div class="hero">
@@ -53,42 +55,54 @@
             <h1 class="caption">Категория</h1>
             <div class="category__items">
                 <section class="category__item">
-                    <img src="/src/items/item_jewellery-3.jpg" alt="ring">
-                    <div class="overlay">
-                        <p>Пръстени</p>
-                    </div>
+                    <a href="">
+                        <img src="/src/items/item_jewellery-3.jpg" alt="ring">
+                        <div class="overlay">
+                            <p>Пръстени</p>
+                        </div>
+                    </a>
                 </section>
                 <section class="category__item">
-                    <img src="/src/items/item_jewellery-5.jpg" alt="earings">
-                    <div class="overlay">
-                        <p>Обеци</p>
-                    </div>
+                    <a href="">
+                        <img src="/src/items/item_jewellery-5.jpg" alt="earings">
+                        <div class="overlay">
+                            <p>Обеци</p>
+                        </div>
+                    </a>
                 </section>
                 <section class="category__item">
-                    <img src="/src/items/item_jewellery-7.jpg" alt="necklace">
-                    <div class="overlay">
-                        <p>Колиета</p>
-                    </div>
+                    <a href="">
+                        <img src="/src/items/item_jewellery-7.jpg" alt="necklace">
+                        <div class="overlay">
+                            <p>Колиета</p>
+                        </div>
+                    </a>
                 </section>
             </div>
             <div class="category__items">
                 <section class="category__item">
-                    <img src="/src/items/item_jewellery-1.jpg" alt="set">
-                    <div class="overlay">
-                        <p>Комплекти</p>
-                    </div>
+                    <a href="">
+                        <img src="/src/items/item_jewellery-1.jpg" alt="set">
+                        <div class="overlay">
+                            <p>Комплекти</p>
+                        </div>
+                    </a>
                 </section>
                 <section class="category__item">
-                    <img src="/src/items/item_other.jpg" alt="gnome">
-                    <div class="overlay">
-                        <p>Други аксесоари</p>
-                    </div>
+                    <a href="">
+                        <img src="/src/items/item_other.jpg" alt="gnome">
+                        <div class="overlay">
+                            <p>Други аксесоари</p>
+                        </div>
+                    </a>
                 </section>
                 <section class="category__item">
-                    <img src="/src/items/item_home.jpg" alt="home">
-                    <div class="overlay">
-                        <p>За дома</p>
-                    </div>
+                    <a href="">
+                        <img src="/src/items/item_home.jpg" alt="home">
+                        <div class="overlay">
+                            <p>За дома</p>
+                        </div>
+                    </a>
                 </section>
             </div>
         </article>
@@ -99,31 +113,41 @@
                 <section class="new__item">
                     <img src="/src/items/item_jewellery-2.jpg" alt="ring">
                     <div class="new__actions">
-                        <p>Артикул: Infinissima</p>
-                        <p>Цена: 15 лв.</p>
-                        <button><i class="fa-solid fa-eye"></i>Виж повече</button>
-                        <button><i class="fa-solid fa-cart-shopping"></i>Добави в количката</button>
+                        <div class="new__description">
+                            <p class="item-name">Infinissima</p>
+                            <p class="item-price">32 лв.</p>
+                        </div>
+                        <div class="new__buttons">
+                            <a class="button" href=""><i class="fa-solid fa-eye"></i>Виж повече</a>
+                            <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Добави в количката</a>
+                        </div>
                     </div>
                 </section>
                 <section class="new__item">
                     <img src="/src/items/item_jewellery-4.jpg" alt="ring">
                     <div class="new__actions">
-                        <p>Артикул: Amara</p>
-                        <p>Цена: 15 лв.</p>
-                        <button><i class="fa-solid fa-eye"></i>Виж повече</button>
-                        <button><i class="fa-solid fa-cart-shopping"></i>Добави в количката</button>
+                        <div class="new__description">
+                            <p class="item-name">Amara</p>
+                            <p class="item-price">24 лв.</p>
+                        </div>
+                        <div class="new__buttons">
+                            <a class="button" href=""><i class="fa-solid fa-eye"></i>Виж повече</a>
+                            <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Добави в количката</a>
+                        </div>
                     </div>
-
                 </section>
                 <section class="new__item">
                     <img src="/src/items/item_jewellery-6.jpg" alt="ring">
                     <div class="new__actions">
-                        <p>Артикул: Jezelle</p>
-                        <p>Цена: 15 лв.</p>
-                        <button><i class="fa-solid fa-eye"></i>Виж повече</button>
-                        <button><i class="fa-solid fa-cart-shopping"></i>Добави в количката</button>
+                        <div class="new__description">
+                            <p class="item-name">Jezelle</p>
+                            <p class="item-price">55 лв.</p>
+                        </div>
+                        <div class="new__buttons">
+                            <a class="button" href=""><i class="fa-solid fa-eye"></i>Виж повече</a>
+                            <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Добави в количката</a>
+                        </div>
                     </div>
-
                 </section>
             </div>
         </article>
@@ -137,10 +161,10 @@
                         <p>Тенденции при бижутата през 2023 г.</p>
                         <p>Бижутата винаги са добра идея! Визията никога не е напълно завършена, ако не добавим стилни
                             обеци, гривни и колие към тоалета.</p>
-                        <button><i class="fa-solid fa-eye"></i>Цялата статия</button>
+                        <a><i class="fa-solid fa-eye"></i>Цялата статия</a>
                     </div>
-
                 </section>
+
                 <section class="blog__article">
                     <img src="/src/items/blog_article-2.jpg" alt="ring">
                     <div class="blog__article__actions">
@@ -150,7 +174,7 @@
                             късметлийският елемент през тази година е огънят, а цветът, който ще носи щастие и късмет е
                             един
                             особен вид розово. </p>
-                        <button><i class="fa-solid fa-eye"></i>Цялата статия</button>
+                        <a><i class="fa-solid fa-eye"></i>Цялата статия</a>
                     </div>
                 </section>
                 <section class="blog__article">
@@ -160,9 +184,8 @@
                         <p>Темата на тазгодишните зимни модни тенденции е "очаквайте неочакваното". Въпреки че, разбира
                             се,
                             все още търсим да останем стоплени, ние също така искаме да направим и впечатление.</p>
-                        <button><i class="fa-solid fa-eye"></i>Цялата статия</button>
+                        <a><i class="fa-solid fa-eye"></i>Цялата статия</a>
                     </div>
-
                 </section>
         </article>
 
