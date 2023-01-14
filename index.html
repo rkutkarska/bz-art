@@ -31,15 +31,16 @@
 
         <div class="header__items">
             <div class="header__buttons">
-                <a class="button" href="/login.html"><i class="fa-solid fa-user"></i>Вход</a>
-                <a class="button" href=""><i class="fa-solid fa-user"></i>Изход</a>
-                <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Количка</a>
+                <a class="button yellow" href="/login.html"><i class="fa-solid fa-user"></i>Вход</a>
+                <a class="button yellow" href=""><i class="fa-solid fa-user"></i>Изход</a>
+                <a class="button yellow" href=""><i class="fa-solid fa-cart-shopping"></i>Количка</a>
             </div>
             <img class="logo" src="/src/logo.png" alt="logo">
             <div class="header__search-bar">
-                <input type="text" />
-                <!-- FIXME -->
-                <input type="submit" /><i class="fa-solid fa-magnifying-glass"></i>
+                <form action="/">
+                    <input type="text" placeholder="Търсене.." name="search">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
             </div>
         </div>
 
@@ -52,7 +53,7 @@
             </ul>
         </nav>
         <div class="hero">
-            <img src="/src/index-banner.png" alt="woman with jewellery">
+            <img src="/src/index-banner.jpg" alt="jewellery">
         </div>
     </header>
 
@@ -124,8 +125,8 @@
                             <p class="item-price">32 лв.</p>
                         </div>
                         <div class="new__buttons">
-                            <a class="button" href=""><i class="fa-solid fa-eye"></i>Детайли</a>
-                            <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Добави</a>
+                            <a class="button purple" href=""><i class="fa-solid fa-eye"></i>Детайли</a>
+                            <a class="button yellow" href=""><i class="fa-solid fa-cart-shopping"></i>Добави</a>
                         </div>
                     </div>
                 </section>
@@ -137,8 +138,8 @@
                             <p class="item-price">24 лв.</p>
                         </div>
                         <div class="new__buttons">
-                            <a class="button" href=""><i class="fa-solid fa-eye"></i>Детайли</a>
-                            <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Добави</a>
+                            <a class="button purple" href=""><i class="fa-solid fa-eye"></i>Детайли</a>
+                            <a class="button yellow" href=""><i class="fa-solid fa-cart-shopping"></i>Добави</a>
                         </div>
                     </div>
                 </section>
@@ -150,8 +151,8 @@
                             <p class="item-price">55 лв.</p>
                         </div>
                         <div class="new__buttons">
-                            <a class="button" href=""><i class="fa-solid fa-eye"></i>Детайли</a>
-                            <a class="button" href=""><i class="fa-solid fa-cart-shopping"></i>Добави</a>
+                            <a class="button purple" href=""><i class="fa-solid fa-eye"></i>Детайли</a>
+                            <a class="button yellow" href=""><i class="fa-solid fa-cart-shopping"></i>Добави</a>
                         </div>
                     </div>
                 </section>
@@ -163,34 +164,36 @@
             <div class="blog__articles">
                 <section class="blog__article">
                     <img src="/src/items/blog_article-1.jpg" alt="ring">
-                    <div class="blog__article__actions">
-                        <p>Тенденции при бижутата през 2023 г.</p>
+                    <div class="blog__article__description">
+                        <h3>Винаги стилни</h3>
                         <p>Бижутата винаги са добра идея! Визията никога не е напълно завършена, ако не добавим стилни
                             обеци, гривни и колие към тоалета.</p>
-                        <a><i class="fa-solid fa-eye"></i>Цялата статия</a>
+                        <div class="blog__buttons">
+                            <a class="button purple" href=""><i class="fa-solid fa-eye"></i>Цялата статия</a>
+                        </div>
                     </div>
                 </section>
 
                 <section class="blog__article">
                     <img src="/src/items/blog_article-2.jpg" alt="ring">
-                    <div class="blog__article__actions">
-                        <p>Флорални мотиви</p>
-                        <p>Според Китайския зодиак 2023 г. ще бъде годината на Водния Заек. Според филосифията на Фън
-                            Шуй
-                            късметлийският елемент през тази година е огънят, а цветът, който ще носи щастие и късмет е
-                            един
-                            особен вид розово. </p>
-                        <a><i class="fa-solid fa-eye"></i>Цялата статия</a>
+                    <div class="blog__article__description">
+                        <h3>Флорални мотиви</h3>
+                        <p>Когато говорим за флорални мотиви, това не означава задължително дрехи. Можете да внесете
+                            флоралните мотиви в гардероба си и с аксесоарите, бижутата, обувките и дори маникюра.</p>
+                        <div class="blog__buttons">
+                            <a class="button purple" href=""><i class="fa-solid fa-eye"></i>Цялата статия</a>
+                        </div>
                     </div>
                 </section>
                 <section class="blog__article">
                     <img src="/src/items/blog_article-3.jpg" alt="ring">
-                    <div class="blog__article__actions">
-                        <p>Тенденции при модните аксесоари през зимата</p>
+                    <div class="blog__article__description">
+                        <h3>Аксесоари зима</h3>
                         <p>Темата на тазгодишните зимни модни тенденции е "очаквайте неочакваното". Въпреки че, разбира
-                            се,
-                            все още търсим да останем стоплени, ние също така искаме да направим и впечатление.</p>
-                        <a><i class="fa-solid fa-eye"></i>Цялата статия</a>
+                            се, все още търсим да останем стоплени, ние също така искаме да направим и впечатление.</p>
+                        <div class="blog__buttons">
+                            <a class="button purple" href=""><i class="fa-solid fa-eye"></i>Цялата статия</a>
+                        </div>
                     </div>
                 </section>
         </article>
@@ -199,19 +202,44 @@
             <h1 class="caption">Ако ни се доверите ще получите:</h1>
             <section class="guarantee__article">
                 <ul class="guarantee__list ul-clear">
-                    <li><i class="fa-sharp fa-solid fa-gem"></i>
+                    <li>
+                        <div class="blob">
+                            <img class="blob__yellow" src="/src/first-blob.svg" alt="yellow blob">
+                            <img class="blob__purple" src="/src/second-blob.svg" alt="purple blob">
+                            <i class="fa-sharp fa-solid fa-gem"></i>
+                        </div>
                         <p>100% ръчна изработка, получавате бутиково бижу.</p>
                     </li>
-                    <li><i class="fa-solid fa-thumbs-up"></i>
+                    <li>
+                        <div class="blob">
+                            <img class="blob__yellow" src="/src/first-blob.svg" alt="yellow blob">
+                            <img class="blob__purple" src="/src/second-blob.svg" alt="purple blob">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
                         <p>Качество без компромиси.</p>
                     </li>
-                    <li><i class="fa-solid fa-truck"></i>
+                    <li>
+                        <div class="blob">
+                            <img class="blob__yellow" src="/src/first-blob.svg" alt="yellow blob">
+                            <img class="blob__purple" src="/src/second-blob.svg" alt="purple blob">
+                            <i class="fa-solid fa-truck"></i>
+                        </div>
                         <p>Доставка в рамките на 24 часа от поръчката.</p>
                     </li>
-                    <li><i class="fa-solid fa-heart"></i>
+                    <li>
+                        <div class="blob">
+                            <img class="blob__yellow" src="/src/first-blob.svg" alt="yellow blob">
+                            <img class="blob__purple" src="/src/second-blob.svg" alt="purple blob">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
                         <p>Внимание в детайлите, защото обичаме работата си.</p>
                     </li>
-                    <li><i class="fa-solid fa-hand-holding-heart"></i>
+                    <li>
+                        <div class="blob">
+                            <img class="blob__yellow" src="/src/first-blob.svg" alt="yellow blob">
+                            <img class="blob__purple" src="/src/second-blob.svg" alt="purple blob">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
                         <p>Изработка изцяло по Ваш вкус.</p>
                     </li>
                 </ul>

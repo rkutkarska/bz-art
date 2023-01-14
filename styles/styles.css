@@ -12,17 +12,22 @@
     --clr-peach: rgb(247, 211, 207);
     --clr-pink: rgb(232, 194, 202);
     --clr-rose-ash: rgb(209, 179, 196);
-    --clr-purple-light: rgb(180, 147, 173);
+    --clr-purple-light: #b493ad;
     --clr-purple-dark: rgb(115, 93, 120);
     --clr-purple-font: rgb(80, 65, 84);
     --clr-yellow: rgb(255, 204, 95);
     --clr-gray: rgb(191, 191, 191);
     --clr-white: rgb(255, 255, 255);
+    --padding-buttons: 10px 7px;
 }
 
 body {
     font-family: 'Arsenal', sans-serif;
-    /* font-size: 1.25rem; */
+}
+
+main article:nth-child(2n) {
+    background-color: rgb(209, 179, 196, 0.1);
+    padding-bottom: 20px;
 }
 
 h1 {
@@ -30,6 +35,9 @@ h1 {
     padding: 30px 0 8px;
     position: relative;
     color: var(--clr-purple-font);
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 h1::before {
@@ -37,13 +45,109 @@ h1::before {
     position: absolute;
     left: 49%;
     bottom: 16px;
-    width: 150px;
+    width: calc(100% + 4px);
     height: 14px;
     transform: skew(-12deg) translateX(-50%);
     background: var(--clr-pink);
     z-index: -1;
 }
 
+h3 {
+    text-align: center;
+}
+
 i {
     padding-right: 0.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"] {
+    border: 0;
+    outline: none;
+}
+
+input[type="text"],
+.form input[type="text"],
+.form input[type="password"] {
+    padding: 0.5em;
+    border-bottom: 2px solid var(--clr-purple-dark);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-bottom: 2px solid var(--clr-yellow);
+}
+
+.button {
+    padding: var(--padding-buttons);
+    text-decoration: none;
+}
+
+.button.purple {
+    color: var(--clr-purple-font);
+    border: 1px solid var(--clr-purple-dark);
+}
+
+.button.purple:hover {
+    color: var(--clr-white);
+    background-color: var(--clr-purple-dark);
+}
+
+.button.yellow {
+    color: var(--clr-purple-font);
+    border: 1px solid var(--clr-yellow);
+}
+
+.button.yellow:hover {
+    background-color: var(--clr-yellow);
+    color: var(--clr-white);
+}
+
+div[class*="buttons"] {
+    margin: 20px 0;
+}
+
+.guarantee__list {
+    position: relative;
+    overflow: hidden;
+}
+
+.guarantee__list .blob {
+    position: relative;
+}
+
+.guarantee__list .blob img {
+    width: 150px;
+    position: absolute;
+    left: 25px;
+    top: -40px;
+    z-index: -1;
+}
+
+.guarantee__list .blob .blob__yellow {
+    -webkit-transform: linear(-45deg);
+    transition: 0.3s;
+    top: -30px;
+    left: 10px;
+}
+
+.guarantee__list .blob:hover .blob__yellow {
+    -webkit-transform: linear(-45deg);
+    transition: 0.3s;
+    top: -35px;
+    left: 0px;
+    opacity: 0.5;
+}
+
+.guarantee__list .blob:hover .blob__purple {
+    -webkit-transform: linear(-45deg);
+    transition: 0.3s;
+    top: -45px;
+    left: 30px;
+    opacity: 0.5;
 }

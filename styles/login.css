@@ -1,9 +1,3 @@
-.form input[type="text"],
-.form input[type="password"] {
-    border: 0;
-    outline: none;
-}
-
 .image-container {
     width: 100wv;
     height: 100vh;
@@ -30,19 +24,6 @@
     transform: translate(30%, -50%);
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form input[type="text"],
-.form input[type="password"] {
-    padding: 0.5em;
-    border-bottom: 2px solid purple;
+.form-container input {
     margin-bottom: 2rem;
-}
-
-.form input[type="text"]:focus,
-.form input[type="password"]:focus {
-    border-bottom: 2px solid green;
 }

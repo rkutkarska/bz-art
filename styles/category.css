@@ -14,6 +14,9 @@
 .new__item,
 .blog__article {
     max-width: 20%;
+    border: 1px solid var(--clr-gray);
+    border-radius: 0.75rem;
+    overflow: hidden;
 }
 
 /* ------------------ */
@@ -29,9 +32,8 @@
 .overlay {
     position: absolute;
     top: 0;
-    background: rgb(115, 93, 120);
+    background: var(--clr-purple-dark);
     background: linear-gradient(180deg, rgba(115, 93, 120, 0.5) 0%, rgba(179, 146, 172, 0.3) 30%, rgba(226, 226, 226, 0.2) 100%);
-    /* FIXME */
     width: 20%;
     height: 100%;
     transition: .5s ease;
@@ -42,6 +44,7 @@
     font-weight: 700;
     padding: 1em;
     text-align: center;
+    border-radius: 0.75rem;
 }
 
 .overlay p {
