@@ -112,42 +112,6 @@ div[class*="buttons"] {
     margin: 20px 0;
 }
 
-.guarantee__list {
-    position: relative;
-    overflow: hidden;
-}
-
-.guarantee__list .blob {
-    position: relative;
-}
-
-.guarantee__list .blob img {
-    width: 150px;
+.wave {
     position: absolute;
-    left: 25px;
-    top: -40px;
-    z-index: -1;
-}
-
-.guarantee__list .blob .blob__yellow {
-    -webkit-transform: linear(-45deg);
-    transition: 0.3s;
-    top: -30px;
-    left: 10px;
-}
-
-.guarantee__list .blob:hover .blob__yellow {
-    -webkit-transform: linear(-45deg);
-    transition: 0.3s;
-    top: -35px;
-    left: 0px;
-    opacity: 0.5;
-}
-
-.guarantee__list .blob:hover .blob__purple {
-    -webkit-transform: linear(-45deg);
-    transition: 0.3s;
-    top: -45px;
-    left: 30px;
-    opacity: 0.5;
 }

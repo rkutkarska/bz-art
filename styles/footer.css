@@ -15,3 +15,11 @@
 .heart {
     animation: zoom-in-zoom-out 0.5s ease infinite;
 }
+
+footer {
+    text-align: center;
+    padding: 15rem 0 2rem 0;
+    background-color: var(--clr-yellow);
+    color: var(--clr-purple-dark);
+    height: 430px;
+}
