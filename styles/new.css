@@ -11,12 +11,6 @@
     transition: 0.5s;
 }
 
-.new__actions .new__buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
 .new__description {
     top: 2rem;
     position: absolute;

@@ -18,7 +18,9 @@
     --clr-yellow: rgb(255, 204, 95);
     --clr-gray: rgb(191, 191, 191);
     --clr-white: rgb(255, 255, 255);
+    --clr-background: rgba(209, 179, 196, 0.1);
     --padding-buttons: 10px 7px;
+
 }
 
 body {
@@ -26,7 +28,7 @@ body {
 }
 
 main article:nth-child(2n) {
-    background-color: rgb(209, 179, 196, 0.1);
+    background-color: var(--clr-background);
     padding-bottom: 20px;
 }
 
@@ -34,7 +36,6 @@ h1 {
     font-size: 2rem;
     padding: 30px 0 8px;
     position: relative;
-    color: var(--clr-purple-font);
     display: inline-block;
     margin-left: 50%;
     transform: translateX(-50%);
@@ -54,6 +55,10 @@ h1::before {
 
 h3 {
     text-align: center;
+}
+
+h1, h2, h3 {
+    color: var(--clr-purple-font);
 }
 
 i {
@@ -111,12 +116,38 @@ input[type="submit"] {
     color: var(--clr-white);
 }
 
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 div[class*="buttons"] {
     margin: 20px 0;
 }
 
 .inline {
     display: inline
+}
+
+.category__items,
+.new__items,
+.blog__articles {
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 3%;
+}
+
+.category__item,
+.new__item,
+.blog__article {
+    max-width: 20%;
+    border: 1px solid var(--clr-gray);
+    border-radius: 0.75rem;
+    overflow: hidden;
 }
 
 .wave {
