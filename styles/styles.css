@@ -22,7 +22,7 @@
 }
 
 body {
-    font-family: 'Arsenal', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 main article:nth-child(2n) {
@@ -69,11 +69,6 @@ input[type="text"],
 input[type="password"] {
     border: 0;
     outline: none;
-}
-
-input[type="text"],
-.form input[type="text"],
-.form input[type="password"] {
     padding: 0.5em;
     border-bottom: 2px solid var(--clr-purple-dark);
 }
@@ -81,6 +76,14 @@ input[type="text"],
 input[type="text"]:focus,
 input[type="password"]:focus {
     border-bottom: 2px solid var(--clr-yellow);
+}
+
+button,
+input[type="submit"] {
+    border: 0;
+    font-family: inherit;
+    background-color: none;
+    background: none;
 }
 
 .button {
@@ -110,6 +113,10 @@ input[type="password"]:focus {
 
 div[class*="buttons"] {
     margin: 20px 0;
+}
+
+.inline {
+    display: inline
 }
 
 .wave {
