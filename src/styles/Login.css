@@ -1,0 +1,29 @@
+.image-container {
+    width: 100wv;
+    height: 100vh;
+    background-image: url(/src/login/cover-image.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.container {
+    display: flex;
+}
+
+.image-container,
+.form-container {
+    width: 50%;
+}
+
+.form-container {
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(30%, -50%);
+}
+
+.form-container input {
+    margin-bottom: 2rem;
+}
