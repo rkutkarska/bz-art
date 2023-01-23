@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import './styles/reset.css';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 // import { BookList } from './components/Booklist';
 // import { ItemCounter } from './components/ItemCounter';
 import { Header } from './components/Header';
-
+import { Main } from './components/Main';
 
 // const books = [
 //   {
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-
+      <Main />
 
       {/* <BookList data={books} />
       <ItemCounter start = {1} /> */}

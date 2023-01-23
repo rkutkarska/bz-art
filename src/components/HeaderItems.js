@@ -1,7 +1,6 @@
 import React from 'react';
-import '../styles/Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export const HeaderItems = () => {
     return (
