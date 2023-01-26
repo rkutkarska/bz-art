@@ -9,7 +9,7 @@ export const CategoryItems = () => {
             .then(res => res.json())
             .then(result => {
                 setItems(result);
-                console.log(result);
+                console.log(result)
             });
     }, []);
 
