@@ -20,7 +20,6 @@
     --clr-white: rgb(255, 255, 255);
     --clr-background: rgba(209, 179, 196, 0.1);
     --padding-buttons: 10px 7px;
-
 }
 
 body {
@@ -57,7 +56,9 @@ h3 {
     text-align: center;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: var(--clr-purple-font);
 }
 
@@ -71,7 +72,9 @@ i {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+select {
     border: 0;
     outline: none;
     padding: 0.5em;
@@ -79,7 +82,9 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
     border-bottom: 2px solid var(--clr-yellow);
 }
 

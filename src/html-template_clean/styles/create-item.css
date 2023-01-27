@@ -1,0 +1,108 @@
+.container {
+    display: flex;
+}
+
+.form-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.form-container input {
+    margin-bottom: 2rem;
+}
+
+/* Added to styles line 75 and 83*/
+select {
+    background: none;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    padding: 0.5em;
+}
+
+select option:checked {
+    background-color: var(--clr-gray);
+}
+
+textarea {
+    border: 0;
+    outline: none;
+    padding: 0.5em;
+    border: 2px solid var(--clr-purple-dark);
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+textarea:focus {
+    border: 2px solid var(--clr-yellow);
+}
+
+.flex-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.flex-items__item {
+    width: 45%;
+}
+
+.flex-items__item input {
+    width: 80%;
+}
+
+.flex-items div label {
+    display: block;
+}
+
+.flex-items div p {
+    display: inline;
+}
+
+.drop-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed var(--clr-purple-dark);
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    margin-bottom: 2em;
+}
+
+.drop-container:hover {
+    background-color: #fbfbfb;
+    border-color: var(--clr-yellow);
+}
+
+.drop-title {
+    color: var(--clr-purple-font);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+}
+
+input[type=file] {
+    max-width: 100%;
+    color: var(--clr-purple-font);
+    border: 1px solid var(--clr-purple-font);
+}
+
+input[type=file]::file-selector-button {
+    border: unset;
+    background: unset;
+    border-right: 2px solid var(--clr-purple-dark);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+    background: var(--clr-purple-dark);
+    color: var(--clr-white);
+}
