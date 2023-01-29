@@ -7,6 +7,7 @@ import React from 'react';
 // import { ItemCounter } from './components/ItemCounter';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
+import { CreateItem } from './components/CreateItem';
 
 // const books = [
 //   {
@@ -22,6 +23,9 @@ function App() {
     <div className="App">
       <Header/>
       <Main />
+
+      <CreateItem />
+
 
       {/* <BookList data={books} />
       <ItemCounter start = {1} /> */}

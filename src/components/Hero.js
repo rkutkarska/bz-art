@@ -2,7 +2,7 @@ import React from "react";
 
 export const Hero = () => {
     return (
-        <div class="hero">
+        <div className="hero">
             <img src={require("../img/index-banner.jpg")} alt="jewellery" />
         </div>
     );
