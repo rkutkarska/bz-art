@@ -55,7 +55,9 @@ h3 {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+select {
     border: 0;
     outline: none;
     padding: 0.5em;
@@ -63,7 +65,9 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
     border-bottom: 2px solid var(--clr-yellow);
 }
 
@@ -73,6 +77,50 @@ input[type="submit"] {
     font-family: inherit;
     background-color: none;
     background: none;
+}
+
+input[type=file] {
+    max-width: 100%;
+    color: var(--clr-purple-font);
+    border: 1px solid var(--clr-purple-font);
+}
+
+input[type=file]::file-selector-button {
+    border: unset;
+    background: unset;
+    border-right: 2px solid var(--clr-purple-dark);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+    background: var(--clr-purple-dark);
+    color: var(--clr-white);
+}
+
+select {
+    background: none;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    padding: 0.5em;
+}
+
+select option:checked {
+    background-color: var(--clr-gray);
+}
+
+textarea {
+    border: 0;
+    outline: none;
+    padding: 0.5em;
+    border: 2px solid var(--clr-purple-dark);
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+textarea:focus {
+    border: 2px solid var(--clr-yellow);
 }
 
 div[class*="buttons"] {

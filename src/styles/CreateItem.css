@@ -11,31 +11,6 @@
     margin-bottom: 2rem;
 }
 
-/* Added to styles line 75 and 83*/
-select {
-    background: none;
-    cursor: pointer;
-    margin-bottom: 2rem;
-    padding: 0.5em;
-}
-
-select option:checked {
-    background-color: var(--clr-gray);
-}
-
-textarea {
-    border: 0;
-    outline: none;
-    padding: 0.5em;
-    border: 2px solid var(--clr-purple-dark);
-    margin-bottom: 2rem;
-    max-width: 100%;
-}
-
-textarea:focus {
-    border: 2px solid var(--clr-yellow);
-}
-
 .flex-items {
     display: flex;
     justify-content: space-between;
@@ -85,24 +60,4 @@ textarea:focus {
     font-weight: bold;
     text-align: center;
     transition: color .2s ease-in-out;
-}
-
-input[type=file] {
-    max-width: 100%;
-    color: var(--clr-purple-font);
-    border: 1px solid var(--clr-purple-font);
-}
-
-input[type=file]::file-selector-button {
-    border: unset;
-    background: unset;
-    border-right: 2px solid var(--clr-purple-dark);
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background .2s ease-in-out;
-}
-
-input[type=file]::file-selector-button:hover {
-    background: var(--clr-purple-dark);
-    color: var(--clr-white);
 }
