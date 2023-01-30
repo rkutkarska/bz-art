@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { storage, db } from "../Firebase";
 import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { v4 } from "uuid";
-import ProgressBar from "./ProgressBar";
 import "../styles/CreateItem.css";
 
-export const CreateItem = () => {
 
+export const CreateItem = () => {
     const initialFormData = Object.freeze({
         'name': '',
         'category': '',
@@ -21,7 +20,18 @@ export const CreateItem = () => {
 
     const [formData, updateFormData] = useState(initialFormData);
     const [imageUpload, setImageUpload] = useState(null);
-    const itemCollectionRef = collection(db, "items");
+    const itemsCollectionRef = collection(db, "items");
+
+    const listCategories = () => {
+        let array = [];
+        const categoriesCollectionRef = collection(db, "categories");
+        getDocs(categoriesCollectionRef)
+            .then((response) => response.forEach(element => {
+                array.push(element.data().category);
+            }));
+
+        return array;
+    }
 
     const handleChange = (e) => {
         updateFormData({
@@ -31,61 +41,26 @@ export const CreateItem = () => {
         });
     }
 
-    const progressHandler = (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        switch (snapshot.state) {
-            case 'paused':
-                console.log('Upload is paused');
-                break;
-            case 'running':
-                console.log('Upload is running');
-                break;
-        }
-        return progress;
-    }
-
     const saveItem = async (e) => {
         e.preventDefault();
 
         const imageRef = ref(storage, `images/items/${v4() + imageUpload.name}`);
-        const uploadTask = uploadBytesResumable(imageRef, imageUpload);
 
-        uploadTask.on('state_changed',
-            (snapshot) => {
-                // Observe state change events such as progress, pause, and resume
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                progressHandler(snapshot);
-
-            },
-            (error) => {
-                // Handle unsuccessful uploads
-            },
-            () => {
-                // Handle successful uploads on complete
-                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
-                });
-            }
-        );
-
-
-        // if (imageUpload == null) {
-        //     // alert('Неуспешно качване!');
-        //     return;
-        // }
-        // uploadBytes(imageRef, imageUpload).then(() => {
-        //     // alert('Файлът е качен успешно!');
-        //     getDownloadURL(imageRef).then((url) => {
-        //         addDoc(itemCollectionRef, { ...formData, url });
-        //     });
-        // });
-
-
-        // // clear form after submit
-        // e.target.reset();
-    };
+        if (imageUpload == null) {
+            // alert('Неуспешно качване!');
+            return;
+        }
+        uploadBytes(imageRef, imageUpload).then(() => {
+            // alert('Файлът е качен успешно!');
+            getDownloadURL(imageRef).then((url) => {
+                addDoc(itemsCollectionRef, { ...formData, url });
+                // let category = formData.category;
+                // addDoc(categoriesCollectionRef, { cat: category });
+            });
+        });
+        // clear form after submit
+        e.target.reset();
+    }
 
     const clearImage = () => {
         setImageUpload(null);
@@ -101,9 +76,9 @@ export const CreateItem = () => {
                     <label htmlFor="category">Категория</label>
                     <select onChange={handleChange} name="category" defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
-                        <option value="ring">Пръстен</option>
-                        <option value="ring">Пръстен</option>
-                        <option value="ring">Пръстен</option>
+                        {/* TODO */}
+                        {console.log(listCategories())}
+                        {listCategories().map(x => (<option value={x}>{x}</option>))}
                     </select>
                     <label htmlFor="material">Материал</label>
                     <select onChange={handleChange} type="select" name="material" defaultValue={'DEFAULT'}>
@@ -130,7 +105,6 @@ export const CreateItem = () => {
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <input type="file" onChange={(e) => { setImageUpload(e.target.files[0]) }} id="images" accept="image/*" required name="url" />
-                        <ProgressBar onChange={progressHandler} />
                         <button onClick={clearImage}>Премахни</button>
                     </label>
                     <input type="submit" className="button yellow" name="" value="Запиши" />
