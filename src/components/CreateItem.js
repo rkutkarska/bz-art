@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { storage, db } from "../Firebase";
-import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { v4 } from "uuid";
 import "../styles/CreateItem.css";
-
 
 export const CreateItem = () => {
     const initialFormData = Object.freeze({
@@ -20,18 +19,42 @@ export const CreateItem = () => {
 
     const [formData, updateFormData] = useState(initialFormData);
     const [imageUpload, setImageUpload] = useState(null);
+    const [categories, setCategories] = useState([]);
+    const [materials, setMaterials] = useState([]);
+
     const itemsCollectionRef = collection(db, "items");
 
-    const listCategories = () => {
-        let array = [];
+    const fetchCategories = async () => {
         const categoriesCollectionRef = collection(db, "categories");
-        getDocs(categoriesCollectionRef)
-            .then((response) => response.forEach(element => {
-                array.push(element.data().category);
-            }));
 
-        return array;
+        await getDocs(categoriesCollectionRef)
+            .then((res => {
+                const data = res.docs
+                    .map((doc) => ({ ...doc.data(), id: doc.id }));
+                setCategories(data);
+            }))
     }
+
+    const fetchMaterials = async () => {
+        const materialsCollectionRef = collection(db, "materials");
+
+        await getDocs(materialsCollectionRef)
+            .then((res => {
+                const data = res.docs
+                    .map((doc) => ({ ...doc.data(), id: doc.id }));
+                setMaterials(data);
+            }))
+    }
+
+    useEffect(() => {
+        // calls the function on the load of the page
+        fetchCategories();
+    }, []);
+
+    useEffect(() => {
+        // calls the function on the load of the page
+        fetchMaterials();
+    }, []);
 
     const handleChange = (e) => {
         updateFormData({
@@ -76,16 +99,24 @@ export const CreateItem = () => {
                     <label htmlFor="category">Категория</label>
                     <select onChange={handleChange} name="category" defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
-                        {/* TODO */}
-                        {console.log(listCategories())}
-                        {listCategories().map(x => (<option value={x}>{x}</option>))}
+                        {
+                            categories.map((category) => (
+                                <option value={category} key={category.id}>
+                                    {category.category}
+                                </option>
+                            ))
+                        }
                     </select>
                     <label htmlFor="material">Материал</label>
                     <select onChange={handleChange} type="select" name="material" defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
-                        <option value="gold">Злато</option>
-                        <option value="gold">Злато</option>
-                        <option value="gold">Злато</option>
+                        {
+                            materials.map((material) => (
+                                <option value={material} key={material.id}>
+                                    {material.material}
+                                </option>
+                            ))
+                        }
                     </select>
                     <label htmlFor="description">Описание</label>
                     <textarea onChange={handleChange} name="description" cols="30" rows="3"></textarea>
