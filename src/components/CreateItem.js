@@ -101,7 +101,7 @@ export const CreateItem = () => {
                         <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
                         {
                             categories.map((category) => (
-                                <option value={category} key={category.id}>
+                                <option value={category.category} key={category.id}>
                                     {category.category}
                                 </option>
                             ))
@@ -112,7 +112,7 @@ export const CreateItem = () => {
                         <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
                         {
                             materials.map((material) => (
-                                <option value={material} key={material.id}>
+                                <option value={material.material} key={material.id}>
                                     {material.material}
                                 </option>
                             ))
