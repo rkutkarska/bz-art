@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { v4 } from "uuid";
 import { storage, db } from "../Firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { v4 } from "uuid";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import "../styles/CreateItem.css";
@@ -26,8 +26,7 @@ export const CreateItem = () => {
     const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
     const [isNew, setIsNew] = useState(false);
-    const [hasDiscount, sethasDiscount] = useState(false);
-
+    const [hasDiscount, setHasDiscount] = useState(false);
 
     const itemsCollectionRef = collection(db, "items");
 
@@ -54,21 +53,33 @@ export const CreateItem = () => {
     }
 
     useEffect(() => {
-        // calls the function on the load of the page
         fetchCategories();
     }, []);
 
     useEffect(() => {
-        // calls the function on the load of the page
         fetchMaterials();
     }, []);
+
+    useEffect(() => {
+        updateFormData({
+            ...formData,
+            'is-new': isNew
+        });
+    }, [isNew]);
+
+    useEffect(() => {
+        updateFormData({
+            ...formData,
+            'has-discount': hasDiscount
+        });
+    }, [hasDiscount]);
 
     const handleChange = (e) => {
         updateFormData({
             ...formData,
-            // Trimming any whitespace
             [e.target.name]: e.target.value.trim()
-        });
+        })
+        // console.log({ ...formData });
     }
 
     const isNewChange = () => {
@@ -76,7 +87,7 @@ export const CreateItem = () => {
     }
 
     const hasDiscountChange = () => {
-        sethasDiscount(current => !current);
+        setHasDiscount(current => !current);
     }
 
     const saveItem = async (e) => {
@@ -102,6 +113,7 @@ export const CreateItem = () => {
     }
 
     const clearImage = (e) => {
+        updateFormData({ ...formData, "url": "" })
         e.target.value = null;
     };
 
@@ -111,11 +123,11 @@ export const CreateItem = () => {
         <div className="container">
             <div className="form-container">
                 <h1>Добавяне на артикул</h1>
-                <form onSubmit={saveItem} className="form">
+                <form onSubmit={saveItem} onChange={(e) => handleChange(e)} className="form">
                     <label htmlFor="name">Име</label>
-                    <input onChange={handleChange} type="text" name="name" />
+                    <input type="text" name="name" />
                     <label htmlFor="category">Категория</label>
-                    <select onChange={handleChange} name="category" defaultValue={'DEFAULT'}>
+                    <select name="category" defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled={true}>-- Моля изберете --</option>
                         {
                             categories.map((category) => (
@@ -126,7 +138,7 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="material">Материал</label>
-                    <select onChange={handleChange} type="select" name="material" defaultValue={'DEFAULT'}>
+                    <select type="select" name="material" defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled={true}>-- Моля изберете --</option>
                         {
                             materials.map((material) => (
@@ -137,16 +149,16 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="description">Описание</label>
-                    <textarea onChange={handleChange} name="description" cols="30" rows="3"></textarea>
+                    <textarea name="description" cols="30" rows="3"></textarea>
                     <div className="flex-items">
                         <div className="flex-items__item">
                             <label htmlFor="price">Цена</label>
-                            <input onChange={handleChange} type="number" name="price" />
+                            <input type="number" name="price" />
                             <p>BGN</p>
                         </div>
                         <div className="flex-items__item">
                             <label htmlFor="discount">Намаление</label>
-                            <input onChange={handleChange} type="number" name="discount" />
+                            <input type="number" name="discount" />
                             <p>BGN</p>
                         </div>
                     </div>
@@ -154,12 +166,12 @@ export const CreateItem = () => {
                     <div className="form-check">
                         <label htmlFor="index-">Етикет начало:</label>
                         <div>
-                            <input className="form-check-input" type="checkbox" name="is-new" value={isNew} onClick={isNewChange} onChange={handleChange} />
+                            <input className="form-check-input" type="checkbox" name="is-new" onClick={(e) => isNewChange(e)} />
                             <label htmlFor="is-new">Ново</label>
                         </div>
 
                         <div>
-                            <input className="form-check-input" type="checkbox" name="has-discount" value={hasDiscount} onClick={hasDiscountChange} onChange={handleChange}/>
+                            <input className="form-check-input" type="checkbox" name="has-discount" value={hasDiscount} onClick={hasDiscountChange} />
                             <label htmlFor="has-discount">Промоция</label>
                         </div>
                     </div>

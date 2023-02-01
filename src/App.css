@@ -120,7 +120,7 @@ input[type="radio"] {
 
 input[type="radio"]:checked,
 input[type="checkbox"]:checked {
-    background: var(--clr-purple-dark);
+    background: var(--clr-yellow);
     outline: 1px solid var(--clr-purple-font);
 }
 
