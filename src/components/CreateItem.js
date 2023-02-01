@@ -16,13 +16,18 @@ export const CreateItem = () => {
         'description': '',
         'price': 0,
         'discount': 0,
-        'url': ''
+        'url': '',
+        'is-new': false,
+        'has-discount': false
     });
 
     const [formData, updateFormData] = useState(initialFormData);
     const [imageUpload, setImageUpload] = useState(null);
     const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
+    const [isNew, setIsNew] = useState(false);
+    const [hasDiscount, sethasDiscount] = useState(false);
+
 
     const itemsCollectionRef = collection(db, "items");
 
@@ -66,6 +71,14 @@ export const CreateItem = () => {
         });
     }
 
+    const isNewChange = () => {
+        setIsNew(current => !current);
+    }
+
+    const hasDiscountChange = () => {
+        sethasDiscount(current => !current);
+    }
+
     const saveItem = async (e) => {
         e.preventDefault();
 
@@ -103,7 +116,7 @@ export const CreateItem = () => {
                     <input onChange={handleChange} type="text" name="name" />
                     <label htmlFor="category">Категория</label>
                     <select onChange={handleChange} name="category" defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
+                        <option value="DEFAULT" disabled={true}>-- Моля изберете --</option>
                         {
                             categories.map((category) => (
                                 <option value={category.category} key={category.id}>
@@ -114,7 +127,7 @@ export const CreateItem = () => {
                     </select>
                     <label htmlFor="material">Материал</label>
                     <select onChange={handleChange} type="select" name="material" defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled={true}>--Моля изберете --</option>
+                        <option value="DEFAULT" disabled={true}>-- Моля изберете --</option>
                         {
                             materials.map((material) => (
                                 <option value={material.material} key={material.id}>
@@ -137,13 +150,30 @@ export const CreateItem = () => {
                             <p>BGN</p>
                         </div>
                     </div>
+
+                    <div className="form-check">
+                        <label htmlFor="index-">Етикет начало:</label>
+                        <div>
+                            <input className="form-check-input" type="checkbox" name="is-new" value={isNew} onClick={isNewChange} onChange={handleChange} />
+                            <label htmlFor="is-new">Ново</label>
+                        </div>
+
+                        <div>
+                            <input className="form-check-input" type="checkbox" name="has-discount" value={hasDiscount} onClick={hasDiscountChange} onChange={handleChange}/>
+                            <label htmlFor="has-discount">Промоция</label>
+                        </div>
+                    </div>
+
                     <label htmlFor="images" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
-                        <input type="file" onChange={(e) => { setImageUpload(e.target.files[0]) }} id="images" accept="image/*" required name="url" />
-                        <button class="button purple" onClick={(e) => clearImage(e)}><FontAwesomeIcon icon={solid('x')} className="fa-icon"/>Премахни</button>
+                        <div className="flex-items">
+                            <input type="file" onChange={(e) => { setImageUpload(e.target.files[0]) }} id="images" accept="image/*" name="url" required />
+                            <button className="button purple" onClick={(e) => clearImage(e)}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
+                        </div>
                     </label>
-                    <input type="submit" className="button yellow" name="" value="Запиши" />
+
+                    <input type="submit" className="button yellow" value="Запиши" />
                 </form>
             </div>
         </div>

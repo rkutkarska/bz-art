@@ -92,11 +92,41 @@ input[type=file]::file-selector-button {
     padding: 10px 20px;
     cursor: pointer;
     transition: background .2s ease-in-out;
+    padding: 13px;
 }
 
 input[type=file]::file-selector-button:hover {
     background: var(--clr-purple-dark);
     color: var(--clr-white);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    cursor: pointer;
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--clr-gray);
+    border: 3px solid var(--clr-white);
+    outline: 1px solid var(--clr-gray);
+}
+
+input[type="radio"] {
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+    background: var(--clr-purple-dark);
+    outline: 1px solid var(--clr-purple-font);
+}
+
+input[type="radio"]:checked+label,
+input[type="checkbox"]:checked+label {
+    font-weight: bold;
 }
 
 select {

@@ -7,15 +7,27 @@
     margin: 0 auto;
 }
 
-.form-container input {
+.form-container input[type="text"],
+.form-container input[type="submit"] {
     margin-bottom: 2rem;
+}
+
+.form-check {
+    display: flex;
+    gap: 30px;
+    margin: 2rem 0rem;
+}
+
+.form-check label {
+    display: inline-block;
+    width: 150px;
 }
 
 .flex-items {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .flex-items__item {

@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import './styles/reset.css';
 import React from 'react';
@@ -20,7 +19,7 @@ import { CreateItem } from './components/CreateItem';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header/>
       <Main />
 
