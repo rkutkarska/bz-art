@@ -4,6 +4,8 @@ import { storage, db } from "../Firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { v4 } from "uuid";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import "../styles/CreateItem.css";
 
 export const CreateItem = () => {
@@ -73,7 +75,8 @@ export const CreateItem = () => {
             // alert('Неуспешно качване!');
             return;
         }
-        uploadBytes(imageRef, imageUpload).then(() => {
+
+        await uploadBytes(imageRef, imageUpload).then(() => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
                 addDoc(itemsCollectionRef, { ...formData, url });
@@ -85,14 +88,16 @@ export const CreateItem = () => {
         e.target.reset();
     }
 
-    const clearImage = () => {
-        setImageUpload(null);
+    const clearImage = (e) => {
+        e.target.value = null;
     };
+
+    // TODO implement drag and drop
 
     return (
         <div className="container">
             <div className="form-container">
-                <h1>Добавяне на продукт</h1>
+                <h1>Добавяне на артикул</h1>
                 <form onSubmit={saveItem} className="form">
                     <label htmlFor="name">Име</label>
                     <input onChange={handleChange} type="text" name="name" />
@@ -136,7 +141,7 @@ export const CreateItem = () => {
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <input type="file" onChange={(e) => { setImageUpload(e.target.files[0]) }} id="images" accept="image/*" required name="url" />
-                        <button onClick={clearImage}>Премахни</button>
+                        <button class="button purple" onClick={(e) => clearImage(e)}><FontAwesomeIcon icon={solid('x')} className="fa-icon"/>Премахни</button>
                     </label>
                     <input type="submit" className="button yellow" name="" value="Запиши" />
                 </form>
