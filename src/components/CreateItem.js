@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import "../styles/CreateItem.css";
 
+const itemsCollectionRef = collection(db, "items");
+
 export const CreateItem = () => {
     const initialFormData = Object.freeze({
         'name': '',
