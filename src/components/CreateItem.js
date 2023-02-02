@@ -17,18 +17,14 @@ export const CreateItem = () => {
         'price': 0,
         'discount': 0,
         'url': '',
-        'is-new': false,
-        'has-discount': false
+        'pin-new': "off",
+        'pin-discount': "off"
     });
 
     const [formData, updateFormData] = useState(initialFormData);
     const [imageUpload, setImageUpload] = useState('');
     const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
-    const [isNew, setIsNew] = useState(false);
-    const [hasDiscount, setHasDiscount] = useState(false);
-
-    const itemsCollectionRef = collection(db, "items");
 
     const fetchCategories = async () => {
         const categoriesCollectionRef = collection(db, "categories");
@@ -60,33 +56,11 @@ export const CreateItem = () => {
         fetchMaterials();
     }, []);
 
-    useEffect(() => {
-        updateFormData({
-            ...formData,
-            'is-new': isNew
-        });
-    }, [isNew]);
-
-    useEffect(() => {
-        updateFormData({
-            ...formData,
-            'has-discount': hasDiscount
-        });
-    }, [hasDiscount]);
-
     const handleChange = (e) => {
         updateFormData({
             ...formData,
             [e.target.name]: e.target.value.trim()
         })
-    }
-
-    const isNewChange = () => {
-        setIsNew(current => !current);
-    }
-
-    const hasDiscountChange = () => {
-        setHasDiscount(current => !current);
     }
 
     const saveItem = async (e) => {
@@ -103,7 +77,6 @@ export const CreateItem = () => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
                 addDoc(itemsCollectionRef, { ...formData, url });
-                setImageUpload(e.target.files[0]);
             });
         });
         e.target.reset();
@@ -113,7 +86,6 @@ export const CreateItem = () => {
         e.preventDefault();
         updateFormData({ ...formData, "url": "" });
         e.target.previousSibling.value = '';
-        console.log({ ...formData });
     };
 
     // TODO implement drag and drop
@@ -165,13 +137,13 @@ export const CreateItem = () => {
                     <div className="form-check">
                         <label htmlFor="index-">Етикет начало:</label>
                         <div>
-                            <input className="form-check-input" type="checkbox" name="is-new" onClick={(e) => isNewChange(e)} />
-                            <label htmlFor="is-new">Ново</label>
+                            <input className="form-check-input" type="checkbox" name="pin-new" />
+                            <label htmlFor="pin-new">Ново</label>
                         </div>
 
                         <div>
-                            <input className="form-check-input" type="checkbox" name="has-discount" value={hasDiscount} onClick={hasDiscountChange} />
-                            <label htmlFor="has-discount">Промоция</label>
+                            <input className="form-check-input" type="checkbox" name="pin-discount" />
+                            <label htmlFor="pin-discount">Промоция</label>
                         </div>
                     </div>
 
