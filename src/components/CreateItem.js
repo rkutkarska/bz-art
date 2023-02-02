@@ -22,7 +22,7 @@ export const CreateItem = () => {
     });
 
     const [formData, updateFormData] = useState(initialFormData);
-    const [imageUpload, setImageUpload] = useState(null);
+    const [imageUpload, setImageUpload] = useState('');
     const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
     const [isNew, setIsNew] = useState(false);
@@ -79,7 +79,6 @@ export const CreateItem = () => {
             ...formData,
             [e.target.name]: e.target.value.trim()
         })
-        // console.log({ ...formData });
     }
 
     const isNewChange = () => {
@@ -92,11 +91,11 @@ export const CreateItem = () => {
 
     const saveItem = async (e) => {
         e.preventDefault();
-
         const imageRef = ref(storage, `images/items/${v4() + imageUpload.name}`);
 
-        if (imageUpload == null) {
+        if (imageUpload === '') {
             // alert('Неуспешно качване!');
+            e.target.value = '';
             return;
         }
 
@@ -104,17 +103,17 @@ export const CreateItem = () => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
                 addDoc(itemsCollectionRef, { ...formData, url });
-                // let category = formData.category;
-                // addDoc(categoriesCollectionRef, { cat: category });
+                setImageUpload(e.target.files[0]);
             });
         });
-        // clear form after submit
         e.target.reset();
     }
 
     const clearImage = (e) => {
-        updateFormData({ ...formData, "url": "" })
-        e.target.value = null;
+        e.preventDefault();
+        updateFormData({ ...formData, "url": "" });
+        e.target.previousSibling.value = '';
+        console.log({ ...formData });
     };
 
     // TODO implement drag and drop
@@ -125,10 +124,10 @@ export const CreateItem = () => {
                 <h1>Добавяне на артикул</h1>
                 <form onSubmit={saveItem} onChange={(e) => handleChange(e)} className="form">
                     <label htmlFor="name">Име</label>
-                    <input type="text" name="name" />
+                    <input type="text" name="name" placeholder="Име на артикул" required />
                     <label htmlFor="category">Категория</label>
-                    <select name="category" defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled={true}>-- Моля изберете --</option>
+                    <select name="category" defaultValue={'DEFAULT'} required>
+                        <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             categories.map((category) => (
                                 <option value={category.category} key={category.id}>
@@ -138,8 +137,8 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="material">Материал</label>
-                    <select type="select" name="material" defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled={true}>-- Моля изберете --</option>
+                    <select type="select" name="material" defaultValue={'DEFAULT'} required>
+                        <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             materials.map((material) => (
                                 <option value={material.material} key={material.id}>
@@ -149,16 +148,16 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="description">Описание</label>
-                    <textarea name="description" cols="30" rows="3"></textarea>
+                    <textarea name="description" cols="30" rows="3" placeholder="Въведете описание" required></textarea>
                     <div className="flex-items">
                         <div className="flex-items__item">
                             <label htmlFor="price">Цена</label>
-                            <input type="number" name="price" />
+                            <input type="number" step="0.01" min="0.00" name="price" placeholder="0.00" />
                             <p>BGN</p>
                         </div>
                         <div className="flex-items__item">
                             <label htmlFor="discount">Намаление</label>
-                            <input type="number" name="discount" />
+                            <input type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" />
                             <p>BGN</p>
                         </div>
                     </div>
@@ -180,7 +179,7 @@ export const CreateItem = () => {
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <div className="flex-items">
-                            <input type="file" onChange={(e) => { setImageUpload(e.target.files[0]) }} id="images" accept="image/*" name="url" required />
+                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="url" required />
                             <button className="button purple" onClick={(e) => clearImage(e)}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
                         </div>
                     </label>
