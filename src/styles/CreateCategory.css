@@ -1,0 +1,22 @@
+.form-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.form-container input[type="text"],
+.form-container input[type="submit"] {
+    margin-bottom: 2rem;
+}
+
+.category-list__item {
+    margin: 1rem 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--clr-yellow);
+    color: var(--clr-white);
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.existing-categories {
+    margin-bottom: 0.5rem;
+}
