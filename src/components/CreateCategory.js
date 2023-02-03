@@ -35,26 +35,24 @@ export const CreateCategory = () => {
             ...formData,
             [e.target.name]: e.target.value.trim()
         })
+        console.log({ ...formData });
     }
 
     const saveCategory = (e) => {
         e.preventDefault();
-        // first record
-        if (categories.length === 0) {
+
+        if (categories
+            .map(x => (x.name.toLowerCase()))
+            .includes((formData.name).toLowerCase())) {
+            alert('Категорията не е записана, защото вече има такава!');
+            return;
+        } else {
             addDoc(categoriesCollectionRef, { ...formData, dateCreated: new Date() });
         }
 
-        categories.map(x => {
-            if (formData.name.toLowerCase() !== x.name.toLowerCase()) {
-                addDoc(categoriesCollectionRef, { ...formData, dateCreated: new Date() });
-                return;
-            } else {
-                alert('Категорията не е записана, защото вече има такава!');
-                return;
-            }
+        fetchCategories().then(() => {
+            e.target.reset();
         });
-
-        e.target.reset();
     };
 
     return (
@@ -69,7 +67,7 @@ export const CreateCategory = () => {
                     {
                         categories.length !== 0
                             ? <ul className="category-list ul-clear" name="categories">{categories.map((category) => (<li className="category-list__item" key={category.id}>{category.name}</li>))}</ul>
-                            : <span>Все още няма добавени категории</span>
+                            : <span>Все още няма добавени категории...</span>
                     }
                     <input type="submit" className="button yellow" value="Запиши" />
                 </form>
