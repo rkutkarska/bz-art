@@ -8,11 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import "../styles/CreateItem.css";
 
-const itemsCollectionRef = collection(db, "items");
-
 export const CreateItem = () => {
     const initialFormData = Object.freeze({
         'name': '',
+        'type': '',
         'category': '',
         'material': '',
         'description': '',
@@ -20,7 +19,8 @@ export const CreateItem = () => {
         'discount': 0,
         'url': '',
         'pin-new': "off",
-        'pin-discount': "off"
+        'pin-discount': "off",
+        'dateCreated': {}
     });
 
     const [formData, updateFormData] = useState(initialFormData);
@@ -78,7 +78,8 @@ export const CreateItem = () => {
         await uploadBytes(imageRef, imageUpload).then(() => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
-                addDoc(itemsCollectionRef, { ...formData, url });
+                const itemsCollectionRef = collection(db, `categories/${formData.category}/items`);
+                addDoc(itemsCollectionRef, { ...formData, url, dateCreated: new Date() });
             });
         });
         e.target.reset();
@@ -99,19 +100,21 @@ export const CreateItem = () => {
                 <form onSubmit={saveItem} onChange={(e) => handleChange(e)} className="form">
                     <label htmlFor="name">Име</label>
                     <input type="text" name="name" placeholder="Име на артикул" required />
+                    <label htmlFor="type">Вид</label>
+                    <input type="text" name="type" placeholder="Вид артикул" required />
                     <label htmlFor="category">Категория</label>
                     <select name="category" defaultValue={'DEFAULT'} required>
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             categories.map((category) => (
-                                <option value={category.category} key={category.id}>
+                                <option value={category.id} key={category.id}>
                                     {category.category}
                                 </option>
                             ))
                         }
                     </select>
                     <label htmlFor="material">Материал</label>
-                    <select type="select" name="material" defaultValue={'DEFAULT'} required>
+                    <select type="select" name="material" defaultValue={'DEFAULT'} required >
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             materials.map((material) => (
@@ -122,16 +125,16 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="description">Описание</label>
-                    <textarea name="description" cols="30" rows="3" placeholder="Въведете описание" required></textarea>
+                    <textarea name="description" cols="30" rows="3" placeholder="Въведете описание"></textarea>
                     <div className="flex-items">
                         <div className="flex-items__item">
                             <label htmlFor="price">Цена</label>
-                            <input type="number" step="0.01" min="0.00" name="price" placeholder="0.00" />
+                            <input type="number" step="0.01" min="0.00" name="price" placeholder="0.00" required />
                             <p>BGN</p>
                         </div>
                         <div className="flex-items__item">
                             <label htmlFor="discount">Намаление</label>
-                            <input type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" />
+                            <input type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" required />
                             <p>BGN</p>
                         </div>
                     </div>
@@ -148,8 +151,7 @@ export const CreateItem = () => {
                             <label htmlFor="pin-discount">Промоция</label>
                         </div>
                     </div>
-
-                    <label htmlFor="images" className="drop-container">
+                    <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <div className="flex-items">
