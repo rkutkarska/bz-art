@@ -6,9 +6,13 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
+import * as categoriesService from '../services/categoriesService';
 import "../styles/CreateItem.css";
+// import { CreateCategory } from "./CreateCategory";
 
 export const CreateItem = () => {
+
     const initialFormData = Object.freeze({
         'name': '',
         'type': '',
@@ -28,17 +32,6 @@ export const CreateItem = () => {
     const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
 
-    const fetchCategories = async () => {
-        const categoriesCollectionRef = collection(db, "categories");
-
-        await getDocs(categoriesCollectionRef)
-            .then((res => {
-                const data = res.docs
-                    .map((doc) => ({ ...doc.data(), id: doc.id }));
-                setCategories(data);
-            }))
-    }
-
     const fetchMaterials = async () => {
         const materialsCollectionRef = collection(db, "materials");
 
@@ -51,7 +44,8 @@ export const CreateItem = () => {
     }
 
     useEffect(() => {
-        fetchCategories();
+        categoriesService.getAll()
+            .then(data => setCategories(data));
     }, []);
 
     useEffect(() => {
@@ -78,7 +72,7 @@ export const CreateItem = () => {
         await uploadBytes(imageRef, imageUpload).then(() => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
-                const itemsCollectionRef = collection(db, `categories/${formData.category}/items`);
+                const itemsCollectionRef = collection(db, 'items');
                 addDoc(itemsCollectionRef, { ...formData, url, dateCreated: new Date() });
             });
         });
@@ -107,12 +101,13 @@ export const CreateItem = () => {
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             categories.map((category) => (
-                                <option value={category.id} key={category.id}>
-                                    {category.category}
+                                <option value={category.name} key={category.id}>
+                                    {category.name}
                                 </option>
                             ))
                         }
                     </select>
+
                     <label htmlFor="material">Материал</label>
                     <select type="select" name="material" defaultValue={'DEFAULT'} required >
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
