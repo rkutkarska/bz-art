@@ -47,7 +47,7 @@ export const CreateCategory = () => {
             categoriesService.getAll()
                 .then(categories => setCategories(categories));
 
-            e.target.reset();
+            // e.target.reset();
         }
     };
 
@@ -56,7 +56,12 @@ export const CreateCategory = () => {
             return (<span>Все още няма добавени категории...</span>);
         }
 
-        return categories.map((category) => (<li className="category-list__item" key={category.id}>{category.name}</li>));
+        return categories.map((category) => (
+            <li className="category-list__item" key={category.id}>
+                <input name="category" type="radio" value={category.name} required />
+                <label for="name">{category.name}</label>
+            </li>
+        ));
     }
 
     let categoriesList;
@@ -72,17 +77,18 @@ export const CreateCategory = () => {
     }
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h1>Добавяне на категория</h1>
-                <form onSubmit={saveCategory} onChange={(e) => handleChange(e)} className="form">
-                    <label htmlFor="name">Име</label>
-                    <input type="text" name="name" placeholder="Име на категория" required />
-                    <label className="existing-categories">Налични категории: </label>
-                    {categoriesList}
-                    <input type="submit" className="button yellow" value="Запиши" />
-                </form>
+        <>
+            <label className="existing-categories">Налични категории: </label>
+            {categoriesList}
+            <div className="category-label">
+                <label htmlFor="name">Липсва категория? Добавете я:</label>
+                <input type="button" className="button yellow inline" value="Добави" />
             </div>
-        </div>
+            <div className="category-form">
+                <input type="text" name="name" placeholder="Име на категория" onChange={handleChange} />
+                <input type="submit" className="button yellow" value="Запази" onClick={saveCategory} />
+            </div>
+
+        </>
     );
 }

@@ -72,12 +72,14 @@ select:focus {
 }
 
 button,
-input[type="submit"] {
+input[type="submit"],
+input[type="button"] {
     border: 0;
     font-family: inherit;
     background-color: none;
     background: none;
 }
+
 
 input[type=file] {
     max-width: 100%;
@@ -198,7 +200,7 @@ div[class*="buttons"] {
 }
 
 .inline {
-    display: inline
+    display: inline;
 }
 
 .new__items,

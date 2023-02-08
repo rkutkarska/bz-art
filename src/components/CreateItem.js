@@ -9,7 +9,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import * as categoriesService from '../services/categoriesService';
 import "../styles/CreateItem.css";
-// import { CreateCategory } from "./CreateCategory";
+import { CreateCategory } from "./CreateCategory";
 
 export const CreateItem = () => {
 
@@ -96,17 +96,8 @@ export const CreateItem = () => {
                     <input type="text" name="name" placeholder="Име на артикул" required />
                     <label htmlFor="type">Вид</label>
                     <input type="text" name="type" placeholder="Вид артикул" required />
-                    <label htmlFor="category">Категория</label>
-                    <select name="category" defaultValue={'DEFAULT'} required>
-                        <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
-                        {
-                            categories.map((category) => (
-                                <option value={category.name} key={category.id}>
-                                    {category.name}
-                                </option>
-                            ))
-                        }
-                    </select>
+
+                    <CreateCategory />
 
                     <label htmlFor="material">Материал</label>
                     <select type="select" name="material" defaultValue={'DEFAULT'} required >
@@ -129,7 +120,7 @@ export const CreateItem = () => {
                         </div>
                         <div className="flex-items__item">
                             <label htmlFor="discount">Намаление</label>
-                            <input type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" required />
+                            <input type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" />
                             <p>BGN</p>
                         </div>
                     </div>
