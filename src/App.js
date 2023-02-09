@@ -21,12 +21,12 @@ import { CreateCategory } from './components/CreateCategory';
 function App() {
   return (
     <div>
-      <Header/>
-      <Main />
+      {/* <Header/>
+      <Main /> */}
 
-      {/* <CreateItem /> */}
+      <CreateItem />
 
-      <CreateCategory />
+      {/* <CreateCategory /> */}
       {/* <BookList data={books} />
       <ItemCounter start = {1} /> */}
       </div>
