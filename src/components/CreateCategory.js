@@ -51,15 +51,15 @@ export const CreateCategory = () => {
         } else {
             addDoc(categoriesCollectionRef, { ...formData, dateCreated: new Date() });
             categoriesService.getAll()
-                .then(categories => setCategories(categories));
-
-            console.log('current ' + formData.name);
+                .then(categories => {
+                    setCategories(categories)
+                });
 
             setCurrentCategory(formData.name);
-
             e.target.previousSibling.value = "";
         }
     };
+
 
     const renderCategoriesOptions = (categories) => {
         if (categories.length === 0) {
@@ -70,9 +70,17 @@ export const CreateCategory = () => {
             // onChange={currentCategory ? currentCategory : 'DEFAULT'}
             <select defaultValue={'DEFAULT'} required>
                 <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
-                {categories.map((category) => (
-                    <option selected={currentCategory} key={category.id} value={category.name} >{category.name}</option>
-                ))}
+                {
+                    categories.map((category) => (
+                        <option
+                            selected={currentCategory}
+                            key={category.id}
+                            value={category.name}
+                        >
+                            {category.name}
+                        </option>
+                    ))
+                }
             </select>
         )
     }
@@ -91,21 +99,24 @@ export const CreateCategory = () => {
             {renderCategoriesOptions(categories)}
             <div className="category-label">
                 <label htmlFor="name">Липсва категория? Добавете я:</label>
-                <input type="button" className="button yellow" value={addCategory ? "+ Добави" : "x Отказ"} onClick={() => {
-                    setHidden(s => !s);
-                    setAddCategory(!addCategory);
-                }}
+                <input type="button" className="button yellow"
+                    value={addCategory ? "+ Добави" : "x Отказ"}
+                    onClick={() => {
+                        setHidden(s => !s);
+                        setAddCategory(!addCategory);
+                    }}
                 />
             </div>
             {
                 !hidden
                     ? <div className="category-form">
                         <input type="text" name="name" placeholder="Име на категория" onChange={handleChange} />
-                        <input type="submit" className="button yellow" value="Запази" onClick={(e) => {
-                            saveCategory(e);
-                            setHidden(s => !s);
-                            setAddCategory(!addCategory);
-                        }}
+                        <input type="submit" className="button yellow" value="Запази"
+                            onClick={(e) => {
+                                saveCategory(e);
+                                setHidden(s => !s);
+                                setAddCategory(!addCategory);
+                            }}
                         />
                     </div>
                     : null
