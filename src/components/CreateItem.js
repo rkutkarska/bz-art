@@ -7,29 +7,26 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import * as categoriesService from '../services/categoriesService';
 import "../styles/CreateItem.css";
 import { CreateCategory } from "./CreateCategory";
 
 export const CreateItem = () => {
 
-    const initialFormData = Object.freeze({
-        'name': '',
-        'type': '',
-        'category': '',
-        'material': '',
-        'description': '',
-        'price': 0,
-        'discount': 0,
-        'url': '',
-        'pin-new': "off",
-        'pin-discount': "off",
-        'dateCreated': {}
+    const [formData, updateFormData] = useState({
+        name: '',
+        type: '',
+        category: '',
+        material: '',
+        description: '',
+        price: 0,
+        discount: 0,
+        url: '',
+        isNew: false,
+        hasDiscount: false,
+        dateCreated: {}
     });
 
-    const [formData, updateFormData] = useState(initialFormData);
     const [imageUpload, setImageUpload] = useState('');
-    const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
 
     const fetchMaterials = async () => {
@@ -44,18 +41,13 @@ export const CreateItem = () => {
     }
 
     useEffect(() => {
-        categoriesService.getAll()
-            .then(data => setCategories(data));
-    }, []);
-
-    useEffect(() => {
         fetchMaterials();
     }, []);
 
     const handleChange = (e) => {
         updateFormData({
             ...formData,
-            [e.target.name]: e.target.value.trim()
+            [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value.trim()
         })
     }
 
@@ -76,14 +68,16 @@ export const CreateItem = () => {
                 addDoc(itemsCollectionRef, { ...formData, url, dateCreated: new Date() });
             });
         });
+        console.log(formData);
         e.target.reset();
     }
 
     const clearImage = (e) => {
         e.preventDefault();
-        updateFormData({ ...formData, "url": "" });
+        updateFormData({ ...formData, url: '' });
         e.target.previousSibling.value = '';
     };
+
 
     // TODO implement drag and drop
 
@@ -91,16 +85,16 @@ export const CreateItem = () => {
         <div className="container">
             <div className="form-container">
                 <h1>Добавяне на артикул</h1>
-                <form onSubmit={saveItem} onChange={(e) => handleChange(e)} className="form">
+                <form onSubmit={saveItem} onChange={handleChange} className="form">
                     <label htmlFor="name">Име</label>
-                    <input type="text" name="name" placeholder="Име на артикул" required />
+                    <input id="name" type="text" name="name" placeholder="Име на артикул" required />
                     <label htmlFor="type">Вид</label>
-                    <input type="text" name="type" placeholder="Вид артикул" required />
+                    <input id="type" type="text" name="type" placeholder="Вид артикул" required />
 
                     <CreateCategory />
 
                     <label htmlFor="material">Материал</label>
-                    <select type="select" name="material" defaultValue={'DEFAULT'} required >
+                    <select id="material" type="select" name="material" defaultValue={'DEFAULT'} required >
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             materials.map((material) => (
@@ -111,30 +105,30 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="description">Описание</label>
-                    <textarea name="description" cols="30" rows="3" placeholder="Въведете описание"></textarea>
+                    <textarea id="description" name="description" cols="30" rows="3" placeholder="Въведете описание" />
                     <div className="flex-items">
                         <div className="flex-items__item">
                             <label htmlFor="price">Цена</label>
-                            <input type="number" step="0.01" min="0.00" name="price" placeholder="0.00" required />
+                            <input id="price" type="number" step="0.01" min="0.00" name="price" placeholder="0.00" required />
                             <p>BGN</p>
                         </div>
                         <div className="flex-items__item">
                             <label htmlFor="discount">Намаление</label>
-                            <input type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" />
+                            <input id="discount" type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" />
                             <p>BGN</p>
                         </div>
                     </div>
 
                     <div className="form-check">
-                        <label htmlFor="index-">Етикет начало:</label>
+                        <label htmlFor="index-label">Етикет начало:</label>
                         <div>
-                            <input className="form-check-input" type="checkbox" name="pin-new" />
-                            <label htmlFor="pin-new">Ново</label>
+                            <input id="isNew" className="form-check-input" type="checkbox" name="isNew" value={formData.isNew} />
+                            <label htmlFor="isNew">Ново</label>
                         </div>
 
                         <div>
-                            <input className="form-check-input" type="checkbox" name="pin-discount" />
-                            <label htmlFor="pin-discount">Промоция</label>
+                            <input id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={formData.hasDiscount} />
+                            <label htmlFor="hasDiscount">Промоция</label>
                         </div>
                     </div>
                     <label htmlFor="image" className="drop-container">
@@ -142,7 +136,7 @@ export const CreateItem = () => {
                         или
                         <div className="flex-items">
                             <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="url" required />
-                            <button className="button purple" onClick={(e) => clearImage(e)}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
+                            <button className="button purple" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
                         </div>
                     </label>
 
