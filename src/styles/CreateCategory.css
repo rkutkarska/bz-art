@@ -17,3 +17,11 @@
 .category-form input[type="text"] {
     width: 85%;
 }
+
+#category-name {
+    width: 40%;
+}
+
+.category-form input[type="file"] {
+    height: fit-content;
+}

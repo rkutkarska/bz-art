@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../Firebase";
 
-import * as categoriesService from '../services/categoriesService';
-
+import * as categoriesService from "../services/categoriesService";
 import "../styles/CreateCategory.css";
 
 export const CreateCategory = () => {
 
-    const [formData, updateFormData] = useState(
+    const [values, updateValues] = useState(
         {
             name: '',
             url: '',
@@ -19,8 +16,7 @@ export const CreateCategory = () => {
     const [categories, setCategories] = useState([]);
     const [hidden, setHidden] = useState(true);
     const [addCategory, setAddCategory] = useState(true);
-
-    const categoriesCollectionRef = collection(db, "categories");
+    const [imageUpload, setImageUpload] = useState('');
 
     useEffect(() => {
         categoriesService.getAll()
@@ -28,31 +24,11 @@ export const CreateCategory = () => {
     }, []);
 
     const handleChange = (e) => {
-        updateFormData((oldFormData) => ({
-            ...oldFormData,
+        updateValues((oldValues) => ({
+            ...oldValues,
             [e.target.name]: e.target.value.trim()
         }))
     }
-
-    const saveCategory = (e) => {
-        e.preventDefault();
-
-        if (categoriesService.checkIfExist(categories, formData)) {
-            alert('Категорията не е записана, защото вече има такава!');
-            return;
-        } else if (formData.name === '') {
-            alert('Моля, въведете категория!');
-            return;
-        } else {
-            addDoc(categoriesCollectionRef, { ...formData, dateCreated: new Date() });
-            categoriesService.getAll()
-                .then(categories => {
-                    setCategories(categories)
-                });
-            e.target.previousSibling.value = "";
-        }
-    };
-
 
     const renderCategoriesOptions = () => {
         if (categories.length === 0) {
@@ -60,7 +36,7 @@ export const CreateCategory = () => {
         }
 
         return (
-            <select name="name" id="available-categories" value={formData.name ? formData.name : 'DEFAULT'} onChange={handleChange} required >
+            <select name="name" id="available-categories" value={values.name ? values.name : 'DEFAULT'} onChange={handleChange} required >
                 <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                 {
                     categories.map((category) => (
@@ -78,7 +54,7 @@ export const CreateCategory = () => {
 
     return (
         <>
-            <label htmlFor="available-categories" className="existing-categories">Налични категории: </label>
+            <label htmlFor="available-categories" className="existing-categories">Категории: </label>
             {renderCategoriesOptions()}
             <div className="category-label">
                 <label htmlFor="category-name">Липсва категория? Добавете я:</label>
@@ -93,10 +69,11 @@ export const CreateCategory = () => {
             {
                 !hidden
                     ? <div className="category-form">
-                        <input id="category-name" type="text" name="name" placeholder="Име на категория" onChange={handleChange}/>
+                        <input id="category-name" type="text" name="name" placeholder="Име на категория" onChange={handleChange} />
+                        <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="url" required />
                         <input type="submit" className="button yellow" value="Запази"
                             onClick={(e) => {
-                                saveCategory(e);
+                                categoriesService.saveCategory(e, categories, values, imageUpload, setCategories);
                                 setHidden(s => !s);
                                 setAddCategory(!addCategory);
                             }}
