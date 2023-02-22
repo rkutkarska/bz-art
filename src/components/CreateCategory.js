@@ -8,8 +8,8 @@ export const CreateCategory = () => {
 
     const [values, updateValues] = useState(
         {
-            name: '',
-            url: '',
+            categoryName: '',
+            categoryImageUrl: '',
             dateCreated: ''
         }
     );
@@ -36,15 +36,15 @@ export const CreateCategory = () => {
         }
 
         return (
-            <select name="name" id="available-categories" value={values.name ? values.name : 'DEFAULT'} onChange={handleChange} required >
+            <select name="categoryName" id="available-categories" value={values.categoryName ? values.categoryName : 'DEFAULT'} onChange={handleChange} required >
                 <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                 {
                     categories.map((category) => (
                         <option
                             key={category.id}
-                            value={category.name}
+                            value={category.categoryName}
                         >
-                            {category.name}
+                            {category.categoryName}
                         </option>
                     ))
                 }
@@ -69,8 +69,8 @@ export const CreateCategory = () => {
             {
                 !hidden
                     ? <div className="category-form">
-                        <input id="category-name" type="text" name="name" placeholder="Име на категория" onChange={handleChange} />
-                        <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="url" required />
+                        <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
+                        <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="categoryImageUrl" required />
                         <input type="submit" className="button yellow" value="Запази"
                             onClick={(e) => {
                                 categoriesService.saveCategory(e, categories, values, imageUpload, setCategories);
