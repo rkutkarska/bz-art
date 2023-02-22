@@ -8,6 +8,7 @@ import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { CreateItem } from './components/CreateItem';
 import { CreateCategory } from './components/CreateCategory';
+import { UpdateItem } from './components/UpdateItem';
 
 // const books = [
 //   {
@@ -24,7 +25,8 @@ function App() {
       {/* <Header/>
       <Main /> */}
 
-      <CreateItem />
+      {/* <CreateItem /> */}
+      <UpdateItem />
 
       {/* <CreateCategory /> */}
       {/* <BookList data={books} />
