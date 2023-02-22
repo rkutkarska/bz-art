@@ -15,12 +15,12 @@ export const CreateItem = () => {
     const [formData, updateFormData] = useState({
         name: '',
         type: '',
-        category: '',
+        categoryName: '',
         material: '',
         description: '',
         price: 0,
         discount: 0,
-        url: '',
+        imageUrl: '',
         isNew: false,
         hasDiscount: false,
         dateCreated: {}
@@ -65,7 +65,7 @@ export const CreateItem = () => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
                 const itemsCollectionRef = collection(db, 'items');
-                addDoc(itemsCollectionRef, { ...formData, url, dateCreated: new Date() });
+                addDoc(itemsCollectionRef, { ...formData, imageUrl: url, dateCreated: new Date() });
             });
         });
         console.log(formData);
@@ -74,7 +74,7 @@ export const CreateItem = () => {
 
     const clearImage = (e) => {
         e.preventDefault();
-        updateFormData({ ...formData, url: '' });
+        updateFormData({ ...formData, imageUrl: '' });
         e.target.previousSibling.value = '';
     };
 
@@ -135,7 +135,7 @@ export const CreateItem = () => {
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <div className="flex-items">
-                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="url" required />
+                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="imageUrl" required />
                             <button className="button purple" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
                         </div>
                     </label>
