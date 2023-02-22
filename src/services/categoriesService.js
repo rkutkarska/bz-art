@@ -14,8 +14,8 @@ export const getAll = async () => {
 
 export const checkIfExist = (categories, values) => {
     return (categories
-        .map(category => (category.name.toLowerCase()))
-        .includes((values.name).toLowerCase()));
+        .map(category => (category.categoryName.toLowerCase()))
+        .includes((values.categoryName).toLowerCase()));
 };
 
 export const saveCategory = async (e, categories, values, imageUpload, setCategories) => {
@@ -23,7 +23,7 @@ export const saveCategory = async (e, categories, values, imageUpload, setCatego
     if (checkIfExist(categories, values)) {
         // alert('Категорията не е записана, защото вече има такава!');
         return;
-    } else if (values.name === '') {
+    } else if (values.categoryName === '') {
         // alert('Моля, въведете категория!');
         return;
     } else if (imageUpload === '') {
@@ -37,7 +37,7 @@ export const saveCategory = async (e, categories, values, imageUpload, setCatego
     await uploadBytes(imageRef, imageUpload).then(() => {
         // alert('Файлът е качен успешно!');
         getDownloadURL(imageRef).then((url) => {
-            addDoc(categoriesCollectionRef, { ...values, url, dateCreated: new Date() });
+            addDoc(categoriesCollectionRef, { ...values, categoryImageUrl: url, dateCreated: new Date() });
             getAll()
             .then(categories => setCategories(categories));
         })
