@@ -17,8 +17,22 @@
     --clr-purple-font: rgb(80, 65, 84);
     --clr-yellow: rgb(255, 204, 95);
     --clr-gray: rgb(191, 191, 191);
+    --clr-gray-background: rgb(242, 242, 242);
     --clr-white: rgb(255, 255, 255);
     --clr-background: rgba(209, 179, 196, 0.1);
+
+    /* For actions, messages, connectivity, status */
+    --clr-green: #36B37E; /* confirm or view, success, available, added */
+    --clr-dark-green: #2b8f64;
+    --clr-blue: #0065FF; /* add, information, - , in progress */
+    --clr-dark-blue: #0050cc;
+    --clr-red: #FF5630; /* remove, error, busy, removed or failed */
+    --clr-dark-red: #cc4426;
+    --clr-neutral: #bcbcc0; /* secondary, - , unavailable, default */
+    --clr-dark-neutral: #8d8d90;
+    --clr-orange: #FFAB00; /* edit, warning, moved, medium or blocked */
+    --clr-dark-orange: #e59900;
+
     --padding-buttons: 10px 7px;
 }
 
@@ -94,6 +108,7 @@ input[type="submit"] {
     font-family: inherit;
     background-color: none;
     background: none;
+    cursor: pointer;
 }
 
 .button {
@@ -120,6 +135,55 @@ input[type="submit"] {
     background-color: var(--clr-yellow);
     color: var(--clr-white);
 }
+
+/* ADDED 24.02.23 - new buttons */
+
+.button.red {
+    color: var(--clr-white);
+    background-color: var(--clr-red);
+}
+
+.button.red:hover {
+    background-color: var(--clr-dark-red);
+}
+
+.button.blue {
+    color: var(--clr-white);
+    background-color: var(--clr-blue);
+}
+
+.button.blue:hover {
+    background-color: var(--clr-dark-blue);
+}
+
+.button.green {
+    color: var(--clr-white);
+    background-color: var(--clr-green);
+}
+
+.button.green:hover {
+    background-color: var(--clr-dark-green);
+}
+
+.button.orange {
+    color: var(--clr-white);
+    background-color: var(--clr-orange);
+}
+
+.button.orange:hover {
+    background-color: var(--clr-dark-orange);
+}
+
+.button.neutral {
+    color: var(--clr-white);
+    background-color: var(--clr-neutral);
+}
+
+.button.neutral:hover {
+    background-color: var(--clr-dark-neutral);
+}
+
+/* --- */
 
 .buttons {
     display: flex;
