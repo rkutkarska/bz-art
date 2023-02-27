@@ -12,18 +12,18 @@ export const getAll = async () => {
     return data;
 };
 
-export const checkIfExist = (categories, values) => {
+export const checkIfExist = (categories, categoriesData) => {
     return (categories
         .map(category => (category.categoryName.toLowerCase()))
-        .includes((values.categoryName).toLowerCase()));
+        .includes((categoriesData.categoryName).toLowerCase()));
 };
 
-export const saveCategory = async (e, categories, values, imageUpload, setCategories) => {
+export const saveCategory = async (e, categories, categoriesData, imageUpload, setCategories) => {
     e.preventDefault();
-    if (checkIfExist(categories, values)) {
+    if (checkIfExist(categories, categoriesData)) {
         // alert('Категорията не е записана, защото вече има такава!');
         return;
-    } else if (values.categoryName === '') {
+    } else if (categoriesData.categoryName === '') {
         // alert('Моля, въведете категория!');
         return;
     } else if (imageUpload === '') {
@@ -37,7 +37,7 @@ export const saveCategory = async (e, categories, values, imageUpload, setCatego
     await uploadBytes(imageRef, imageUpload).then(() => {
         // alert('Файлът е качен успешно!');
         getDownloadURL(imageRef).then((url) => {
-            addDoc(categoriesCollectionRef, { ...values, categoryImageUrl: url, dateCreated: new Date() });
+            addDoc(categoriesCollectionRef, { ...categoriesData, categoryImageUrl: url, dateCreated: new Date() });
             getAll()
             .then(categories => setCategories(categories));
         })

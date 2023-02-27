@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import { storage, db } from "../Firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -12,7 +11,7 @@ import { CreateCategory } from "./CreateCategory";
 
 export const CreateItem = () => {
 
-    const [formData, updateFormData] = useState({
+    const [itemsData, updateItemsData] = useState({
         name: '',
         type: '',
         categoryName: '',
@@ -26,7 +25,7 @@ export const CreateItem = () => {
         dateCreated: {}
     });
 
-    const [imageUpload, setImageUpload] = useState('');
+    const [itemImageUpload, setItemImageUpload] = useState('');
     const [materials, setMaterials] = useState([]);
 
     const fetchMaterials = async () => {
@@ -45,36 +44,37 @@ export const CreateItem = () => {
     }, []);
 
     const handleChange = (e) => {
-        updateFormData({
-            ...formData,
+        updateItemsData({
+            ...itemsData,
             [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value.trim()
         })
+        console.log(itemsData);
     }
 
     const saveItem = async (e) => {
         e.preventDefault();
-        const imageRef = ref(storage, `images/items/${v4() + imageUpload.name}`);
+        const imageRef = ref(storage, `images/items/${v4() + itemImageUpload.name}`);
 
-        if (imageUpload === '') {
+        if (itemImageUpload === '') {
             // alert('Неуспешно качване!');
             e.target.value = '';
             return;
         }
 
-        await uploadBytes(imageRef, imageUpload).then(() => {
+        await uploadBytes(imageRef, itemImageUpload).then(() => {
             // alert('Файлът е качен успешно!');
             getDownloadURL(imageRef).then((url) => {
                 const itemsCollectionRef = collection(db, 'items');
-                addDoc(itemsCollectionRef, { ...formData, imageUrl: url, dateCreated: new Date() });
+                addDoc(itemsCollectionRef, { ...itemsData, imageUrl: url, dateCreated: new Date() });
             });
         });
-        console.log(formData);
+
         e.target.reset();
     }
 
     const clearImage = (e) => {
         e.preventDefault();
-        updateFormData({ ...formData, imageUrl: '' });
+        updateItemsData({ ...itemsData, imageUrl: '' });
         e.target.previousSibling.value = '';
     };
 
@@ -122,12 +122,12 @@ export const CreateItem = () => {
                     <div className="form-check">
                         <label htmlFor="index-label">Етикет начало:</label>
                         <div>
-                            <input id="isNew" className="form-check-input" type="checkbox" name="isNew" value={formData.isNew} />
+                            <input id="isNew" className="form-check-input" type="checkbox" name="isNew" value={itemsData.isNew} />
                             <label htmlFor="isNew">Ново</label>
                         </div>
 
                         <div>
-                            <input id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={formData.hasDiscount} />
+                            <input id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={itemsData.hasDiscount} />
                             <label htmlFor="hasDiscount">Промоция</label>
                         </div>
                     </div>
@@ -135,7 +135,7 @@ export const CreateItem = () => {
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <div className="flex-items">
-                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="imageUrl" required />
+                            <input type="file" onChange={(e) => setItemImageUpload(e.target.files[0])} id="images" accept="image/*" name="imageUrl" required />
                             <button className="button purple" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
                         </div>
                     </label>
