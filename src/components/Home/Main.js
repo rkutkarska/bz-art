@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from "../Category";
+import { Category } from "./Categories/Category";
 
 export const Main = () => {
     return(
