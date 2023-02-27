@@ -1,10 +1,9 @@
 import React from 'react';
-import '../styles/Header.css';
+import '../../styles/Header.css';
 
 import { HeaderInfo } from './HeaderInfo';
 import { HeaderItems } from './HeaderItems';
 import { Navigation } from './Navigation';
-import { Hero } from './Hero';
 
 export const Header = () => {
     return (
@@ -12,7 +11,6 @@ export const Header = () => {
             <HeaderInfo />
             <HeaderItems />
             <Navigation />
-            <Hero />
         </header>
     );
 }
