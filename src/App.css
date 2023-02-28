@@ -104,17 +104,16 @@ input[type=file] {
 
 input[type=file]::file-selector-button {
     border: unset;
-    background: unset;
-    border-right: 2px solid var(--clr-purple-dark);
+    background-color: var(--clr-blue);
+    color: var(--clr-white);
     padding: 10px 20px;
     cursor: pointer;
-    transition: background .2s ease-in-out;
+    transition: background .3s ease-in-out;
     padding: 13px;
 }
 
 input[type=file]::file-selector-button:hover {
-    background: var(--clr-purple-dark);
-    color: var(--clr-white);
+    background-color: var(--clr-dark-blue);
 }
 
 input[type="radio"],
