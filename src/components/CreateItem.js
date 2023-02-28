@@ -44,11 +44,20 @@ export const CreateItem = () => {
     }, []);
 
     const handleChange = (e) => {
+        let objValue;
+
+        if (e.target.type === 'checkbox') {
+            objValue = e.target.checked;
+        } else if (e.target.type === 'number') {
+            objValue = Number(e.target.value.trim());
+        } else {
+            objValue = e.target.value.trim();
+        }
+
         updateItemsData({
             ...itemsData,
-            [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value.trim()
+            [e.target.name]: objValue
         })
-        console.log(itemsData);
     }
 
     const saveItem = async (e) => {
@@ -136,11 +145,11 @@ export const CreateItem = () => {
                         или
                         <div className="flex-items">
                             <input type="file" onChange={(e) => setItemImageUpload(e.target.files[0])} id="images" accept="image/*" name="imageUrl" required />
-                            <button className="button purple" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
+                            <button className="button red" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
                         </div>
                     </label>
 
-                    <input type="submit" className="button yellow" value="Запиши" />
+                    <input type="submit" className="button green" value="Запиши" />
                 </form>
             </div>
         </div>

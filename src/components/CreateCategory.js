@@ -5,7 +5,7 @@ import "../styles/CreateCategory.css";
 
 export const CreateCategory = () => {
 
-    const [categoriesData, updateCategorisData] = useState({
+    const [categoriesData, updateCategoriеsData] = useState({
         categoryName: '',
         categoryImageUrl: '',
         dateCreated: ''
@@ -21,7 +21,7 @@ export const CreateCategory = () => {
     }, []);
 
     const handleChange = (e) => {
-        updateCategorisData((oldValues) => ({
+        updateCategoriеsData((oldValues) => ({
             ...oldValues,
             [e.target.name]: e.target.value.trim()
         }))
@@ -51,11 +51,12 @@ export const CreateCategory = () => {
 
     return (
         <>
-            <label htmlFor="available-categories" className="existing-categories">Категории: </label>
+            <label htmlFor="available-categories" className="existing-categories">Категория: </label>
             {renderCategoriesOptions()}
             <div className="category-label">
                 <label htmlFor="category-name">Липсва категория? Добавете я:</label>
-                <input type="button" className="button yellow"
+                <input type="button"
+                    className={addCategory ? "button blue" : "button red"}
                     value={addCategory ? "+ Добави" : "x Отказ"}
                     onClick={() => {
                         setHidden(s => !s);
@@ -68,7 +69,7 @@ export const CreateCategory = () => {
                     ? <div className="category-form">
                         <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
                         <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="categoryImageUrl" required />
-                        <input type="submit" className="button yellow" value="Запази"
+                        <input type="submit" className="button green" value="Запази"
                             onClick={(e) => {
                                 categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories);
                                 setHidden(s => !s);
