@@ -1,4 +1,5 @@
 import React from "react";
+import {Link } from 'react-router-dom';
 import "../../styles/LoginRegister.css";
 
 export const Login = () => {
@@ -16,7 +17,7 @@ export const Login = () => {
                     <input className="button yellow" type="submit" name="" value="Вход" />
                 </form>
                 <p className="inline">Нямате акаунт? </p>
-                <a href="/register">Регистрирайте се</a>
+                <Link to="/register">Регистрирайте се</Link>
             </div>
         </div>
     );
