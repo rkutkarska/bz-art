@@ -12,8 +12,8 @@ export const CategoryItems = () => {
 
     return (
         categoryItems.map(category => (
-            <section className="category__item">
-                <a href={`/details/` + category.div}>
+            <section key={category.id} className="category__item">
+                <a href={`/details/` + category.id}>
                     <img src={category.categoryImageUrl} alt="ring" />
                     <div className="overlay">
                         <p>{category.categoryName}</p>
