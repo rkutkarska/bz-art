@@ -10,8 +10,6 @@ export const CategoryItems = () => {
             .then(categories => setCategoryItems(categories));
     }, []);
 
-
-    console.log(categoryItems);
     return (
         categoryItems.map(category => (
             <section className="category__item">

@@ -9,7 +9,7 @@ import * as itemsService from "../services/itemsService";
 import '../styles/UpdateItem.css';
 
 export const UpdateItem = () => {
-
+    // TODO get the specific id
     let id = 'KqQ3icCRUhR5fOvwXkLo';
 
     const [categories, setCategories] = useState([]);

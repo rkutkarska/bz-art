@@ -4,12 +4,12 @@ import * as categoriesService from "../services/categoriesService";
 import "../styles/CreateCategory.css";
 
 export const CreateCategory = () => {
-
     const [categoriesData, updateCategoriеsData] = useState({
         categoryName: '',
         categoryImageUrl: '',
         dateCreated: ''
     });
+
     const [categories, setCategories] = useState([]);
     const [hidden, setHidden] = useState(true);
     const [addCategory, setAddCategory] = useState(true);
@@ -56,8 +56,8 @@ export const CreateCategory = () => {
             <div className="category-label">
                 <label htmlFor="category-name">Липсва категория? Добавете я:</label>
                 <input type="button"
+                    value={addCategory ? "Добави" : "Отказ"}
                     className={addCategory ? "button blue" : "button red"}
-                    value={addCategory ? "+ Добави" : "x Отказ"}
                     onClick={() => {
                         setHidden(s => !s);
                         setAddCategory(!addCategory);
