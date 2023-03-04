@@ -4,7 +4,7 @@ import "../../styles/LoginRegister.css";
 
 export const Register = () => {
     return (
-        <div class="register-container">
+        <div className="register-container">
             <div className="register-container__image"></div>
             <div className="register-container__form">
                 <h1>Регистрация</h1>

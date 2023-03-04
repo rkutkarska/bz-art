@@ -6,9 +6,9 @@ import styles from './NotFound.module.css';
 export const NotFound = () => {
     return (
         <div>
-            <img class={styles["img-center"]} src={require("../../img/404/404.png")} />
+            <img className={styles["img-center"]} src={require("../../img/404/404.png")} />
             <h1>Page not found!</h1>
-            <div class={styles["text-center"]}>
+            <div className={styles["text-center"]}>
                 <p>Ами сега? Страницата, която търсиш не съществува!</p>
                 <Link to="/" class="button purple">Към началната страница</Link>
             </div>
