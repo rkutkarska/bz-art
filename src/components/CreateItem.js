@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { v4 } from "uuid";
-import { storage, db } from "../Firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { db } from "../Firebase";
+
+import * as itemsService from '../services/itemsService';
 
 import "../styles/CreateItem.css";
 import { CreateCategory } from "./CreateCategory";
+import { ModalTemplate } from "./Modals/ModalTemplate";
 
 export const CreateItem = () => {
 
@@ -27,6 +29,8 @@ export const CreateItem = () => {
 
     const [itemImageUpload, setItemImageUpload] = useState('');
     const [materials, setMaterials] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     const fetchMaterials = async () => {
         const materialsCollectionRef = collection(db, "materials");
@@ -60,26 +64,13 @@ export const CreateItem = () => {
         })
     }
 
-    const saveItem = async (e) => {
-        e.preventDefault();
-        const imageRef = ref(storage, `images/items/${v4() + itemImageUpload.name}`);
-
-        if (itemImageUpload === '') {
-            // alert('Неуспешно качване!');
-            e.target.value = '';
-            return;
+    useEffect(() => {
+        if (isModalOpen) {
+            document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+        } else {
+            document.getElementsByTagName('body')[0].style.overflow = 'scroll';
         }
-
-        await uploadBytes(imageRef, itemImageUpload).then(() => {
-            // alert('Файлът е качен успешно!');
-            getDownloadURL(imageRef).then((url) => {
-                const itemsCollectionRef = collection(db, 'items');
-                addDoc(itemsCollectionRef, { ...itemsData, imageUrl: url, dateCreated: new Date() });
-            });
-        });
-
-        e.target.reset();
-    }
+    }, [isModalOpen]);
 
     const clearImage = (e) => {
         e.preventDefault();
@@ -92,9 +83,16 @@ export const CreateItem = () => {
 
     return (
         <div className="container">
+            {isModalOpen ? <ModalTemplate obj={modalObject} /> : false}
+            {/* <ModalTemplate obj={{ message: 'Съобщение', type: "information" }} /> */}
+
             <div className="form-container">
                 <h1>Добавяне на артикул</h1>
-                <form onSubmit={saveItem} onChange={handleChange} className="form">
+                <form
+                    onSubmit={(e) => itemsService.saveItem(e, itemImageUpload, itemsData, setIsModalOpen, setModalObject)}
+                    onChange={handleChange}
+                    className="form"
+                >
                     <label htmlFor="name">Име</label>
                     <input id="name" type="text" name="name" placeholder="Име на артикул" required />
                     <label htmlFor="type">Вид</label>
