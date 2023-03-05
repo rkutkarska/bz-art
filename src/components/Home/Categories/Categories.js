@@ -17,7 +17,7 @@ export const Categories = () => {
             <div className="category__items">
                 {categoryItems.length > 0
                     ? <CategoryItems categories={categoryItems} />
-                    : <p class="no-categories">Все още няма добавени категории...</p>
+                    : <p className="no-categories">Все още няма добавени категории...</p>
                 }
             </div>
         </article>

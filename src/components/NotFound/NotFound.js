@@ -6,7 +6,7 @@ import styles from './NotFound.module.css';
 export const NotFound = () => {
     return (
         <div>
-            <img className={styles["img-center"]} src={require("../../img/404/404.png")} />
+            <img className={styles["img-center"]} src={require("../../img/404/404.png")} alt="404 Page not found!" />
             <h1>Page not found!</h1>
             <div className={styles["text-center"]}>
                 <p>Ами сега? Страницата, която търсиш не съществува!</p>
