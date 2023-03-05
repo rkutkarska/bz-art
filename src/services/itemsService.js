@@ -1,5 +1,5 @@
 import { db, storage } from "../Firebase";
-import { collection, doc, getDoc, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, addDoc } from "firebase/firestore";
 import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -42,4 +42,13 @@ export const saveItem = async (e, itemImageUpload, itemsData, setIsModalOpen, se
     });
 
     e.target.reset();
+}
+
+export const getNewItems = async () => {
+    const itemsCollectionRef = collection(db, "items");
+    const response = await getDocs(itemsCollectionRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+    const newItems = data.filter(item => item.isNew)
+    return newItems;
 }
