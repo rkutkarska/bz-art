@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { db } from "../Firebase";
+import { db } from "../../Firebase";
 
-import * as itemsService from '../services/itemsService';
+import * as itemsService from '../../services/itemsService';
 
-import "../styles/CreateItem.css";
-import { CreateCategory } from "./CreateCategory";
-import { ModalTemplate } from "./Modals/ModalTemplate";
+import "../../styles/CreateItem.css";
+import { AddCategory } from "./AddCategory";
+import { ModalTemplate } from "../Modals/ModalTemplate";
 
 export const CreateItem = () => {
 
@@ -19,6 +19,7 @@ export const CreateItem = () => {
         categoryName: '',
         material: '',
         description: '',
+        quantity: 0,
         price: 0,
         discount: 0,
         imageUrl: '',
@@ -80,6 +81,7 @@ export const CreateItem = () => {
 
 
     // TODO implement drag and drop
+    // TODO fix modal
 
     return (
         <div className="container">
@@ -90,18 +92,17 @@ export const CreateItem = () => {
                 <h1>Добавяне на артикул</h1>
                 <form
                     onSubmit={(e) => itemsService.saveItem(e, itemImageUpload, itemsData, setIsModalOpen, setModalObject)}
-                    onChange={handleChange}
                     className="form"
                 >
                     <label htmlFor="name">Име</label>
-                    <input id="name" type="text" name="name" placeholder="Име на артикул" required />
+                    <input id="name" type="text" name="name" placeholder="Име на артикул" required onChange={handleChange} />
                     <label htmlFor="type">Вид</label>
-                    <input id="type" type="text" name="type" placeholder="Вид артикул" required />
+                    <input id="type" type="text" name="type" placeholder="Вид артикул" required onChange={handleChange} />
 
-                    <CreateCategory />
+                    <AddCategory updateItemsData={updateItemsData}/>
 
                     <label htmlFor="material">Материал</label>
-                    <select id="material" type="select" name="material" defaultValue={'DEFAULT'} required >
+                    <select id="material" type="select" name="material" defaultValue={'DEFAULT'} required onChange={handleChange} >
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             materials.map((material) => (
@@ -112,16 +113,21 @@ export const CreateItem = () => {
                         }
                     </select>
                     <label htmlFor="description">Описание</label>
-                    <textarea id="description" name="description" cols="30" rows="3" placeholder="Въведете описание" />
+                    <textarea id="description" name="description" cols="30" rows="3" placeholder="Въведете описание" onChange={handleChange} />
                     <div className="flex-items">
+                    <div className="flex-items__item">
+                            <label htmlFor="quantity">Количество</label>
+                            <input id="quantity" type="number" step="1" min="1" name="quantity" placeholder="0" required onChange={handleChange} />
+                            <p>бр.</p>
+                        </div>
                         <div className="flex-items__item">
                             <label htmlFor="price">Цена</label>
-                            <input id="price" type="number" step="0.01" min="0.00" name="price" placeholder="0.00" required />
+                            <input id="price" type="number" step="0.01" min="0.00" name="price" placeholder="0.00" required onChange={handleChange} />
                             <p>BGN</p>
                         </div>
                         <div className="flex-items__item">
                             <label htmlFor="discount">Намаление</label>
-                            <input id="discount" type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" />
+                            <input id="discount" type="number" step="0.01" min="0.00" name="discount" placeholder="0.00" onChange={handleChange} />
                             <p>BGN</p>
                         </div>
                     </div>
@@ -129,12 +135,12 @@ export const CreateItem = () => {
                     <div className="form-check">
                         <label htmlFor="index-label">Етикет начало:</label>
                         <div>
-                            <input id="isNew" className="form-check-input" type="checkbox" name="isNew" value={itemsData.isNew} />
+                            <input id="isNew" className="form-check-input" type="checkbox" name="isNew" value={itemsData.isNew} onChange={handleChange} />
                             <label htmlFor="isNew">Ново</label>
                         </div>
 
                         <div>
-                            <input id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={itemsData.hasDiscount} />
+                            <input id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={itemsData.hasDiscount} onChange={handleChange} />
                             <label htmlFor="hasDiscount">Промоция</label>
                         </div>
                     </div>
