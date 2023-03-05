@@ -7,7 +7,7 @@ import './styles/reset.css';
 // import { ItemCounter } from './components/ItemCounter';
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
-import { CreateItem } from './components/CreateItem';
+import { CreateItem } from './components/CreateItem/CreateItem';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { UpdateItem } from './components/UpdateItem';

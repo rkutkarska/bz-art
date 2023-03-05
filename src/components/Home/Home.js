@@ -1,12 +1,16 @@
 import React from "react";
 import { Hero } from "./Hero";
-import { Main } from "./Main"
+import { NewItems } from "./NewItems/NewItems";
+import { Categories } from "./Categories/Categories";
 
 export const Home = () => {
     return (
         <>
             <Hero />
-            <Main />
+            <main>
+                <Categories />
+                <NewItems />
+            </main>
         </>
     );
 }
