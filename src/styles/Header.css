@@ -58,8 +58,6 @@
     align-items: center;
     height: 4rem;
     background-color: var(--clr-purple-dark);
-    /* background: linear-gradient(180deg, rgba(115, 93, 120, 0.5) 0%, rgba(179, 146, 172, 0.3) 60%, rgba(226, 226, 226, 0.2) 100%); */
-    /* position: absolute; */
     width: 100%;
     padding: 0 2rem;
 }
@@ -105,8 +103,3 @@
     font-style: italic;
     color: var(--clr-yellow) !important;
 }
-
-/*
-.hero img {
-    z-index: -1;
-} */
