@@ -26,14 +26,6 @@
     gap: 10px;
 }
 
-.flex-items__item {
-    width: 45%;
-}
-
-.flex-items__item input {
-    width: 80%;
-}
-
 .flex-items div label {
     display: block;
 }
