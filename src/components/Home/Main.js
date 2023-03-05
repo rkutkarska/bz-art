@@ -1,8 +1,8 @@
 import React from 'react';
-import { Category } from "./Categories/Category";
+import { Categories } from "./Categories/Categories";
 
 export const Main = () => {
     return(
-        <Category />
+        <Categories />
     );
 }

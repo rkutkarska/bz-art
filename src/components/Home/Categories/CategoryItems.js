@@ -1,17 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import * as categoriesService from '../../../services/categoriesService';
 
-export const CategoryItems = () => {
-
-    const [categoryItems, setCategoryItems] = useState([]);
-    useEffect(() => {
-        categoriesService.getAll()
-            .then(categories => setCategoryItems(categories));
-    }, []);
+export const CategoryItems = ({categories}) => {
 
     return (
-        categoryItems.map(category => (
+        categories.map(category => (
             <section key={category.id} className="category__item">
                 <a href={`/details/` + category.id}>
                     <img src={category.categoryImageUrl} alt="ring" />
