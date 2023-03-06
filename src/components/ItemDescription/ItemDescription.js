@@ -14,7 +14,6 @@ export const ItemDescription = () => {
             .then((item) => setItem(item));
     }, [])
 
-
     return (
         <div class="container">
             <h1>{item.type} "{item.name}"</h1>
@@ -23,14 +22,14 @@ export const ItemDescription = () => {
                 <div class="item__description">
                     <div class="details">
                         <h2>Категория</h2>
-                        <p>{item.material}</p>
+                        <p>{item.categoryName}</p>
                         <h2>Материал</h2>
                         <p>{item.material}</p>
                         <h2>Описание</h2>
                         <p>{item.description}</p>
                         <h2>Цена</h2>
                         <p>{item.price} лв.</p>
-                        <h2>Налични</h2>
+                        <h2>Наличност</h2>
                         <p>{item.quantity} бр.</p>
                     </div>
 
@@ -43,6 +42,7 @@ export const ItemDescription = () => {
                             <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
                         </Link>
                     </div>
+
                     <div className="favourites">
                         <h2>Харесва ли ти?</h2>
                         <Link class="button purple same-size" to="">
