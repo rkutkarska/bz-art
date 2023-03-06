@@ -32,10 +32,29 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-main article:nth-child(2n) {
-    background-color: var(--clr-background);
-    padding-bottom: 20px;
+main {
+    background-image: url('../src/img/background-purple.png');
+
 }
+
+/* main article {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-bottom: 20px;
+    height: fit-content
+} */
+
+/* main article:nth-child(odd) {
+    background-image: url('../src/img/background-yellow.png');
+}
+
+main article:nth-child(even) {
+    background-image: url('../src/img/background-purple.png');
+} */
 
 h1 {
     font-size: 2rem;
@@ -263,9 +282,8 @@ div[class*="buttons"] {
 }
 
 .new__items,
-.blog__articles {
+.discounted__items {
     display: flex;
-    gap: 3%;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
@@ -274,7 +292,7 @@ div[class*="buttons"] {
 
 .category__item,
 .new__item,
-.blog__article {
+.discounted__item {
     max-width: 20%;
     border: 1px solid var(--clr-gray);
     border-radius: 15px;
