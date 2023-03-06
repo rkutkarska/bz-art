@@ -1,21 +1,61 @@
-import React from "react";
-import {Link } from 'react-router-dom';
+import React, { useRef, useState } from "react";
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+
 import "../../styles/LoginRegister.css";
 
 export const Register = () => {
+
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const repeatPasswordRef = useRef();
+
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState('');
+
+
+    const { register } = useAuth();
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        if (passwordRef.current.value !== repeatPasswordRef.current.value) {
+            return setError('Паролите не съвпадат!');
+            // TODO modal
+        }
+
+        try {
+            setError('');
+            setLoading(true);
+            await register(emailRef.current.value, passwordRef.current.value);
+        } catch (error) {
+            console.log(error);
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            setError('Регистрацията е неуспешна! Съобщение: ' + error.message + ' code: ' + errorCode);
+            // TODO modal
+        }
+        setLoading(false);
+    }
+
     return (
+        // TODO padding!
         <div className="register-container">
             <div className="register-container__image"></div>
+            {error ? <p>{error}</p> : null}
+            {/* TODO modal */}
             <div className="register-container__form">
                 <h1>Регистрация</h1>
-                <form className="form">
+                <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="username">Потребител</label>
-                    <input type="text" name="username" />
+                    <input id="username" type="text" name="username" ref={emailRef} required />
                     <label htmlFor="password">Парола</label>
-                    <input type="password" name="password" />
+                    <input id="password" type="password" name="password" ref={passwordRef} required />
                     <label htmlFor="repeat-password">Повторете паролата</label>
-                    <input type="password" name="repeat-password" />
-                    <input className="button yellow" type="submit" value="Регистрирай ме" />
+                    <input id="repeat-password" type="password" name="repeat-password" ref={repeatPasswordRef} required />
+
+                    <input className="button yellow" type="submit" value="Регистрирай ме" disabled={loading} />
                 </form>
                 <p className="inline">Вече имате акаунт? </p>
                 <Link to="/login">Вход</Link>
