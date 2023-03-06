@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 export const NewItem = ({ items }) => {
-    console.log(items);
     return (
         items.map((item) => (
             <section key={item.id} className="new__item">
