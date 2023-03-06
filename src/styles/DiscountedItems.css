@@ -1,0 +1,168 @@
+.discounted__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.discounted__item {
+    background-color: var(--clr-white);
+    margin: 3%;
+}
+
+.discounted__item img {
+    transition: 0.6s;
+}
+
+.discounted__item:hover img {
+    transform: scale(0.90, 0.90);
+}
+
+.discounted__description {
+    top: 5rem;
+    position: absolute;
+}
+
+.discounted__description .item-name {
+    color: var(--clr-white);
+    background: var(--clr-purple-dark);
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+    position: relative;
+    left: -8px;
+}
+
+.discounted__description .item-name:before,
+.discounted__description .item-name:after {
+    content: "";
+    position: absolute;
+}
+
+.discounted__description .item-name:before {
+    height: 0;
+    width: 0;
+    top: -8.5px;
+    left: 0.1px;
+    border-bottom: 9px solid black;
+    border-left: 8px solid transparent;
+}
+
+.discounted__description .item-name:after {
+    height: 0;
+    width: 0;
+    right: -14.6px;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 15px solid var(--clr-purple-dark);
+}
+
+.discounted__description .item-price {
+    background-color: var(--clr-yellow);
+    padding: 8px;
+    max-width: fit-content;
+    text-align: center;
+}
+
+.no-discounted-items {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--clr-purple-dark);
+    padding: 2rem;
+}
+
+s {
+    text-decoration: none;
+    position: relative;
+}
+
+s::before {
+    top: 50%;
+    background: red;
+    opacity: .7;
+    content: '';
+    width: 110%;
+    position: absolute;
+    height: .1em;
+    border-radius: .1em;
+    left: -5%;
+    white-space: nowrap;
+    display: block;
+    transform: rotate(-15deg);
+}
+
+s::after {
+    top: 50%;
+    background: red;
+    opacity: .7;
+    content: '';
+    width: 110%;
+    position: absolute;
+    height: .1em;
+    border-radius: .1em;
+    left: -5%;
+    white-space: nowrap;
+    display: block;
+    transform: rotate(15deg);
+}
+
+.ribbon {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.ribbon::before,
+.ribbon::after {
+    position: absolute;
+    z-index: 2;
+    content: '';
+    display: block;
+    border: 5px solid var(--clr-dark-red);
+}
+
+.ribbon span {
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 15px 0;
+    background-color: var(--clr-red);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 18px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.ribbon-top-right {
+    top: -43px;
+    right: -181px;
+}
+
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+
+.ribbon-top-right::before {
+    top: 0;
+    left: 0;
+}
+
+.ribbon-top-right::after {
+    bottom: 0;
+    right: 0;
+}
+
+.ribbon-top-right span {
+    left: -25px;
+    top: 30px;
+    transform: rotate(45deg);
+}
+
+/* TODO */
+/* https://codepen.io/nxworld/pen/oLdoWb */
