@@ -9,10 +9,10 @@ export const Login = () => {
             <div className="login-container__form">
                 <h1>Вписване</h1>
                 <form class="form">
-                    <label htmlFor="username">Потребител</label>
-                    <input type="text" name="username" />
+                    <label htmlFor="email">Email</label>
+                    <input id="email" type="text" name="email" placeholder="sample@mail.com" />
                     <label htmlFor="password">Парола</label>
-                    <input type="password" name="password" />
+                    <input id="password" type="password" name="password" placeholder="******" />
                     <label className="remember-me" htmlFor="remember-me"><input type="checkbox" /> Запомни ме</label>
                     <input className="button yellow" type="submit" name="" value="Вход" />
                 </form>
