@@ -13,24 +13,27 @@ import { Register } from './components/Register/Register';
 import { UpdateItem } from './components/UpdateItem';
 import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
 
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/createItem" element={<CreateItem />} />
-        <Route path="/updateItem" element={<UpdateItem />} />
-        <Route path="/items/:itemId" element={<ItemDescription />} />
-        <Route path="*" element={<NotFound />} />
+    <AuthProvider>
+      <div>
+        {/* <Header /> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/createItem" element={<CreateItem />} />
+          <Route path="/updateItem" element={<UpdateItem />} />
+          <Route path="/items/:itemId" element={<ItemDescription />} />
+          <Route path="*" element={<NotFound />} />
 
-      </Routes>
-      {/* <ItemCounter start = {1} /> */}
-    </div>
+        </Routes>
+        {/* <ItemCounter start = {1} /> */}
+      </div>
+    </AuthProvider>
   );
 }
 
