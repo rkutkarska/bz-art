@@ -7,6 +7,7 @@ import './styles/reset.css';
 // import { ItemCounter } from './components/ItemCounter';
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
+import { Footer } from './components/Footer';
 import { CreateItem } from './components/CreateItem/CreateItem';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
@@ -20,7 +21,7 @@ function App() {
   return (
     <AuthProvider>
       <div>
-        {/* <Header /> */}
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -29,8 +30,8 @@ function App() {
           <Route path="/updateItem" element={<UpdateItem />} />
           <Route path="/items/:itemId" element={<ItemDescription />} />
           <Route path="*" element={<NotFound />} />
-
         </Routes>
+        <Footer />
         {/* <ItemCounter start = {1} /> */}
       </div>
     </AuthProvider>
