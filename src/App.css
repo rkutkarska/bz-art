@@ -299,6 +299,55 @@ div[class*="buttons"] {
     overflow: hidden;
 }
 
+.new-tag,
+.discount-tag {
+    position: absolute;
+    color: var(--clr-white);
+    top: -70px;
+    right: -215px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    align-items: center;
+    text-align: center;
+}
+
+.discount-tag {
+    background-color: var(--clr-red);
+    border: 5px solid var(--clr-dark-red);
+}
+
+.new-tag {
+    background-color: var(--clr-green);
+    border: 5px solid var(--clr-dark-green);
+}
+
 .wave {
     position: absolute;
 }
+
+/* TODO responsive */
+
+/* Mobile: 360 x 640.
+Mobile: 375 x 667.
+Mobile: 360 x 720.
+iPhone X: 375 x 812.
+Pixel 2: 411 x 731.
+Tablet: 768 x 1024.
+Laptop: 1366 x 768.
+High-res laptop or desktop: 1920 x 1080. */
+
+/* 1 	1920×1080 	104,190(22.62%)
+2 	1366×768 	51,580(11.20%)
+3 	1440×900 	44,003(9.55%)
+4 	1536×864 	39,606(8.60%)
+5 	2560×1440 	34,152(7.41%)
+6 	1680×1050 	19,730(4.28%)
+7 	1280×720 	16,364(3.55%)
+8 	1280×800 	10,719(2.33%)
+9 	1792×1120 	9,494(2.06%)
+10 	1600×900 	8,630(1.87%) */
