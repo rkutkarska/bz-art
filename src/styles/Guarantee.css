@@ -12,7 +12,7 @@
 }
 
 .guarantee__list li img {
-    transition: 0.5s;
+    transition: 0.9s;
 }
 
 .guarantee__list li .icon {
@@ -22,7 +22,7 @@
     font-size: 3rem;
     color: var(--clr-purple-dark);
     position: relative;
-    z-index: 10;
+    z-index: 1;
 }
 
 .guarantee__list li p {
@@ -33,6 +33,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid var(--clr-purple-dark);
+    border-radius: 15px;
 }
 
 .guarantee__list {
