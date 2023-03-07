@@ -103,3 +103,46 @@
     font-style: italic;
     color: var(--clr-yellow) !important;
 }
+
+.hero {
+    position: relative;
+}
+
+.hero__caption {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    bottom: 5%;
+    justify-content: center;
+}
+
+.caption__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.caption__text {
+    color: var(--clr-white);
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px black;
+}
+
+.caption__container {
+    /* max-height: 100px; */
+    width: 50%;
+    text-align: center;
+}
+
+.button.white {
+    border: 2px solid var(--clr-white);
+    background-color: var(--clr-white);
+    color: black;
+}
+
+.button.white:hover {
+    color: var(--clr-white);
+    background-color: unset;
+}
