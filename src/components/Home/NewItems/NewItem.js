@@ -10,6 +10,7 @@ export const NewItem = ({ items }) => {
                 <img src={item.imageUrl} alt="ring" />
                 <div className="new__actions">
                     <div className="new__description">
+                    <div className="new-tag">НОВО</div>
                         <p className="item-name">{item.name}</p>
                         <p className="item-price">{item.price} лв.</p>
                     </div>

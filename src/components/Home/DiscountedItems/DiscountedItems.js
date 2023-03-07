@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from '../../../styles/DiscountedItems.css';
+import '../../../styles/DiscountedItems.css';
 import * as itemsService from '../../../services/itemsService';
 import { DiscountedItem } from "./DiscountedItem";
 
