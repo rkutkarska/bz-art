@@ -299,6 +299,12 @@ div[class*="buttons"] {
     overflow: hidden;
 }
 
+.category__item:hover,
+.new__item:hover,
+.discounted__item:hover {
+    border: 1px solid var(--clr-purple-light);
+}
+
 .new-tag,
 .discount-tag {
     position: absolute;
@@ -326,8 +332,10 @@ div[class*="buttons"] {
     border: 5px solid var(--clr-dark-green);
 }
 
-.wave {
-    position: absolute;
+
+.container input,
+.container textarea {
+    background-color: unset;
 }
 
 /* TODO responsive */
