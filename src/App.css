@@ -14,15 +14,20 @@
     --clr-background: rgba(209, 179, 196, 0.1);
 
     /* For actions, messages, connectivity, status */
-    --clr-green: #36B37E; /* confirm or view, success, available, added */
+    --clr-green: #36B37E;
+    /* confirm or view, success, available, added */
     --clr-dark-green: #2b8f64;
-    --clr-blue: #0065FF; /* add, information, - , in progress */
+    --clr-blue: #0065FF;
+    /* add, information, - , in progress */
     --clr-dark-blue: #0050cc;
-    --clr-red: #FF5630; /* remove, error, busy, removed or failed */
+    --clr-red: #FF5630;
+    /* remove, error, busy, removed or failed */
     --clr-dark-red: #cc4426;
-    --clr-neutral: #bcbcc0; /* secondary, - , unavailable, default */
+    --clr-neutral: #bcbcc0;
+    /* secondary, - , unavailable, default */
     --clr-dark-neutral: #8d8d90;
-    --clr-orange: #FFAB00; /* edit, warning, moved, medium or blocked */
+    --clr-orange: #FFAB00;
+    /* edit, warning, moved, medium or blocked */
     --clr-dark-orange: #e59900;
 
     --padding-buttons: 10px 7px;
@@ -34,7 +39,6 @@ body {
 
 main {
     background-image: url('../src/img/background-purple.png');
-
 }
 
 /* main article {
@@ -63,6 +67,9 @@ h1 {
     display: inline-block;
     margin-left: 50%;
     transform: translateX(-50%);
+    /* -webkit-text-stroke-width: 1pt;
+    -webkit-text-stroke-color: var(--clr-white); */
+    color: var(--clr-purple-font);
 }
 
 h1::before {
@@ -81,7 +88,6 @@ h3 {
     text-align: center;
 }
 
-h1,
 h2,
 h3 {
     color: var(--clr-purple-font);
@@ -294,6 +300,7 @@ div[class*="buttons"] {
 .new__item,
 .discounted__item {
     max-width: 20%;
+    min-width: 250px;
     border: 1px solid var(--clr-gray);
     border-radius: 15px;
     overflow: hidden;
