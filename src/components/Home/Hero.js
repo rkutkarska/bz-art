@@ -10,7 +10,7 @@ export const Hero = () => {
                     <Link to="" className="button white same-size">Разгледай</Link>
                 </div>
             </div>
-            <img src={require("../../img/index-banner.jpg")} alt="jewellery" />
+            <img className="hero__image"src={require("../../img/index-banner.jpg")} alt="jewellery" />
         </div>
     );
 }
