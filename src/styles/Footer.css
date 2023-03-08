@@ -18,8 +18,15 @@
 
 footer {
     text-align: center;
-    padding: 15rem 0 2rem 0;
-    background-color: var(--clr-yellow);
     color: var(--clr-purple-dark);
     height: 430px;
+}
+
+footer svg.wave {
+    background-color: var(--clr-yellow);
+}
+
+footer div {
+    background-color: var(--clr-yellow);
+    padding-bottom: 5rem;
 }
