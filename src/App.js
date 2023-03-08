@@ -15,27 +15,29 @@ import { UpdateItem } from './components/UpdateItem';
 import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
 import { AuthProvider } from './context/AuthContext';
+import { ListDocuments } from './components/AdminActions/ListDocuments/ListDocuments';
 
 function App() {
 
-  return (
-    <AuthProvider>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/createItem" element={<CreateItem />} />
-          <Route path="/updateItem" element={<UpdateItem />} />
-          <Route path="/items/:itemId" element={<ItemDescription />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-        {/* <ItemCounter start = {1} /> */}
-      </div>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <div>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/createItem" element={<CreateItem />} />
+                    <Route path="/updateItem" element={<UpdateItem />} />
+                    <Route path="/items/:itemId" element={<ItemDescription />} />
+                    <Route path="/list-documents" element={<ListDocuments />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Footer />
+                {/* <ItemCounter start = {1} /> */}
+            </div>
+        </AuthProvider>
+    );
 }
 
 export default App;
