@@ -1,4 +1,10 @@
-<?xml version="1.0" standalone="no"?>
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#FFCC5F" d="M44.4,-39.2C54,-23.3,56,-5,54.6,16.9C53.1,38.9,48.3,64.5,33.3,73.2C18.4,82,-6.6,73.9,-28,62.1C-49.4,50.3,-67.1,34.8,-72.8,15.1C-78.5,-4.7,-72.3,-28.7,-58.2,-45.6C-44,-62.6,-22,-72.6,-2.3,-70.7C17.4,-68.9,34.7,-55.2,44.4,-39.2Z" transform="translate(100 100)" />
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCC5F;stroke:#E5A82F;stroke-width:2;stroke-miterlimit:10;}
+</style>
+<path class="st0" d="M139.4,55.1c11.3,14.8,15.3,32.7,16.3,54.6c0.9,22-1,48-15,58.3c-13.8,10.4-39.6,5.1-62.1-4.3
+	s-41.9-22.8-49.7-41.8c-7.8-19.1-4.3-43.6,7.8-61.9c12.2-18.5,33-30.8,52.8-31.1C109.3,28.5,128,40.3,139.4,55.1z"/>
 </svg>
