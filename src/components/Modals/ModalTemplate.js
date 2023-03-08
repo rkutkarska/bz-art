@@ -12,12 +12,14 @@ export const ModalTemplate = (props) => {
     const onClose = () => {
         if (isClosed) {
             setIsClosed(false);
+            props.obj.setIsModalOpen(false);
+
         } else {
             setIsClosed(true);
         }
     }
 
-    if (props.obj.type === 'alert') {
+    if (props.obj.modalObject.type === 'alert') {
         modalCaption = 'Предупреждение!'
         buttons = (<>
             <button className="button green">Да</button>
@@ -25,14 +27,14 @@ export const ModalTemplate = (props) => {
         </>);
     }
 
-    if (props.obj.type === 'error') {
+    if (props.obj.modalObject.type === 'error') {
         modalCaption = 'Грешка!'
         buttons = (
             <button onClick={onClose} className="button blue">OK</button>
         );
     }
 
-    if (props.obj.type === 'information') {
+    if (props.obj.modalObject.type === 'information') {
         modalCaption = 'Информация'
 
         buttons = (<>
@@ -40,7 +42,7 @@ export const ModalTemplate = (props) => {
         </>);
     }
 
-    if (props.obj.type === 'confirm') {
+    if (props.obj.modalObject.type === 'confirm') {
         modalCaption = 'Моля, потвърдете...'
         buttons = (<>
             <button className="button green">Да</button>
@@ -61,8 +63,8 @@ export const ModalTemplate = (props) => {
                                     className={`${styles.button} ${styles.close}`}>
                                     <FontAwesomeIcon icon={regular('circle-xmark')} className={styles.icon} />
                                 </button>
-                                <p className={styles[`modal__` + props.obj.type]}>{modalCaption}</p>
-                                <p className={styles["modal__message"]}>{props.obj.message}</p>
+                                <p className={styles[`modal__` + props.obj.modalObject.type]}>{modalCaption}</p>
+                                <p className={styles["modal__message"]}>{props.obj.modalObject.message}</p>
                                 <div className={styles["modal__buttons"]}>
                                     {buttons}
                                 </div>

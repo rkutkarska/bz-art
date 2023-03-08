@@ -79,15 +79,12 @@ export const CreateItem = () => {
         e.target.previousSibling.value = '';
     };
 
-
     // TODO implement drag and drop
     // TODO fix modal
 
     return (
         <div className="container">
-            {isModalOpen ? <ModalTemplate obj={modalObject} /> : false}
-            {/* <ModalTemplate obj={{ message: 'Съобщение', type: "information" }} /> */}
-
+            {isModalOpen ? <ModalTemplate obj={{modalObject, setIsModalOpen}} /> : false}
             <div className="form-container">
                 <h1>Добавяне на артикул</h1>
                 <form
