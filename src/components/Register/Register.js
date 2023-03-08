@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 import "../../styles/LoginRegister.css";
@@ -13,8 +13,8 @@ export const Register = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState('');
 
-
     const { register } = useAuth();
+    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -28,6 +28,7 @@ export const Register = () => {
             setError('');
             setLoading(true);
             await register(emailRef.current.value, passwordRef.current.value);
+            navigate("/");
         } catch (error) {
             console.log(error);
             const errorCode = error.code;
