@@ -20,6 +20,7 @@ footer {
     text-align: center;
     color: var(--clr-purple-dark);
     height: 430px;
+    background-color: var(--clr-yellow);
 }
 
 footer svg.wave {
