@@ -8,7 +8,7 @@ export const Login = () => {
             <div className="login-container__image"></div>
             <div className="login-container__form">
                 <h1>Вписване</h1>
-                <form class="form">
+                <form className="form">
                     <label htmlFor="email">Email</label>
                     <input id="email" type="text" name="email" placeholder="sample@mail.com" />
                     <label htmlFor="password">Парола</label>
