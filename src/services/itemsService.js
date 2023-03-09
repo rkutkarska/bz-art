@@ -61,3 +61,11 @@ export const getDiscountedItems = async () => {
     const discountedItems = data.filter(item => item.hasDiscount)
     return discountedItems;
 }
+
+export const getAllItems = async () => {
+    const itemsCollectionRef = collection(db, "items");
+    const response = await getDocs(itemsCollectionRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+    return data;
+}
