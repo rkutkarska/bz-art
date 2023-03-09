@@ -22,7 +22,7 @@ export const DiscountedItem = ({ items }) => {
                                         <span className="final-price">{item.price - item.discount} лв.</span>
                                     </p>
                                 </div>
-                                <div class="discounted__tag">
+                                <div className="discounted__tag">
                                     <div className="discount-tag">{`- ${((item.discount / item.price) * 100).toFixed(0)} %`}</div>
                                 </div>
                                 <div className="buttons">
