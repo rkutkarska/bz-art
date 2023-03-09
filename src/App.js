@@ -16,6 +16,7 @@ import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
 import { AuthProvider } from './context/AuthContext';
 import { ListDocuments } from './components/AdminActions/ListDocuments/ListDocuments';
+import { ListItems } from './components/ListItems/ListItems';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/createItem" element={<CreateItem />} />
                     <Route path="/updateItem" element={<UpdateItem />} />
+                    <Route path="/items" element={<ListItems />} />
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/list-documents" element={<ListDocuments />} />
                     <Route path="*" element={<NotFound />} />
