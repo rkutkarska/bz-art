@@ -314,7 +314,7 @@ div[class*="buttons"] {
 
 .new-tag,
 .discount-tag {
-    position: absolute;
+    position: relative;
     color: var(--clr-white);
     top: -70px;
     right: -215px;

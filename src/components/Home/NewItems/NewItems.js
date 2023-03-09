@@ -14,12 +14,10 @@ export const NewItems = () => {
     return (
         <article className="new">
             <h1 className="caption">Ново</h1>
-            <div className="new__items">
-                { newItems
-                    ? <NewItem items={newItems} />
-                    : <p className="no-new-items">Няма нови артикули!</p>
-                }
-            </div>
+            {newItems
+                ? <NewItem items={newItems} />
+                : <p className="no-new-items">Няма нови артикули!</p>
+            }
         </article>
     );
 }

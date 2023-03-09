@@ -19,9 +19,10 @@
     transform: scale(0.90, 0.90);
 }
 
-.new__description {
-    top: 5rem;
+.new__description,
+.new__tags {
     position: absolute;
+    top: 5rem;
 }
 
 .new__description .item-name {
@@ -70,4 +71,8 @@
     font-size: 1.5rem;
     color: var(--clr-purple-dark);
     padding: 2rem;
+}
+
+.tags {
+
 }

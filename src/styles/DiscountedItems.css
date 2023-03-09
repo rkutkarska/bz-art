@@ -19,7 +19,8 @@
     transform: scale(0.90, 0.90);
 }
 
-.discounted__description {
+.discounted__description,
+.discounted__tag {
     top: 5rem;
     position: absolute;
 }

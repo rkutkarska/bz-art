@@ -15,12 +15,10 @@ export const DiscountedItems = () => {
     return (
         <article className="discounted">
             <h1 className="caption">Намаления</h1>
-            <div className="discounted__items">
                 {discountedItems
                     ? <DiscountedItem items={discountedItems} />
                     : <p className="no-discounted-items">Към момента няма намалени артикули!</p>
                 }
-            </div>
         </article>
     );
 }
