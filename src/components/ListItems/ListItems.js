@@ -13,7 +13,6 @@ export const ListItems = () => {
             .then((data) => setItems(data));
     }, [])
 
-
     let itemsList = [];
 
     for (var i = 0; i < items.length; i += 3) {
