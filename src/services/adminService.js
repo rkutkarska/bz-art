@@ -3,8 +3,19 @@ import { collection, getDocs, addDoc, where, query, orderBy } from "firebase/fir
 // import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // import { v4 } from "uuid";
 
-export const getAllItemsOrdered = async () => {
-    const q = query(collection(db, "items"), orderBy('name'));
-    // where("name", "==", true));
+export const getAllItemsOrdered = async (documentType, documentSortType) => {
+    if (documentType == '') {
+        return false;
+    }
+
+    if (documentSortType == '') {
+        const q = query(collection(db, documentType));
+        return await getDocs(q);
+    }
+
+    const [param, order] = documentSortType.split(', ');
+    const q = query(collection(db, documentType), orderBy(param, order));
     return await getDocs(q);
+
+    // where("name", "==", true));
 };
