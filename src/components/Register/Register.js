@@ -30,11 +30,7 @@ export const Register = () => {
             await register(emailRef.current.value, passwordRef.current.value);
             navigate("/");
         } catch (error) {
-            console.log(error);
-            const errorCode = error.code;
-            const errorMessage = error.message;
-
-            setError('Регистрацията е неуспешна! Съобщение: ' + error.message + ' code: ' + errorCode);
+            setError(`Регистрацията е неуспешна! Съобщение: ${error.message} code: ${error.code}`);
             // TODO modal
         }
         setLoading(false);

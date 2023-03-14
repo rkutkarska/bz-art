@@ -22,12 +22,10 @@ export const Login = () => {
             setError('');
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
+            console.log('loggedin')
             navigate("/");
         } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-
-            setError('Вписването е неуспешно! Съобщение: ' + error.message + ' code: ' + errorCode);
+            setError(`Вписването е неуспешно! Съобщение:  ${error.message} code: + ${error.code}`);
             // TODO modal
         }
         setLoading(false);
