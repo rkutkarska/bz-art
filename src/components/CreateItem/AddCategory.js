@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import * as categoriesService from "../../services/categoriesService";
-import "../../styles/CreateCategory.css";
+import "../../styles/AddCategory.css";
 
 export const AddCategory = ({updateItemsData}) => {
     const [categoriesData, updateCategoriеsData] = useState({
         categoryName: '',
         categoryImageUrl: '',
-        dateCreated: ''
+        dateCreated: {}
     });
 
     const [categories, setCategories] = useState([]);

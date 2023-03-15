@@ -1,0 +1,27 @@
+.existing-categories {
+    margin-bottom: 0.5rem;
+}
+
+.category-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.category-form input[type="text"] {
+    width: 50%;
+}
+
+#category-name {
+    width: 40%;
+}
+
+.category-form input[type="file"] {
+    height: fit-content;
+}
