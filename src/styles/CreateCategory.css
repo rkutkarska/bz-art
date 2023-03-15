@@ -1,27 +1,22 @@
 .existing-categories {
-    margin-bottom: 0.5rem;
-}
-
-.category-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin: 2rem 0;
 }
 
 .category-form {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .category-form input[type="text"] {
-    width: 50%;
-}
-
-#category-name {
-    width: 40%;
+    width: 100%;
 }
 
 .category-form input[type="file"] {
-    height: fit-content;
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.category-form .button {
+    width: 100%;
 }
