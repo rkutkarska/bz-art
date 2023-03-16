@@ -11,12 +11,10 @@
     width: 100%;
 }
 
-.category-form input[type="file"] {
-    display: block;
+.category-form .button.green {
     width: 100%;
-    margin-bottom: 2rem;
 }
 
-.category-form .button {
+.category-form .drop-container {
     width: 100%;
 }

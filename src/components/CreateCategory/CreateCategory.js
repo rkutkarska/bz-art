@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 import * as categoriesService from "../../services/categoriesService";
 import "../../styles/CreateCategory.css";
 
@@ -18,6 +21,12 @@ export const CreateCategory = () => {
             .then(categories => setCategories(categories));
     }, []);
 
+    const clearImage = (e) => {
+        e.preventDefault();
+        updateCategoriеsData({ ...categoriesData, categoryImageUrl: '' });
+        e.target.previousSibling.value = '';
+    };
+
     const handleChange = (e) => {
         updateCategoriеsData((oldValues) => ({
             ...oldValues,
@@ -25,6 +34,8 @@ export const CreateCategory = () => {
         }))
     }
 
+    // TODO drag and drop image
+    // TODO modal
     return (
         <div className="container">
             <div className="form-container">
@@ -54,8 +65,15 @@ export const CreateCategory = () => {
                 </div>
                 <div className="category-form">
                     <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
-                    <label htmlFor="image">Снимка:</label>
-                    <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="image" accept="image/*" name="categoryImageUrl" required />
+                    <label htmlFor="image" className="drop-container">
+                        <span className="drop-title">Провлачете снимка тук</span>
+                        или
+                        <div className="flex-items">
+                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="image" accept="image/*" name="categoryImageUrl" required />
+                            <button className="button red" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
+                        </div>
+                    </label>
+
                     <input type="submit" className="button green" value="Запази"
                         onClick={(e) => {
                             categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories);
