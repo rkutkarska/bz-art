@@ -18,6 +18,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ListDocuments } from './components/AdminActions/ListDocuments/ListDocuments';
 import { ListItems } from './components/ListItems/ListItems';
 import { CreateCategory } from './components/CreateCategory/CreateCategory';
+import { CreateMaterial } from './components/CreateMaterials/CreateMaterial';
 
 function App() {
 
@@ -29,9 +30,10 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/createItem" element={<CreateItem />} />
-                    <Route path="/updateItem" element={<UpdateItem />} />
+                    <Route path="/create-item" element={<CreateItem />} />
+                    <Route path="/update-item" element={<UpdateItem />} />
                     <Route path="/create-category" element={<CreateCategory />} />
+                    <Route path="/create-material" element={<CreateMaterial />} />
                     <Route path="/items" element={<ListItems />} />
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/list-documents" element={<ListDocuments />} />
