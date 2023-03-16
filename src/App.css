@@ -120,7 +120,6 @@ input[type="button"] {
     cursor: pointer;
 }
 
-
 input[type=file] {
     max-width: 100%;
     color: var(--clr-purple-font);
@@ -339,10 +338,25 @@ div[class*="buttons"] {
     border: 5px solid var(--clr-dark-green);
 }
 
-
 .container input,
 .container textarea {
     background-color: unset;
+}
+
+/* Error messages in forms */
+.form-error {
+    color: var(--clr-dark-red);
+    font-style: italic;
+    padding-bottom: 2rem;
+    position: relative;
+    bottom: 25px;
+}
+
+input[type="text"].error,
+input[type="password"].error,
+input[type="number"].error,
+select.error {
+    border-bottom: 2px solid var(--clr-dark-red);
 }
 
 /* TODO responsive */
