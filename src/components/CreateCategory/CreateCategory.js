@@ -37,7 +37,7 @@ export const CreateCategory = () => {
     // TODO drag and drop image
     // TODO modal
     return (
-        <div className="container">
+        <div className="container categories">
             <div className="form-container">
                 <h1>Добавяне на категория</h1>
                 <div className="existing-categories">
@@ -63,7 +63,7 @@ export const CreateCategory = () => {
                 <div className="category-label">
                     <label htmlFor="category-name">Име на категория:</label>
                 </div>
-                <div className="category-form">
+                <form className="category-form">
                     <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
@@ -79,7 +79,7 @@ export const CreateCategory = () => {
                             categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories);
                         }}
                     />
-                </div>
+                </form>
             </div>
         </div>
     );
