@@ -1,12 +1,12 @@
 import { db, storage } from "../Firebase";
-import { collection, doc, getDoc, getDocs, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc } from "firebase/firestore";
 import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const getItem = async (id) => {
     try {
-        const itemsCollectionRef = doc(db, "items", id);
-        const docSnap = await getDoc(itemsCollectionRef);
+        const itemCollectionRef = doc(db, "items", id);
+        const docSnap = await getDoc(itemCollectionRef);
         if (docSnap.exists()) {
             return docSnap.data();
         } else {
@@ -42,6 +42,16 @@ export const saveItem = async (e, itemImageUpload, itemsData, setIsModalOpen, se
     });
 
     e.target.reset();
+}
+
+export const updateItem = async (e, id, values) => {
+    e.preventDefault();
+    const itemDoc = doc(db, 'items', id);
+    try {
+        await updateDoc(itemDoc, values);
+    } catch (error) {
+        // TODO modal -> Артикулът не е обновен!
+    }
 }
 
 export const getNewItems = async () => {
