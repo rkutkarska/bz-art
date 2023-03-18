@@ -14,7 +14,7 @@ export const Spinner = () => {
                 <div></div>
                 <div></div>
             </div>
-            <p className={styles.message}>Loading... Please wait!</p>
+            <p className={styles.message}>Зареждане... Моля изчакайте!</p>
         </>
     );
 };
