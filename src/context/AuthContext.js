@@ -10,7 +10,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
-    console.log(currentUser);
+    // console.log(currentUser);
 
     const value = {
         currentUser,
