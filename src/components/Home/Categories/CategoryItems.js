@@ -1,16 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const CategoryItems = ({categories}) => {
 
     return (
         categories.map(category => (
             <section key={category.id} className="category__item">
-                <a href={`/details/` + category.id}>
-                    <img src={category.categoryImageUrl} alt="ring" />
+                <Link to={`/category/${category.id}/items`}>
+                    <img src={category.categoryImageUrl} alt={category.categoryName} />
                     <div className="overlay">
                         <p>{category.categoryName}</p>
                     </div>
-                </a>
+                </Link>
             </section>
         ))
     );

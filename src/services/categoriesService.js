@@ -1,5 +1,5 @@
 import { storage, db } from "../Firebase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, getDoc, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
@@ -44,4 +44,22 @@ export const saveCategory = async (e, categories, categoriesData, imageUpload, s
 
         e.target.previousSibling.value = "";
     });
+};
+
+export const getCategory = async (id) => {
+    try {
+        const categoryCollectionRef = doc(db, "categories", id);
+        const docSnap = await getDoc(categoryCollectionRef);
+        if (docSnap.exists(docSnap.data())) {
+            return docSnap.data();
+        } else {
+            // TODO modal
+            // setModalObject({ message: "Document does not exist!", type: "error" });
+            return;
+        }
+
+    } catch (error) {
+        // TODO modal
+        // setModalObject({ message: error, type: "error" });
+    }
 };

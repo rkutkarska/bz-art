@@ -79,3 +79,13 @@ export const getAllItems = async () => {
         .map((doc) => ({ ...doc.data(), id: doc.id }));
     return data;
 }
+
+export const getItemsByCategory = async (categoryName) => {
+    const itemsCollectionRef = collection(db, "items");
+    const response = await getDocs(itemsCollectionRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+
+        const itemsByCategory = data.filter(item => item.categoryName === categoryName)
+    return itemsByCategory;
+}
