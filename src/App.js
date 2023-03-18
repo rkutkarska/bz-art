@@ -11,14 +11,16 @@ import { Footer } from './components/Footer';
 import { CreateItem } from './components/CreateItem/CreateItem';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
-import { UpdateItem } from './components/UpdateItem';
 import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
 import { AuthProvider } from './context/AuthContext';
-import { ListDocuments } from './components/AdminActions/ListDocuments/ListDocuments';
+import { CrudDocuments } from './components/AdminActions/CrudDocuments/CrudDocuments';
 import { ListItems } from './components/ListItems/ListItems';
 import { CreateCategory } from './components/CreateCategory/CreateCategory';
 import { CreateMaterial } from './components/CreateMaterials/CreateMaterial';
+import { ReadItem } from './components/AdminActions/CrudDocuments/ReadItem/ReadItem';
+import { UpdateItem } from './components/AdminActions/CrudDocuments/UpdateItem/UpdateItem';
+import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
 
 function App() {
 
@@ -31,12 +33,14 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/create-item" element={<CreateItem />} />
-                    <Route path="/update-item" element={<UpdateItem />} />
+                    <Route path="/update-item/:itemId" element={<UpdateItem />} />
                     <Route path="/create-category" element={<CreateCategory />} />
                     <Route path="/create-material" element={<CreateMaterial />} />
                     <Route path="/items" element={<ListItems />} />
                     <Route path="/items/:itemId" element={<ItemDescription />} />
-                    <Route path="/list-documents" element={<ListDocuments />} />
+                    <Route path="/crud-documents" element={<CrudDocuments />} />
+                    <Route path="/read-item/:itemId" element={<ReadItem />} />
+                    <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />

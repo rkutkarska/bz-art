@@ -225,6 +225,7 @@ div[class*="buttons"] {
 .button.red {
     color: var(--clr-white);
     background-color: var(--clr-red);
+    text-align: center;
 }
 
 .button.red:hover {
