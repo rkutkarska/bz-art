@@ -19,11 +19,19 @@ export const ModalTemplate = (props) => {
         }
     }
 
+    const onConfirm = () => {
+        return 'yes';
+    }
+
+    const onReject = () => {
+        return 'no';
+    }
+
     if (props.obj.modalObject.type === 'alert') {
         modalCaption = 'Предупреждение!'
         buttons = (<>
-            <button className="button green">Да</button>
-            <button className="button red">Не</button>
+            <button onClick={onConfirm} className="button green">Да</button>
+            <button onClick={onReject} className="button red">Не</button>
         </>);
     }
 
@@ -45,8 +53,8 @@ export const ModalTemplate = (props) => {
     if (props.obj.modalObject.type === 'confirm') {
         modalCaption = 'Моля, потвърдете...'
         buttons = (<>
-            <button className="button green">Да</button>
-            <button className="button red">Не</button>
+            <button onClick={onConfirm} className="button green">Да</button>
+            <button onClick={onReject} className="button red">Не</button>
         </>);
     }
 
