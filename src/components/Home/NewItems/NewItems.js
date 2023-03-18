@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from '../../../styles/NewItems.css';
+import '../../../styles/NewItems.css';
 import * as itemsService from '../../../services/itemsService';
 import { NewItem } from "./NewItem";
 
@@ -14,7 +14,7 @@ export const NewItems = () => {
     return (
         <article className="new">
             <h1 className="caption">Ново</h1>
-            {newItems
+            {newItems.length > 0
                 ? <NewItem items={newItems} />
                 : <p className="no-new-items">Няма нови артикули!</p>
             }

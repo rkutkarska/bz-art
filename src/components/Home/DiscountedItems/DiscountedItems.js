@@ -15,9 +15,9 @@ export const DiscountedItems = () => {
     return (
         <article className="discounted">
             <h1 className="caption">Намаления</h1>
-                {discountedItems
+                {discountedItems.length > 0
                     ? <DiscountedItem items={discountedItems} />
-                    : <p className="no-discounted-items">Към момента няма намалени артикули!</p>
+                    : <p className="no-discounted-items">Няма намалени артикули!</p>
                 }
         </article>
     );
