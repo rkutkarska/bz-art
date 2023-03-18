@@ -17,7 +17,7 @@ export const CreateItem = () => {
         name: '',
         type: '',
         categoryName: '',
-        material: '',
+        materialName: '',
         description: '',
         quantity: 0,
         price: 0,
@@ -99,12 +99,12 @@ export const CreateItem = () => {
                     <AddCategory updateItemsData={updateItemsData}/>
 
                     <label htmlFor="material">Материал</label>
-                    <select id="material" type="select" name="material" defaultValue={'DEFAULT'} required onChange={handleChange} >
+                    <select id="material" type="select" name="materialName" defaultValue={'DEFAULT'} required onChange={handleChange} >
                         <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
                         {
                             materials.map((material) => (
-                                <option value={material.material} key={material.id}>
-                                    {material.material}
+                                <option value={material.materialName} key={material.id}>
+                                    {material.materialName}
                                 </option>
                             ))
                         }
