@@ -30,10 +30,10 @@ export const ListCategories = ({ documents }) => {
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <button className="button orange">
+                            <Link to={`/update-category/${document.id}`}className="button orange">
                                 <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                 Редактирай
-                            </button>
+                            </Link>
                             <button className="button red"
                                 onClick={() => adminService.deleteCategory(document.id, documents.documents, documents.setDocuments, documents.isClicked)}
                             >

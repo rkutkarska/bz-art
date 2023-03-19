@@ -1,5 +1,6 @@
 import { storage, db } from "../Firebase";
-import { collection, getDocs, addDoc, getDoc, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, getDoc, doc, updateDoc } from "firebase/firestore";
+
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
@@ -39,7 +40,7 @@ export const saveCategory = async (e, categories, categoriesData, imageUpload, s
         getDownloadURL(imageRef).then((url) => {
             addDoc(categoriesCollectionRef, { ...categoriesData, categoryImageUrl: url, dateCreated: new Date() });
             getAll()
-            .then(categories => setCategories(categories));
+                .then(categories => setCategories(categories));
         })
 
         e.target.previousSibling.value = "";
@@ -63,3 +64,28 @@ export const getCategory = async (id) => {
         // setModalObject({ message: error, type: "error" });
     }
 };
+
+export const uploadCategoryImage = async (imageUpload, updateCategoriesData) => {
+    const imageRef = ref(storage, `images/categories/${v4() + imageUpload.name}`);
+
+    await uploadBytes(imageRef, imageUpload).then(() => {
+        // TODO modal
+        // alert('Файлът е качен успешно!');
+        getDownloadURL(imageRef).then((url) => {
+            updateCategoriesData((values) => ({ ...values, categoryImageUrl: url }));
+        })
+    });
+}
+
+export const updateCategory = async (e, id, values) => {
+    e.preventDefault();
+
+    const categoryDoc = doc(db, 'categories', id);
+    console.log(values);
+    try {
+        await updateDoc(categoryDoc, values);
+    } catch (error) {
+        // TODO modal -> Категорията не е обновена!
+        // alert(error.message);
+    }
+}

@@ -21,6 +21,7 @@ import { CreateMaterial } from './components/CreateMaterials/CreateMaterial';
 import { ReadItem } from './components/AdminActions/CrudDocuments/ReadItem/ReadItem';
 import { ReadCategory } from './components/AdminActions/CrudDocuments/ReadCategory/ReadCategory';
 import { UpdateItem } from './components/AdminActions/CrudDocuments/UpdateItem/UpdateItem';
+import { UpdateCategory } from './components/AdminActions/CrudDocuments/UpdateCategory/UpdateCategory';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
 
 
@@ -36,13 +37,14 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/create-item" element={<CreateItem />} />
                     <Route path="/update-item/:itemId" element={<UpdateItem />} />
+                    <Route path="/read-item/:itemId" element={<ReadItem />} />
                     <Route path="/create-category" element={<CreateCategory />} />
+                    <Route path="/update-category/:categoryId" element={<UpdateCategory />} />
+                    <Route path="/read-category/:categoryId" element={<ReadCategory />} />
                     <Route path="/create-material" element={<CreateMaterial />} />
                     <Route path="/items" element={<ListItems />} />
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/crud-documents" element={<CrudDocuments />} />
-                    <Route path="/read-item/:itemId" element={<ReadItem />} />
-                    <Route path="/read-category/:categoryId" element={<ReadCategory />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
