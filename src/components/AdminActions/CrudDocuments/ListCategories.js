@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { Link } from 'react-router-dom';
 
 import * as adminService from "../../../services/adminService";
 import styles from './CrudDocuments.module.css';
@@ -25,10 +26,10 @@ export const ListCategories = ({ documents }) => {
 
                         <div>{document.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</div>
                         <div className={styles.row__actions}>
-                            <button className="button green">
+                            <Link to={`/read-category/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
-                            </button>
+                            </Link>
                             <button className="button orange">
                                 <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                 Редактирай

@@ -19,8 +19,10 @@ import { ListItems } from './components/ListItems/ListItems';
 import { CreateCategory } from './components/CreateCategory/CreateCategory';
 import { CreateMaterial } from './components/CreateMaterials/CreateMaterial';
 import { ReadItem } from './components/AdminActions/CrudDocuments/ReadItem/ReadItem';
+import { ReadCategory } from './components/AdminActions/CrudDocuments/ReadCategory/ReadCategory';
 import { UpdateItem } from './components/AdminActions/CrudDocuments/UpdateItem/UpdateItem';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
+
 
 function App() {
 
@@ -40,6 +42,7 @@ function App() {
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/crud-documents" element={<CrudDocuments />} />
                     <Route path="/read-item/:itemId" element={<ReadItem />} />
+                    <Route path="/read-category/:categoryId" element={<ReadCategory />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
