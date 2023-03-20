@@ -7,24 +7,28 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 export const ModalTemplate = (props) => {
     let buttons;
     let modalCaption = '';
-    const [isClosed, setIsClosed] = useState(true);
+    const [isClosed, setIsOpen] = useState(true);
 
     const onClose = () => {
         if (isClosed) {
-            setIsClosed(false);
+            setIsOpen(false);
             props.obj.setIsModalOpen(false);
 
         } else {
-            setIsClosed(true);
+            setIsOpen(true);
         }
     }
 
-    const onConfirm = () => {
-        return 'yes';
+    const onConfirm = async (e) => {
+        await props.handleClick(true);
+        onClose();
+        return;
     }
 
-    const onReject = () => {
-        return 'no';
+    const onReject = async (e) => {
+        await props.handleClick(false);
+        onClose();
+        return;
     }
 
     if (props.obj.modalObject.type === 'alert') {
@@ -53,8 +57,8 @@ export const ModalTemplate = (props) => {
     if (props.obj.modalObject.type === 'confirm') {
         modalCaption = 'Моля, потвърдете...'
         buttons = (<>
-            <button onClick={onConfirm} className="button green">Да</button>
-            <button onClick={onReject} className="button red">Не</button>
+            <button onClick={(e) => onConfirm(e)} className="button green">Да</button>
+            <button onClick={(e) => onReject(e)} className="button red">Не</button>
         </>);
     }
 

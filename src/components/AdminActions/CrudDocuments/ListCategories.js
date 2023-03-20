@@ -1,17 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Link } from 'react-router-dom';
+
+// import { ModalTemplate } from "../../Modals/ModalTemplate";
 
 import * as adminService from "../../../services/adminService";
 import styles from './CrudDocuments.module.css';
 
 export const ListCategories = ({ documents }) => {
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [modalObject, setModalObject] = useState({});
 
     documents.isClicked.current = !documents.isClicked.current;
 
+    const onDelete = (...params) => {
+        adminService.deleteCategory(...params);
+            // setIsModalOpen,
+            // setModalObject,
+            // isConfirmed
+
+    }
+
+    // const handleClick = (isConfirmed) => {
+    //     return isConfirmed;
+    // }
+
     return (
         <>
+            {/* {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false} */}
+
             <div className={`${styles.table__header} ${styles.table__row}`}>
                 <div></div>
                 <div>Име</div>
@@ -30,12 +48,12 @@ export const ListCategories = ({ documents }) => {
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <Link to={`/update-category/${document.id}`}className="button orange">
+                            <Link to={`/update-category/${document.id}`} className="button orange">
                                 <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                 Редактирай
                             </Link>
                             <button className="button red"
-                                onClick={() => adminService.deleteCategory(document.id, documents.documents, documents.setDocuments, documents.isClicked)}
+                                onClick={() => onDelete(document.id, documents.documents, documents.setDocuments, documents.isClicked)}
                             >
                                 <FontAwesomeIcon icon={regular('trash-can')} className="delete fa-icon" />
                                 Изтрий

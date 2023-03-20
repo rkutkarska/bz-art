@@ -1,16 +1,12 @@
-import { storage, db } from "../Firebase";
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, where, query, orderBy } from "firebase/firestore";
-import { refFromURL } from "firebase/storage";
-
-// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-// import { v4 } from "uuid";
+import { db } from "../Firebase";
+import { collection, getDocs, doc, deleteDoc, where, query, orderBy } from "firebase/firestore";
 
 export const getAllItemsOrdered = async (documentType, documentSortType) => {
-    if (documentType == '') {
+    if (documentType === '') {
         return false;
     }
 
-    if (documentSortType == '') {
+    if (documentSortType === '') {
         const q = query(collection(db, documentType));
         return await getDocs(q);
     }
@@ -24,7 +20,7 @@ export const getAllItemsOrdered = async (documentType, documentSortType) => {
 
 function deleteRow(id, documents, setDocuments) {
     let copy = [...documents];
-    copy = copy.filter((document) => document.id != id)
+    copy = copy.filter((document) => document.id !== id);
     setDocuments(copy);
 }
 
@@ -41,12 +37,15 @@ export const deleteItem = async (id, documents, setDocuments, isClicked) => {
     }
 }
 
-export const deleteCategory = async (id, documents, setDocuments, isClicked) => {
+export const deleteCategory = async (id, documents, setDocuments, isClicked /*, setIsModalOpen, setModalObject, isConfirmed*/) => {
+    // setIsModalOpen(true);
+    // setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
+
     const categoryDoc = doc(db, "categories", id);
     try {
         const response = await deleteDoc(categoryDoc).then(() => true);
         if (response) {
-            deleteRow(id, documents, setDocuments)
+            deleteRow(id, documents, setDocuments);
             isClicked.current = true;
         }
     } catch (error) {
@@ -59,7 +58,7 @@ export const deleteMaterial = async (id, documents, setDocuments, isClicked) => 
     try {
         const response = await deleteDoc(materialDoc).then(() => true);
         if (response) {
-            deleteRow(id, documents, setDocuments)
+            deleteRow(id, documents, setDocuments);
             isClicked.current = true;
         }
     } catch (error) {
