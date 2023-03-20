@@ -1,0 +1,17 @@
+.image__preview {
+    display: block;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+.update .buttons {
+    display: flex;
+    width: 100%;
+}
+
+.update button.update,
+.update a.close {
+    width: 50%;
+}

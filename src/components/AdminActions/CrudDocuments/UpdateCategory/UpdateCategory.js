@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import styles from './UpdateCategory.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -72,7 +73,7 @@ export const UpdateCategory = () => {
                 </div>
 
                 <label>Име на категория:</label>
-                <form className="category-form" onChange={handleChange}>
+                <form className={`category-form ${styles.update}`} onChange={handleChange}>
                     <input defaultValue={category.categoryName} type="text" name="categoryName" />
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
@@ -92,10 +93,10 @@ export const UpdateCategory = () => {
                         </div>
                     </label>
 
-                    <img src={category.categoryImageUrl} alt={category.categoryName} />
-                    <div /*className={styles.buttons}*/ >
-                        <button onClick={updateDocument} className="button orange">Обнови</button>
-                        <Link to={'/crud-documents'} className="button red">Затвори</Link>
+                    <img src={category.categoryImageUrl} className={styles.image__preview} alt={category.categoryName} />
+                    <div className={styles.buttons} >
+                        <Link to={'/crud-documents'} className={`button red ${styles.close}`}>Затвори</Link>
+                        <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                     </div>
                 </form>
             </div>
