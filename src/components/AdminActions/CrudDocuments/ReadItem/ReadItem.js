@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import * as itemsService from '../../../../services/itemsService';
 import styles from './ReadItem.module.css';
-import { Spinner } from '../../../spinner/Spinner';
+import { Spinner } from '../../../Spinner/Spinner';
 
 export const ReadItem = () => {
     const [item, setItem] = useState({});

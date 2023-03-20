@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import * as categoriesService from '../../../../services/categoriesService';
-import { Spinner } from '../../../spinner/Spinner';
+import { Spinner } from '../../../Spinner/Spinner';
 import styles from './ReadCategory.module.css';
 
 export const ReadCategory = () => {
