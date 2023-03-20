@@ -37,9 +37,7 @@ export const deleteItem = async (id, documents, setDocuments, isClicked) => {
     }
 }
 
-export const deleteCategory = async (id, documents, setDocuments, isClicked /*, setIsModalOpen, setModalObject, isConfirmed*/) => {
-    // setIsModalOpen(true);
-    // setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
+export const deleteCategory = async (id, documents, setDocuments, isClicked /*, setIsModalOpen, setModalObject*/) => {
 
     const categoryDoc = doc(db, "categories", id);
     try {

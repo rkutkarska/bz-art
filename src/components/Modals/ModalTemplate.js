@@ -19,14 +19,14 @@ export const ModalTemplate = (props) => {
         }
     }
 
-    const onConfirm = async (e) => {
-        await props.handleClick(true);
+    const onConfirm = (e) => {
+        props.handleClick(true);
         onClose();
         return;
     }
 
-    const onReject = async (e) => {
-        await props.handleClick(false);
+    const onReject = (e) => {
+        props.handleClick(false);
         onClose();
         return;
     }

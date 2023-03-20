@@ -3,32 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Link } from 'react-router-dom';
 
-// import { ModalTemplate } from "../../Modals/ModalTemplate";
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
 import * as adminService from "../../../services/adminService";
 import styles from './CrudDocuments.module.css';
 
 export const ListCategories = ({ documents }) => {
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [modalObject, setModalObject] = useState({});
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+    const [currentDocumentId, setCurrentDocument] = useState('');
 
     documents.isClicked.current = !documents.isClicked.current;
 
-    const onDelete = (...params) => {
-        adminService.deleteCategory(...params);
-            // setIsModalOpen,
-            // setModalObject,
-            // isConfirmed
-
+    const handleClick = (isConfirmed) => {
+        console.log(isConfirmed);
+        if (isConfirmed) {
+            adminService.deleteCategory(currentDocumentId, documents.documents, documents.setDocuments, documents.isClicked);
+        }
+        return;
     }
-
-    // const handleClick = (isConfirmed) => {
-    //     return isConfirmed;
-    // }
 
     return (
         <>
-            {/* {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false} */}
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false}
 
             <div className={`${styles.table__header} ${styles.table__row}`}>
                 <div></div>
@@ -53,7 +50,11 @@ export const ListCategories = ({ documents }) => {
                                 Редактирай
                             </Link>
                             <button className="button red"
-                                onClick={() => onDelete(document.id, documents.documents, documents.setDocuments, documents.isClicked)}
+                                onClick={() => {
+                                    setIsModalOpen(true);
+                                    setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
+                                    setCurrentDocument(document.id);
+                                }}
                             >
                                 <FontAwesomeIcon icon={regular('trash-can')} className="delete fa-icon" />
                                 Изтрий
