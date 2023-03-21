@@ -29,7 +29,6 @@ export const saveCategory = async (e, categories, categoriesData, imageUpload, s
         return;
     } else if (imageUpload === '') {
         // alert('Неуспешно качване!');
-        e.target.value = '';
         return;
     }
 
