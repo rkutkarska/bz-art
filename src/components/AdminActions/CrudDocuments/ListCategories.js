@@ -11,14 +11,20 @@ import styles from './CrudDocuments.module.css';
 export const ListCategories = ({ documents }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
-    const [currentDocumentId, setCurrentDocument] = useState('');
+    const [currentDocumentId, setCurrentDocumentId] = useState('');
 
     documents.isClicked.current = !documents.isClicked.current;
 
     const handleClick = (isConfirmed) => {
-        console.log(isConfirmed);
         if (isConfirmed) {
-            adminService.deleteCategory(currentDocumentId, documents.documents, documents.setDocuments, documents.isClicked);
+            adminService.deleteCategory(
+                currentDocumentId,
+                documents.documents,
+                documents.setDocuments,
+                documents.isClicked,
+                setIsModalOpen,
+                setModalObject
+            );
         }
         return;
     }
@@ -53,7 +59,7 @@ export const ListCategories = ({ documents }) => {
                                 onClick={() => {
                                     setIsModalOpen(true);
                                     setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
-                                    setCurrentDocument(document.id);
+                                    setCurrentDocumentId(document.id);
                                 }}
                             >
                                 <FontAwesomeIcon icon={regular('trash-can')} className="delete fa-icon" />

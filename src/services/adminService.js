@@ -24,42 +24,48 @@ function deleteRow(id, documents, setDocuments) {
     setDocuments(copy);
 }
 
-export const deleteItem = async (id, documents, setDocuments, isClicked) => {
+export const deleteItem = async (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
     const itemDoc = doc(db, "items", id);
     try {
-        const response = await deleteDoc(itemDoc).then(() => true);
-        if (response) {
-            deleteRow(id, documents, setDocuments);
-            isClicked.current = true;
-        }
+        deleteDoc(itemDoc)
+            .then(() => {
+                deleteRow(id, documents, setDocuments);
+                isClicked.current = true;
+            })
+            .catch((err) => { throw new Error(err) });
     } catch (error) {
-        // TODO modal -> error.message error.code;
+        setIsModalOpen(true);
+        setModalObject({ message: `Грешка! Съобщение за грешка: ${error.message}, код на грешката: ${error.code}`, type: 'error' });
     }
 }
 
-export const deleteCategory = async (id, documents, setDocuments, isClicked /*, setIsModalOpen, setModalObject*/) => {
-
+export const deleteCategory = (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
     const categoryDoc = doc(db, "categories", id);
+
     try {
-        const response = await deleteDoc(categoryDoc).then(() => true);
-        if (response) {
-            deleteRow(id, documents, setDocuments);
-            isClicked.current = true;
-        }
+        deleteDoc(categoryDoc)
+            .then(() => {
+                deleteRow(id, documents, setDocuments);
+                isClicked.current = true;
+            })
+            .catch((err) => { throw new Error(err) });
     } catch (error) {
-        // TODO modal -> error.message error.code;
+        setIsModalOpen(true);
+        setModalObject({ message: `Грешка! Съобщение за грешка: ${error.message}, код на грешката: ${error.code}`, type: 'error' });
     }
 }
 
-export const deleteMaterial = async (id, documents, setDocuments, isClicked) => {
+export const deleteMaterial = async (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
     const materialDoc = doc(db, "materials", id);
     try {
-        const response = await deleteDoc(materialDoc).then(() => true);
-        if (response) {
-            deleteRow(id, documents, setDocuments);
-            isClicked.current = true;
-        }
+        deleteDoc(materialDoc)
+            .then(() => {
+                deleteRow(id, documents, setDocuments);
+                isClicked.current = true;
+            })
+            .catch((err) => { throw new Error(err) });
     } catch (error) {
-        // TODO modal -> error.message error.code;
+        setIsModalOpen(true);
+        setModalObject({ message: `Грешка! Съобщение за грешка: ${error.message}, код на грешката: ${error.code}`, type: 'error' });
     }
 }

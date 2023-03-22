@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import styles from './CrudDocuments.module.css';
 
+import { ModalTemplate } from "../../Modals/ModalTemplate";
+
 import * as adminService from "../../../services/adminService";
 
 export const ListMaterials = ({ documents }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+    const [currentDocumentId, setCurrentDocumentId] = useState('');
+
     documents.isClicked.current = !documents.isClicked.current;
 
+    const handleClick = (isConfirmed) => {
+        if (isConfirmed) {
+            adminService.deleteMaterial(
+                currentDocumentId,
+                documents.documents,
+                documents.setDocuments,
+                documents.isClicked,
+                setIsModalOpen,
+                setModalObject
+            );
+        }
+        return;
+    }
     return (
         <>
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false}
+
             <div className={`${styles.table__header} ${styles.table__row}`}>
                 <div></div>
                 <div>Име</div>
@@ -33,7 +54,11 @@ export const ListMaterials = ({ documents }) => {
                                 Редактирай
                             </button>
                             <button className="button red"
-                                onClick={() => adminService.deleteCategory(document.id, documents.documents, documents.setDocuments, documents.isClicked)}
+                                onClick={() => {
+                                    setIsModalOpen(true);
+                                    setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
+                                    setCurrentDocumentId(document.id);
+                                }}
                             >
                                 <FontAwesomeIcon icon={regular('trash-can')} className="delete fa-icon" />
                                 Изтрий
