@@ -49,9 +49,7 @@ export const ModalTemplate = (props) => {
     if (props.obj.modalObject.type === 'information') {
         modalCaption = 'Информация'
 
-        buttons = (<>
-            <button onClick={onClose} className="button blue">OK</button>
-        </>);
+        buttons = (<button onClick={onClose} className="button blue">OK</button>);
     }
 
     if (props.obj.modalObject.type === 'confirm') {
