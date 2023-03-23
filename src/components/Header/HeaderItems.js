@@ -13,7 +13,6 @@ export const HeaderItems = () => {
         try {
             await logout();
             navigate("/login");
-            console.log('logged out!');
 
         } catch (error) {
             // console.log(Неуспешно отписване!)
@@ -27,6 +26,8 @@ export const HeaderItems = () => {
                 <Link className="button yellow" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>
                 <Link onClick={handleLogOut} className="button yellow"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>
                 <Link className="button yellow" to="/cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                {/* TODO read from db item count in the cart */}
+                <span className="items-count">5</span>
             </div>
             <Link to="/"><img className="logo" src={require('../../img/logo.png')} alt="logo" /></Link>
             <div className="header__search-bar">

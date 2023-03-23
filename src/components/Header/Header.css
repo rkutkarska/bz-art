@@ -135,7 +135,6 @@
 }
 
 .caption__container {
-    /* max-height: 100px; */
     width: 50%;
     text-align: center;
 }
@@ -149,4 +148,19 @@
 .button.white:hover {
     color: var(--clr-white);
     background-color: unset;
+}
+
+.items-count {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: -53px;
+    top: -20px;
+    background: var(--clr-red);
+    border: 1px solid var(--clr-dark-red);
+    color: var(--clr-white);
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
 }
