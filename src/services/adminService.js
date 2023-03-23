@@ -1,5 +1,5 @@
 import { db } from "../Firebase";
-import { collection, getDocs, doc, deleteDoc, where, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, getDoc, doc, deleteDoc, where, query, orderBy } from "firebase/firestore";
 
 export const getAllItemsOrdered = async (documentType, documentSortType) => {
     if (documentType === '') {
@@ -24,48 +24,68 @@ function deleteRow(id, documents, setDocuments) {
     setDocuments(copy);
 }
 
-export const deleteItem = async (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
+export const deleteItem = (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
     const itemDoc = doc(db, "items", id);
-    try {
-        deleteDoc(itemDoc)
-            .then(() => {
-                deleteRow(id, documents, setDocuments);
-                isClicked.current = true;
-            })
-            .catch((err) => { throw new Error(err) });
-    } catch (error) {
-        setIsModalOpen(true);
-        setModalObject({ message: `Грешка! Съобщение за грешка: ${error.message}, код на грешката: ${error.code}`, type: 'error' });
-    }
+
+    deleteDoc(itemDoc)
+        .then(() => {
+            getDoc(itemDoc)
+                .then((value) => {
+                    if (value.data()) {
+                        setIsModalOpen(true);
+                        setModalObject({ message: 'Записът не е изтрит!', type: 'error' });
+                    } else {
+                        deleteRow(id, documents, setDocuments);
+                        isClicked.current = true;
+                    }
+                })
+                .catch(error => {
+                    setIsModalOpen(true);
+                    setModalObject({ message: `Грешка! Message: ${error.message}`, type: 'error' });
+                })
+        })
 }
 
 export const deleteCategory = (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
     const categoryDoc = doc(db, "categories", id);
 
-    try {
-        deleteDoc(categoryDoc)
-            .then(() => {
-                deleteRow(id, documents, setDocuments);
-                isClicked.current = true;
-            })
-            .catch((err) => { throw new Error(err) });
-    } catch (error) {
-        setIsModalOpen(true);
-        setModalObject({ message: `Грешка! Съобщение за грешка: ${error.message}, код на грешката: ${error.code}`, type: 'error' });
-    }
+    deleteDoc(categoryDoc)
+        .then(() => {
+            getDoc(categoryDoc)
+                .then((value) => {
+                    if (value.data()) {
+                        setIsModalOpen(true);
+                        setModalObject({ message: 'Записът не е изтрит!', type: 'error' });
+                    } else {
+                        deleteRow(id, documents, setDocuments);
+                        isClicked.current = true;
+                    }
+                })
+                .catch(error => {
+                    setIsModalOpen(true);
+                    setModalObject({ message: `Грешка! Message: ${error.message}`, type: 'error' });
+                })
+        })
 }
 
 export const deleteMaterial = async (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
     const materialDoc = doc(db, "materials", id);
-    try {
-        deleteDoc(materialDoc)
-            .then(() => {
-                deleteRow(id, documents, setDocuments);
-                isClicked.current = true;
-            })
-            .catch((err) => { throw new Error(err) });
-    } catch (error) {
-        setIsModalOpen(true);
-        setModalObject({ message: `Грешка! Съобщение за грешка: ${error.message}, код на грешката: ${error.code}`, type: 'error' });
-    }
+
+    deleteDoc(materialDoc)
+        .then(() => {
+            getDoc(materialDoc)
+                .then((value) => {
+                    if (value.data()) {
+                        setIsModalOpen(true);
+                        setModalObject({ message: 'Записът не е изтрит!', type: 'error' });
+                    } else {
+                        deleteRow(id, documents, setDocuments);
+                        isClicked.current = true;
+                    }
+                })
+                .catch(error => {
+                    setIsModalOpen(true);
+                    setModalObject({ message: `Грешка! Message: ${error.message}`, type: 'error' });
+                })
+        })
 }
