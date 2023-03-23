@@ -1,0 +1,32 @@
+.contacts {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.container__map {
+    border: 0;
+    width: 50%;
+    height: 650px;
+}
+
+.form {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.contacts .form input {
+    margin-bottom: 1.5rem;
+}
+
+.contacts .form input,
+.contacts .form textarea {
+    width: 100%;
+}
+
+.contacts .form textarea {
+    min-width: 100%;
+}

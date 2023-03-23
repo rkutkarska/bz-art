@@ -23,7 +23,7 @@ import { ReadCategory } from './components/AdminActions/CrudDocuments/ReadCatego
 import { UpdateItem } from './components/AdminActions/CrudDocuments/UpdateItem/UpdateItem';
 import { UpdateCategory } from './components/AdminActions/CrudDocuments/UpdateCategory/UpdateCategory';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
-
+import { Contacts } from './components/Contacts/Contacts';
 
 function App() {
 
@@ -46,6 +46,7 @@ function App() {
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/crud-documents" element={<CrudDocuments />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
+                    <Route path="/contacts" element={<Contacts />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />
