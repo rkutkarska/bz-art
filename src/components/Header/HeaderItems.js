@@ -5,7 +5,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useAuth } from '../../context/AuthContext';
 
 export const HeaderItems = () => {
-    // const { currentUser } = useAuth();
+    const { currentUser } = useAuth();
     const navigate = useNavigate();
     const { logout } = useAuth();
 
@@ -23,11 +23,11 @@ export const HeaderItems = () => {
     return (
         <div className="header__items">
             <div className="header__buttons">
-                <Link className="button yellow" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>
-                <Link onClick={handleLogOut} className="button yellow"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>
-                <Link className="button yellow" to="/cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                {!currentUser && <Link className="button yellow" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>}
+                {currentUser && <Link onClick={handleLogOut} className="button yellow"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>}
+                {currentUser && <><Link className="button yellow" to="/cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                <span className="items-count">5</span></> }
                 {/* TODO read from db item count in the cart */}
-                <span className="items-count">5</span>
             </div>
             <Link to="/"><img className="logo" src={require('../../img/logo.png')} alt="logo" /></Link>
             <div className="header__search-bar">
