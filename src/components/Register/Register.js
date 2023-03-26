@@ -93,7 +93,7 @@ export const Register = () => {
             <div className="register-container__form">
                 <h1>Регистрация</h1>
                 <form className="form" onSubmit={handleSubmit} onChange={() => setError('')} >
-                    {error && <p className="error-message">{error}</p>}
+                    {error && <p className="error-message fadeOut">{error}</p>}
                     <label htmlFor="email">Email</label>
                     <input
                         className={emailHasError ? "error" : undefined}
