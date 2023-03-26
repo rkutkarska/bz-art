@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import * as categoriesService from "../../services/categoriesService";
-import "../../styles/CreateCategory.css";
+import * as categoriesService from "../../../../services/categoriesService";
+import "./CreateCategory.css";
 
 export const CreateCategory = () => {
     const [categoriesData, updateCategoriеsData] = useState({

@@ -1,5 +1,5 @@
 import React from "react";
-import '../../../styles/Guarantee.css';
+import './Guarantee.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 

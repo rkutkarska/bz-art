@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { ModalTemplate } from "../Modals/ModalTemplate";
-import * as materialsService from "../../services/materialsService";
+import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import * as materialsService from "../../../../services/materialsService";
 
 import styles from './CreateMaterial.module.css';
 

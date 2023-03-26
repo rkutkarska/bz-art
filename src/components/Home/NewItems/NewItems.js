@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../../../styles/NewItems.css';
+import './NewItems.css';
 import * as itemsService from '../../../services/itemsService';
 import { NewItem } from "./NewItem";
 

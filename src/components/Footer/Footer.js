@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useLocation } from "react-router-dom";
-import '../styles/Footer.css';
+import './Footer.css';
 
 export const Footer = () => {
     const { pathname } = useLocation();

@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { db } from "../../Firebase";
+import { db } from "../../../../Firebase";
 
-import * as itemsService from '../../services/itemsService';
+import * as itemsService from '../../../../services/itemsService';
 
-import "../../styles/CreateItem.css";
+import "./CreateItem.css";
 import { AddCategory } from "./AddCategory";
-import { ModalTemplate } from "../Modals/ModalTemplate";
+import { ModalTemplate } from "../../../Modals/ModalTemplate";
 
 export const CreateItem = () => {
 

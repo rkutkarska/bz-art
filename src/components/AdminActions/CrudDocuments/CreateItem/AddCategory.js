@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import * as categoriesService from "../../services/categoriesService";
-import "../../styles/AddCategory.css";
+import * as categoriesService from "../../../../services/categoriesService";
+import "./AddCategory.css";
 
 export const AddCategory = ({updateItemsData}) => {
     const [categoriesData, updateCategoriеsData] = useState({

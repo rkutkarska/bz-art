@@ -1,6 +1,6 @@
 import React from 'react';
 import { CategoryItems } from './CategoryItems';
-import '../../../styles/Categories.css';
+import './Categories.css';
 import { useEffect, useState } from "react";
 import * as categoriesService from '../../../services/categoriesService';
 
