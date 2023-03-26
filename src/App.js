@@ -40,25 +40,25 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/items" element={<ListItems />} />
+                    <Route path="/items/:itemId" element={<ItemDescription />} />
+                    <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
+                    <Route path="/contacts" element={<Contacts />} />
 
+                    {/* Private */}
+                    <Route path="/crud-documents" element={<CrudDocuments />} />
                     <Route path="/create-item" element={<CreateItem />} />
                     <Route path="/update-item/:itemId" element={<UpdateItem />} />
                     <Route path="/read-item/:itemId" element={<ReadItem />} />
-
                     <Route path="/create-category" element={<CreateCategory />} />
                     <Route path="/update-category/:categoryId" element={<UpdateCategory />} />
                     <Route path="/read-category/:categoryId" element={<ReadCategory />} />
-
                     <Route path="/create-material" element={<CreateMaterial />} />
                     {/* TODO update */}
                     <Route path="/read-material/:materialId" element={<ReadMaterial />} />
 
-                    <Route path="/items" element={<ListItems />} />
-                    <Route path="/items/:itemId" element={<ItemDescription />} />
-                    <Route path="/crud-documents" element={<CrudDocuments />} />
-                    <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
-                    <Route path="/contacts" element={<Contacts />} />
                     <Route path="*" element={<NotFound />} />
+
                 </Routes>
                 <Footer />
                 {/* <ItemCounter start = {1} /> */}
