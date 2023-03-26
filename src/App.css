@@ -348,9 +348,9 @@ div[class*="buttons"] {
 .form-error {
     color: var(--clr-dark-red);
     font-style: italic;
-    padding-bottom: 2rem;
+    /* padding-bottom: 2rem; */
     position: relative;
-    bottom: 25px;
+    /* bottom: 25px; */
 }
 
 input[type="text"].error,
@@ -358,6 +358,13 @@ input[type="password"].error,
 input[type="number"].error,
 select.error {
     border-bottom: 2px solid var(--clr-dark-red);
+}
+
+.error-message {
+    background-color: var(--clr-dark-red);
+    color: var(--clr-white);
+    text-align: center;
+    padding: 1em 0;
 }
 
 /* TODO responsive */
