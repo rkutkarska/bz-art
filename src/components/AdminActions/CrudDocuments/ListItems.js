@@ -34,14 +34,15 @@ export const ListItems = ({ documents }) => {
         <>
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false}
 
-            {documents.length > 0
-                ? <div className={`${styles.table__header} ${styles.table__row}`}>
-                    <div></div>
-                    <div>Име</div>
-                    <div>Категория</div>
-                    <div>Действия</div>
-                </div>
-                : <h2 className={styles["no-items"]}>Няма добавени категории!</h2>
+            {
+                documents.documents.length > 0
+                    ? <div className={`${styles.table__header} ${styles.table__row}`}>
+                        <div></div>
+                        <div>Име</div>
+                        <div>Категория</div>
+                        <div>Действия</div>
+                    </div>
+                    : <h2 className={styles["no-items"]}>Няма добавени артикули!</h2>
             }
 
             {

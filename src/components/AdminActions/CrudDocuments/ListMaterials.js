@@ -31,12 +31,17 @@ export const ListMaterials = ({ documents }) => {
         <>
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false}
 
-            <div className={`${styles.table__header} ${styles.table__row}`}>
-                <div></div>
-                <div>Име</div>
-                <div>Създаден на</div>
-                <div>Действия</div>
-            </div>
+            {
+                documents.documents.length > 0
+                    ? <div className={`${styles.table__header} ${styles.table__row}`}>
+                        <div></div>
+                        <div>Име</div>
+                        <div>Създаден на</div>
+                        <div>Действия</div>
+                    </div>
+                    : <h2 className={styles["no-items"]}>Няма добавени материали!</h2>
+            }
+
             {
                 documents.documents.map((document, index) => (
                     <div key={document.id} className={styles.table__row}>
