@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import { ModalTemplate } from "../../Modals/ModalTemplate";
+import { ModalTemplate } from '../../Modals/ModalTemplate';
 
 import * as adminService from '../../../services/adminService';
 import styles from './CrudDocuments.module.css';
@@ -34,12 +34,16 @@ export const ListItems = ({ documents }) => {
         <>
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} handleClick={handleClick} /> : false}
 
-            <div className={`${styles.table__header} ${styles.table__row}`}>
-                <div></div>
-                <div>Име</div>
-                <div>Категория</div>
-                <div>Действия</div>
-            </div>
+            {documents.length > 0
+                ? <div className={`${styles.table__header} ${styles.table__row}`}>
+                    <div></div>
+                    <div>Име</div>
+                    <div>Категория</div>
+                    <div>Действия</div>
+                </div>
+                : <h2 className={styles["no-items"]}>Няма добавени категории!</h2>
+            }
+
             {
                 documents.documents.map(document => (
                     <div key={document.id} className={styles.table__row}>

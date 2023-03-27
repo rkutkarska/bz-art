@@ -87,3 +87,7 @@ button[disabled] {
 .add-document {
     padding-bottom: 2rem;
 }
+
+.no-items {
+    text-align: center;
+}
