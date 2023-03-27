@@ -75,6 +75,13 @@ export const CrudDocuments = () => {
         <div className={styles.container}>
             <h1>Документи</h1>
             <div className={styles.container__actions}>
+                <h2>Създаване на нов документ</h2>
+                <div className={`${styles["add-document"]} buttons`}>
+                    <Link to="/create-category" className="button blue">+ Нова категория</Link>
+                    <Link to="/create-item" className="button blue">+ Нов артикул</Link>
+                    <Link to="/create-material" className="button blue">+ Нов материал</Link>
+                </div>
+                <h2>Извличане на документи и търсене</h2>
                 <div className={styles.document__name}>
                     <div>
                         <span>Документ: </span>
@@ -168,24 +175,6 @@ export const CrudDocuments = () => {
                         <button className="button green" onClick={(e) => { onSearch(); isClicked.current = true; }}>Търсене</button>
                     </div>
                 }
-
-                <div className={styles["add-document"]}>
-                    {
-                        documentType === 'categories' &&
-                        <Link to="/create-category" className="button blue">+ Добавяне на категория</Link>
-                    }
-
-                    {
-                        documentType === 'items' &&
-                        <Link to="/create-item" className="button blue">+ Добавяне на артикул</Link>
-                    }
-
-                    {
-                        documentType === 'materials' &&
-                        <Link to="/create-material" className="button blue">+ Добавяне на материал</Link>
-                    }
-
-                </div>
             </div>
 
             {/* Table with results */}

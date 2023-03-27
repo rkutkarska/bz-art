@@ -91,3 +91,12 @@ button[disabled] {
 .no-items {
     text-align: center;
 }
+
+.container h2 {
+    text-align: center;
+}
+
+.container a {
+    width: 220px;
+    text-align: center;
+}
