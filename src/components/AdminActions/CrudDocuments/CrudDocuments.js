@@ -196,13 +196,13 @@ export const CrudDocuments = () => {
             </div>
 
             {/* TODO paginaton */}
-            <div className={styles.container__pagination}>
+            {/* <div className={styles.container__pagination}>
                 <button className="button neutral">Предишен</button>
                 <button className="button neutral">1</button>
                 <button className="button neutral">2</button>
                 <button className="button neutral">3</button>
                 <button className="button neutral">Следващ</button>
-            </div>
+            </div> */}
         </div>
     )
 }
