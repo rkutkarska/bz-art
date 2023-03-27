@@ -1,5 +1,5 @@
 import { db } from "../Firebase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, doc } from "firebase/firestore";
 
 const materialsCollectionRef = collection(db, "materials");
 
@@ -16,3 +16,21 @@ export const saveMaterial = (e, materialsData) => {
     addDoc(materialsCollectionRef, { ...materialsData, dateCreated: new Date() });
     e.target.previousSibling.value = '';
 }
+
+export const getMaterial = async (id) => {
+    try {
+        const materialCollectionRef = doc(db, "materials", id);
+        const docSnap = await getDoc(materialCollectionRef);
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            // TODO modal
+            // setModalObject({ message: "Document does not exist!", type: "error" });
+            return;
+        }
+
+    } catch (error) {
+        // TODO modal
+        // setModalObject({ message: error, type: "error" });
+    }
+};
