@@ -1,13 +1,3 @@
-.form-container {
-    width: 60%;
-    margin: 0 auto;
-}
-
-.form-container input[type="text"],
-.form-container input[type="submit"] {
-    margin-bottom: 2rem;
-}
-
 .form-check {
     display: flex;
     gap: 30px;

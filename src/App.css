@@ -371,6 +371,16 @@ select.error {
     animation-fill-mode: both;
 }
 
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form-container input[type="text"],
+.form-container input[type="submit"] {
+    margin-bottom: 2rem;
+}
+
 @-webkit-keyframes fadeOut {
     0% {
         opacity: 1;
