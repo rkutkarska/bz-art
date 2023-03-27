@@ -13,6 +13,7 @@ import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
 
 import { AuthProvider } from './context/AuthContext';
+import { RequireAuth } from './components/RequireAuth/RequireAuth';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 
@@ -40,22 +41,27 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/items" element={<ListItems />} />
+                    {/* <Route path="/items" element={<ListItems />} /> */}
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="/contacts" element={<Contacts />} />
 
                     {/* Private */}
-                    <Route path="/crud-documents" element={<CrudDocuments />} />
-                    <Route path="/create-item" element={<CreateItem />} />
-                    <Route path="/update-item/:itemId" element={<UpdateItem />} />
-                    <Route path="/read-item/:itemId" element={<ReadItem />} />
-                    <Route path="/create-category" element={<CreateCategory />} />
-                    <Route path="/update-category/:categoryId" element={<UpdateCategory />} />
-                    <Route path="/read-category/:categoryId" element={<ReadCategory />} />
-                    <Route path="/create-material" element={<CreateMaterial />} />
-                    {/* TODO update */}
-                    <Route path="/read-material/:materialId" element={<ReadMaterial />} />
+
+                    <Route element={<RequireAuth />}>
+                        <Route path="/items" element={<ListItems />} />
+                        <Route path="/crud-documents" element={<CrudDocuments />} />
+                        <Route path="/create-item" element={<CreateItem />} />
+                        <Route path="/update-item/:itemId" element={<UpdateItem />} />
+                        <Route path="/read-item/:itemId" element={<ReadItem />} />
+                        <Route path="/create-category" element={<CreateCategory />} />
+                        <Route path="/update-category/:categoryId" element={<UpdateCategory />} />
+                        <Route path="/read-category/:categoryId" element={<ReadCategory />} />
+                        <Route path="/create-material" element={<CreateMaterial />} />
+                        {/* TODO update */}
+                        <Route path="/read-material/:materialId" element={<ReadMaterial />} />
+                    </Route>
+
 
                     <Route path="*" element={<NotFound />} />
 
