@@ -7,7 +7,7 @@ import * as categoriesService from "../../../../services/categoriesService";
 import "./CreateCategory.css";
 
 export const CreateCategory = () => {
-    const [categoriesData, updateCategoriеsData] = useState({
+    const [categoriesData, updateCategoriesData] = useState({
         categoryName: '',
         categoryImageUrl: '',
         dateCreated: {}
@@ -23,12 +23,12 @@ export const CreateCategory = () => {
 
     const clearImage = (e) => {
         e.preventDefault();
-        updateCategoriеsData({ ...categoriesData, categoryImageUrl: '' });
+        updateCategoriesData({ ...categoriesData, categoryImageUrl: '' });
         e.target.previousSibling.value = '';
     };
 
     const handleChange = (e) => {
-        updateCategoriеsData((oldValues) => ({
+        updateCategoriesData((oldValues) => ({
             ...oldValues,
             [e.target.name]: e.target.value.trim()
         }))
