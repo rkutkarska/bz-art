@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useLocation } from "react-router-dom";
-import './Footer.css';
+import styles from './Footer.module.css';
 
 export const Footer = () => {
     const { pathname } = useLocation();
@@ -28,7 +28,7 @@ export const Footer = () => {
                             <p>&copy; Studio BZ Art 2023</p>
                             <p>Programming & Design: Ralena Kutkarska</p>
                             <p>Made with &nbsp;
-                                <FontAwesomeIcon icon={solid('heart')} className="heart"></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={solid('heart')} className={styles.heart}></FontAwesomeIcon>
                             </p>
                         </div>
                     </footer>
