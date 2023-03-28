@@ -30,7 +30,7 @@ export const HeaderItems = () => {
             <div className="header__buttons">
                 {!currentUser && <Link className="button yellow" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>}
                 {currentUser && <Link onClick={handleLogOut} className="button yellow"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>}
-                {currentUser && <><Link className="button yellow" to="/cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                {currentUser && <><Link className="button yellow" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
                     <span className="items-count">5</span></>}
                 {/* TODO read from db item count in the cart */}
             </div>

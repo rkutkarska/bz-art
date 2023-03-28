@@ -30,6 +30,7 @@ import { UpdateCategory } from './components/AdminActions/CrudDocuments/UpdateCa
 
 import { ListItems } from './components/ListItems/ListItems';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
+import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <div>
                 <Header />
                 <Routes>
+                    {/* Regular user */}
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
@@ -45,10 +47,11 @@ function App() {
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="/contacts" element={<Contacts />} />
-
-                    {/* Private */}
+                    <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    {/* --- Regular user */}
 
                     <Route element={<RequireAuth />}>
+                        {/* Admin */}
                         <Route path="/items" element={<ListItems />} />
                         <Route path="/crud-documents" element={<CrudDocuments />} />
                         <Route path="/create-item" element={<CreateItem />} />
@@ -60,11 +63,9 @@ function App() {
                         <Route path="/create-material" element={<CreateMaterial />} />
                         {/* TODO update */}
                         <Route path="/read-material/:materialId" element={<ReadMaterial />} />
+                        {/* --- Admin */}
                     </Route>
-
-
                     <Route path="*" element={<NotFound />} />
-
                 </Routes>
                 <Footer />
                 {/* <ItemCounter start = {1} /> */}

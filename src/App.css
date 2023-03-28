@@ -160,7 +160,7 @@ input[type="radio"] {
 
 input[type="radio"]:checked,
 input[type="checkbox"]:checked {
-    background: var(--clr-yellow);
+    background: var(--clr-dark-green);
     outline: 1px solid var(--clr-purple-font);
 }
 
@@ -339,7 +339,7 @@ div[class*="buttons"] {
     border: 5px solid var(--clr-dark-green);
 }
 
-.container input,
+.container input:not(input[type="checkbox"], input[type="radio"]),
 .container textarea {
     background-color: unset;
 }
