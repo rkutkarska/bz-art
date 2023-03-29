@@ -66,6 +66,11 @@
     background-color: var(--clr-green);
 }
 
+.cart,
+.favourites  {
+    background-color: var(--clr-green);
+}
+
 .button.close {
     position: absolute;
     right: 0%;

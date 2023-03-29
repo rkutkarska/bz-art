@@ -32,7 +32,7 @@ export const ModalTemplate = (props) => {
     }
 
     if (props.obj.modalObject.type === 'alert') {
-        modalCaption = 'Предупреждение!'
+        modalCaption = 'Предупреждение!';
         buttons = (<>
             <button onClick={onConfirm} className="button green">Да</button>
             <button onClick={onReject} className="button red">Не</button>
@@ -40,23 +40,39 @@ export const ModalTemplate = (props) => {
     }
 
     if (props.obj.modalObject.type === 'error') {
-        modalCaption = 'Грешка!'
+        modalCaption = 'Грешка!';
         buttons = (
             <button onClick={onClose} className="button blue">OK</button>
         );
     }
 
     if (props.obj.modalObject.type === 'information') {
-        modalCaption = 'Информация'
+        modalCaption = 'Информация';
 
         buttons = (<button onClick={onClose} className="button blue">OK</button>);
     }
 
     if (props.obj.modalObject.type === 'confirm') {
-        modalCaption = 'Моля, потвърдете...'
+        modalCaption = 'Моля, потвърдете...';
         buttons = (<>
             <button onClick={(e) => onConfirm(e)} className="button green">Да</button>
             <button onClick={(e) => onReject(e)} className="button red">Не</button>
+        </>);
+    }
+
+    if (props.obj.modalObject.type === 'cart') {
+        modalCaption = 'Информация!';
+        buttons = (<>
+            <button onClick={(e) => onConfirm(e)} className="button blue">Към количката</button>
+            <button onClick={onClose} className="button green">ОК</button>
+        </>);
+    }
+
+    if (props.obj.modalObject.type === 'favourites') {
+        modalCaption = 'Информация!';
+        buttons = (<>
+            <button onClick={(e) => onConfirm(e)} className="button blue">Към любими</button>
+            <button onClick={onClose} className="button green">ОК</button>
         </>);
     }
 
@@ -71,9 +87,9 @@ export const ModalTemplate = (props) => {
                                 <button
                                     onClick={onClose}
                                     className={`${styles.button} ${styles.close}`}>
-                                    <FontAwesomeIcon icon={regular('circle-xmark')} className={styles.icon} />
+                                    <FontAwesomeIcon icon={regular("circle-xmark")} className={styles.icon} />
                                 </button>
-                                <p className={styles[`modal__` + props.obj.modalObject.type]}>{modalCaption}</p>
+                                <p className={styles["modal__" + props.obj.modalObject.type]}>{modalCaption}</p>
                                 <p className={styles["modal__message"]}>{props.obj.modalObject.message}</p>
                                 <div className={styles["modal__buttons"]}>
                                     {buttons}

@@ -73,7 +73,15 @@ export const ItemDescription = () => {
                     <h2>Количество</h2>
                     <div className="add-cart">
                         <div>
-                            <input type="number" min="1" defaultValue={1} max={item.quantity} onChange={(e) => handleChange(e, item.quantity)} />
+                            <input
+                                type="number"
+                                min="1"
+                                step="1"
+                                max={item.quantity}
+                                onInput={(e) => e.target.value = (parseInt(e.target.value))}
+                                defaultValue={1}
+                                onChange={(e) => handleChange(e, item.quantity)}
+                            />
                             {isInsufficientQty && <p className="form-error">{error}</p>}
                         </div>
 
@@ -84,7 +92,7 @@ export const ItemDescription = () => {
                                     className="button yellow same-size-large"
                                     onClick={(e) =>
                                         shoppingCartService
-                                            .addToCart(e, currentUser.uid, itemId, item.quantity, desiredQty)
+                                            .addToCart(e, currentUser.uid, itemId, desiredQty)
                                     }
                                     disabled={isInsufficientQty}
                                 >
