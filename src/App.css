@@ -268,6 +268,39 @@ div[class*="buttons"] {
     background-color: var(--clr-dark-neutral);
 }
 
+button.yellow:disabled,
+button.purple:disabled,
+button.orange:disabled,
+button.red:disabled,
+button.green:disabled,
+button.blue:disabled {
+    cursor: not-allowed;
+    color: var(--clr-gray);
+    border: 1px solid var(--clr-gray);
+}
+
+button.yellow:disabled:hover,
+button.purple:disabled:hover,
+button.orange:disabled:hover,
+button.red:disabled:hover,
+button.green:disabled:hover,
+button.blue:disabled:hover {
+    background-color: unset;
+    color: var(--clr-dark-neutral);
+}
+
+button.same-size-large,
+a.same-size-large {
+    min-width: 200px;
+    text-align: center;
+}
+
+button.same-size-small,
+a.same-size-small {
+    width: 120px;
+    text-align: center;
+}
+
 .buttons {
     display: flex;
     flex-direction: row;
@@ -369,6 +402,12 @@ select.error {
     animation-duration: 10s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+
+}
+
+.container {
+    background-color: var(--clr-background);
+    height: fit-content;
 }
 
 .form-container {
@@ -404,6 +443,64 @@ select.error {
 .fadeOut {
     -webkit-animation-name: fadeOut;
     animation-name: fadeOut;
+}
+
+
+.tooltip-top,
+.tooltip-bottom {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-top .tooltiptext,
+.tooltip-bottom .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--clr-dark-neutral);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.tooltip-top .tooltiptext {
+    bottom: 120%;
+}
+
+.tooltip-bottom .tooltiptext {
+    top: 120%;
+}
+
+.tooltip-top .tooltiptext::after,
+.tooltip-bottom .tooltiptext::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.tooltip-top .tooltiptext::after {
+    top: 100%;
+    border-color: var(--clr-dark-neutral) transparent transparent transparent;
+}
+
+.tooltip-bottom .tooltiptext::after {
+    bottom: 100%;
+    border-color: transparent transparent var(--clr-dark-neutral) transparent;
+}
+
+.tooltip-top:hover .tooltiptext,
+.tooltip-bottom:hover .tooltiptext  {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* TODO responsive */

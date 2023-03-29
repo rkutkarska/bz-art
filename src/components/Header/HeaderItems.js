@@ -28,11 +28,22 @@ export const HeaderItems = () => {
         <div className="header__items">
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
             <div className="header__buttons">
-                {!currentUser && <Link className="button yellow" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>}
-                {currentUser && <Link onClick={handleLogOut} className="button yellow"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>}
-                {currentUser && <><Link className="button yellow" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
-                    <span className="items-count">5</span></>}
-                {/* TODO read from db item count in the cart */}
+                {
+                    !currentUser &&
+                    <>
+                        <Link className="button yellow same-size-small" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>
+                        {/* <Link className="button yellow same-size-small" to="/register"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Регистрация</Link> */}
+                    </>
+                }
+                {
+                    currentUser &&
+                    <>
+                        <Link onClick={handleLogOut} className="button yellow same-size-small"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>
+                        <Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                        <span className="items-count">5</span>
+                        {/* TODO read from db item count in the cart */}
+                    </>
+                }
             </div>
             <Link to="/"><img className="logo" src={require('../../img/logo.png')} alt="logo" /></Link>
             <div className="header__search-bar">
