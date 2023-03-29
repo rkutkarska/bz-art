@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useAuth } from '../../context/AuthContext';
@@ -10,13 +10,34 @@ import './ItemDescription.css';
 
 export const ItemDescription = () => {
     const [item, setItem] = useState({});
+    const [isInsufficientQty, setIsInsufficientQty] = useState(false);
+    const [error, setError] = useState('');
+    const [desiredQty, setDesiredQty] = useState(1);
+
     const { itemId } = useParams();
     const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         itemsService.getItem(itemId)
             .then((item) => setItem(item));
     }, [])
+
+    const handleChange = (e, itemQuantity) => {
+
+        if (e.target.value > itemQuantity) {
+            setIsInsufficientQty(true);
+            setError('Недостатъчна наличност!');
+        } else if (e.target.value === '' || e.target.value <= 0) {
+            setIsInsufficientQty(true);
+            setError('Невалидна стойност!')
+        }
+        else {
+            setIsInsufficientQty(false);
+            setError('');
+            setDesiredQty(e.target.value);
+        }
+    }
 
     return (
         <div className="container">
@@ -49,30 +70,62 @@ export const ItemDescription = () => {
                         <p>{item.quantity} бр.</p>
                     </div>
 
+                    <h2>Количество</h2>
                     <div className="add-cart">
                         <div>
-                            <h2>Количество</h2>
-                            <input type="number" min="1" defaultValue={1} />
+                            <input type="number" min="1" defaultValue={1} max={item.quantity} onChange={(e) => handleChange(e, item.quantity)} />
+                            {isInsufficientQty && <p className="form-error">{error}</p>}
                         </div>
-                        <button className="button yellow same-size"
-                            onClick={(e) =>
-                                shoppingCartService
-                                    .addToCart(e, currentUser.uid, itemId, item.quantity)
-                            }
-                        >
-                            <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
-                        </button>
+
+
+                        {
+                            currentUser
+                                ? <button
+                                    className="button yellow same-size-large"
+                                    onClick={(e) =>
+                                        shoppingCartService
+                                            .addToCart(e, currentUser.uid, itemId, item.quantity, desiredQty)
+                                    }
+                                    disabled={isInsufficientQty}
+                                >
+                                    <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
+                                </button>
+
+
+                                : <div className="tooltip-top">
+                                    <button
+                                        className="button yellow same-size-large"
+                                        onClick={(e) => { navigate("/login") }}
+                                        disabled={isInsufficientQty}
+                                    >
+                                        <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
+                                    </button>
+                                    <span className="tooltiptext">За поръчка е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
+                                </div>
+                        }
                     </div>
 
                     <div className="favourites">
                         <h2>Харесва ли ти?</h2>
-                        <Link className="button purple same-size" to="">
-                            <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
-                            Добави в любими
-                        </Link>
+
+                        {
+                            currentUser
+                                ?
+                                <button className="button purple same-size-large">
+                                    <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
+                                    Добави в любими
+                                </button>
+                                : <div className="tooltip-bottom">
+                                    <button className="button purple same-size-large">
+                                        <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
+                                        Добави в любими
+                                    </button>
+                                    <span className="tooltiptext">За добавяне на артикул в любими е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
+                                </div>
+                        }
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
