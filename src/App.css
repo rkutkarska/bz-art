@@ -372,7 +372,7 @@ a.same-size-small {
     border: 5px solid var(--clr-dark-green);
 }
 
-.container input:not(input[type="checkbox"], input[type="radio"]),
+.container input:not(input[type="checkbox"], input[type="radio"], input[type="button"], input[type="submit"]),
 .container textarea {
     background-color: unset;
 }
@@ -498,7 +498,7 @@ select.error {
 }
 
 .tooltip-top:hover .tooltiptext,
-.tooltip-bottom:hover .tooltiptext  {
+.tooltip-bottom:hover .tooltiptext {
     opacity: 1;
     visibility: visible;
 }
