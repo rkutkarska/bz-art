@@ -43,14 +43,14 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    {/* <Route path="/items" element={<ListItems />} /> */}
+                    <Route path="/items" element={<ListItems />} />
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     {/* --- Regular user */}
 
-                    <Route element={<RequireAuth />}>
+                    {/* <Route element={<RequireAuth />}> */}
                         {/* Admin */}
                         <Route path="/items" element={<ListItems />} />
                         <Route path="/crud-documents" element={<CrudDocuments />} />
@@ -64,7 +64,9 @@ function App() {
                         {/* TODO update */}
                         <Route path="/read-material/:materialId" element={<ReadMaterial />} />
                         {/* --- Admin */}
-                    </Route>
+                    {/* </Route> */}
+
+
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />
