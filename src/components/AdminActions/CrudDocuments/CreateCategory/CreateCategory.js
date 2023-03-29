@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -37,7 +38,7 @@ export const CreateCategory = () => {
     // TODO drag and drop image
     // TODO modal
     return (
-        <div className="container categories">
+        <div className="container categories create">
             <div className="form-container">
                 <h1>Добавяне на категория</h1>
                 <div className="existing-categories">
@@ -64,7 +65,7 @@ export const CreateCategory = () => {
                     <label htmlFor="category-name">Име на категория:</label>
                 </div>
                 <form className="category-form">
-                    <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
+                    <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} required />
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
@@ -74,11 +75,15 @@ export const CreateCategory = () => {
                         </div>
                     </label>
 
-                    <input type="submit" className="button green" value="Запази"
-                        onClick={(e) => {
-                            categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories);
-                        }}
-                    />
+                    <div className="buttons">
+                        <Link className="button red close " to="/crud-documents">Затвори</Link>
+                        <input type="submit" className="button green create" value="Запази"
+                            onClick={(e) => {
+                                categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories);
+                                e.target.parentElement.parentElement.reset();
+                            }}
+                        />
+                    </div>
                 </form>
             </div>
         </div>

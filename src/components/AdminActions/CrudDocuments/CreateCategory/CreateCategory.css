@@ -12,9 +12,20 @@
 }
 
 .category-form .button.green {
-    width: 100%;
+    width: 50%;
 }
 
 .category-form .drop-container {
     width: 100%;
+}
+
+.create .buttons {
+    display: flex;
+    width: 100%;
+}
+
+.create button.create,
+.create a.close {
+    width: 50%;
+    height: fit-content;
 }
