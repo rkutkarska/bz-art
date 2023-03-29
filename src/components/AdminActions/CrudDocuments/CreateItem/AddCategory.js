@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import * as categoriesService from "../../../../services/categoriesService";
-import "./AddCategory.css";
+import styles from "./AddCategory.module.css";
 
 export const AddCategory = ({updateItemsData}) => {
     const [categoriesData, updateCategoriеsData] = useState({
@@ -56,9 +56,9 @@ export const AddCategory = ({updateItemsData}) => {
 
     return (
         <>
-            <label htmlFor="available-categories" className="existing-categories">Категория: </label>
+            <label htmlFor="available-categories" className={styles["existing-categories"]}>Категория: </label>
             {renderCategoriesOptions()}
-            <div className="category-label">
+            <div className={styles["category-label"]}>
                 <label htmlFor="category-name">Липсва категория? Добавете я:</label>
                 <input type="button"
                     value={addCategory ? "Добави" : "Отказ"}
@@ -71,8 +71,8 @@ export const AddCategory = ({updateItemsData}) => {
             </div>
             {
                 !hidden
-                    ? <div className="category-form">
-                        <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
+                    ? <div className={styles["category-form"]}>
+                        <input className={styles.categoryName} id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} />
                         <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="categoryImageUrl" required />
                         <input type="submit" className="button green" value="Запази"
                             onClick={(e) => {
