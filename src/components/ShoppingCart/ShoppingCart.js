@@ -16,7 +16,7 @@ export const ShoppingCart = () => {
     const [itemsInCart, setItemsInCart] = useState([]);
     const { currentUser } = useAuth();
 
-    const [purchaseData, setPurchaseData] = useState({});
+    // const [purchaseData, setPurchaseData] = useState({});
 
     const handleChange = (e) => {
         if (e.target.type === 'number') {
@@ -29,14 +29,19 @@ export const ShoppingCart = () => {
         // }
     }
 
-    useEffect(async function () {
+    const getAddedItemsInCart = async () => {
         await shoppingCartService.getItemsInCart(currentUser.uid)
             .then((id) => setItemsId(id));
-    }, []);
+    }
 
-    useEffect(async function () {
+    const getAddedItemsInCartById = async () => {
         await itemsService.getItemsByIds(itemsId)
             .then((items) => setItemsInCart(items));
+    }
+
+    useEffect(() => {
+        getAddedItemsInCart();
+        getAddedItemsInCartById();
     }, []);
 
     return (<>
@@ -46,7 +51,7 @@ export const ShoppingCart = () => {
                 <div className={styles.cart__items} onChange={handleChange}>
                     {
                         itemsInCart.map(item => (
-                            <div className={styles.cart__item}>
+                            <div key={item.id} className={styles.cart__item}>
                                 <input type="checkbox" />
                                 <img src={item.imageUrl} alt={item.name} />
                                 <div className={styles.item__description}>
