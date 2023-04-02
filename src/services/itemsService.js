@@ -94,7 +94,7 @@ export const updateItem = async (e, id, values, setIsModalOpen, setModalObject) 
         await updateDoc(itemDoc, values);
     } catch (error) {
         setIsModalOpen(true);
-        setModalObject({ message: 'Артикулът не е обновен!', type: 'error' });
+        setModalObject({ message: 'Записът не е обновен!', type: 'error' });
     }
 }
 
