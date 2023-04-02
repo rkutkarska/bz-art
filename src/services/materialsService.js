@@ -1,5 +1,5 @@
 import { db } from "../Firebase";
-import { collection, getDocs, getDoc, addDoc, doc } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, doc, updateDoc } from "firebase/firestore";
 
 const materialsCollectionRef = collection(db, "materials");
 
@@ -62,6 +62,19 @@ export const getMaterial = async (id, setIsModalOpen, setModalObject) => {
         setModalObject({ message: error.message, type: "error" });
     }
 };
+
+export const updateMaterial = async (e, id, values, setIsModalOpen, setModalObject) => {
+    e.preventDefault();
+
+    const materialDoc = doc(db, 'materials', id);
+
+    try {
+        await updateDoc(materialDoc, values);
+    } catch (error) {
+        setIsModalOpen(true);
+        setModalObject({ message: 'Записът не е обновен!', type: 'error' });
+    }
+}
 
 // Form validations
 

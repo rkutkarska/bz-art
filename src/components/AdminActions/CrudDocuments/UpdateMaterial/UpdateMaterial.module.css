@@ -1,0 +1,13 @@
+.materials-form input {
+    width: 100%;
+}
+
+.materials-form .buttons {
+    display: flex;
+    margin-bottom: unset;
+}
+
+.materials-form a.close,
+.materials-form button.update {
+    width: 50%;
+}
