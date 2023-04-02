@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { auth } from '../Firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { setPersistence, browserSessionPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -10,7 +10,6 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
-    // console.log(currentUser);
 
     const value = {
         currentUser,
@@ -24,7 +23,15 @@ export function AuthProvider({ children }) {
     }
 
     function login(email, password) {
-        return signInWithEmailAndPassword(auth, email, password);
+        setPersistence(auth, browserSessionPersistence)
+            .then(() => {
+                return signInWithEmailAndPassword(auth, email, password);
+            })
+            .catch((error) => {
+                // TODO Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
     }
 
     function logout() {
