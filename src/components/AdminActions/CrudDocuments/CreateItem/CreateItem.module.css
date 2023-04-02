@@ -1,0 +1,29 @@
+.home-page-pin {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 2rem;
+}
+
+.home-page-pin label {
+    display: inline-block;
+    width: 150px;
+}
+
+.create .buttons {
+    display: flex;
+    width: 100%;
+}
+
+.create input.create,
+.create a.close {
+    width: 50%;
+    height: fit-content;
+}
+
+.inputs {
+    padding-bottom: 2rem;
+}
+
+.create select {
+    margin-bottom: 1.5rem;
+}

@@ -172,7 +172,8 @@ input[type="checkbox"]:checked+label {
 select {
     background: none;
     cursor: pointer;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
+    /* margin-bottom: 2rem; */
     padding: 0.5em;
 }
 
@@ -383,7 +384,7 @@ a.same-size-small {
     font-style: italic;
     /* padding-bottom: 2rem; */
     position: relative;
-    /* bottom: 25px; */
+    bottom: 25px;
 }
 
 input[type="text"].error,
@@ -418,6 +419,51 @@ select.error {
 .form-container input[type="text"],
 .form-container input[type="submit"] {
     margin-bottom: 2rem;
+}
+
+/* Drop files container */
+.drop-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed var(--clr-purple-dark);
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    margin-bottom: 2em;
+    width: 100%;
+}
+
+.drop-container:hover {
+    background-color: #fbfbfb;
+    border-color: var(--clr-yellow);
+}
+
+.drop-title {
+    color: var(--clr-purple-font);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+}
+
+.flex-items {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.flex-items div label {
+    display: block;
+}
+
+.flex-items div p {
+    display: inline;
 }
 
 @-webkit-keyframes fadeOut {
