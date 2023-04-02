@@ -32,10 +32,9 @@ export const ModalTemplate = (props) => {
     }
 
     if (props.obj.modalObject.type === 'alert') {
-        modalCaption = 'Предупреждение!';
+        modalCaption = 'Внимание!';
         buttons = (<>
-            <button onClick={onConfirm} className="button green">Да</button>
-            <button onClick={onReject} className="button red">Не</button>
+            <button onClick={onClose} className="button red">ОК</button>
         </>);
     }
 
