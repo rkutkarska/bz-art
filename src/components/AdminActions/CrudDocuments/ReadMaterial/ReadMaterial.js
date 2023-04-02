@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+
 import { Spinner } from '../../../Spinner/Spinner';
+import { ModalTemplate } from "../../../Modals/ModalTemplate";
+
 import * as materialsService from '../../../../services/materialsService';
 
 import styles from './ReadMaterial.module.css';
@@ -8,10 +11,14 @@ import styles from './ReadMaterial.module.css';
 export const ReadMaterial = () => {
     const [material, setMaterial] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+
     const { materialId } = useParams();
 
     useEffect(() => {
-        materialsService.getMaterial(materialId)
+        materialsService.getMaterial(materialId, setIsModalOpen, setModalObject)
             .then((material) => {
                 setMaterial(material)
                 setIsLoading(false);
@@ -24,6 +31,8 @@ export const ReadMaterial = () => {
                 isLoading
                     ? <Spinner />
                     : <>
+                        {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
                         <h1>Преглед на материал</h1>
                         <div className="form-container">
                             <form className={styles["materials-form"]}>
