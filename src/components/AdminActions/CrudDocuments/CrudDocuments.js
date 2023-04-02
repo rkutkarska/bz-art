@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ListItems } from "./ListItems";
 import { ListCategories } from "./ListCategories";
 import { ListMaterials } from "./ListMaterials";
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
 import * as adminService from '../../../services/adminService';
 import styles from './CrudDocuments.module.css';
@@ -13,10 +14,15 @@ export const CrudDocuments = () => {
     const [documents, setDocuments] = useState([]);
     const [documentType, setDocumentType] = useState('');
     const [isHidden, setHidden] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+
     const searchString = useRef('');
     const searchOption = useRef('');
-    const isClicked = useRef(false);
     const documentSortType = useRef('');
+
+    const isClicked = useRef(false);
 
     useEffect(() => {
         getDocument();
@@ -53,12 +59,14 @@ export const CrudDocuments = () => {
     const onSearch = () => {
 
         if (searchOption.current === "") {
-            alert('Моля, изберете опция за търсене!');
+            setIsModalOpen(true);
+            setModalObject({ message: 'Моля, изберете опция за търсене!', type: 'alert' });
             return;
         }
 
         if (searchString.current === "") {
-            alert('Моля, въведете думата, която търсите!')
+            setIsModalOpen(true);
+            setModalObject({ message: 'Моля, въведете думата, която търсите!', type: 'alert' });
             return;
         }
 
@@ -73,6 +81,9 @@ export const CrudDocuments = () => {
 
     return (
         <div className={styles.container}>
+
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <h1>Документи</h1>
             <div className={styles.container__actions}>
                 <h2>Създаване на нов документ</h2>
@@ -144,7 +155,8 @@ export const CrudDocuments = () => {
                             <span>Търсене в:</span>
                             <select className={styles["search-option"]} defaultValue={"DEFAULT"} name="document-search" onChange={handleSearchOption}>
                                 <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
-                                {documentType === "items" &&
+                                {
+                                    documentType === "items" &&
                                     <>
                                         <option value="name">Име</option>
                                         <option value="description">Описание</option>
@@ -154,13 +166,15 @@ export const CrudDocuments = () => {
                                     </>
                                 }
 
-                                {documentType === "categories" &&
+                                {
+                                    documentType === "categories" &&
                                     <>
                                         <option value="categoryName">Име</option>
                                     </>
                                 }
 
-                                {documentType === "materials" &&
+                                {
+                                    documentType === "materials" &&
                                     <>
                                         <option value="materialName">Име</option>
                                     </>

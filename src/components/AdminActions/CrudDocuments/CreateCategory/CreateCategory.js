@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
+import { ModalTemplate } from "../../../Modals/ModalTemplate";
+
 import * as categoriesService from "../../../../services/categoriesService";
+
 import "./CreateCategory.css";
 
 export const CreateCategory = () => {
@@ -16,6 +19,10 @@ export const CreateCategory = () => {
 
     const [categories, setCategories] = useState([]);
     const [imageUpload, setImageUpload] = useState('');
+    const [categoryNameHasError, setCategoryNameHasError] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
         categoriesService.getAll()
@@ -35,12 +42,23 @@ export const CreateCategory = () => {
         }))
     }
 
+    const validateName = (e) => {
+        if (e.target.value.length < 3) {
+            setCategoryNameHasError(true);
+        } else {
+            setCategoryNameHasError(false);
+        }
+    }
+
     // TODO drag and drop image
     // TODO modal
     return (
         <div className="container categories create">
+
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <div className="form-container">
-                <h1>Добавяне на категория</h1>
+                <h1>Създаване на категория</h1>
                 <div className="existing-categories">
                     <label htmlFor="available-categories" >Налични категории: </label>
                     {
@@ -65,7 +83,17 @@ export const CreateCategory = () => {
                     <label htmlFor="category-name">Име на категория:</label>
                 </div>
                 <form className="category-form">
-                    <input id="categoryName" type="text" name="categoryName" placeholder="Име на категория" onChange={handleChange} required />
+                    <input
+                        id="categoryName"
+                        type="text"
+                        name="categoryName"
+                        placeholder="Име на категория"
+                        onChange={handleChange}
+                        onBlur={validateName}
+                        required />
+
+                    {categoryNameHasError && <p className="form-error">Името трябва да е с дължина от поне 3 символа!</p>}
+
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
                         или

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import * as categoriesService from "../../../../services/categoriesService";
 import styles from "./AddCategory.module.css";
 
-export const AddCategory = ({updateItemsData}) => {
-    const [categoriesData, updateCategoriеsData] = useState({
+export const AddCategory = ({...props}) => {
+    const [categoriesData, updateCategoriesData] = useState({
         categoryName: '',
         categoryImageUrl: '',
         dateCreated: {}
@@ -21,12 +21,12 @@ export const AddCategory = ({updateItemsData}) => {
     }, []);
 
     const handleChange = (e) => {
-        updateCategoriеsData((oldValues) => ({
+        updateCategoriesData((oldValues) => ({
             ...oldValues,
             [e.target.name]: e.target.value.trim()
         }))
 
-            updateItemsData((oldItemsData) => ({
+            props.props.updateItemsData((oldItemsData) => ({
             ...oldItemsData,
             [e.target.name]: e.target.value.trim()
         }))
@@ -55,9 +55,11 @@ export const AddCategory = ({updateItemsData}) => {
     }
 
     return (
-        <>
+        <div className={styles["add-category"]}>
             <label htmlFor="available-categories" className={styles["existing-categories"]}>Категория: </label>
             {renderCategoriesOptions()}
+            {props.props.categoryHasError && <p className="form-error">Категорията е задължителна!</p>}
+
             <div className={styles["category-label"]}>
                 <label htmlFor="category-name">Липсва категория? Добавете я:</label>
                 <input type="button"
@@ -84,6 +86,6 @@ export const AddCategory = ({updateItemsData}) => {
                     </div>
                     : null
             }
-        </>
+        </div>
     );
 }

@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
+
+import { Spinner } from '../../../Spinner/Spinner';
+import { ModalTemplate } from "../../../Modals/ModalTemplate";
+
 import * as itemsService from '../../../../services/itemsService';
 import styles from './ReadItem.module.css';
-import { Spinner } from '../../../Spinner/Spinner';
 
 export const ReadItem = () => {
     const [item, setItem] = useState({});
-    const { itemId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+
+    const { itemId } = useParams();
+
     useEffect(() => {
-        itemsService.getItem(itemId)
+        itemsService.getItem(itemId, setIsModalOpen, setModalObject)
             .then((item) => {
                 setItem(item)
                 setIsLoading(false);
@@ -23,6 +30,9 @@ export const ReadItem = () => {
                 isLoading
                     ? <Spinner />
                     : <div className="form-container">
+
+                        {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
                         <h1>Преглед на артикул</h1>
                         <form className="form">
                             <label>Име</label>

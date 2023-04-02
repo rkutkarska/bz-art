@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import { Link } from "react-router-dom";
+import { ModalTemplate } from "../../../Modals/ModalTemplate";
+
 import * as  categoriesService from "../../../../services/categoriesService";
 import * as  materialsService from "../../../../services/materialsService";
 import * as itemsService from "../../../../services/itemsService";
@@ -20,8 +22,11 @@ export const UpdateItem = () => {
     const [imageUpload, setImageUpload] = useState('');
     const [item, setItem] = useState({});
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+
     useEffect(() => {
-        itemsService.getItem(itemId)
+        itemsService.getItem(itemId, setIsModalOpen, setModalObject)
             .then((item) => {
                 setItem(item)
             });
@@ -39,7 +44,7 @@ export const UpdateItem = () => {
 
     useEffect(() => {
         itemsService
-            .getItem(itemId)
+            .getItem(itemId, setIsModalOpen, setModalObject)
             .then((doc) => setItem(doc));
     }, []);
 
@@ -58,11 +63,14 @@ export const UpdateItem = () => {
 
     const updateDocument = async (e) => {
         await itemsService
-            .updateItem(e, itemId, values)
+            .updateItem(e, itemId, values, setIsModalOpen, setModalObject)
     }
 
     return (
         <div className={`container ${styles.update}`}>
+
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <div className="form-container">
                 <h1>Редактиране на артикул</h1>
                 <form onChange={handleChange} className="form">
@@ -132,8 +140,8 @@ export const UpdateItem = () => {
                         <img className={styles.image__preview} src={item.imageUrl} />
                     </label>
                     <div className={styles.buttons}>
-                        <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                         <Link to="/crud-documents" className={`button red ${styles.close}`}>Затвори</Link>
+                        <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                     </div>
                 </form>
             </div>

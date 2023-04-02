@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 import { useAuth } from '../../context/AuthContext';
+import { ModalTemplate } from "../Modals/ModalTemplate";
 
 import * as shoppingCartService from "../../services/shoppingCartService";
 import * as itemsService from '../../services/itemsService';
@@ -14,12 +17,15 @@ export const ItemDescription = () => {
     const [error, setError] = useState('');
     const [desiredQty, setDesiredQty] = useState(1);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
+
     const { itemId } = useParams();
     const { currentUser } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        itemsService.getItem(itemId)
+        itemsService.getItem(itemId, setIsModalOpen, setModalObject)
             .then((item) => setItem(item));
     }, [])
 
@@ -41,6 +47,9 @@ export const ItemDescription = () => {
 
     return (
         <div className="container">
+
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <h1>{item.type} "{item.name}"</h1>
             <div className="item">
                 <img className="item__image" src={item.imageUrl} alt="jewellery" />
