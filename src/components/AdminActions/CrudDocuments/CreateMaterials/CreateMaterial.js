@@ -34,10 +34,10 @@ export const CreateMaterial = () => {
 
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
-            <h1>Добавяне на материали</h1>
+            <h1>Създаване на материал</h1>
             <div className="form-container">
                 <div className="existing-materials">
-                    <label htmlFor="available-materials" >Налични материали: </label>
+                    <label htmlFor="available-materials">Налични материали: </label>
                     {
                         materials.length === 0
                             ? <span>Все още няма добавени материали...</span>

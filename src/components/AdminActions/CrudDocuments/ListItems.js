@@ -36,12 +36,15 @@ export const ListItems = ({ documents }) => {
 
             {
                 documents.documents.length > 0
-                    ? <div className={`${styles.table__header} ${styles.table__row}`}>
-                        <div></div>
-                        <div>Име</div>
-                        <div>Категория</div>
-                        <div>Действия</div>
-                    </div>
+                    ? <>
+                        <h2>Списък с наличните артикули</h2>
+                        <div className={`${styles.table__header} ${styles.table__row}`}>
+                            <div></div>
+                            <div>Име</div>
+                            <div>Категория</div>
+                            <div>Действия</div>
+                        </div>
+                    </>
                     : <h2 className={styles["no-items"]}>Няма добавени артикули!</h2>
             }
 

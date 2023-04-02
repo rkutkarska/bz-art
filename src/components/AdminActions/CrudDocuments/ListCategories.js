@@ -35,12 +35,16 @@ export const ListCategories = ({ documents }) => {
 
             {
                 documents.documents.length > 0
-                    ? <div className={`${styles.table__header} ${styles.table__row}`}>
-                        <div></div>
-                        <div>Име</div>
-                        <div>Създаден на</div>
-                        <div>Действия</div>
-                    </div>
+                    ?
+                    <>
+                        <h2>Списък с наличните категории</h2>
+                        <div className={`${styles.table__header} ${styles.table__row}`}>
+                            <div></div>
+                            <div>Име</div>
+                            <div>Създаден на</div>
+                            <div>Действия</div>
+                        </div>
+                    </>
                     : <h2 className={styles["no-items"]}>Няма добавени категории!</h2>
             }
 
