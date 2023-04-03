@@ -53,11 +53,11 @@ export const ListMaterials = ({ documents }) => {
 
                         <div>{document.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</div>
                         <div className={styles.row__actions}>
-                            <Link to={`/read-material/${document.id}`} className="button green">
+                            <Link to={`/crud-documents/read-material/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <Link to={`/update-material/${document.id}`} className="button orange">
+                            <Link to={`/crud-documents/update-material/${document.id}`} className="button orange">
                                 <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                 Редактирай
                             </Link>

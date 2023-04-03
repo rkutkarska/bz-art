@@ -88,9 +88,9 @@ export const CrudDocuments = () => {
             <div className={styles.container__actions}>
                 <h2>Създаване на нов документ</h2>
                 <div className={`${styles["add-document"]} buttons`}>
-                    <Link to="/create-category" className="button blue">+ Нова категория</Link>
-                    <Link to="/create-item" className="button blue">+ Нов артикул</Link>
-                    <Link to="/create-material" className="button blue">+ Нов материал</Link>
+                    <Link to="/crud-documents/create-category" className="button blue">+ Нова категория</Link>
+                    <Link to="/crud-documents/create-item" className="button blue">+ Нов артикул</Link>
+                    <Link to="/crud-documents/create-material" className="button blue">+ Нов материал</Link>
                 </div>
                 <h2>Извличане на документи и търсене</h2>
                 <div className={styles.document__name}>
