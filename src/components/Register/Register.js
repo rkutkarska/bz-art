@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import * as userService from '../../services/userService';
 
 import "../../styles/LoginRegister.css";
 
@@ -18,6 +19,7 @@ export const Register = () => {
     const [repeatPasswordHasError, setRepeatPasswordHasError] = useState(false);
 
     const { register } = useAuth();
+
     const navigate = useNavigate();
 
     const validateEmail = () => {
@@ -62,7 +64,11 @@ export const Register = () => {
         try {
             setError('');
             setLoading(true);
-            await register(emailRef.current.value, passwordRef.current.value);
+            await register(emailRef.current.value, passwordRef.current.value)
+                .then((res) => {
+                    userService.saveUserData(res);
+                })
+
             navigate("/");
         } catch (error) {
             switch (error.code) {
