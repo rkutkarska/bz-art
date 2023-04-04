@@ -85,14 +85,60 @@ export const saveItem = async (
     e.target.reset();
 }
 
-export const updateItem = async (e, id, values, setIsModalOpen, setModalObject) => {
+export const updateItem = async (
+    e,
+    id,
+    values,
+    itemImageUpload,
+    setNewImageUrl,
+    itemNameHasError,
+    itemTypeHasError,
+    descriptionHasError,
+    quantityHasError,
+    priceHasError,
+    discountHasError,
+    setIsModalOpen,
+    setModalObject) => {
     e.preventDefault();
 
-    const itemDoc = doc(db, 'items', id);
+    if (itemNameHasError || itemTypeHasError || descriptionHasError || quantityHasError || priceHasError || discountHasError) {
+        setIsModalOpen(true);
+        setModalObject({ message: 'Артикулът не е обновен! Моля попълнете коректно всички полета!', type: 'error' });
+        return;
+    }
+    // TODO delete old image from firebase storage
+    if (values.url) {
+        const imageRef = ref(storage, `images/items/${v4() + itemImageUpload.name}`);
+        await uploadBytes(imageRef, itemImageUpload).then(() => {
+            getDownloadURL(imageRef).then(async (url) => {
+                try {
+                    const itemDoc = doc(db, 'items', id);
+                    await updateDoc(itemDoc, { ...values, imageUrl: url });
+                    setNewImageUrl(url);
+                    setIsModalOpen(true);
+                    setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
+                    return
+                } catch (error) {
+                    setIsModalOpen(true);
+                    setModalObject({ message: 'Записът не е обновен!', type: 'error' });
+                    return;
+                }
+            });
+        });
+    }
 
+    const itemDoc = doc(db, 'items', id);
     try {
         await updateDoc(itemDoc, values);
+        setIsModalOpen(true);
+        setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
     } catch (error) {
+        if (error.code === "invalid-argument") {
+            setIsModalOpen(true);
+            setModalObject({ message: 'Записът не е обновен, тъй като няма промени по него!', type: 'alert' });
+            return;
+        }
+
         setIsModalOpen(true);
         setModalObject({ message: 'Записът не е обновен!', type: 'error' });
     }
@@ -177,7 +223,41 @@ export const validateQuantity = (e, setQuantityHasError) => {
 }
 
 export const validatePriceAndDiscount = (e, setPriceHasError, setDiscountHasError, price, discount) => {
-    if (price <= 0 && e.target.name==='price') {
+    console.log('price:', price);
+    console.log('discount:', discount);
+
+    if (price <= 0) {
+        setDiscountHasError(false);
+        setPriceHasError(true);
+    } else {
+        setPriceHasError(false);
+    }
+
+    if (price <= discount) {
+        setDiscountHasError(true);
+    } else {
+        setDiscountHasError(false);
+    }
+}
+
+export const validatePriceAndDiscountInUpdate = (e, setPriceHasError, setDiscountHasError, savedPrice, savedDiscount, changedPrice, changedDiscount) => {
+    let price = 0;
+    let discount = 0;
+
+    if (changedPrice === undefined) {
+        price = Number(savedPrice);
+    } else {
+        price = Number(changedPrice);
+    }
+
+    if (changedDiscount === undefined) {
+        discount = Number(savedDiscount);
+
+    } else {
+        discount = Number(changedDiscount);
+    }
+
+    if (price <= 0) {
         setDiscountHasError(false);
         setPriceHasError(true);
     } else {

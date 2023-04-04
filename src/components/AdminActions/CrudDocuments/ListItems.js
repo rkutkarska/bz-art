@@ -56,11 +56,11 @@ export const ListItems = ({ documents }) => {
                         <div>{document.categoryName}</div>
 
                         <div className={styles.row__actions}>
-                            <Link to={`/read-item/${document.id}`} className="button green">
+                            <Link to={`/crud-documents/read-item/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <Link to={`/update-item/${document.id}`} className="button orange">
+                            <Link to={`/crud-documents/update-item/${document.id}`} className="button orange">
                                 <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                 Редактирай
                             </Link>

@@ -56,11 +56,11 @@ export const ListCategories = ({ documents }) => {
 
                         <div>{document.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</div>
                         <div className={styles.row__actions}>
-                            <Link to={`/read-category/${document.id}`} className="button green">
+                            <Link to={`/crud-documents/read-category/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <Link to={`/update-category/${document.id}`} className="button orange">
+                            <Link to={`/crud-documents/update-category/${document.id}`} className="button orange">
                                 <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                 Редактирай
                             </Link>
