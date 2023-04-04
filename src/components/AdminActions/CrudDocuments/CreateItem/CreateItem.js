@@ -20,7 +20,7 @@ export const CreateItem = () => {
         categoryName: '',
         materialName: '',
         description: '',
-        quantity: 0,
+        quantity: 1,
         price: 0,
         discount: 0,
         imageUrl: '',
@@ -205,7 +205,8 @@ export const CreateItem = () => {
                                 name="discount"
                                 placeholder="0.00"
                                 pattern="[0-9\.]+"
-                                onInput={(e) => e.target.value = (Number(e.target.value))}
+                                // TODO mozilla alphanumeric problem
+                                // onInput={(e) => e.target.value = (parseFloat(e.target.value))}
                                 onBlur={(e) => itemsService
                                     .validatePriceAndDiscount(e, setPriceHasError, setDiscountHasError, itemsData.price, itemsData.discount)
                                 }

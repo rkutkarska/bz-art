@@ -64,13 +64,13 @@ export const saveItem = async (
         return;
     }
 
-    const imageRef = ref(storage, `images/items/${v4() + itemImageUpload.name}`);
-
     if (itemImageUpload === '') {
         e.target.value = '';
-        setModalObject({ message: 'Изображението не е качено!', type: 'error' });
+        setModalObject({ message: 'Артикулът не е записан! Моля качете изображение!', type: 'error' });
         return;
     }
+
+    const imageRef = ref(storage, `images/items/${v4() + itemImageUpload.name}`);
 
     await uploadBytes(imageRef, itemImageUpload).then(() => {
         getDownloadURL(imageRef).then((url) => {
@@ -223,9 +223,6 @@ export const validateQuantity = (e, setQuantityHasError) => {
 }
 
 export const validatePriceAndDiscount = (e, setPriceHasError, setDiscountHasError, price, discount) => {
-    console.log('price:', price);
-    console.log('discount:', discount);
-
     if (price <= 0) {
         setDiscountHasError(false);
         setPriceHasError(true);
