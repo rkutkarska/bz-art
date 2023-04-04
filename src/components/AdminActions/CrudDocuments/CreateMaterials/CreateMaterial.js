@@ -6,8 +6,6 @@ import { ModalTemplate } from "../../../Modals/ModalTemplate";
 import * as materialsService from "../../../../services/materialsService";
 import styles from './CreateMaterial.module.css';
 
-// TODO fix dynamic listing of existing materials
-
 export const CreateMaterial = () => {
     const [materialsData, updateMaterialsData] = useState({
         materialName: '',
@@ -21,7 +19,7 @@ export const CreateMaterial = () => {
     const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
-        materialsService.getAll(setIsModalOpen, setModalObject)
+        materialsService.getAll()
             .then(materials => setMaterials(materials));
     }, []);
 
@@ -68,6 +66,7 @@ export const CreateMaterial = () => {
                         placeholder="Име на материал"
                         onChange={handleChange}
                         onBlur={(e) => materialsService.validateName(e, setMaterialNameHasError)}
+                        required
                     />
 
                     {materialNameHasError && <p className="form-error">Името трябва да е с дължина от поне 3 символа!</p>}
@@ -78,7 +77,7 @@ export const CreateMaterial = () => {
                             className={`button green ${styles.close}`}
                             value="Запази"
                             onClick={(e) => {
-                                materialsService.saveMaterial(e, materials, materialsData, setMaterialNameHasError, setIsModalOpen, setModalObject);
+                                materialsService.saveMaterial(e, materials, materialsData, setMaterials, setMaterialNameHasError, setIsModalOpen, setModalObject);
                             }}
                         />
                     </div>

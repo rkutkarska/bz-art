@@ -16,7 +16,7 @@ export const checkIfExist = (materials, materialsData) => {
         .includes((materialsData.materialName).toLowerCase()));
 };
 
-export const saveMaterial = (e, materials, materialsData, setMaterialNameHasError, setIsModalOpen, setModalObject) => {
+export const saveMaterial = async (e, materials, materialsData, setMaterials, setMaterialNameHasError, setIsModalOpen, setModalObject) => {
     e.preventDefault();
 
     if (checkIfExist(materials, materialsData)) {
@@ -34,10 +34,14 @@ export const saveMaterial = (e, materials, materialsData, setMaterialNameHasErro
         setMaterialNameHasError(false);
     }
 
-    addDoc(materialsCollectionRef, { ...materialsData, dateCreated: new Date() });
-    setIsModalOpen(true);
-    setModalObject({ message: 'Материалът е записан успешно!', type: 'information' });
-    e.target.parentElement.parentElement.reset();
+
+    await addDoc(materialsCollectionRef, { ...materialsData, dateCreated: new Date() }).then(() => {
+        getAll()
+            .then(materials => setMaterials(materials));
+        setIsModalOpen(true);
+        setModalObject({ message: 'Материалът е записан успешно!', type: 'information' });
+        e.target.parentElement.parentElement.reset();
+    });
 }
 
 export const getMaterial = async (id, setIsModalOpen, setModalObject) => {
