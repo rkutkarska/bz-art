@@ -3,16 +3,11 @@ import { collection, getDocs, getDoc, addDoc, doc, updateDoc } from "firebase/fi
 
 const materialsCollectionRef = collection(db, "materials");
 
-export const getAll = async (setIsModalOpen, setModalObject) => {
-    try {
-        const response = await getDocs(materialsCollectionRef);
-        const data = response.docs
-            .map((doc) => ({ ...doc.data(), id: doc.id }));
-        return data;
-    } catch (error) {
-        setIsModalOpen(true);
-        setModalObject({ message: 'Неуспешно извличане на материали!', type: 'error' });
-    }
+export const getAll = async () => {
+    const response = await getDocs(materialsCollectionRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+    return data;
 };
 
 export const checkIfExist = (materials, materialsData) => {

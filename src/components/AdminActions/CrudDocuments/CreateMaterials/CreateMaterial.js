@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { ModalTemplate } from "../../../Modals/ModalTemplate";
 
 import * as materialsService from "../../../../services/materialsService";
 import styles from './CreateMaterial.module.css';
 
+// TODO fix dynamic listing of existing materials
+
 export const CreateMaterial = () => {
-    const [materialNameHasError, setMaterialNameHasError] = useState(false);
-    const [materials, setMaterials] = useState([]);
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalObject, setModalObject] = useState({});
-
-    const [materialsData, setMaterialsData] = useState({
+    const [materialsData, updateMaterialsData] = useState({
         materialName: '',
         dateCreated: {}
     });
+
+    const [materials, setMaterials] = useState([]);
+    const [materialNameHasError, setMaterialNameHasError] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
         materialsService.getAll(setIsModalOpen, setModalObject)
@@ -23,7 +26,7 @@ export const CreateMaterial = () => {
     }, []);
 
     const handleChange = (e) => {
-        setMaterialsData((oldValues) => ({
+        updateMaterialsData((oldValues) => ({
             ...oldValues,
             [e.target.name]: e.target.value.trim()
         }))
@@ -57,9 +60,8 @@ export const CreateMaterial = () => {
                 </div>
 
                 <form className={styles["materials-form"]}>
-                    <label htmlFor="material-name">Име:</label>
+                    <label htmlFor="material-name">Име на материал:</label>
                     <input
-                        className={materialNameHasError ? "error" : undefined}
                         id="material-name"
                         type="text"
                         name="materialName"
