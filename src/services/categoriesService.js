@@ -6,11 +6,16 @@ import { v4 } from "uuid";
 
 const categoriesCollectionRef = collection(db, "categories");
 
-export const getAll = async () => {
-    const response = await getDocs(categoriesCollectionRef);
-    const data = response.docs
-        .map((doc) => ({ ...doc.data(), id: doc.id }));
-    return data;
+export const getAll = async (setIsModalOpen, setModalObject) => {
+    try {
+        const response = await getDocs(categoriesCollectionRef);
+        const data = response.docs
+            .map((doc) => ({ ...doc.data(), id: doc.id }));
+        return data;
+    } catch (error) {
+        setIsModalOpen(true);
+        setModalObject({ message: 'Неуспешно извличане на категория!', type: 'error' });
+    }
 };
 
 export const checkIfExist = (categories, categoriesData) => {
@@ -19,30 +24,41 @@ export const checkIfExist = (categories, categoriesData) => {
         .includes((categoriesData.categoryName).toLowerCase()));
 };
 
-export const saveCategory = async (e, categories, categoriesData, imageUpload, setCategories) => {
+export const saveCategory = async (e, categories, categoriesData, imageUpload, setCategories, setCategoryNameHasError, setIsModalOpen, setModalObject) => {
     e.preventDefault();
+
     if (checkIfExist(categories, categoriesData)) {
-        // alert('Категорията не е записана, защото вече има такава!');
-        return;
-    } else if (categoriesData.categoryName === '') {
-        // alert('Моля, въведете категория!');
-        return;
-    } else if (imageUpload === '') {
-        // alert('Неуспешно качване!');
+        setIsModalOpen(true);
+        setModalObject({ message: 'Категорията не е записана, защото вече има такава!', type: 'error' });
         return;
     }
 
-    const imageRef = ref(storage, `images/categories/${v4() + imageUpload.name}`);
+    if (categoriesData.categoryName === '' || categoriesData.categoryName.length < 3) {
+        setCategoryNameHasError(true);
+        setIsModalOpen(true);
+        setModalObject({ message: 'Категорията не е записана! Моля попълнете коректно всички полета!', type: 'error' });
+        return;
+    } else {
+        setCategoryNameHasError(false);
+    }
 
+    if (imageUpload === '') {
+        setIsModalOpen(true);
+        setModalObject({ message: 'Категорията не е записана! Моля качете изображение!', type: 'error' });
+        return;
+    } else {
+        setCategoryNameHasError(false);
+    }
+
+    const imageRef = ref(storage, `images/categories/${v4() + imageUpload.name}`);
     await uploadBytes(imageRef, imageUpload).then(() => {
-        // alert('Файлът е качен успешно!');
         getDownloadURL(imageRef).then((url) => {
             addDoc(categoriesCollectionRef, { ...categoriesData, categoryImageUrl: url, dateCreated: new Date() });
             getAll()
                 .then(categories => setCategories(categories));
+            setIsModalOpen(true);
+            setModalObject({ message: 'Категорията е записана успешно!', type: 'information' });
         })
-
-        e.target.previousSibling.value = "";
     });
 };
 
@@ -80,11 +96,20 @@ export const updateCategory = async (e, id, values) => {
     e.preventDefault();
 
     const categoryDoc = doc(db, 'categories', id);
-    console.log(values);
+
     try {
         await updateDoc(categoryDoc, values);
     } catch (error) {
         // TODO modal -> Категорията не е обновена!
         // alert(error.message);
+    }
+}
+
+// Form validations
+export const validateName = (e, setCategoryNameHasError) => {
+    if (e.target.value.length < 3) {
+        setCategoryNameHasError(true);
+    } else {
+        setCategoryNameHasError(false);
     }
 }

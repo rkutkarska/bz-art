@@ -7,7 +7,6 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from "../../../Modals/ModalTemplate";
 
 import * as categoriesService from "../../../../services/categoriesService";
-
 import "./CreateCategory.css";
 
 export const CreateCategory = () => {
@@ -25,7 +24,7 @@ export const CreateCategory = () => {
     const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
-        categoriesService.getAll()
+        categoriesService.getAll(setIsModalOpen, setModalObject)
             .then(categories => setCategories(categories));
     }, []);
 
@@ -40,14 +39,6 @@ export const CreateCategory = () => {
             ...oldValues,
             [e.target.name]: e.target.value.trim()
         }))
-    }
-
-    const validateName = (e) => {
-        if (e.target.value.length < 3) {
-            setCategoryNameHasError(true);
-        } else {
-            setCategoryNameHasError(false);
-        }
     }
 
     // TODO drag and drop image
@@ -89,8 +80,9 @@ export const CreateCategory = () => {
                         name="categoryName"
                         placeholder="Име на категория"
                         onChange={handleChange}
-                        onBlur={validateName}
-                        required />
+                        onBlur={(e) => categoriesService.validateName(e, setCategoryNameHasError)}
+                        required
+                    />
 
                     {categoryNameHasError && <p className="form-error">Името трябва да е с дължина от поне 3 символа!</p>}
 
@@ -107,8 +99,8 @@ export const CreateCategory = () => {
                         <Link className="button red close " to="/crud-documents">Затвори</Link>
                         <input type="submit" className="button green create" value="Запази"
                             onClick={(e) => {
-                                categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories);
-                                e.target.parentElement.parentElement.reset();
+                                categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories, setCategoryNameHasError, setIsModalOpen, setModalObject);
+                                !categoryNameHasError && imageUpload && (e.target.parentElement.parentElement.reset() && setImageUpload(''))
                             }}
                         />
                     </div>
