@@ -58,7 +58,7 @@ export const ItemDescription = () => {
                         <h2>Категория</h2>
                         <p>{item.categoryName}</p>
                         <h2>Материал</h2>
-                        <p>{item.material}</p>
+                        <p>{item.materialName}</p>
                         <h2>Описание</h2>
                         <p>{item.description}</p>
                         {

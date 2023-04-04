@@ -35,6 +35,10 @@
     gap: 2rem;
 }
 
+.item__description .add-cart input {
+    width: 240px;
+}
+
 .favourites {
     display: flex;
     padding: 2rem 0;
