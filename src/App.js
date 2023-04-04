@@ -49,7 +49,7 @@ function App() {
                     <Route path="/contacts" element={<Contacts />} />
                     {/* --- Regular user */}
 
-                    {/* <Route element={<RequireAuth />}> */}
+                    <Route element={<RequireAuth />}>
                         {/* Admin */}
                         <Route path="/items" element={<ListItems />} />
                         <Route path="/crud-documents" element={<CrudDocuments />} />
@@ -62,10 +62,12 @@ function App() {
                         <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
                         <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
                         <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
-
-                        <Route path="/shopping-cart" element={<ShoppingCart />} />
                         {/* --- Admin */}
-                    {/* </Route> */}
+
+                        {/* Regular user */}
+                        <Route path="/shopping-cart" element={<ShoppingCart />} />
+                        {/* Regular user */}
+                    </Route>
 
 
                     <Route path="*" element={<NotFound />} />
