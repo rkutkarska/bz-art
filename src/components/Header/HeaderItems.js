@@ -7,8 +7,8 @@ import { ModalTemplate } from '../Modals/ModalTemplate';
 
 export const HeaderItems = () => {
     const { currentUser } = useAuth();
-    // const navigate = useNavigate();
     const { logout } = useAuth();
+    const navigate = useNavigate();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
@@ -16,7 +16,7 @@ export const HeaderItems = () => {
     async function handleLogOut() {
         try {
             await logout();
-            // navigate("/login");
+            navigate("/");
         } catch (error) {
             setIsModalOpen(true);
             setModalObject({ message: 'Неуспешно отписване!', type: 'error' });
