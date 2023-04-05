@@ -23,7 +23,7 @@ export const Login = () => {
             setError('');
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
-            navigate(-1);
+            navigate('/');
         } catch (error) {
             setError(`Вписването е неуспешно!`);
         }
