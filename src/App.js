@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import './styles/reset.css';
 
-// import { ItemCounter } from './components/ItemCounter';
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
@@ -33,13 +32,19 @@ import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsB
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 
 function App() {
+    const usersRoles = {
+        admin: 0,
+        moderator: 1,
+        user: 2
+    }
 
     return (
         <AuthProvider>
             <div>
                 <Header />
                 <Routes>
-                    {/* Regular user */}
+
+                    {/* Guest - public part*/}
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
@@ -47,10 +52,17 @@ function App() {
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="/contacts" element={<Contacts />} />
-                    {/* --- Regular user */}
+                    {/* --- End of Guest - public part* */}
 
-                    <Route element={<RequireAuth />}>
-                        {/* Admin */}
+                    {/* Regular user */}
+                    <Route element={<RequireAuth allowedRoles={usersRoles.user} />}>
+                        <Route path="/shopping-cart" element={<ShoppingCart />} />
+                        {/* Favourites list */}
+                    </Route>
+                    {/* Regular user */}
+
+                    {/* Admin */}
+                    <Route element={<RequireAuth allowedRoles={usersRoles.admin} />}>
                         <Route path="/items" element={<ListItems />} />
                         <Route path="/crud-documents" element={<CrudDocuments />} />
                         <Route path="/crud-documents/create-item" element={<CreateItem />} />
@@ -62,18 +74,24 @@ function App() {
                         <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
                         <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
                         <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
-                        {/* --- Admin */}
-
-                        {/* Regular user */}
-                        <Route path="/shopping-cart" element={<ShoppingCart />} />
-                        {/* Regular user */}
                     </Route>
+                    {/* --- End of Admin */}
 
+                    {/* Moderator */}
+                    <Route element={<RequireAuth allowedRoles={usersRoles.moderator} />}>
+                        <Route path="/crud-documents" element={<CrudDocuments />} />
+                        <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} />
+                        <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} />
+                        <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
+                        {/* Orders list */}
+                    </Route>
+                    {/* --- Admin */}
 
+                    {/* For all */}
                     <Route path="*" element={<NotFound />} />
+
                 </Routes>
                 <Footer />
-                {/* <ItemCounter start = {1} /> */}
             </div>
         </AuthProvider>
     );
