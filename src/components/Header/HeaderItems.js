@@ -32,7 +32,7 @@ export const HeaderItems = () => {
                     !currentUser &&
                     <>
                         <Link className="button yellow same-size-small" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>
-                        {/* <Link className="button yellow same-size-small" to="/register"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Регистрация</Link> */}
+                        <Link className="button yellow same-size-small" to="/register"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Регистрация</Link>
                     </>
                 }
                 {
