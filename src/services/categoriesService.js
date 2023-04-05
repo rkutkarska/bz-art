@@ -64,8 +64,8 @@ export const saveCategory = async (e, categories, categoriesData, imageUpload, s
 
 export const getCategory = async (id) => {
     try {
-        const categoryCollectionRef = doc(db, "categories", id);
-        const docSnap = await getDoc(categoryCollectionRef);
+        const categoryDocumentRef = doc(db, "categories", id);
+        const docSnap = await getDoc(categoryDocumentRef);
         if (docSnap.exists(docSnap.data())) {
             return docSnap.data();
         } else {
