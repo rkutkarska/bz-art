@@ -26,15 +26,9 @@ export const addToCart = async (e, userId, itemId, itemQty) => {
 
 export const getItemsInCart = async (userId) => {
     const cartItemRef = collection(db, `usersItems/${userId}/cart`);
-    try {
-        await getDocs(cartItemRef)
-        .then((res => {
-            const data = res.docs
-                .map((doc) => ({ ...doc.data(), id: doc.id }));
-                // console.log(data);
-                return data;
-        }))
-    } catch (error) {
-        // TODO modal
-    }
+
+    const response = await getDocs(cartItemRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+    return data;
 }

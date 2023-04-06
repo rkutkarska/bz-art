@@ -182,10 +182,12 @@ export const getItemsByCategory = async (categoryName) => {
 
 
 export const getItemsByIds = async (ids) => {
-    const itemsCollectionRef = collection(db, `items/${ids}`);
+    const itemsCollectionRef = collection(db, 'items');
     const response = await getDocs(itemsCollectionRef);
     const data = response.docs
-        .map((doc) => ({ ...doc.data(), id: doc.id }));
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        // data.filter(doc => ids.includes(doc))
+        // console.log('data', data);
     return data;
 }
 

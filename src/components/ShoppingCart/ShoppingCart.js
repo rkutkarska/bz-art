@@ -6,43 +6,35 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import * as shoppingCartService from '../../services/shoppingCartService';
 import * as itemsService from '../../services/itemsService';
 
-// import {ItemCounter} from '../ItemCounter';
-
 import styles from './ShoppingCart.module.css';
+import { faLaptopFile } from '@fortawesome/free-solid-svg-icons';
 
 export const ShoppingCart = () => {
     const [itemsCount, setItemsCount] = useState(0);
-    const [itemsId, setItemsId] = useState([]);
+    const [userItems, setUserItems] = useState([]);
     const [itemsInCart, setItemsInCart] = useState([]);
     const { currentUser } = useAuth();
 
-    // const [purchaseData, setPurchaseData] = useState({});
-
     const handleChange = (e) => {
         if (e.target.type === 'number') {
-            // TODO implement sum of items count
-            setItemsCount(x => x = Number(e.target.value));
+            // setItemsCount(x => x = Number(e.target.value));
         }
-
-        // if (e.target.type === 'checkbox' && e.target.value === 'on') {
-        //     alert(e.target.value);
-        // }
-    }
-
-    const getAddedItemsInCart = async () => {
-        await shoppingCartService.getItemsInCart(currentUser.uid)
-            .then((id) => setItemsId(id));
-    }
-
-    const getAddedItemsInCartById = async () => {
-        await itemsService.getItemsByIds(itemsId)
-            .then((items) => setItemsInCart(items));
     }
 
     useEffect(() => {
-        getAddedItemsInCart();
-        getAddedItemsInCartById();
+        shoppingCartService.getItemsInCart(currentUser.uid)
+            .then(items => {
+                setUserItems(items);
+            })
     }, []);
+
+
+    // TODO get information about every item in cart and render it
+    useEffect(() => {
+        let ids = userItems.map(x => x.id);
+        console.log(ids);
+        itemsService.getItemsByIds(ids);
+    }, [userItems])
 
     return (<>
         <div className={`container ${styles.cart}`}>
@@ -55,7 +47,7 @@ export const ShoppingCart = () => {
                                 <input type="checkbox" />
                                 <img src={item.imageUrl} alt={item.name} />
                                 <div className={styles.item__description}>
-                                    <Link to="/items/:itemId">
+                                    <Link to={`/items/${item.id}`}>
                                         <p>{item.type} {item.name}</p>
                                     </Link>
                                     <h2>{item.price} лв.</h2>
