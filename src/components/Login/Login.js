@@ -22,8 +22,8 @@ export const Login = () => {
         try {
             setError('');
             setLoading(true);
-            await login(emailRef.current.value, passwordRef.current.value)
-                .then(() => navigate('/'));
+            await login(emailRef.current.value, passwordRef.current.value);
+            navigate('/');
 
         } catch (error) {
             setError(`Вписването е неуспешно!`);
