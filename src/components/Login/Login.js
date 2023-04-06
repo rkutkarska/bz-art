@@ -22,8 +22,9 @@ export const Login = () => {
         try {
             setError('');
             setLoading(true);
-            await login(emailRef.current.value, passwordRef.current.value);
-            navigate('/');
+            await login(emailRef.current.value, passwordRef.current.value)
+                .then(() => navigate('/'));
+
         } catch (error) {
             setError(`Вписването е неуспешно!`);
         }
@@ -36,7 +37,7 @@ export const Login = () => {
             <div className="login-container__form">
                 <h1>Вписване</h1>
                 <form className="form" onSubmit={handleSubmit} onChange={() => setError('')}>
-                {error && <p className="error-message">{error}</p>}
+                    {error && <p className="error-message fadeOut">{error}</p>}
                     <label htmlFor="email">Email</label>
                     <input id="email" type="text" name="email" placeholder="sample@mail.com" ref={emailRef} />
                     <label htmlFor="password">Парола</label>
