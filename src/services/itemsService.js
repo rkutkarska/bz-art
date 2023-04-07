@@ -180,15 +180,14 @@ export const getItemsByCategory = async (categoryName) => {
     return itemsByCategory;
 }
 
-
 export const getItemsByIds = async (ids) => {
     const itemsCollectionRef = collection(db, 'items');
     const response = await getDocs(itemsCollectionRef);
     const data = response.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }))
-        // data.filter(doc => ids.includes(doc))
-        // console.log('data', data);
-    return data;
+    let itemsData = data.filter(doc => ids.includes(doc.id) ? doc : null);
+
+    return itemsData;
 }
 
 // Form Validations

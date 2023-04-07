@@ -7,14 +7,15 @@ import * as shoppingCartService from '../../services/shoppingCartService';
 import * as itemsService from '../../services/itemsService';
 
 import styles from './ShoppingCart.module.css';
-import { faLaptopFile } from '@fortawesome/free-solid-svg-icons';
 
 export const ShoppingCart = () => {
     const [itemsCount, setItemsCount] = useState(0);
     const [userItems, setUserItems] = useState([]);
     const [itemsInCart, setItemsInCart] = useState([]);
+    const [desiredQty, setDesiredQty] = useState()
     const { currentUser } = useAuth();
 
+    // TODO get desiredQty
     const handleChange = (e) => {
         if (e.target.type === 'number') {
             // setItemsCount(x => x = Number(e.target.value));
@@ -28,12 +29,10 @@ export const ShoppingCart = () => {
             })
     }, []);
 
-
-    // TODO get information about every item in cart and render it
     useEffect(() => {
         let ids = userItems.map(x => x.id);
-        console.log(ids);
-        itemsService.getItemsByIds(ids);
+        itemsService.getItemsByIds(ids)
+        .then((items) => setItemsInCart(items));
     }, [userItems])
 
     return (<>
