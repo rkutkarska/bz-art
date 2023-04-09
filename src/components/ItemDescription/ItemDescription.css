@@ -41,7 +41,10 @@
 
 .favourites {
     display: flex;
-    padding: 2rem 0;
     justify-content: space-between;
     align-items: center;
+}
+
+.add-cart input {
+    margin-bottom: 1.5rem;
 }
