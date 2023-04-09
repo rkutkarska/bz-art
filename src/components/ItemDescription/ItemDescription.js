@@ -7,7 +7,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useAuth } from '../../context/AuthContext';
 import { ModalTemplate } from "../Modals/ModalTemplate";
 
-import * as shoppingCartService from "../../services/shoppingCartService";
+import * as usersItemsService from "../../services/usersItemsService";
 import * as itemsService from '../../services/itemsService';
 import './ItemDescription.css';
 
@@ -31,7 +31,7 @@ export const ItemDescription = () => {
 
     const handleChange = (e, itemQuantity) => {
 
-        if (e.target.value > itemQuantity) {
+        if (Number(e.target.value) > Number(itemQuantity)) {
             setIsInsufficientQty(true);
             setError('Недостатъчна наличност!');
         } else if (e.target.value === '' || e.target.value <= 0) {
@@ -100,7 +100,7 @@ export const ItemDescription = () => {
                                 ? <button
                                     className="button yellow same-size-large"
                                     onClick={(e) =>
-                                        shoppingCartService
+                                        usersItemsService
                                             .addToCart(e, currentUser.uid, itemId, desiredQty)
                                     }
                                     disabled={isInsufficientQty}

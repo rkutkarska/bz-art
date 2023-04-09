@@ -1,5 +1,5 @@
 import { db } from "../Firebase";
-import { collection, getDoc, setDoc, updateDoc, doc, getDocs } from "firebase/firestore";
+import { collection, getDoc, setDoc, updateDoc, doc, getDocs, addDoc } from "firebase/firestore";
 
 const usersItemsCollectionRef = collection(db, "usersItems");
 
@@ -24,6 +24,19 @@ export const addToCart = async (e, userId, itemId, itemQty) => {
     }
 }
 
+export const updateCartItem = async (userId, itemId, itemQty) => {
+
+    const cartItemRef = doc(db, `usersItems/${userId}/cart`, itemId);
+
+    try{
+        await updateDoc(cartItemRef, { quantity: Number(itemQty) });
+    } catch {
+        // TODO modal
+        // Наличноста не е актуализирана!
+    }
+
+}
+
 export const getItemsInCart = async (userId) => {
     const cartItemRef = collection(db, `usersItems/${userId}/cart`);
 
@@ -31,4 +44,20 @@ export const getItemsInCart = async (userId) => {
     const data = response.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }));
     return data;
+}
+
+export const orderItems = async (userId, itemsInCart, totalSum) => {
+
+    const ordersItemRef = collection(db, `usersItems/${userId}/orders`);
+
+    // TODO add data for every item from itemsInCart array!
+    console.log(itemsInCart);
+
+    try {
+        await addDoc(ordersItemRef, {'desiredQuantity': itemsInCart.desiredQuantity, totalSum} );
+    } catch (error) {
+        console.log(error.code, error.message)
+        // TODO modal
+        // Артикулът не е добавен в количката!
+    }
 }
