@@ -1,39 +1,39 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getUserRole } from '../../services/usersService';
-import { Forbidden } from '../Forbidden/Forbidden';
 
-// TODO get currentUserRole
 export const RequireAuth = ({ allowedRoles }) => {
 
-    const user = useRef(null);
+    const userRef = useRef(null);
     const [isUserLoaded, setIsUserLoaded] = useState(false);
 
-    const role = useRef(null);
+    const roleRef = useRef(null);
     const [isRoleLoaded, setIsRoleLoaded] = useState(false);
 
-    if (user.current && role.current === allowedRoles) {
+
+    if (userRef.current && roleRef.current === allowedRoles){
         return <Outlet />
-    } else if (user.current && isRoleLoaded && (role.current !== allowedRoles)) {
-        return <Forbidden />
+    } else if (userRef.current && isRoleLoaded && roleRef.current !== allowedRoles){
+        // TODO navigate to forbiden content page
+        return <Navigate to="/" />
     } else {
-        if (isUserLoaded) {
-            if (user.current) {
-                getUserRole(user.current.uid)
-                .then((res) => {
-                    role.current = res.role;
-                    setIsRoleLoaded(true);
-                })
-                .catch (
-                    // set error if getting role fail
+        if(isUserLoaded){
+            if(userRef.current){
+                getUserRole(userRef.current.uid)
+                    .then((res) => {
+                        roleRef.current = res.role;
+                        setIsRoleLoaded(true);
+                    })
+                    .catch(
+                        // TODO set error message if role fails to load
                 )
             } else {
-                return <Navigate to="login" />
+                return <Navigate to="/login" />
             }
         } else {
-            const { currentUser } = useAuth();
-            user.current = currentUser;
+            const {currentUser} = useAuth();
+            userRef.current = currentUser;
             setIsUserLoaded(true);
         }
     }
