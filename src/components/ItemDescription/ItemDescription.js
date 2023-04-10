@@ -45,6 +45,8 @@ export const ItemDescription = () => {
         }
     }
 
+
+
     return (
         <div className="container">
 
@@ -128,7 +130,12 @@ export const ItemDescription = () => {
                         {
                             currentUser
                                 ?
-                                <button className="button purple same-size-large">
+                                <button className="button purple same-size-large"
+                                    onClick={(e) =>
+                                        usersItemsService
+                                            .addToFavorites(currentUser.uid, itemId)
+                                    }
+                                >
                                     <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
                                     Добави в любими
                                 </button>

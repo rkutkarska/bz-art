@@ -76,3 +76,18 @@ function deleteItem(id, itemsInCart, setItemsInCart) {
     copy = copy.filter((document) => document.id !== id);
     setItemsInCart(copy);
 }
+
+
+export const addToFavorites = async (userId, itemId) => {
+
+    const favouritesItemRef = doc(db, `usersItems/${userId}/favourites`, itemId);
+
+    try {
+        await setDoc(favouritesItemRef, {});
+    } catch (error){
+        console.log(error.code, error.message)
+        // TODO modal
+        // Артикулът не е добавен в любими!
+    }
+
+}
