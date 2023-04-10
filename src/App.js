@@ -10,6 +10,7 @@ import { Footer } from './components/Footer/Footer';
 import { Contacts } from './components/Contacts/Contacts';
 import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
+import {Forbidden } from './components/Forbidden/Forbidden';
 
 import { AuthProvider } from './context/AuthContext';
 import { RequireAuth } from './components/RequireAuth/RequireAuth';
@@ -88,7 +89,9 @@ function App() {
                     {/* --- Admin */}
 
                     {/* For all */}
+                    <Route path="/forbidden" element={<Forbidden />} />
                     <Route path="*" element={<NotFound />} />
+                    {/* --- For all */}
 
                 </Routes>
                 <Footer />

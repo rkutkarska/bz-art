@@ -15,8 +15,7 @@ export const RequireAuth = ({ allowedRoles }) => {
     if (userRef.current && roleRef.current === allowedRoles){
         return <Outlet />
     } else if (userRef.current && isRoleLoaded && roleRef.current !== allowedRoles){
-        // TODO navigate to forbiden content page
-        return <Navigate to="/" />
+        return <Navigate to="/forbidden" />
     } else {
         if(isUserLoaded){
             if(userRef.current){
