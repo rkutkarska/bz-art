@@ -31,8 +31,7 @@ export const ShoppingCart = () => {
 
     const placeOrder = () => {
         usersItemsService
-            .orderItems(currentUser.uid, itemsInCart, totalSum.current)
-            // .then(res => console.log(res))
+            .orderItems(currentUser.uid, itemsInCart, totalSum.current);
     }
 
     useEffect(() => {
@@ -62,52 +61,71 @@ export const ShoppingCart = () => {
         }
     }, [userItems])
 
+
     return (<>
         <div className={`container ${styles.cart}`}>
             <h1>Артикули добавени в количката</h1>
-            <div className={styles.cart__content}>
-                <div className={styles.cart__items}>
-                    {
-                        itemsInCart.length > 0
-                            ? itemsInCart.map(item => (
-                                <div key={item.id} className={styles.cart__item}>
-                                    <img src={item.imageUrl} alt={item.name} />
-                                    <div className={styles.item__description}>
-                                        <Link to={`/items/${item.id}`}>
-                                            <p>{item.type} {item.name}</p>
-                                        </Link>
-                                        <h2>{(item.price).toFixed(2)} лв.</h2>
-                                        <h2>Наличност: {item.quantity} бр.</h2>
-                                    </div >
-                                    {
-                                        (item.desiredQuantity < item.quantity)
-                                            ? <input type="number" defaultValue={item.desiredQuantity} min="1" max={item.quantity} onBlur={(e) => changeAmount({ "id": item.id, "event": e })} />
-                                            : <input type="number" defaultValue={item.quantity} min="1" max={item.quantity} onBlur={(e) => changeAmount({ "id": item.id, "event": e })} />
-                                    }
-                                    <div className={styles.item__actions}>
-                                        <button>
-                                            <FontAwesomeIcon icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
-                                        </button>
-                                        <button>
-                                            <FontAwesomeIcon icon={solid('trash-can')} className={`fa-icon ${styles.trash}`} />
-                                        </button>
+            {
+                itemsInCart.length > 0
+                    ? <div className={styles.cart__content}>
+                        <div className={styles.cart__items}>
+                            {
+                                itemsInCart.map(item => (
+                                    <div key={item.id} className={styles.cart__item}>
+                                        <img src={item.imageUrl} alt={item.name} />
+                                        <div className={styles.item__description}>
+                                            <Link to={`/items/${item.id}`}>
+                                                <p>{item.type} {item.name}</p>
+                                            </Link>
+                                            <h2>{(item.price).toFixed(2)} лв.</h2>
+                                            <h2>Наличност: {item.quantity} бр.</h2>
+                                        </div >
+                                        {
+                                            (item.desiredQuantity < item.quantity)
+                                                ? <input
+                                                    type="number"
+                                                    defaultValue={item.desiredQuantity}
+                                                    min={1}
+                                                    max={item.quantity}
+                                                    onBlur={(e) => changeAmount({ "id": item.id, "event": e })}
+                                                />
+                                                : <input
+                                                    type="number"
+                                                    defaultValue={item.quantity}
+                                                    min={1}
+                                                    max={item.quantity}
+                                                    onBlur={(e) => changeAmount({ "id": item.id, "event": e })}
+                                                />
+                                        }
+                                        <div className={styles.item__actions}>
+                                            <button>
+                                                <FontAwesomeIcon icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
+                                            </button>
+                                            <button>
+                                                <FontAwesomeIcon
+                                                    onClick={() => usersItemsService.removeItemFromCart(item.id, currentUser.uid, itemsInCart, setItemsInCart)}
+                                                    icon={solid('trash-can')}
+                                                    className={`fa-icon ${styles.trash}`}
+                                                />
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
-                            : <>
-                                <h2>Количката ти е празна!</h2>
-                                <Link to="/items" className="button purple">Към артикулите</Link>
-                            </>
-                    }
-                </div>
+                                ))
+                            }
 
-                <div className={styles.cart__summary}>
-                    <h2>Общо:</h2>
-                    <p className={styles.summary__count}>{itemsCount.current} артикула</p>
-                    <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
-                    <button className="button green" onClick={placeOrder}>Поръчай</button>
-                </div>
-            </div>
+                        </div>
+                        <div className={styles.cart__summary}>
+                            <h2>Общо:</h2>
+                            <p className={styles.summary__count}>{itemsCount.current} артикула</p>
+                            <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
+                            <button className="button green" onClick={placeOrder}>Поръчай</button>
+                        </div>
+                    </div>
+                    : <div className={styles.cart__empty}>
+                        <h2>Количката ти е празна!</h2>
+                        <Link to="/items" className="button purple">Към артикулите</Link>
+                    </div>
+            }
         </div>
     </>
     );

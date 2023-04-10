@@ -3,9 +3,22 @@
     gap: 50px;
     justify-content: center;
     padding: 2rem 0;
-    width: 100%;
-    justify-content: center;
+}
 
+.cart__empty {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.cart__empty a {
+    width: 200px;
+    text-align: center;
 }
 
 .cart img {
