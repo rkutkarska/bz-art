@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { useAuth } from '../../context/AuthContext';
+
 import { ModalTemplate } from '../Modals/ModalTemplate';
+import { useAuth } from '../../context/AuthContext';
 
 export const HeaderItems = () => {
     const { currentUser } = useAuth();
@@ -39,6 +41,15 @@ export const HeaderItems = () => {
                     currentUser &&
                     <>
                         <Link onClick={handleLogOut} className="button yellow same-size-small"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>
+
+                        <ul className="profile ul-clear">
+                            <li><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Настройки</li>
+                            <li>Любими</li>
+                            <li>История</li>
+                            <li>Хронология</li>
+                            <li>Друго</li>
+                        </ul>
+
                         <Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
                         <span className="items-count">5</span>
                         {/* TODO read from db item count in the cart */}

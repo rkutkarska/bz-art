@@ -97,6 +97,7 @@
     gap: 40px;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
 }
 
 .active-link {
@@ -163,4 +164,22 @@
     width: 25px;
     height: 25px;
     border-radius: 100%;
+}
+
+.profile {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    background-color: var(--clr-white);
+    z-index: 2;
+    border: 1px solid var(--clr-yellow);
+}
+
+.profile li {
+    padding: 0.7rem;
+}
+
+.profile li:hover {
+    background-color: var(--clr-yellow);
+    color: var(--clr-white);
 }
