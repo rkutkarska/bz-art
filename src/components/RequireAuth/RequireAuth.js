@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { getUserRole } from '../../services/usersService';
 
 export const RequireAuth = ({ allowedRoles }) => {
+    const {currentUser} = useAuth();
 
     const userRef = useRef(null);
     const [isUserLoaded, setIsUserLoaded] = useState(false);
@@ -31,7 +32,6 @@ export const RequireAuth = ({ allowedRoles }) => {
                 return <Navigate to="/login" />
             }
         } else {
-            const {currentUser} = useAuth();
             userRef.current = currentUser;
             setIsUserLoaded(true);
         }
