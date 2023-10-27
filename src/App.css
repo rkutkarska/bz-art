@@ -37,28 +37,9 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-main {
-    background-image: url('../src/img/background-purple.png');
-}
-
-/* main article {
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding-bottom: 20px;
-    height: fit-content
-} */
-
-/* main article:nth-child(odd) {
-    background-image: url('../src/img/background-yellow.png');
-}
-
 main article:nth-child(even) {
-    background-image: url('../src/img/background-purple.png');
-} */
+    background-color: var(--clr-background);
+}
 
 h1 {
     font-size: 2rem;
@@ -173,7 +154,6 @@ select {
     background: none;
     cursor: pointer;
     margin-bottom: 0.5rem;
-    /* margin-bottom: 2rem; */
     padding: 0.5em;
 }
 
