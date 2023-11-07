@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import "../../styles/LoginRegister.css";
 
@@ -14,7 +14,6 @@ export const Login = () => {
 
     const { login } = useAuth();
 
-    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -22,9 +21,7 @@ export const Login = () => {
         try {
             setError('');
             setLoading(true);
-            await login(emailRef.current.value, passwordRef.current.value);
-            navigate('/');
-
+            await login(emailRef.current.value, passwordRef.current.value, setError);
         } catch (error) {
             setError(`Вписването е неуспешно!`);
         }
