@@ -5,7 +5,6 @@ import { getUserRole } from '../../services/usersService';
 
 export const RequireAuth = ({ allowedRoles }) => {
     const {currentUser} = useAuth();
-    console.log(currentUser);
 
     const userRef = useRef(null);
     const [isUserLoaded, setIsUserLoaded] = useState(false);
