@@ -17,7 +17,6 @@ export const ListItemsByCategory = () => {
     const { categoryId } = useParams();
 
     useEffect(() => {
-        console.log(category.categoryName)
         itemsService.getItemsByCategory(category.categoryName)
             .then((data) => setItems(data));
     }, [category])
@@ -72,7 +71,7 @@ export const ListItemsByCategory = () => {
 
     return (
         <div className="container">
-            <h1 className="caption">Артикули</h1>
+            <h1 className="caption">{category.categoryName}</h1>
             <article className={styles.items}>
                 {itemsList.length > 0
                     ? itemsList
