@@ -23,7 +23,7 @@ export const Register = () => {
     const navigate = useNavigate();
 
     const validateEmail = () => {
-        let emailPattern = new RegExp(/^[a-zA-Z0-9\.\-_]{2,}@[a-zA-Z]{2,}.[a-zA-Z]{2,}$/);
+        let emailPattern = new RegExp(/^[a-zA-Z0-9\.\-_]{2,}@[a-zA-Z\-0-9]{2,}.[a-zA-Z]{2,}$/);
 
         if (!emailPattern.test(emailRef.current.value)) {
             setEmailHasError(true);
@@ -51,7 +51,7 @@ export const Register = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        let emailPattern = new RegExp(/^[a-zA-Z0-9\.\-_]{2,}@[a-zA-Z]{2,}.[a-zA-Z]{2,}$/);
+        let emailPattern = new RegExp(/^[a-zA-Z0-9\.\-_]{2,}@[a-zA-Z\-0-9]{2,}.[a-zA-Z]{2,}$/);
         if (passwordRef.current.value !== repeatPasswordRef.current.value) {
             return setError('Паролите не съвпадат!');
         }

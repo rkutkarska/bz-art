@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { auth } from '../Firebase';
 import { setPersistence, browserSessionPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -11,6 +12,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     const value = {
         currentUser,
@@ -23,16 +26,20 @@ export function AuthProvider({ children }) {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    function login(email, password) {
+    function login(email, password, setError) {
         setPersistence(auth, browserSessionPersistence)
             .then(() => {
-                return signInWithEmailAndPassword(auth, email, password);
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        if (user) {
+                            navigate("/")
+                        }
+                    })
+                    .catch(() => {
+                        setError('Неуспешно вписване!');
+                    });
             })
-            .catch((error) => {
-                // TODO Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
     }
 
     function logout() {
@@ -49,7 +56,7 @@ export function AuthProvider({ children }) {
     }, [])
 
     return (
-        <AuthContext.Provider value={value} >
+        <AuthContext.Provider value={value}>
             {!loading && children}
         </AuthContext.Provider>
     )

@@ -13,20 +13,20 @@ export const RequireAuth = ({ allowedRoles }) => {
     const [isRoleLoaded, setIsRoleLoaded] = useState(false);
 
 
-    if (userRef.current && roleRef.current === allowedRoles){
+    if (userRef.current && roleRef.current === allowedRoles) {
         return <Outlet />
-    } else if (userRef.current && isRoleLoaded && roleRef.current !== allowedRoles){
+    } else if (userRef.current && isRoleLoaded && roleRef.current !== allowedRoles) {
         return <Navigate to="/forbidden" />
     } else {
-        if(isUserLoaded){
-            if(userRef.current){
+        if (isUserLoaded) {
+            if (userRef.current) {
                 getUserRole(userRef.current.uid)
                     .then((res) => {
                         roleRef.current = res.role;
                         setIsRoleLoaded(true);
                     })
                     .catch(
-                        // TODO set error message if role fails to load
+                    // TODO set error message if role fails to load
                 )
             } else {
                 return <Navigate to="/login" />
