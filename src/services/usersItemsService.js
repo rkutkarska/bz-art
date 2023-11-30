@@ -46,6 +46,16 @@ export const getItemsInCart = async (userId) => {
     return data;
 }
 
+
+export const getFavourites = async (userId) => {
+    const favouritesItemRef = collection(db, `usersItems/${userId}/favourites`);
+
+    const response = await getDocs(favouritesItemRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+    return data;
+}
+
 export const orderItems = async (userId, itemsInCart, totalSum) => {
     const ordersItemRef = collection(db, `usersItems/${userId}/orders`);
 
@@ -72,11 +82,24 @@ export const removeItemFromCart = (itemId, userId, itemsInCart, setItemsInCart) 
 }
 
 function deleteItem(id, itemsInCart, setItemsInCart) {
-    let copy = [...itemsInCart];
-    copy = copy.filter((document) => document.id !== id);
-    setItemsInCart(copy);
+    let items = [...itemsInCart];
+    items = items.filter((document) => document.id !== id);
+    setItemsInCart(items);
 }
 
+
+export const removeItemFromFavourites = (itemId, userId, itemsInFavourites, setItemsInFavourites) => {
+    const itemInFavouritesRef = doc(db, `usersItems/${userId}/favourites`, itemId);
+
+    deleteDoc(itemInFavouritesRef)
+    deleteItemInFavourites(itemId, itemsInFavourites, setItemsInFavourites);
+}
+
+function deleteItemInFavourites(id, itemsInFavourites, setItemsInFavourites) {
+    let items = [...itemsInFavourites];
+    items = items.filter((document) => document.id !== id);
+    setItemsInFavourites(items);
+}
 
 export const addToFavorites = async (userId, itemId) => {
 
@@ -84,10 +107,9 @@ export const addToFavorites = async (userId, itemId) => {
 
     try {
         await setDoc(favouritesItemRef, {});
-    } catch (error){
-        console.log(error.code, error.message)
+    } catch (error) {
+        console.log(error.code, error.message);
         // TODO modal
         // Артикулът не е добавен в любими!
     }
-
 }
