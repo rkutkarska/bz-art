@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import styles from './ModalTemplate.module.css';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import styles from './ModalTemplate.module.css';
 // modal type, modal message
 
 export const ModalTemplate = (props) => {
@@ -62,7 +63,7 @@ export const ModalTemplate = (props) => {
     if (props.obj.modalObject.type === 'cart') {
         modalCaption = 'Информация!';
         buttons = (<>
-            <button onClick={(e) => onConfirm(e)} className="button blue">Към количката</button>
+            <Link to="/shopping-cart" className="button blue">Към количката</Link>
             <button onClick={onClose} className="button green">ОК</button>
         </>);
     }
@@ -70,7 +71,7 @@ export const ModalTemplate = (props) => {
     if (props.obj.modalObject.type === 'favourites') {
         modalCaption = 'Информация!';
         buttons = (<>
-            <button onClick={(e) => onConfirm(e)} className="button blue">Към любими</button>
+            <Link to="/favourites" className="button blue">Към любими</Link>
             <button onClick={onClose} className="button green">ОК</button>
         </>);
     }

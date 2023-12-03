@@ -43,7 +43,9 @@
 .modal__error,
 .modal__alert,
 .modal__confirm,
-.modal__information {
+.modal__information,
+.modal__cart,
+.modal__favourites {
     font-weight: bold;
     padding: 1em;
     text-align: center;
@@ -66,8 +68,8 @@
     background-color: var(--clr-green);
 }
 
-.cart,
-.favourites  {
+.modal__cart,
+.modal__favourites  {
     background-color: var(--clr-green);
 }
 
@@ -82,8 +84,10 @@
     justify-content: center;
 }
 
-.modal__buttons button {
+.modal__buttons button,
+.modal__buttons a {
     width: 100%;
+    text-align: center;
 }
 
 .icon {
