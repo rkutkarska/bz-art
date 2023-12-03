@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,8 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from '../Modals/ModalTemplate';
 import { useAuth } from '../../context/AuthContext';
 
+import * as usersService from '../../services/usersService';
+
 export const HeaderItems = () => {
     const { currentUser } = useAuth();
     const { logout } = useAuth();
@@ -14,6 +16,20 @@ export const HeaderItems = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
+
+    const [userRole, setUserRole] = useState(false);
+    const [hidden, isHidden] = useState(true);
+
+    useEffect(() => {
+        getUserRole();
+    }, [])
+
+    const getUserRole = () => {
+        if (currentUser) {
+            usersService.getUserRole(currentUser.uid)
+                .then((res) => setUserRole(res));
+        }
+    }
 
     async function handleLogOut() {
         try {
@@ -37,19 +53,30 @@ export const HeaderItems = () => {
                         <Link className="button yellow same-size-small" to="/register"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Регистрация</Link>
                     </>
                 }
+
                 {
                     currentUser &&
                     <>
-                        <Link onClick={handleLogOut} className="button yellow same-size-small"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link>
-
-                        <ul className="profile ul-clear">
-                            <li><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Настройки</li>
-                            <li>Любими</li>
-                            <li>История</li>
-                            <li>Хронология</li>
-                            <li>Друго</li>
-                        </ul>
-
+                        <Link className={`profile button yellow same-size-small ${!hidden && "active-button"}`} onClick={() => isHidden(s => !s)} >
+                            <FontAwesomeIcon icon={solid('user')} className="fa-icon" />Профил
+                            {
+                                !hidden ?
+                                    <ul className="profile__options ul-clear">
+                                        {
+                                            (userRole.role == 0) || (userRole.role == 1) ?
+                                                <>
+                                                    <li><Link>Административен панел</Link></li>
+                                                    <hr className="delimiter" />
+                                                </>
+                                                : null
+                                        }
+                                        <li><Link>Любими</Link></li>
+                                        <li><Link>Поръчки</Link></li>
+                                        <li><Link onClick={handleLogOut}><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link></li>
+                                    </ul>
+                                    : null
+                            }
+                        </Link>
                         <Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
                         <span className="items-count">5</span>
                         {/* TODO read from db item count in the cart */}

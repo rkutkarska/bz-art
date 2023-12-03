@@ -167,19 +167,39 @@
 }
 
 .profile {
-    position: absolute;
-    left: 0;
-    top: 60px;
+    width: 120px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.profile__options {
     background-color: var(--clr-white);
-    z-index: 2;
     border: 1px solid var(--clr-yellow);
+    position: absolute;
+    z-index: 2;
+    top: 50px;
+    left: 0px;
 }
 
-.profile li {
+.profile__options li {
+    list-style: none;
+    text-align: left;
+    color: var(--clr-purple-font);
+}
+
+.profile__options li a {
+    display: block;
     padding: 0.7rem;
+    text-decoration: none;
+    width: auto;
 }
 
-.profile li:hover {
+.profile__options li a:hover,
+.active-button {
     background-color: var(--clr-yellow);
-    color: var(--clr-white);
+    color: var(--clr-white)!important;
+}
+
+.delimiter {
+    border: 1px solid var(--clr-dark-orange);
 }
