@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { ModalTemplate } from "../Modals/ModalTemplate";
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
 
@@ -14,7 +15,10 @@ export const ShoppingCart = () => {
 
     const [userItems, setUserItems] = useState([]);
     const [itemsInCart, setItemsInCart] = useState([]);
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     const changeAmount = (item) => {
         usersItemsService
@@ -63,6 +67,7 @@ export const ShoppingCart = () => {
 
 
     return (<>
+        {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
         <div className={`container ${styles.cart}`}>
             <h1>Артикули добавени в количката</h1>
             {
@@ -99,11 +104,15 @@ export const ShoppingCart = () => {
                                         }
                                         <div className={styles.item__actions}>
                                             <button>
-                                                <FontAwesomeIcon icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
+                                                <FontAwesomeIcon
+                                                    onClick={() => {
+                                                        setIsModalOpen(true);
+                                                        setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
+                                                    }}
+                                                    icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
                                             </button>
                                             <button>
-                                                <FontAwesomeIcon
-                                                    onClick={() => usersItemsService.removeItemFromCart(item.id, currentUser.uid, itemsInCart, setItemsInCart)}
+                                                <FontAwesomeIcon onClick={() => usersItemsService.removeItemFromCart(item.id, currentUser.uid, itemsInCart, setItemsInCart)}
                                                     icon={solid('trash-can')}
                                                     className={`fa-icon ${styles.trash}`}
                                                 />
