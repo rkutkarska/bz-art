@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +17,7 @@ export const DiscountedItem = ({ items }) => {
                 {
                     items.slice(i, i + 3).map(item => (
                         <section key={item.id} className="discounted__item">
-                            <img src={item.imageUrl} alt="ring" />
+                            <Link to={`/items/${item.id}`}><img src={item.imageUrl} alt="ring" /></Link>
                             <div className="discounted__actions">
                                 <div className="discounted__description">
                                     <p className="item-name">{item.name}</p>
@@ -35,16 +36,19 @@ export const DiscountedItem = ({ items }) => {
                                         <FontAwesomeIcon icon={solid('eye')} className="fa-icon" />
                                         Детайли
                                     </Link>
-                                    <Link
-                                        className="button yellow" to={`/items/${item.id}`}
-                                        onClick={(e) =>
-                                            usersItemsService
-                                                .addToCart(e, currentUser.uid, item.id, 1)
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />
-                                        Добави
-                                    </Link>
+                                    {
+                                        currentUser &&
+                                        <Link
+                                            className="button yellow"
+                                            onClick={(e) => {
+                                                usersItemsService
+                                                    .addToCart(e, currentUser.uid, item.id, 1)
+                                            }}
+                                        >
+                                            <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />
+                                            Добави
+                                        </Link>
+                                    }
                                 </div>
                             </div>
                         </section >
