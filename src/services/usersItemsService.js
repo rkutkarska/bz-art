@@ -88,17 +88,17 @@ function deleteItem(id, itemsInCart, setItemsInCart) {
 }
 
 
-export const removeItemFromFavourites = (itemId, userId, itemsInFavourites, setItemsInFavourites) => {
+export const removeItemFromFavourites = (itemId, userId, favourites, setFavourites) => {
     const itemInFavouritesRef = doc(db, `usersItems/${userId}/favourites`, itemId);
 
     deleteDoc(itemInFavouritesRef)
-    deleteItemInFavourites(itemId, itemsInFavourites, setItemsInFavourites);
+    deleteItemInFavourites(itemId, favourites, setFavourites);
 }
 
-function deleteItemInFavourites(id, itemsInFavourites, setItemsInFavourites) {
-    let items = [...itemsInFavourites];
+function deleteItemInFavourites(id, favourites, setFavourites) {
+    let items = [...favourites];
     items = items.filter((document) => document.id !== id);
-    setItemsInFavourites(items);
+    setFavourites(items);
 }
 
 export const addToFavorites = async (userId, itemId) => {
