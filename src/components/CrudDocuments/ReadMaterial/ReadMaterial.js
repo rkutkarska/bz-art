@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { Spinner } from '../../../Spinner/Spinner';
-import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import { Spinner } from '../../Spinner/Spinner';
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
-import * as materialsService from '../../../../services/materialsService';
+import * as materialsService from '../../../services/materialsService';
 
 import styles from './ReadMaterial.module.css';
 

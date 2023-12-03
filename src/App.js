@@ -17,16 +17,16 @@ import { RequireAuth } from './components/RequireAuth/RequireAuth';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 
-import { CrudDocuments } from './components/AdminActions/CrudDocuments/CrudDocuments';
-import { CreateItem } from './components/AdminActions/CrudDocuments/CreateItem/CreateItem';
-import { CreateCategory } from './components/AdminActions/CrudDocuments/CreateCategory/CreateCategory';
-import { CreateMaterial } from './components/AdminActions/CrudDocuments/CreateMaterials/CreateMaterial';
-import { ReadItem } from './components/AdminActions/CrudDocuments/ReadItem/ReadItem';
-import { ReadCategory } from './components/AdminActions/CrudDocuments/ReadCategory/ReadCategory';
-import { ReadMaterial } from './components/AdminActions/CrudDocuments/ReadMaterial/ReadMaterial';
-import { UpdateMaterial } from './components/AdminActions/CrudDocuments/UpdateMaterial/UpdateMaterial';
-import { UpdateItem } from './components/AdminActions/CrudDocuments/UpdateItem/UpdateItem';
-import { UpdateCategory } from './components/AdminActions/CrudDocuments/UpdateCategory/UpdateCategory';
+import { CrudDocuments } from './components/CrudDocuments/CrudDocuments';
+import { CreateItem } from './components/CrudDocuments/CreateItem/CreateItem';
+import { CreateCategory } from './components/CrudDocuments/CreateCategory/CreateCategory';
+import { CreateMaterial } from './components/CrudDocuments/CreateMaterials/CreateMaterial';
+import { ReadItem } from './components/CrudDocuments/ReadItem/ReadItem';
+import { ReadCategory } from './components/CrudDocuments/ReadCategory/ReadCategory';
+import { ReadMaterial } from './components/CrudDocuments/ReadMaterial/ReadMaterial';
+import { UpdateMaterial } from './components/CrudDocuments/UpdateMaterial/UpdateMaterial';
+import { UpdateItem } from './components/CrudDocuments/UpdateItem/UpdateItem';
+import { UpdateCategory } from './components/CrudDocuments/UpdateCategory/UpdateCategory';
 
 import { ListItems } from './components/ListItems/ListItems';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';

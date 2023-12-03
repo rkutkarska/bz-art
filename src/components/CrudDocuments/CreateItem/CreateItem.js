@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import { AddCategory } from "./AddCategory";
-import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
-import * as itemsService from '../../../../services/itemsService';
-import * as materialsService from '../../../../services/materialsService';
+import * as itemsService from '../../../services/itemsService';
+import * as materialsService from '../../../services/materialsService';
 
 import styles from "./CreateItem.module.css";
 

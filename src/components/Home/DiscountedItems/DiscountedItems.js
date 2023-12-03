@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import './DiscountedItems.css';
 import * as itemsService from '../../../services/itemsService';
 import { DiscountedItem } from "./DiscountedItem";

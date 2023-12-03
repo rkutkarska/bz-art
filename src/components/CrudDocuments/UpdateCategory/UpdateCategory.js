@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styles from './UpdateCategory.module.css';
@@ -6,7 +6,7 @@ import styles from './UpdateCategory.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import * as categoriesService from "../../../../services/categoriesService";
+import * as categoriesService from "../../../services/categoriesService";
 
 export const UpdateCategory = () => {
     const [categoriesData, updateCategoriesData] = useState({});

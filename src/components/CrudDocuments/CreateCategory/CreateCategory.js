@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
-import * as categoriesService from "../../../../services/categoriesService";
+import * as categoriesService from "../../../services/categoriesService";
 import "./CreateCategory.css";
 
 export const CreateCategory = () => {

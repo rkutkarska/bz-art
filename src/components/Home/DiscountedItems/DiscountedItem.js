@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
+import * as usersItemsService from "../../../services/usersItemsService";
 
 export const DiscountedItem = ({ items }) => {
 
     let discountedItemsList = [];
+    const { currentUser } = useAuth();
 
     for (var i = 0; i < items.length; i += 3) {
         discountedItemsList.push(
@@ -34,11 +37,14 @@ export const DiscountedItem = ({ items }) => {
                                     </Link>
                                     <Link
                                         className="button yellow" to={`/items/${item.id}`}
+                                        onClick={(e) =>
+                                            usersItemsService
+                                                .addToCart(e, currentUser.uid, item.id, 1)
+                                        }
                                     >
                                         <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />
                                         Добави
                                     </Link>
-                                    {/* TODO add to cart functionality */}
                                 </div>
                             </div>
                         </section >

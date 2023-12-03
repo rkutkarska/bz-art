@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
-import styles from './CrudDocuments.module.css';
 import { Link } from 'react-router-dom';
-import { ModalTemplate } from "../../Modals/ModalTemplate";
+import { ModalTemplate } from "../Modals/ModalTemplate";
+import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import * as adminService from "../../../services/adminService";
+import styles from './CrudDocuments.module.css';
+import * as adminService from "../../services/adminService";
 
 export const ListMaterials = ({ documents }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);

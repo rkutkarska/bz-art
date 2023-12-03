@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
 
-import { Spinner } from '../../../Spinner/Spinner';
-import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import { Spinner } from '../../Spinner/Spinner';
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
-import * as itemsService from '../../../../services/itemsService';
+import * as itemsService from '../../../services/itemsService';
 import styles from './ReadItem.module.css';
 
 export const ReadItem = () => {

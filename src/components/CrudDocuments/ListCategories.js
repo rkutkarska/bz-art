@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Link } from 'react-router-dom';
 
-import { ModalTemplate } from "../../Modals/ModalTemplate";
+import { ModalTemplate } from "../Modals/ModalTemplate";
 
-import * as adminService from "../../../services/adminService";
+import * as adminService from "../../services/adminService";
 import styles from './CrudDocuments.module.css';
 
 export const ListCategories = ({ documents }) => {

@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ListItems } from "./ListItems";
 import { ListCategories } from "./ListCategories";
 import { ListMaterials } from "./ListMaterials";
-import { ModalTemplate } from "../../Modals/ModalTemplate";
+import { ModalTemplate } from "../Modals/ModalTemplate";
 
-import * as adminService from '../../../services/adminService';
+import * as adminService from '../../services/adminService';
 import styles from './CrudDocuments.module.css';
 
 export const CrudDocuments = () => {

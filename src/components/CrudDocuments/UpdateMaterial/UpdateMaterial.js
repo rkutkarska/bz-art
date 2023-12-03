@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import { ModalTemplate } from '../../Modals/ModalTemplate';
 
-import * as materialsService from "../../../../services/materialsService";
-import styles from './CreateMaterial.module.css';
+import * as materialsService from "../../../services/materialsService";
+import styles from './UpdateMaterial.module.css';
 
-export const CreateMaterial = () => {
-    const [materialsData, updateMaterialsData] = useState({
-        materialName: '',
-        dateCreated: {}
-    });
-
+export const UpdateMaterial = () => {
     const [materials, setMaterials] = useState([]);
+    const [material, setMaterial] = useState({});
     const [materialNameHasError, setMaterialNameHasError] = useState(false);
+    const [materialsData, updateMaterialsData] = useState({});
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
 
+    const { materialId } = useParams();
+
     useEffect(() => {
-        materialsService.getAll()
+        materialsService.getMaterial(materialId, setIsModalOpen, setModalObject)
+            .then((material) => {
+                setMaterial(material)
+            });
+    }, [])
+
+    useEffect(() => {
+        materialsService.getAll(setIsModalOpen, setModalObject)
             .then(materials => setMaterials(materials));
     }, []);
 
@@ -30,12 +37,17 @@ export const CreateMaterial = () => {
         }))
     }
 
+    const updateDocument = async (e) => {
+        await materialsService
+            .updateMaterial(e, materialId, materialsData, setIsModalOpen, setModalObject)
+    }
+
     return (
         <div className="container">
 
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
-            <h1>Създаване на материал</h1>
+            <h1>Редактиране на материал</h1>
             <div className="form-container">
                 <div className="existing-materials">
                     <label htmlFor="available-materials">Налични материали: </label>
@@ -58,33 +70,27 @@ export const CreateMaterial = () => {
                 </div>
 
                 <form className={styles["materials-form"]}>
-                    <label htmlFor="material-name">Име на материал:</label>
+                    <label htmlFor="material-name">Име:</label>
                     <input
+                        className={materialNameHasError ? "error" : undefined}
                         id="material-name"
                         type="text"
                         name="materialName"
-                        placeholder="Име на материал"
+                        defaultValue={material.materialName}
                         onChange={handleChange}
                         onBlur={(e) => materialsService.validateName(e, setMaterialNameHasError)}
-                        required
                     />
 
                     {materialNameHasError && <p className="form-error">Името трябва да е с дължина от поне 3 символа!</p>}
 
-                    <div className="buttons">
+                    <div className={styles.buttons}>
                         <Link to="/crud-documents" className={`button red ${styles.close}`}>Затвори</Link>
-                        <input type="submit"
-                            className={`button green ${styles.close}`}
-                            value="Запази"
-                            onClick={(e) => {
-                                materialsService.saveMaterial(e, materials, materialsData, setMaterials, setMaterialNameHasError, setIsModalOpen, setModalObject);
-                            }}
-                        />
+                        <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                     </div>
 
                 </form>
 
             </div>
         </div>
-    );
+    )
 }

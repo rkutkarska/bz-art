@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { ModalTemplate } from "../../../Modals/ModalTemplate";
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
-import * as categoriesService from "../../../../services/categoriesService";
+import * as categoriesService from "../../../services/categoriesService";
 import styles from "./AddCategory.module.css";
 
 export const AddCategory = ({ ...props }) => {

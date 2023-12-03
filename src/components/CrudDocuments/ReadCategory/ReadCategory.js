@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import * as categoriesService from '../../../../services/categoriesService';
-import { Spinner } from '../../../Spinner/Spinner';
+import { Spinner } from '../../Spinner/Spinner';
+
+import * as categoriesService from '../../../services/categoriesService';
 import styles from './ReadCategory.module.css';
 
 export const ReadCategory = () => {
@@ -25,10 +26,10 @@ export const ReadCategory = () => {
                     : <div className="form-container">
                         <h1>Преглед на категория</h1>
                         <form className={styles["category-form"]}>
-                        <label>Име на категория:</label>
+                            <label>Име на категория:</label>
                             <input defaultValue={category.categoryName} type="text" disabled />
                             <label>Снимка:</label>
-                            <img src={category.categoryImageUrl} className={styles.image__preview} alt={category.categoryName}/>
+                            <img src={category.categoryImageUrl} className={styles.image__preview} alt={category.categoryName} />
                             <Link to="/crud-documents" className="button red">Затвори</Link>
                         </form>
                     </div>
