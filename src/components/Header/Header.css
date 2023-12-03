@@ -191,7 +191,7 @@
     display: block;
     padding: 0.7rem;
     text-decoration: none;
-    width: auto;
+    width: 240px;
 }
 
 .profile__options li a:hover,

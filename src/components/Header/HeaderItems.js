@@ -65,13 +65,13 @@ export const HeaderItems = () => {
                                         {
                                             (userRole.role == 0) || (userRole.role == 1) ?
                                                 <>
-                                                    <li><Link>Административен панел</Link></li>
+                                                    <li><Link to="/crud-documents"><FontAwesomeIcon icon={solid('gear')} className="fa-icon"/>Административен панел</Link></li>
                                                     <hr className="delimiter" />
                                                 </>
                                                 : null
                                         }
-                                        <li><Link>Любими</Link></li>
-                                        <li><Link>Поръчки</Link></li>
+                                        <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon"/>Любими</Link></li>
+                                        <li><Link><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon"/>Поръчки</Link></li>
                                         <li><Link onClick={handleLogOut}><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link></li>
                                     </ul>
                                     : null
