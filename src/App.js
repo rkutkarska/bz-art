@@ -31,6 +31,7 @@ import { UpdateCategory } from './components/AdminActions/CrudDocuments/UpdateCa
 import { ListItems } from './components/ListItems/ListItems';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
+import { Favourites } from './components/Favourites/Favourites';
 
 function App() {
     const usersRoles = {
@@ -44,7 +45,6 @@ function App() {
             <div>
                 <Header />
                 <Routes>
-
                     {/* Guest - public part*/}
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
@@ -56,37 +56,38 @@ function App() {
                     {/* --- End of Guest - public part* */}
 
                     {/* Regular user */}
-                    <Route element={<RequireAuth allowedRoles={usersRoles.user} />}>
+                    <Route element={<RequireAuth allowedRoles={[usersRoles.user]} />}>
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
+                        <Route path="/favourites" element={<Favourites />} />
                         {/* Favourites list */}
                     </Route>
-                    {/* Regular user */}
+                    {/*  --- End of Regular user */}
 
                     {/* Admin */}
-                    <Route element={<RequireAuth allowedRoles={usersRoles.admin} />}>
+                    <Route element={<RequireAuth allowedRoles={[usersRoles.admin]} />}>
                         <Route path="/items" element={<ListItems />} />
-                        <Route path="/crud-documents" element={<CrudDocuments />} />
+                        {/* <Route path="/crud-documents" element={<CrudDocuments />} /> */}
                         <Route path="/crud-documents/create-item" element={<CreateItem />} />
                         <Route path="/crud-documents/update-item/:itemId" element={<UpdateItem />} />
-                        <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} />
+                        {/* <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} /> */}
                         <Route path="/crud-documents/create-category" element={<CreateCategory />} />
                         <Route path="/crud-documents/update-category/:categoryId" element={<UpdateCategory />} />
-                        <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} />
+                        {/* <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} /> */}
                         <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
                         <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
-                        <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
+                        {/* <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} /> */}
                     </Route>
                     {/* --- End of Admin */}
 
-                    {/* Moderator */}
-                    <Route element={<RequireAuth allowedRoles={usersRoles.moderator} />}>
+                    {/* Moderator or Admin */}
+                    <Route element={<RequireAuth allowedRoles={[usersRoles.moderator, usersRoles.admin]} />}>
                         <Route path="/crud-documents" element={<CrudDocuments />} />
                         <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} />
                         <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} />
                         <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
                         {/* Orders list */}
                     </Route>
-                    {/* --- Admin */}
+                    {/* --- End Moderator or Admin */}
 
                     {/* For all */}
                     <Route path="/forbidden" element={<Forbidden />} />
