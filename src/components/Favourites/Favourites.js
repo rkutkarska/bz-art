@@ -12,8 +12,7 @@ export const Favourites = () => {
 
     const [userItems, setUserItems] = useState([]);
     const [favourites, setFavourites] = useState([]);
-    const [itemsInFavourites, setItemsInFavourites] = useState([]);
-    const { currentUser } = useAuth()
+    const { currentUser } = useAuth();
 
     useEffect(() => {
         usersItemsService.getFavourites(currentUser.uid)
@@ -63,7 +62,7 @@ export const Favourites = () => {
                                             </button>
                                             <button>
                                                 <FontAwesomeIcon
-                                                    onClick={() => usersItemsService.removeItemFromFavourites(item.id, currentUser.uid, itemsInFavourites, setItemsInFavourites)}
+                                                    onClick={() => usersItemsService.removeItemFromFavourites(item.id, currentUser.uid, favourites, setFavourites)}
                                                     icon={solid('trash-can')}
                                                     className={`fa-icon ${styles.trash}`}
                                                 />
