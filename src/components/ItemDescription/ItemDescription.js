@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,15 +37,12 @@ export const ItemDescription = () => {
         } else if (e.target.value === '' || e.target.value <= 0) {
             setIsInsufficientQty(true);
             setError('Невалидна стойност!')
-        }
-        else {
+        } else {
             setIsInsufficientQty(false);
             setError('');
             setDesiredQty(e.target.value);
         }
     }
-
-
 
     return (
         <div className="container">
@@ -95,8 +92,6 @@ export const ItemDescription = () => {
                             />
                             {isInsufficientQty && <p className="form-error">{error}</p>}
                         </div>
-
-
                         {
                             currentUser
                                 ? <button
@@ -109,8 +104,6 @@ export const ItemDescription = () => {
                                 >
                                     <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
                                 </button>
-
-
                                 : <div className="tooltip-top">
                                     <button
                                         className="button yellow same-size-large"
@@ -126,7 +119,6 @@ export const ItemDescription = () => {
 
                     <div className="favourites">
                         <h2>Харесва ли ти?</h2>
-
                         {
                             currentUser
                                 ?
