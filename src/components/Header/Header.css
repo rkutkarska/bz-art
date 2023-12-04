@@ -192,6 +192,7 @@
     padding: 0.7rem;
     text-decoration: none;
     width: 240px;
+    color: var(--clr-purple-font);
 }
 
 .profile__options li a:hover,
