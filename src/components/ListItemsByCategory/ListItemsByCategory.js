@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from 'react-router-dom';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { useEffect, useState } from "react";
+import { useParams} from 'react-router-dom';
+import { ItemActionButtons } from "../ItemActionButtons/ItemActionButtons";
 
 import * as itemsService from '../../services/itemsService';
 import * as categoriesService from '../../services/categoriesService';
@@ -46,21 +44,7 @@ export const ListItemsByCategory = () => {
                                         || (item.hasDiscount && <div className="discount-tag">{`- ${((item.discount / item.price) * 100).toFixed(0)} %`}</div>)
                                     }
                                 </div>
-                                <div className="buttons">
-                                    <Link
-                                        className="button purple" to={`/items/${item.id}`}
-                                    >
-                                        <FontAwesomeIcon icon={solid('eye')} className="fa-icon" />
-                                        Детайли
-                                    </Link>
-                                    <Link
-                                        className="button yellow" to={`/items/${item.id}`}
-                                    >
-                                        <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />
-                                        Добави
-                                    </Link>
-                                    {/* TODO add to cart functionality */}
-                                </div>
+                                <ItemActionButtons props={{'item': item, 'quantity': 1}}/>
                             </div>
                         </section >
                     ))

@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import * as itemsService from '../../services/itemsService';
+import { useEffect, useState } from "react";
+import { ItemActionButtons } from '../ItemActionButtons/ItemActionButtons';
+import { Spinner } from '../Spinner/Spinner';
+
 import styles from './ListItems.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import * as itemsService from '../../services/itemsService';
 
 export const ListItems = () => {
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    let itemsList = [];
 
     useEffect(() => {
         itemsService.getAllItems()
-            .then((data) => setItems(data));
+            .then((data) => {
+                setItems(data);
+                setIsLoading(false);
+            });
     }, [])
 
-    let itemsList = [];
 
     for (var i = 0; i < items.length; i += 3) {
         itemsList.push(
@@ -33,21 +38,7 @@ export const ListItems = () => {
                                         || (item.hasDiscount && <div className="discount-tag">{`- ${((item.discount / item.price) * 100).toFixed(0)} %`}</div>)
                                     }
                                 </div>
-                                <div className="buttons">
-                                    <Link
-                                        className="button purple" to={`/items/${item.id}`}
-                                    >
-                                        <FontAwesomeIcon icon={solid('eye')} className="fa-icon" />
-                                        Детайли
-                                    </Link>
-                                    <Link
-                                        className="button yellow" to={`/items/${item.id}`}
-                                    >
-                                        <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />
-                                        Добави
-                                    </Link>
-                                    {/* TODO add to cart functionality */}
-                                </div>
+                                <ItemActionButtons props={{ 'item': item, 'quantity': 1 }} />
                             </div>
                         </section >
                     ))
@@ -59,12 +50,19 @@ export const ListItems = () => {
     return (
         <div className="container">
             <h1 className="caption">Артикули</h1>
-            <article className={styles.items}>
-                {itemsList.length > 0
-                    ? itemsList
-                    : <p className="no-items">Няма добавени артикули!</p>
-                }
-            </article>
+            {
+                isLoading
+                    ? <Spinner />
+                    : <>
+                        <article className={styles.items}>
+                            {
+                                itemsList.length > 0
+                                    ? itemsList
+                                    : <p className="no-items">Няма добавени артикули!</p>
+                            }
+                        </article>
+                    </>
+            }
         </div>
     );
 }
