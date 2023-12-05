@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { ListUsers } from "./ListUsers";
 import { ListItems } from "./ListItems";
 import { ListCategories } from "./ListCategories";
 import { ListMaterials } from "./ListMaterials";
@@ -92,12 +93,13 @@ export const CrudDocuments = () => {
                     <Link to="/crud-documents/create-item" className="button blue">+ Нов артикул</Link>
                     <Link to="/crud-documents/create-material" className="button blue">+ Нов материал</Link>
                 </div>
-                <h2>Извличане на документи и търсене</h2>
+                <h2>Търсене в документи и CRUD операции</h2>
                 <div className={styles.document__name}>
                     <div>
                         <span>Документ: </span>
                         <select className={styles["document-name"]} defaultValue={"DEFAULT"} name="document-name" onChange={handleDocumentNameChange} required >
                             <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
+                            <option value='users'>Потребители</option>
                             <option value='items'>Артикули</option>
                             <option value='categories'>Категории</option>
                             <option value='materials'>Материали</option>
@@ -193,6 +195,7 @@ export const CrudDocuments = () => {
 
             {/* Table with results */}
             <div className={styles.container__table}>
+                {isClicked.current && documentType == 'users' && <ListUsers documents={{ documents, isClicked, setDocuments }} />}
                 {isClicked.current && documentType == 'items' && <ListItems documents={{ documents, isClicked, setDocuments }} />}
                 {isClicked.current && documentType == 'categories' && <ListCategories documents={{ documents, isClicked, setDocuments }} />}
                 {isClicked.current && documentType == 'materials' && <ListMaterials documents={{ documents, isClicked, setDocuments }} />}

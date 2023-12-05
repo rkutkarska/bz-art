@@ -24,9 +24,11 @@ import { CreateMaterial } from './components/CrudDocuments/CreateMaterials/Creat
 import { ReadItem } from './components/CrudDocuments/ReadItem/ReadItem';
 import { ReadCategory } from './components/CrudDocuments/ReadCategory/ReadCategory';
 import { ReadMaterial } from './components/CrudDocuments/ReadMaterial/ReadMaterial';
+import { ReadUser } from './components/CrudDocuments/ReadUser/ReadUser';
 import { UpdateMaterial } from './components/CrudDocuments/UpdateMaterial/UpdateMaterial';
 import { UpdateItem } from './components/CrudDocuments/UpdateItem/UpdateItem';
 import { UpdateCategory } from './components/CrudDocuments/UpdateCategory/UpdateCategory';
+import { UpdateUser } from './components/CrudDocuments/UpdateUser/UpdateUser';
 
 import { ListItems } from './components/ListItems/ListItems';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
@@ -76,6 +78,10 @@ function App() {
                         <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
                         <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
                         {/* <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} /> */}
+                        
+                        <Route path="/crud-documents/read-user/:userId" element={<ReadUser />} />
+                        <Route path="/crud-documents/update-user/:userId" element={<UpdateUser />} />
+
                     </Route>
                     {/* --- End of Admin */}
 

@@ -1,0 +1,16 @@
+.users-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.read input,
+.read textarea {
+    width: 100%;
+    cursor: no-drop;
+    color: var(--clr-dark-green);
+}
+
+.read a {
+    display: block;
+    margin-top: 2rem;
+}

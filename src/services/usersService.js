@@ -25,3 +25,11 @@ export const getUserRole = async (userId) => {
         // setModalObject({ message: error, type: "error" });
     }
 }
+
+export const updateUserRole = (userId) => {
+    // TODO
+}
+
+export const getUserEmail = async (userId) => {
+    // TODO
+}; 
