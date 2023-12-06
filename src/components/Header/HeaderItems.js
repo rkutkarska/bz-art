@@ -21,12 +21,12 @@ export const HeaderItems = () => {
     const [hidden, isHidden] = useState(true);
 
     useEffect(() => {
-        getUserRole();
+        getUserData();
     }, [])
 
-    const getUserRole = () => {
+    const getUserData = () => {
         if (currentUser) {
-            usersService.getUserRole(currentUser.uid)
+            usersService.getUserData(currentUser.uid)
                 .then((res) => setUserRole(res));
         }
     }
