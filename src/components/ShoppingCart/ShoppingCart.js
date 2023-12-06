@@ -7,6 +7,8 @@ import { ModalTemplate } from "../Modals/ModalTemplate";
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
 
+import { useModal } from '../../context/ModalContext';
+
 import styles from './ShoppingCart.module.css';
 
 export const ShoppingCart = () => {
@@ -17,7 +19,7 @@ export const ShoppingCart = () => {
     const [itemsInCart, setItemsInCart] = useState([]);
     const { currentUser } = useAuth();
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isOpen, openModal } = useModal();
     const [modalObject, setModalObject] = useState({});
 
     const changeAmount = (item) => {
@@ -67,7 +69,8 @@ export const ShoppingCart = () => {
 
 
     return (<>
-        {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+        {isOpen && <ModalTemplate obj={{ modalObject }} />}
+
         <div className={`container ${styles.cart}`}>
             <h1>Артикули добавени в количката</h1>
             {
@@ -106,8 +109,8 @@ export const ShoppingCart = () => {
                                             <button>
                                                 <FontAwesomeIcon
                                                     onClick={() => {
-                                                        setIsModalOpen(true);
                                                         setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
+                                                        openModal();
                                                     }}
                                                     icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
                                             </button>
