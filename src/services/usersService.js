@@ -1,14 +1,14 @@
 import { db } from "../Firebase";
-import { collection, setDoc, doc, getDoc } from "firebase/firestore";
+import { collection, setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
 const usersCollectionRef = collection(db, "users");
 
-export const saveUserData = async (userData) => {
+export const saveUserData = async (userData, email) => {
     const userRef = doc(db, `users`, userData.user.uid);
-    setDoc(userRef, { 'role': 2 });
+    setDoc(userRef, { 'role': 2, 'email': email });
 }
 
-export const getUserRole = async (userId) => {
+export const getUserData = async (userId) => {
     try {
         const userDocumentRef = doc(db, `users/${userId}`);
         const docSnap = await getDoc(userDocumentRef);
@@ -26,10 +26,15 @@ export const getUserRole = async (userId) => {
     }
 }
 
-export const updateUserRole = (userId) => {
-    // TODO
-}
+export const updateUserRole = async (e, id, userRole, setModalObject) => {
+    e.preventDefault();
 
-export const getUserEmail = async (userId) => {
-    // TODO
-}; 
+    const userDoc = doc(db, 'users', id);
+
+    try {
+        await updateDoc(userDoc, userRole);
+        setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
+    } catch (error) {
+        setModalObject({ message: 'Записът не е обновен!', type: 'error' });
+    }
+}

@@ -66,7 +66,7 @@ export const Register = () => {
             setLoading(true);
             await register(emailRef.current.value, passwordRef.current.value)
                 .then((res) => {
-                    userService.saveUserData(res);
+                    userService.saveUserData(res, emailRef.current.value);
                 })
 
             navigate("/");

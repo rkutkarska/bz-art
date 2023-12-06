@@ -1,0 +1,19 @@
+.users-form input {
+    width: 100%;
+    cursor: no-drop;
+    color: var(--clr-dark-green);
+}
+
+.users-form select {
+    width: 100%;
+}
+
+.users-form .buttons {
+    display: flex;
+    margin-bottom: unset;
+}
+
+.users-form a.close,
+.users-form button.update {
+    width: 50%;
+}

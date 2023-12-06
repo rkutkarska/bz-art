@@ -8,8 +8,7 @@ import * as usersService from '../../../services/usersService';
 import styles from './ReadUser.module.css';
 
 export const ReadUser = () => {
-    const [userEmail, setUserEmail] = useState('');
-    const [userRole, setUserRole] = useState({});
+    const [userData, setUserData] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,29 +19,19 @@ export const ReadUser = () => {
     let roleName = '';
 
     useEffect(() => {
-        usersService.getUserRole(userId, setIsModalOpen, setModalObject)
+        usersService.getUserData(userId, setIsModalOpen, setModalObject)
             .then((role) => {
-                setUserRole(role)
+                setUserData(role)
                 setIsLoading(false);
             });
     }, [])
 
-    useEffect(() => {
-        usersService.getUserEmail(userId)
-            .then((mail) => {
-                setUserEmail(mail)
-            });
-    }, [userId]);
-
-    console.log('User Email:', userEmail);
-
-
-    if (userRole.role == 0) {
+    if (userData.role == 0) {
         roleName = 'Администратор';
-    } else if (userRole.role == 1) {
+    } else if (userData.role == 1) {
         roleName = 'Модератор';
     } else {
-        roleName = 'Обикновен потребител';
+        roleName = 'Потребител';
     }
 
     return (
@@ -59,11 +48,11 @@ export const ReadUser = () => {
                                 <label>ID:</label>
                                 <input type="text" defaultValue={userId} disabled />
                                 <label>Роля</label>
-                                <input type="text" defaultValue={userRole.role} disabled />
+                                <input type="text" defaultValue={userData.role} disabled />
                                 <label>Наименование на ролята</label>
                                 <input type="text" defaultValue={roleName} disabled />
                                 <label>Имейл</label>
-                                <input type="text" defaultValue={userEmail} disabled />
+                                <input type="text" defaultValue={userData.email} disabled />
                                 <Link to="/crud-documents" className="button red">Затвори</Link>
                             </form>
                         </div>

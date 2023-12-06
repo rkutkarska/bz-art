@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { getUserRole } from '../../services/usersService';
+import { getUserData } from '../../services/usersService';
 
 export const RequireAuth = (allowedRoles) => {
     const {currentUser} = useAuth();
 
     const roles = allowedRoles.allowedRoles;
-    
+
     const userRef = useRef(null);
     const [isUserLoaded, setIsUserLoaded] = useState(false);
 
@@ -22,7 +22,7 @@ export const RequireAuth = (allowedRoles) => {
     } else {
         if (isUserLoaded) {
             if (userRef.current) {
-                getUserRole(userRef.current.uid)
+                getUserData(userRef.current.uid)
                     .then((res) => {
                         roleRef.current = res.role;
                         setIsRoleLoaded(true);
