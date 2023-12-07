@@ -24,15 +24,14 @@ function deleteRow(id, documents, setDocuments) {
     setDocuments(copy);
 }
 
-export const deleteItem = (id, documents, setDocuments, isClicked, setIsModalOpen, setModalObject) => {
+export const deleteItem = (id, documents, setDocuments, isClicked, setModalObject) => {
     const itemDoc = doc(db, "items", id);
-
+    
     deleteDoc(itemDoc)
         .then(() => {
             getDoc(itemDoc)
                 .then((value) => {
                     if (value.data()) {
-                        setIsModalOpen(true);
                         setModalObject({ message: 'Записът не е изтрит!', type: 'error' });
                     } else {
                         deleteRow(id, documents, setDocuments);
@@ -40,7 +39,6 @@ export const deleteItem = (id, documents, setDocuments, isClicked, setIsModalOpe
                     }
                 })
                 .catch(error => {
-                    setIsModalOpen(true);
                     setModalObject({ message: `Грешка! Message: ${error.message}`, type: 'error' });
                 })
         })

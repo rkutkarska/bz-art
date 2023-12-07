@@ -69,6 +69,8 @@ export const updateMaterial = async (e, id, values, setIsModalOpen, setModalObje
 
     try {
         await updateDoc(materialDoc, values);
+        setIsModalOpen(true);
+        setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
     } catch (error) {
         setIsModalOpen(true);
         setModalObject({ message: 'Записът не е обновен!', type: 'error' });

@@ -92,16 +92,18 @@ export const uploadCategoryImage = async (imageUpload, updateCategoriesData) => 
     });
 }
 
-export const updateCategory = async (e, id, values) => {
+export const updateCategory = async (e, id, values, setModalObject, setIsModalOpen) => {
     e.preventDefault();
 
     const categoryDoc = doc(db, 'categories', id);
 
     try {
         await updateDoc(categoryDoc, values);
+        setIsModalOpen(true);
+        setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
     } catch (error) {
-        // TODO modal -> Категорията не е обновена!
-        // alert(error.message);
+        setIsModalOpen(true);
+        setModalObject({ message: 'Записът не е обновен!', type: 'error' });
     }
 }
 

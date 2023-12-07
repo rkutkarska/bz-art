@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
 import { ModalTemplate } from '../../Modals/ModalTemplate';
-import { useModal } from '../../../context/ModalContext';
 
 import * as usersService from "../../../services/usersService";
 import styles from './UpdateUser.module.css';
@@ -12,10 +10,10 @@ export const UpdateUser = () => {
     const [user, setUser] = useState({});
     const [userRole, updateUserRole] = useState({});
 
-    const { isOpen, openModal } = useModal();
-    const [modalObject, setModalObject] = useState({});
-
     const { userId } = useParams();
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
         usersService.getUserData(userId, setModalObject)
@@ -33,13 +31,13 @@ export const UpdateUser = () => {
 
     const updateDocument = async (e) => {
         await usersService
-            .updateUserRole(e, userId, userRole, setModalObject)
+            .updateUserRole(e, userId, userRole, setModalObject, setIsModalOpen)
     }
 
     return (
         <div className="container">
 
-            {isOpen ? <ModalTemplate obj={{ modalObject }} /> : false}
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
             <h1>Редактиране ролята на потребител</h1>
             <div className="form-container">
@@ -85,7 +83,7 @@ export const UpdateUser = () => {
 
                     <div className={styles.buttons}>
                         <Link to="/crud-documents" className={`button red ${styles.close}`}>Затвори</Link>
-                        <button onClick={(e) => { updateDocument(e).then(() => openModal()) }} className={`button orange ${styles.update}`}>Обнови</button>
+                        <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                     </div>
                 </form>
             </div>

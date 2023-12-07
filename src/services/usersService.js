@@ -26,7 +26,7 @@ export const getUserData = async (userId) => {
     }
 }
 
-export const updateUserRole = async (e, id, userRole, setModalObject) => {
+export const updateUserRole = async (e, id, userRole, setModalObject, setIsModalOpen) => {
     e.preventDefault();
 
     const userDoc = doc(db, 'users', id);
@@ -34,7 +34,9 @@ export const updateUserRole = async (e, id, userRole, setModalObject) => {
     try {
         await updateDoc(userDoc, userRole);
         setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
+        setIsModalOpen(true);
     } catch (error) {
+        setIsModalOpen(true);
         setModalObject({ message: 'Записът не е обновен!', type: 'error' });
     }
 }

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from "../Modals/ModalTemplate";
+
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
 
-import { useModal } from '../../context/ModalContext';
 
 import styles from './ShoppingCart.module.css';
 
@@ -19,7 +19,7 @@ export const ShoppingCart = () => {
     const [itemsInCart, setItemsInCart] = useState([]);
     const { currentUser } = useAuth();
 
-    const { isOpen, openModal } = useModal();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
 
     const changeAmount = (item) => {
@@ -69,9 +69,10 @@ export const ShoppingCart = () => {
 
 
     return (<>
-        {isOpen && <ModalTemplate obj={{ modalObject }} />}
-
         <div className={`container ${styles.cart}`}>
+
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <h1>Артикули добавени в количката</h1>
             {
                 itemsInCart.length > 0
@@ -110,7 +111,7 @@ export const ShoppingCart = () => {
                                                 <FontAwesomeIcon
                                                     onClick={() => {
                                                         setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
-                                                        openModal();
+                                                        setIsModalOpen(true);
                                                     }}
                                                     icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
                                             </button>

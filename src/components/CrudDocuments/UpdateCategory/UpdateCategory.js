@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import styles from './UpdateCategory.module.css';
-
+import { useParams,Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { ModalTemplate } from '../../Modals/ModalTemplate';
 
 import * as categoriesService from "../../../services/categoriesService";
+import styles from './UpdateCategory.module.css';
 
 export const UpdateCategory = () => {
     const [categoriesData, updateCategoriesData] = useState({});
@@ -15,6 +14,9 @@ export const UpdateCategory = () => {
 
     const { categoryId } = useParams();
     const imageUpload = useRef('');
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
         categoriesService.getCategory(categoryId)
@@ -43,13 +45,15 @@ export const UpdateCategory = () => {
 
     const updateDocument = async (e) => {
         await categoriesService
-            .updateCategory(e, categoryId, categoriesData, imageUpload, updateCategoriesData);
+            .updateCategory(e, categoryId, categoriesData, setModalObject, setIsModalOpen);
     }
 
     // TODO drag and drop image
-    // TODO modal
     return (
         <div className="container categories">
+
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <div className="form-container">
                 <h1>Редактиране на категория</h1>
                 <div className="existing-categories">
