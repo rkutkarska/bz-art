@@ -1,41 +1,62 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { useModal } from '../../context/ModalContext';
 import styles from './ModalTemplate.module.css';
 // modal type, modal message
 
 export const ModalTemplate = (props) => {
-    const { closeModal, onConfirm, onReject, isOpen } = useModal();
-
     let buttons;
     let modalCaption = '';
+    const [isOpen, setIsOpen] = useState(true);
+
+    const onClose = () => {
+        if (isOpen) {
+            setIsOpen(false);
+            props.obj.setIsModalOpen(false);
+
+        } else {
+            setIsOpen(true);
+        }
+    }
+
+    const onConfirm = (e) => {
+        props.handleClick(true);
+        onClose();
+        return;
+    }
+
+    const onReject = (e) => {
+        props.handleClick(false);
+        onClose();
+        return;
+    }
 
     if (props.obj.modalObject.type === 'alert') {
         modalCaption = 'Внимание!';
         buttons = (<>
-            <button onClick={closeModal} className="button red">ОК</button>
+            <button onClick={onClose} className="button red">ОК</button>
         </>);
     }
 
     if (props.obj.modalObject.type === 'error') {
         modalCaption = 'Грешка!';
         buttons = (
-            <button onClick={closeModal} className="button blue">OK</button>
+            <button onClick={onClose} className="button blue">OK</button>
         );
     }
 
     if (props.obj.modalObject.type === 'information') {
         modalCaption = 'Информация';
 
-        buttons = (<button onClick={closeModal} className="button blue">OK</button>);
+        buttons = (<button onClick={onClose} className="button blue">OK</button>);
     }
 
     if (props.obj.modalObject.type === 'confirm') {
-        modalCaption = 'Моля, потвърдете...';
+        modalCaption = 'Внимание!';
         buttons = (<>
-            <button onClick={(e) => onConfirm(e)} className="button green">Да</button>
-            <button onClick={(e) => onReject(e)} className="button red">Не</button>
+            <button onClick={onConfirm} className="button green">Да</button>
+            <button onClick={onClose} className="button red">Не</button>
         </>);
     }
 
@@ -43,7 +64,7 @@ export const ModalTemplate = (props) => {
         modalCaption = 'Информация!';
         buttons = (<>
             <Link to="/shopping-cart" className="button blue">Към количката</Link>
-            <button onClick={closeModal} className="button green">ОК</button>
+            <button onClick={onClose} className="button green">ОК</button>
         </>);
     }
 
@@ -51,10 +72,9 @@ export const ModalTemplate = (props) => {
         modalCaption = 'Информация!';
         buttons = (<>
             <Link to="/favourites" className="button blue">Към любими</Link>
-            <button onClick={closeModal} className="button green">ОК</button>
+            <button onClick={onClose} className="button green">ОК</button>
         </>);
     }
-
     return (
         <>
             {
@@ -64,7 +84,7 @@ export const ModalTemplate = (props) => {
                         <div className={styles["modal-container"]}>
                             <div className={styles.modal}>
                                 <button
-                                    onClick={closeModal}
+                                    onClick={onClose}
                                     className={`${styles.button} ${styles.close}`}>
                                     <FontAwesomeIcon icon={regular("circle-xmark")} className={styles.icon} />
                                 </button>

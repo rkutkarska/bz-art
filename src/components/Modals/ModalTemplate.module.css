@@ -65,7 +65,7 @@
 }
 
 .modal__confirm {
-    background-color: var(--clr-green);
+    background-color: var(--clr-orange);
 }
 
 .modal__cart,
