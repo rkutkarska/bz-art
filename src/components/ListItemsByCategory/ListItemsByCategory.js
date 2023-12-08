@@ -59,7 +59,7 @@ export const ListItemsByCategory = () => {
             <article className={styles.items}>
                 {itemsList.length > 0
                     ? itemsList
-                    : <p className="no-items">Няма добавени артикули!</p>
+                    : <h2 className="no-items">Няма добавени артикули!</h2>
                 }
             </article>
         </div>
