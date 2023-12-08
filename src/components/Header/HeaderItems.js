@@ -63,15 +63,21 @@ export const HeaderItems = () => {
                                 !hidden ?
                                     <ul className="profile__options ul-clear">
                                         {
-                                            (userData.role == 0) || (userData.role == 1) ?
-                                                <>
+                                            (userData.role == 0) || (userData.role == 1)
+                                                ? <>
                                                     <li><Link to="/crud-documents"><FontAwesomeIcon icon={solid('gear')} className="fa-icon" />Административен панел</Link></li>
-                                                    <hr className="delimiter" />
                                                 </>
                                                 : null
                                         }
-                                        <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon" />Любими</Link></li>
-                                        <li><Link><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />Поръчки</Link></li>
+
+                                        {
+                                            (userData.role == 2) &&
+                                            <>
+                                                <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon" />Любими</Link></li>
+                                                <li><Link><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />Поръчки</Link></li>
+                                            </>
+                                        }
+
                                         <li><Link onClick={handleLogOut}><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link></li>
                                     </ul>
                                     : null
