@@ -8,7 +8,7 @@ import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Contacts } from './components/Contacts/Contacts';
-import { ItemDescription } from './components/ItemDescription/ItemDescription';
+import { ItemDescription } from './components/Items/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
 import { Forbidden } from './components/Forbidden/Forbidden';
 
@@ -30,8 +30,8 @@ import { UpdateItem } from './components/CrudDocuments/UpdateItem/UpdateItem';
 import { UpdateCategory } from './components/CrudDocuments/UpdateCategory/UpdateCategory';
 import { UpdateUser } from './components/CrudDocuments/UpdateUser/UpdateUser';
 
-import { ListItems } from './components/ListItems/ListItems';
-import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
+import { ListItems } from './components/Items/ListItems/ListItems';
+import { ListItemsByCategory } from './components/Items/ListItemsByCategory/ListItemsByCategory';
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 import { Favourites } from './components/Favourites/Favourites';
 import { SuccessfullOrder } from './components/ShoppingCart/SuccessfullOrder';

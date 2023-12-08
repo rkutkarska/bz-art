@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { ItemActionButtons } from '../ItemActionButtons/ItemActionButtons';
-import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '../../Spinner/Spinner';
 
 import styles from './ListItems.module.css';
-import * as itemsService from '../../services/itemsService';
+import * as itemsService from '../../../services/itemsService';
 
 export const ListItems = () => {
     const [items, setItems] = useState([]);

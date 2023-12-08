@@ -1,9 +1,9 @@
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Link } from 'react-router-dom';
 
-import * as usersItemsService from "../../services/usersItemsService";
+import * as usersItemsService from "../../../services/usersItemsService";
 
 export const ItemActionButtons = ({ props }) => {
     const { currentUser } = useAuth();

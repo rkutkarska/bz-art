@@ -4,11 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import { useAuth } from '../../context/AuthContext';
-import { ModalTemplate } from "../Modals/ModalTemplate";
+import { useAuth } from '../../../context/AuthContext';
+import { ModalTemplate } from "../../Modals/ModalTemplate";
 
-import * as usersItemsService from "../../services/usersItemsService";
-import * as itemsService from '../../services/itemsService';
+import * as usersItemsService from "../../../services/usersItemsService";
+import * as itemsService from '../../../services/itemsService';
 import './ItemDescription.css';
 
 export const ItemDescription = () => {

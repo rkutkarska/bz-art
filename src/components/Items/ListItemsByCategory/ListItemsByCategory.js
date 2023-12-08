@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams} from 'react-router-dom';
 import { ItemActionButtons } from "../ItemActionButtons/ItemActionButtons";
 
-import * as itemsService from '../../services/itemsService';
-import * as categoriesService from '../../services/categoriesService';
+import * as itemsService from '../../../services/itemsService';
+import * as categoriesService from '../../../services/categoriesService';
 
 import styles from './ListItemsByCategory.module.css';
 

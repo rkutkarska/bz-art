@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ItemActionButtons } from '../../ItemActionButtons/ItemActionButtons';
+import { ItemActionButtons } from '../../Items/ItemActionButtons/ItemActionButtons';
 
 export const NewItem = ({ items }) => {
     let newItemsList = [];
