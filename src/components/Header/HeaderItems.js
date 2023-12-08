@@ -17,7 +17,7 @@ export const HeaderItems = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
 
-    const [userRole, setUserRole] = useState(false);
+    const [userData, setUserData] = useState(false);
     const [hidden, isHidden] = useState(true);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export const HeaderItems = () => {
     const getUserData = () => {
         if (currentUser) {
             usersService.getUserData(currentUser.uid)
-                .then((res) => setUserRole(res));
+                .then((res) => setUserData(res));
         }
     }
 
@@ -63,23 +63,28 @@ export const HeaderItems = () => {
                                 !hidden ?
                                     <ul className="profile__options ul-clear">
                                         {
-                                            (userRole.role == 0) || (userRole.role == 1) ?
+                                            (userData.role == 0) || (userData.role == 1) ?
                                                 <>
-                                                    <li><Link to="/crud-documents"><FontAwesomeIcon icon={solid('gear')} className="fa-icon"/>Административен панел</Link></li>
+                                                    <li><Link to="/crud-documents"><FontAwesomeIcon icon={solid('gear')} className="fa-icon" />Административен панел</Link></li>
                                                     <hr className="delimiter" />
                                                 </>
                                                 : null
                                         }
-                                        <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon"/>Любими</Link></li>
-                                        <li><Link><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon"/>Поръчки</Link></li>
+                                        <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon" />Любими</Link></li>
+                                        <li><Link><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />Поръчки</Link></li>
                                         <li><Link onClick={handleLogOut}><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link></li>
                                     </ul>
                                     : null
                             }
                         </Link>
-                        <Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
-                        <span className="items-count">5</span>
-                        {/* TODO read from db item count in the cart */}
+                        {
+                            userData.role == 0 || userData.role == 1
+                                ? null
+                                : <><Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                                    <span className="items-count">5</span>
+                                    {/* TODO read from db item count in the cart */}
+                                </>
+                        }
                     </>
                 }
             </div>
@@ -90,6 +95,6 @@ export const HeaderItems = () => {
                     <button type="submit"><FontAwesomeIcon icon={solid('magnifying-glass')} className={"fa-icon fa-magnifying-glass"} /></button>
                 </form>
             </div>
-        </div>
+        </div >
     );
 }
