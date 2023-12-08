@@ -1,11 +1,12 @@
-import React from 'react';
-import { CategoryItems } from './CategoryItems';
-import './Categories.css';
 import { useEffect, useState } from "react";
+import { CategoryItems } from './CategoryItems';
+
 import * as categoriesService from '../../../services/categoriesService';
+import './Categories.css';
 
 export const Categories = () => {
     const [categoryItems, setCategoryItems] = useState([]);
+
     useEffect(() => {
         categoriesService.getAll()
             .then(categories => setCategoryItems(categories));
