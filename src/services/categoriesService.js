@@ -6,15 +6,14 @@ import { v4 } from "uuid";
 
 const categoriesCollectionRef = collection(db, "categories");
 
-export const getAll = async (setIsModalOpen, setModalObject) => {
+export const getAll = async () => {
     try {
         const response = await getDocs(categoriesCollectionRef);
         const data = response.docs
             .map((doc) => ({ ...doc.data(), id: doc.id }));
         return data;
     } catch (error) {
-        setIsModalOpen(true);
-        setModalObject({ message: 'Неуспешно извличане на категория!', type: 'error' });
+        //  TODO modal  'Неуспешно извличане на категория!
     }
 };
 
