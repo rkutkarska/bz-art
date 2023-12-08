@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import { ModalTemplate } from '../../Modals/ModalTemplate';
 
 import * as usersService from "../../../services/usersService";
@@ -11,7 +11,8 @@ export const UpdateUser = () => {
     const [userRole, updateUserRole] = useState({});
 
     const { userId } = useParams();
-    
+    const { currentUser } = useAuth();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
 
@@ -58,7 +59,11 @@ export const UpdateUser = () => {
                         {
                             user.role == 0 &&
                             <>
-                                <option value={1}>1 - Модератор</option>
+                                {
+                                    // Edge case: Administrator cannot give himself Moderator rights
+                                    currentUser.uid !== userId &&
+                                    <option value={1}>1 - Модератор</option>
+                                }
                                 <option value={2}>2 - Потребител</option>
                             </>
                         }
@@ -69,7 +74,6 @@ export const UpdateUser = () => {
                                 <option value={0}>0 - Администратор</option>
                                 <option value={2}>2 - Потребител</option>
                             </>
-
                         }
 
                         {
