@@ -1,6 +1,8 @@
 import { db } from "../Firebase";
 import { collection, getDoc, setDoc, updateDoc, doc, getDocs, addDoc, deleteDoc } from "firebase/firestore";
 
+import * as itemsService from "./itemsService";
+
 const usersItemsCollectionRef = collection(db, "usersItems");
 
 export const addToCart = async (e, userId, itemId, itemQty) => {
@@ -56,22 +58,40 @@ export const getFavourites = async (userId) => {
     return data;
 }
 
-export const orderItems = async (userId, itemsInCart, totalSum) => {
+export const orderItems = async (userId, itemsInCart, totalSum, setItemsInCart) => {
     const ordersItemRef = collection(db, `usersItems/${userId}/orders`);
+    let orderId = '';
 
     const orderedItems = [];
     itemsInCart.map(item => {
-        orderedItems.push({ 'id': item.id, 'desiredQuantity': item.desiredQuantity })
+        orderedItems.push({ 'id': item.id, 'desiredQuantity': item.desiredQuantity });
     })
 
-    console.log(orderedItems);
     try {
-        await addDoc(ordersItemRef, { ...orderedItems, totalSum });
+        await addDoc(ordersItemRef, { ...orderedItems, totalSum })
+            .then(order => orderId = order.id);
     } catch (error) {
-        console.log(error.code, error.message)
+        // console.log(error.code, error.message)
         // TODO modal
         // Грешка! Артикулът не е добавен в количката!
     }
+
+    orderedItems.forEach(item => {
+        const orderedQuantity = parseInt(item.desiredQuantity);
+        itemsService.getItem(item.id).then(async res => {
+            const availableQuantity = parseInt(res.quantity);
+            try {
+                const itemDoc = doc(db, 'items', item.id);
+                await updateDoc(itemDoc, { quantity: availableQuantity - orderedQuantity })
+                    .then(() => removeItemFromCart(item.id, userId, itemsInCart, setItemsInCart));
+            } catch (error) {
+                // todo
+                return;
+            }
+        });
+    })
+
+    return orderId;
 }
 
 export const removeItemFromCart = (itemId, userId, itemsInCart, setItemsInCart) => {
@@ -108,7 +128,7 @@ export const addToFavorites = async (userId, itemId) => {
     try {
         await setDoc(favouritesItemRef, {});
     } catch (error) {
-        console.log(error.code, error.message);
+        // console.log(error.code, error.message);
         // TODO modal
         // Артикулът не е добавен в любими!
     }

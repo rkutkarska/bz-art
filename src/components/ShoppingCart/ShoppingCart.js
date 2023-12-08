@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from "../Modals/ModalTemplate";
+import { Spinner } from '../Spinner/Spinner';
 
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
-
 
 import styles from './ShoppingCart.module.css';
 
@@ -21,6 +21,11 @@ export const ShoppingCart = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
+    let orderId = '';
+
+    const navigate = useNavigate();
 
     const changeAmount = (item) => {
         usersItemsService
@@ -31,13 +36,16 @@ export const ShoppingCart = () => {
                 usersItemsService.getItemsInCart(currentUser.uid)
                     .then(items => {
                         setUserItems(items);
+                        setIsLoading(false);
                     })
             });
     }
 
     const placeOrder = () => {
         usersItemsService
-            .orderItems(currentUser.uid, itemsInCart, totalSum.current);
+            .orderItems(currentUser.uid, itemsInCart, totalSum.current, setItemsInCart)
+            .then((res) => orderId = res)
+            .then(() => navigate(`/successful-order/${orderId}`));
     }
 
     useEffect(() => {
@@ -46,7 +54,6 @@ export const ShoppingCart = () => {
                 setUserItems(items);
             })
     }, []);
-
 
     useEffect(() => {
         if (true) {
@@ -96,14 +103,14 @@ export const ShoppingCart = () => {
                                                     defaultValue={item.desiredQuantity}
                                                     min={1}
                                                     max={item.quantity}
-                                                    onBlur={(e) => changeAmount({ "id": item.id, "event": e })}
+                                                    onInput={(e) => { setIsLoading(true); changeAmount({ "id": item.id, "event": e }) }}
                                                 />
                                                 : <input
                                                     type="number"
                                                     defaultValue={item.quantity}
                                                     min={1}
                                                     max={item.quantity}
-                                                    onBlur={(e) => changeAmount({ "id": item.id, "event": e })}
+                                                    onInput={(e) => changeAmount({ "id": item.id, "event": e })}
                                                 />
                                         }
                                         <div className={styles.item__actions}>
@@ -129,12 +136,19 @@ export const ShoppingCart = () => {
                         </div>
                         <div className={styles.cart__summary}>
                             <h2>Общо:</h2>
-                            <p className={styles.summary__count}>{itemsCount.current} артикула</p>
-                            <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
-                            <button className="button green" onClick={placeOrder}>Поръчай</button>
+                            {
+                                isLoading
+                                    ? <Spinner />
+                                    : <>
+                                        <p className={styles.summary__count}>{itemsCount.current} артикула</p>
+                                        <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
+                                        <button className="button green" onClick={placeOrder}>Поръчай</button>
+                                    </>
+                            }
                         </div>
                     </div>
-                    : <div className={styles.cart__empty}>
+                    :
+                    <div className={styles.cart__empty}>
                         <h2>Количката ти е празна!</h2>
                         <Link to="/items" className="button purple">Към артикулите</Link>
                     </div>

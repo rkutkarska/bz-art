@@ -10,7 +10,7 @@ import { Footer } from './components/Footer/Footer';
 import { Contacts } from './components/Contacts/Contacts';
 import { ItemDescription } from './components/ItemDescription/ItemDescription';
 import { NotFound } from './components/NotFound/NotFound';
-import {Forbidden } from './components/Forbidden/Forbidden';
+import { Forbidden } from './components/Forbidden/Forbidden';
 
 import { AuthProvider } from './context/AuthContext';
 import { RequireAuth } from './components/RequireAuth/RequireAuth';
@@ -34,6 +34,7 @@ import { ListItems } from './components/ListItems/ListItems';
 import { ListItemsByCategory } from './components/ListItemsByCategory/ListItemsByCategory';
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 import { Favourites } from './components/Favourites/Favourites';
+import { SuccessfullOrder } from './components/ShoppingCart/SuccessfullOrder';
 
 function App() {
     const usersRoles = {
@@ -61,27 +62,21 @@ function App() {
                     <Route element={<RequireAuth allowedRoles={[usersRoles.user]} />}>
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
                         <Route path="/favourites" element={<Favourites />} />
-                        {/* Favourites list */}
+                        <Route path="/successful-order/:orderId" element={<SuccessfullOrder />}/>
+                        {/* Orders list */}
                     </Route>
                     {/*  --- End of Regular user */}
 
                     {/* Admin */}
                     <Route element={<RequireAuth allowedRoles={[usersRoles.admin]} />}>
                         <Route path="/items" element={<ListItems />} />
-                        {/* <Route path="/crud-documents" element={<CrudDocuments />} /> */}
                         <Route path="/crud-documents/create-item" element={<CreateItem />} />
                         <Route path="/crud-documents/update-item/:itemId" element={<UpdateItem />} />
-                        {/* <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} /> */}
                         <Route path="/crud-documents/create-category" element={<CreateCategory />} />
                         <Route path="/crud-documents/update-category/:categoryId" element={<UpdateCategory />} />
-                        {/* <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} /> */}
                         <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
                         <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
-                        {/* <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} /> */}
-                        
-                        <Route path="/crud-documents/read-user/:userId" element={<ReadUser />} />
                         <Route path="/crud-documents/update-user/:userId" element={<UpdateUser />} />
-
                     </Route>
                     {/* --- End of Admin */}
 
@@ -91,7 +86,7 @@ function App() {
                         <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} />
                         <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} />
                         <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
-                        {/* Orders list */}
+                        <Route path="/crud-documents/read-user/:userId" element={<ReadUser />} />
                     </Route>
                     {/* --- End Moderator or Admin */}
 
