@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,8 +6,8 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import { ModalTemplate } from '../Modals/ModalTemplate';
 import { useAuth } from '../../context/AuthContext';
-
 import * as usersService from '../../services/usersService';
+
 
 export const HeaderItems = () => {
     const { currentUser } = useAuth();
@@ -18,7 +18,10 @@ export const HeaderItems = () => {
     const [modalObject, setModalObject] = useState({});
 
     const [userData, setUserData] = useState(false);
-    const [hidden, isHidden] = useState(true);
+    const [isHidden, setIsHidden] = useState(true);
+
+
+    const ref = useRef()
 
     useEffect(() => {
         getUserData();
@@ -41,6 +44,15 @@ export const HeaderItems = () => {
         }
     }
 
+    useEffect(() => {
+        const checkIfClickedOutside = e => {
+          if (ref.current && !ref.current.contains(e.target) && !ref.current.parentElement.contains(e.target)) {
+            setIsHidden(true);
+          }
+        }
+        document.addEventListener("click", checkIfClickedOutside)
+      }, [isHidden])
+
     return (
 
         <div className="header__items">
@@ -57,11 +69,11 @@ export const HeaderItems = () => {
                 {
                     currentUser &&
                     <>
-                        <Link className={`profile button yellow same-size-small ${!hidden && "active-button"}`} onClick={() => isHidden(s => !s)} >
+                        <button className={`profile button yellow same-size-small ${!isHidden && "active-button"}`} onClick={() => setIsHidden(s => !s)} >
                             <FontAwesomeIcon icon={solid('user')} className="fa-icon" />Профил
                             {
-                                !hidden ?
-                                    <ul className="profile__options ul-clear">
+                                !isHidden ?
+                                    <ul className="profile__options ul-clear" ref={ref}>
                                         {
                                             (userData.role == 0) || (userData.role == 1)
                                                 ? <>
@@ -74,7 +86,7 @@ export const HeaderItems = () => {
                                             (userData.role == 2) &&
                                             <>
                                                 <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon" />Любими</Link></li>
-                                                <li><Link><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />Поръчки</Link></li>
+                                                <li><Link to="/orders-history"><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />Поръчки</Link></li>
                                             </>
                                         }
 
@@ -82,7 +94,7 @@ export const HeaderItems = () => {
                                     </ul>
                                     : null
                             }
-                        </Link>
+                        </button>
                         {
                             userData.role == 0 || userData.role == 1
                                 ? null
