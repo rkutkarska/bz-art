@@ -46,12 +46,12 @@ export const HeaderItems = () => {
 
     useEffect(() => {
         const checkIfClickedOutside = e => {
-          if (ref.current && !ref.current.contains(e.target) && !ref.current.parentElement.contains(e.target)) {
-            setIsHidden(true);
-          }
+            if (ref.current && !ref.current.contains(e.target) && !ref.current.parentElement.contains(e.target)) {
+                setIsHidden(true);
+            }
         }
         document.addEventListener("click", checkIfClickedOutside)
-      }, [isHidden])
+    }, [isHidden])
 
     return (
 
@@ -110,7 +110,10 @@ export const HeaderItems = () => {
             <div className="header__search-bar">
                 <form action="POST">
                     <input type="text" placeholder="Търсене..." name="search" />
-                    <button type="submit"><FontAwesomeIcon icon={solid('magnifying-glass')} className={"fa-icon fa-magnifying-glass"} /></button>
+                    {/* TODO search */}
+                    <button onClick={(e) => e.preventDefault()}>
+                        <FontAwesomeIcon icon={solid('magnifying-glass')} className={"fa-icon fa-magnifying-glass"} />
+                    </button>
                 </form>
             </div>
         </div >
