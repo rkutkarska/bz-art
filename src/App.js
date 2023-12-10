@@ -63,13 +63,13 @@ function App() {
                     <Route element={<RequireAuth allowedRoles={[usersRoles.user]} />}>
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
                         <Route path="/favourites" element={<Favourites />} />
-                        <Route path="/successful-order/:orderId" element={<SuccessfullOrder />}/>
-                        <Route path="/orders-history" element={<OrdersHistory />}/>
+                        <Route path="/successful-order/:orderId" element={<SuccessfullOrder />} />
+                        <Route path="/orders-history" element={<OrdersHistory />} />
                     </Route>
                     {/*  --- End of Regular user */}
 
-                    {/* Admin */}
-                    <Route element={<RequireAuth allowedRoles={[usersRoles.admin]} />}>
+                    {/* Moderator */}
+                    <Route element={<RequireAuth allowedRoles={[usersRoles.moderator]} />}>
                         <Route path="/items" element={<ListItems />} />
                         <Route path="/crud-documents/create-item" element={<CreateItem />} />
                         <Route path="/crud-documents/update-item/:itemId" element={<UpdateItem />} />
@@ -77,9 +77,8 @@ function App() {
                         <Route path="/crud-documents/update-category/:categoryId" element={<UpdateCategory />} />
                         <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
                         <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
-                        <Route path="/crud-documents/update-user/:userId" element={<UpdateUser />} />
                     </Route>
-                    {/* --- End of Admin */}
+                    {/* --- End of Moderator */}
 
                     {/* Moderator or Admin */}
                     <Route element={<RequireAuth allowedRoles={[usersRoles.moderator, usersRoles.admin]} />}>
@@ -90,6 +89,12 @@ function App() {
                         <Route path="/crud-documents/read-user/:userId" element={<ReadUser />} />
                     </Route>
                     {/* --- End Moderator or Admin */}
+
+                    {/* Admin */}
+                    <Route element={<RequireAuth allowedRoles={[usersRoles.admin]} />}>
+                        <Route path="/crud-documents/update-user/:userId" element={<UpdateUser />} />
+                    </Route>
+                    {/* --- End of Admin */}
 
                     {/* For all */}
                     <Route path="/forbidden" element={<Forbidden />} />
