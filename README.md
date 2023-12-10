@@ -76,7 +76,7 @@ UsersItems collection has users unique Ids documents, each of them with document
 				* dateCreated (type: timestamp)
 				* totalSum (type: 52)
 	* collection: favourites
-		*document: items ids
+ 		*document: items ids
 
 # User Roles
 ## Guest - public part
