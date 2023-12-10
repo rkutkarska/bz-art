@@ -1,0 +1,22 @@
+.orders__list {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.order__number {
+    background-color: var(--clr-gray);
+    text-align: center;
+    padding: 1rem 1rem;
+    color: var(--clr-white);
+    font-weight: bold;
+}
+
+.no-orders {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.no-orders h2,
+.no-orders.button {
+    margin-bottom: 2rem;
+}

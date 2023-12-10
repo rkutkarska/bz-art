@@ -34,7 +34,8 @@ import { ListItems } from './components/Items/ListItems/ListItems';
 import { ListItemsByCategory } from './components/Items/ListItemsByCategory/ListItemsByCategory';
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 import { Favourites } from './components/Favourites/Favourites';
-import { SuccessfullOrder } from './components/ShoppingCart/SuccessfullOrder';
+import { SuccessfullOrder } from './components/Orders/SuccessfullOrder';
+import { OrdersHistory } from './components/Orders/OrdersHistory';
 
 function App() {
     const usersRoles = {
@@ -63,7 +64,7 @@ function App() {
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
                         <Route path="/favourites" element={<Favourites />} />
                         <Route path="/successful-order/:orderId" element={<SuccessfullOrder />}/>
-                        {/* Orders list */}
+                        <Route path="/orders-history" element={<OrdersHistory />}/>
                     </Route>
                     {/*  --- End of Regular user */}
 

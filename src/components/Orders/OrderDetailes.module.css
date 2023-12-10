@@ -1,0 +1,26 @@
+.order__detailes li:first-child {
+    text-align: center;
+    color: var(--clr-purple-dark);
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+    text-align: center;
+    align-items: center;
+    margin: 1rem 0;
+    justify-items: right;
+}
+
+.item a {
+    width: 100px;
+}
+
+.order__total-sum {
+    text-align: right;
+    padding: 1rem 0;
+}
+
+.delimieter {
+    color: var(--clr-gray);
+}
