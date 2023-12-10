@@ -4,7 +4,6 @@ import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from "../Modals/ModalTemplate";
-import { Spinner } from '../Spinner/Spinner';
 
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
@@ -19,26 +18,30 @@ export const ShoppingCart = () => {
     const [itemsInCart, setItemsInCart] = useState([]);
     const { currentUser } = useAuth();
 
+    const [isInsufficientQty, setIsInsufficientQty] = useState(false);
+    const [error, setError] = useState('');
+    const [desiredQty, setDesiredQty] = useState(1);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
 
     let orderId = '';
 
     const navigate = useNavigate();
 
     const changeAmount = (item) => {
-        usersItemsService
-            .updateCartItem(currentUser.uid, item.id, item.event.target.value)
-            .then(() => {
-                itemsCount.current = 0;
-                totalSum.current = 0;
-                usersItemsService.getItemsInCart(currentUser.uid)
-                    .then(items => {
-                        setUserItems(items);
-                        setIsLoading(false);
-                    })
-            });
+        if (item.availableQuantity > parseInt(item.event.target.value)) {
+            usersItemsService
+                .updateCartItem(currentUser.uid, item.id, item.event.target.value)
+                .then(() => {
+                    itemsCount.current = 0;
+                    totalSum.current = 0;
+                    usersItemsService.getItemsInCart(currentUser.uid)
+                        .then(items => {
+                            setUserItems(items);
+                        })
+                });
+        }
     }
 
     const placeOrder = () => {
@@ -74,6 +77,20 @@ export const ShoppingCart = () => {
         }
     }, [userItems])
 
+    const handleChange = (e, itemQuantity) => {
+
+        if (Number(e.target.value) > Number(itemQuantity)) {
+            setIsInsufficientQty(true);
+            setError('Недостатъчна наличност!');
+        } else if (e.target.value === '' || e.target.value <= 0) {
+            setIsInsufficientQty(true);
+            setError('Невалидна стойност!')
+        } else {
+            setIsInsufficientQty(false);
+            setError('');
+            setDesiredQty(e.target.value);
+        }
+    }
 
     return (<>
         <div className={`container ${styles.cart}`}>
@@ -97,21 +114,19 @@ export const ShoppingCart = () => {
                                             <h2>Наличност: {item.quantity} бр.</h2>
                                         </div >
                                         {
-                                            (item.desiredQuantity < item.quantity)
-                                                ? <input
+                                            <>
+                                                <input
                                                     type="number"
                                                     defaultValue={item.desiredQuantity}
                                                     min={1}
                                                     max={item.quantity}
-                                                    onInput={(e) => { setIsLoading(true); changeAmount({ "id": item.id, "event": e }) }}
+                                                    onChange={(e) => handleChange(e, item.quantity)}
+                                                    onInput={(e) => {
+                                                        changeAmount({ "id": item.id, "event": e, 'availableQuantity': item.quantity })
+                                                    }}
                                                 />
-                                                : <input
-                                                    type="number"
-                                                    defaultValue={item.quantity}
-                                                    min={1}
-                                                    max={item.quantity}
-                                                    onInput={(e) => changeAmount({ "id": item.id, "event": e })}
-                                                />
+                                                {isInsufficientQty && <p className="form-error">{error}</p>}
+                                            </>
                                         }
                                         <div className={styles.item__actions}>
                                             <button>
@@ -138,15 +153,15 @@ export const ShoppingCart = () => {
                         </div>
                         <div className={styles.cart__summary}>
                             <h2>Общо:</h2>
+                            <p className={styles.summary__count}>{userItems.length} артикула</p>
+                            <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
+{/* 
                             {
-                                isLoading
-                                    ? <Spinner />
-                                    : <>
-                                        <p className={styles.summary__count}>{itemsCount.current} артикула</p>
-                                        <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
-                                        <button className="button green" onClick={placeOrder}>Поръчай</button>
-                                    </>
-                            }
+                                   typeof(totalSum.current) == Number
+                                        ? ` ${totalSum.current.toFixed(2)} лева`
+                                        : "---,--- лева"
+                                } */}
+                            <button className="button green" onClick={placeOrder} disabled={isInsufficientQty}>Поръчай</button>
                         </div>
                     </div>
                     :
