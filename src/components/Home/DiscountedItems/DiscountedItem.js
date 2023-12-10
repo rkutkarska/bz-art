@@ -10,6 +10,7 @@ export const DiscountedItem = ({ items }) => {
             <div key={'discounted' + i} className="discounted__items">
                 {
                     items.slice(i, i + 3).map(item => (
+                        item.quantity > 0 &&
                         <section key={item.id} className="discounted__item">
                             <Link to={`/items/${item.id}`}><img src={item.imageUrl} alt="ring" /></Link>
                             <div className="discounted__actions">
@@ -23,7 +24,7 @@ export const DiscountedItem = ({ items }) => {
                                 <div className="discounted__tag">
                                     <div className="discount-tag">{`- ${((item.discount / item.price) * 100).toFixed(0)} %`}</div>
                                 </div>
-                                <ItemActionButtons props={{'item': item, 'quantity': 1}}/>
+                                <ItemActionButtons props={{ 'item': item, 'quantity': 1 }} />
                             </div>
                         </section >
                     ))
