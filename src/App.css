@@ -528,6 +528,11 @@ select.error {
     visibility: visible;
 }
 
+.out-of-stock {
+    text-align: center;
+    padding-top: 1rem;
+}
+
 /* TODO responsive */
 
 /* Mobile: 360 x 640.
