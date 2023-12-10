@@ -37,7 +37,6 @@ export const Favourites = () => {
         }
     }, [userItems])
 
-
     return (<>
         <div className={`container ${styles.favourites}`}>
             <h1>Любими артикули</h1>
@@ -58,7 +57,16 @@ export const Favourites = () => {
                                         </div >
                                         <div className={styles.item__actions}>
                                             <button>
-                                                <FontAwesomeIcon icon={solid('shopping-cart')} className={`fa-icon ${styles["solid-cart"]}`} />
+                                                <FontAwesomeIcon
+                                                    onClick={(e) => {
+                                                        usersItemsService
+                                                        .addToCart(e, currentUser.uid, item.id, item.quantity)
+                                                        .then(() => usersItemsService.removeItemFromFavourites(item.id, currentUser.uid, favourites, setFavourites))
+                                                    }}
+                                                    icon={solid('shopping-cart')}
+                                                    className={`fa-icon ${styles["cart"]}`}
+                                                />
+                                                <p className={styles['hidden-text__cart']}>Премести в количката</p>
                                             </button>
                                             <button>
                                                 <FontAwesomeIcon
@@ -66,15 +74,12 @@ export const Favourites = () => {
                                                     icon={solid('trash-can')}
                                                     className={`fa-icon ${styles.trash}`}
                                                 />
+                                                <p className={styles['hidden-text__trash']}>Премахни</p>
                                             </button>
                                         </div>
                                     </div>
                                 ))
                             }
-
-                        </div>
-                        <div className={styles.favourites__similar}>
-                            <h2>Също може да ти хареса:</h2>
 
                         </div>
                     </div>
