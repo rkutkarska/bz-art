@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -120,13 +120,15 @@ export const ShoppingCart = () => {
                                                         setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
                                                         setIsModalOpen(true);
                                                     }}
-                                                    icon={solid('heart')} className={`fa-icon ${styles["solid-heart"]}`} />
+                                                    icon={solid('heart')} className={`fa-icon ${styles["heart"]}`} />
+                                                <p className={styles['hidden-text__heart']}>Добави в любими</p>
                                             </button>
                                             <button>
                                                 <FontAwesomeIcon onClick={() => usersItemsService.removeItemFromCart(item.id, currentUser.uid, itemsInCart, setItemsInCart)}
                                                     icon={solid('trash-can')}
                                                     className={`fa-icon ${styles.trash}`}
                                                 />
+                                                <p className={styles['hidden-text__trash']}>Премахни</p>
                                             </button>
                                         </div>
                                     </div>

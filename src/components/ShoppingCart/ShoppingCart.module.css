@@ -42,7 +42,7 @@
 }
 
 .trash,
-.solid-heart {
+.heart {
     color: var(--clr-gray);
     position: absolute;
     top: 0px;
@@ -54,12 +54,28 @@
     right: 0px;
 }
 
-.solid-heart {
+.heart {
     right: 40px;
 }
 
+.hidden-text__trash,
+.hidden-text__heart {
+    display: none;
+    padding-top: 40px;
+}
+
 .trash:hover,
-.solid-heart:hover {
+.heart:hover {
+    color: var(--clr-red);
+}
+
+.trash:hover + .hidden-text__trash{
+    display: block;
+    color: var(--clr-red);
+}
+
+.heart:hover + .hidden-text__heart{
+    display: block;
     color: var(--clr-red);
 }
 
