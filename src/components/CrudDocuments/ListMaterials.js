@@ -57,20 +57,25 @@ export const ListMaterials = ({ documents }) => {
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <Link to={`/crud-documents/update-material/${document.id}`} className="button orange">
-                                <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
-                                Редактирай
-                            </Link>
-                            <button className="button red"
-                                onClick={() => {
-                                    setIsModalOpen(true);
-                                    setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
-                                    setCurrentDocumentId(document.id);
-                                }}
-                            >
-                                <FontAwesomeIcon icon={regular('trash-can')} className="delete fa-icon" />
-                                Изтрий
-                            </button>
+                            {
+                                documents.currentUserRole == 1 &&
+                                <>
+                                    <Link to={`/crud-documents/update-material/${document.id}`} className="button orange">
+                                        <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
+                                        Редактирай
+                                    </Link>
+                                    <button className="button red"
+                                        onClick={() => {
+                                            setIsModalOpen(true);
+                                            setModalObject({ message: 'Сигурни ли сте, че искате да изтриете записа?', type: 'confirm' });
+                                            setCurrentDocumentId(document.id);
+                                        }}
+                                    >
+                                        <FontAwesomeIcon icon={regular('trash-can')} className="delete fa-icon" />
+                                        Изтрий
+                                    </button>
+                                </>
+                            }
                         </div>
                     </div>
                 ))

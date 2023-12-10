@@ -7,6 +7,9 @@ import { ListCategories } from "./ListCategories";
 import { ListMaterials } from "./ListMaterials";
 import { ModalTemplate } from "../Modals/ModalTemplate";
 
+import { useAuth } from '../../context/AuthContext';
+import * as usersService from '../../services/usersService';
+
 import * as adminService from '../../services/adminService';
 import styles from './CrudDocuments.module.css';
 
@@ -15,6 +18,9 @@ export const CrudDocuments = () => {
     const [documents, setDocuments] = useState([]);
     const [documentType, setDocumentType] = useState('');
     const [isHidden, setHidden] = useState(false);
+
+    const { currentUser } = useAuth();
+    const [userData, setUserData] = useState({});
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
@@ -80,6 +86,17 @@ export const CrudDocuments = () => {
         setDocuments(newDoc);
     }
 
+    const getUserData = () => {
+        if (currentUser) {
+            usersService.getUserData(currentUser.uid)
+                .then((res) => setUserData(res));
+        }
+    }
+
+    useEffect(() => {
+        getUserData();
+    }, [])
+
     return (
         <div className={styles.container}>
 
@@ -87,12 +104,18 @@ export const CrudDocuments = () => {
 
             <h1>Документи</h1>
             <div className={styles.container__actions}>
-                <h2>Създаване на нов документ</h2>
-                <div className={`${styles["add-document"]} buttons`}>
-                    <Link to="/crud-documents/create-category" className="button blue">+ Нова категория</Link>
-                    <Link to="/crud-documents/create-item" className="button blue">+ Нов артикул</Link>
-                    <Link to="/crud-documents/create-material" className="button blue">+ Нов материал</Link>
-                </div>
+                {
+                    userData.role == 1 &&
+                    <>
+                        <h2>Създаване на нов документ</h2>
+                        <div className={`${styles["add-document"]} buttons`}>
+                            <Link to="/crud-documents/create-category" className="button blue">+ Нова категория</Link>
+                            <Link to="/crud-documents/create-item" className="button blue">+ Нов артикул</Link>
+                            <Link to="/crud-documents/create-material" className="button blue">+ Нов материал</Link>
+                        </div>
+                    </>
+                }
+
                 <h2>Търсене в документи и CRUD операции</h2>
                 <div className={styles.document__name}>
                     <div>
@@ -181,6 +204,14 @@ export const CrudDocuments = () => {
                                         <option value="materialName">Име</option>
                                     </>
                                 }
+
+                                {
+                                    documentType === "users" &&
+                                    <>
+                                        <option value="email">Email</option>
+                                    </>
+                                }
+
                             </select>
                         </div>
                         <div>
@@ -195,10 +226,10 @@ export const CrudDocuments = () => {
 
             {/* Table with results */}
             <div className={styles.container__table}>
-                {isClicked.current && documentType == 'users' && <ListUsers documents={{ documents, isClicked, setDocuments }} />}
-                {isClicked.current && documentType == 'items' && <ListItems documents={{ documents, isClicked, setDocuments }} />}
-                {isClicked.current && documentType == 'categories' && <ListCategories documents={{ documents, isClicked, setDocuments }} />}
-                {isClicked.current && documentType == 'materials' && <ListMaterials documents={{ documents, isClicked, setDocuments }} />}
+                {isClicked.current && documentType == 'users' && <ListUsers documents={{ documents, isClicked, setDocuments, 'currentUserRole': userData.role }} />}
+                {isClicked.current && documentType == 'items' && <ListItems documents={{ documents, isClicked, setDocuments, 'currentUserRole': userData.role }} />}
+                {isClicked.current && documentType == 'categories' && <ListCategories documents={{ documents, isClicked, setDocuments, 'currentUserRole': userData.role }} />}
+                {isClicked.current && documentType == 'materials' && <ListMaterials documents={{ documents, isClicked, setDocuments, 'currentUserRole': userData.role }} />}
             </div>
 
             {/* TODO paginaton */}

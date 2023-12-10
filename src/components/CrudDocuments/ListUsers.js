@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
+
 import styles from './CrudDocuments.module.css';
 
 export const ListUsers = ({ documents }) => {
-
+   
     documents.isClicked.current = !documents.isClicked.current;
 
     return (
@@ -42,10 +44,13 @@ export const ListUsers = ({ documents }) => {
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
-                            <Link to={`/crud-documents/update-user/${document.id}`} className="button orange">
-                                <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
-                                Редактирай
-                            </Link>
+                            {
+                                documents.currentUserRole === 0 &&
+                                <Link to={`/crud-documents/update-user/${document.id}`} className="button orange">
+                                    <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
+                                    Редактирай
+                                </Link>
+                            }
                         </div>
                     </div>
                 ))
