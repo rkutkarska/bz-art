@@ -16,7 +16,6 @@ export const addToCart = async (e, userId, itemId, itemQty) => {
         if (docSnap.exists()) {
             itemQty = Number(itemQty) + Number(docSnap.data().quantity);
             await updateDoc(cartItemRef, { quantity: Number(itemQty) });
-
         } else {
             await setDoc(cartItemRef, { quantity: itemQty });
         }
@@ -36,7 +35,6 @@ export const updateCartItem = async (userId, itemId, itemQty) => {
         // TODO modal
         // Наличноста не е актуализирана!
     }
-
 }
 
 export const getItemsInCart = async (userId) => {
@@ -48,11 +46,18 @@ export const getItemsInCart = async (userId) => {
     return data;
 }
 
-
 export const getFavourites = async (userId) => {
     const favouritesItemRef = collection(db, `usersItems/${userId}/favourites`);
 
     const response = await getDocs(favouritesItemRef);
+    const data = response.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }));
+    return data;
+}
+
+export const getOrdersHistory = async(userId) => {
+    const ordersRef = collection(db, `usersItems/${userId}/orders`);
+    const response = await getDocs(ordersRef);
     const data = response.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }));
     return data;
@@ -64,11 +69,11 @@ export const orderItems = async (userId, itemsInCart, totalSum, setItemsInCart) 
 
     const orderedItems = [];
     itemsInCart.map(item => {
-        orderedItems.push({ 'id': item.id, 'desiredQuantity': item.desiredQuantity });
+        orderedItems.push({ 'id': item.id, 'desiredQuantity': item.desiredQuantity, 'imageUrl': item.imageUrl, 'price': item.price});
     })
 
     try {
-        await addDoc(ordersItemRef, { ...orderedItems, totalSum })
+        await addDoc(ordersItemRef, { ...orderedItems, totalSum, dateCreated: new Date() })
             .then(order => orderId = order.id);
     } catch (error) {
         // console.log(error.code, error.message)
