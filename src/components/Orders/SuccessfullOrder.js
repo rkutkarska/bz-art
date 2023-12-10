@@ -10,7 +10,7 @@ export const SuccessfullOrder = () => {
             <div className={styles.order__detailes}>
                 <h2>Поръчка с номер {orderId} е регистрирана успешно!</h2>
                 <h2>Благодарим ти за доверието!</h2>
-                <Link to="/order-history" className="button purple">Към история на поръчките</Link>
+                <Link to="/orders-history" className="button purple">Към история на поръчките</Link>
             </div>
         </div>
     )
