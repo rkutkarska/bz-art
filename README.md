@@ -45,6 +45,7 @@ Items collection has items unique Ids documents, each of them with fields:
 * hasDiscount (type: boolean)
 * imageUrl(type: string)
 * isNew (type: boolean)
+* isPinnedToHome (type: boolean)
 * materialName (type: string)
 * name (type: string)
 * price (type: number)
