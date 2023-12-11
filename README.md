@@ -32,9 +32,9 @@ The database consist of the following collections:
 
 1. Categories; 
 Categories collection has categories unique Ids documents, each of them with fields:
-	* categoryImageUrl (type: string)
-	* categoryName (type: string)
-	* categoryName (type: timestamp)
+* categoryImageUrl (type: string)
+* categoryName (type: string)
+* categoryName (type: timestamp)
 
 2. Items;
 Items collection has items unique Ids documents, each of them with fields:
@@ -79,7 +79,7 @@ UsersItems collection has users unique Ids documents, each of them with document
 				* dateCreated (type: timestamp)
 				* totalSum (type: 52)
 	* collection: favourites
- 		*document: items ids
+ 		* document: items ids
 
 # User Roles
 ## Guest - public part
@@ -135,7 +135,6 @@ User is a registered user with a role value of 2. When it is signed in this user
 
 User does not have access to:
 1. The admin panel to Perform CRUD operations on users, items, item categories and item materials.
-
 
 # TODO before exam date:
 * Create component CurrentPromotion for the hero button
