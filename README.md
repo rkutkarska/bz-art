@@ -9,7 +9,10 @@ npm i
 ```js
 npm start
 ```
-4. Navigate to http:localhost:3000 in any browser to preview the app.
+4. Navigate to the following address in any browser to preview the app:
+```
+http://localhost:3000
+```
 
 # Project Description
 ## Front end
@@ -29,9 +32,9 @@ The database consist of the following collections:
 
 1. Categories; 
 Categories collection has categories unique Ids documents, each of them with fields:
-* categoryImageUrl (type: string)
-* categoryName (type: string)
-* categoryName (type: timestamp)
+	* categoryImageUrl (type: string)
+	* categoryName (type: string)
+	* categoryName (type: timestamp)
 
 2. Items;
 Items collection has items unique Ids documents, each of them with fields:
