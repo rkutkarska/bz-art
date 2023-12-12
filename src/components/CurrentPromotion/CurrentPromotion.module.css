@@ -1,0 +1,120 @@
+.row-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.items__item {
+    background-color: var(--clr-white);
+    margin: 3%;
+}
+
+.items__item img {
+    transition: 0.6s;
+}
+
+.items__item:hover img {
+    transform: scale(0.90, 0.90);
+}
+
+.item__description,
+.item__tags {
+    position: absolute;
+    top: 5rem;
+}
+
+.item__description .item-name {
+    color: var(--clr-white);
+    background: var(--clr-purple-dark);
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+    position: relative;
+    left: -8px;
+}
+
+.item__description .item-name:before,
+.item__description .item-name:after {
+    content: "";
+    position: absolute;
+}
+
+.item__description .item-name:before {
+    height: 0;
+    width: 0;
+    top: -8.5px;
+    left: 0.1px;
+    border-bottom: 9px solid black;
+    border-left: 8px solid transparent;
+}
+
+.item__description .item-name:after {
+    height: 0;
+    width: 0;
+    right: -14.6px;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 15px solid var(--clr-purple-dark);
+}
+
+.item__description .item-price {
+    background-color: var(--clr-yellow);
+    padding: 8px;
+    max-width: fit-content;
+    text-align: center;
+}
+
+.items__item {
+    max-width: 20%;
+    min-width: 250px;
+    border: 1px solid var(--clr-gray);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.items__item:hover {
+    border: 1px solid var(--clr-purple-light);
+}
+
+.new-tag,
+.discount-tag {
+    position: relative;
+    color: var(--clr-white);
+    top: -70px;
+    right: -215px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    align-items: center;
+    text-align: center;
+}
+
+.discount-tag {
+    background-color: var(--clr-red);
+    border: 5px solid var(--clr-dark-red);
+}
+
+.new-tag {
+    background-color: var(--clr-green);
+    border: 5px solid var(--clr-dark-green);
+}
+
+.no-items {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--clr-purple-dark);
+    padding: 2rem;
+}

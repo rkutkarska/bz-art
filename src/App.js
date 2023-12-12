@@ -36,6 +36,7 @@ import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 import { Favourites } from './components/Favourites/Favourites';
 import { SuccessfullOrder } from './components/Orders/SuccessfullOrder';
 import { OrdersHistory } from './components/Orders/OrdersHistory';
+import { CurrentPromotion } from './components/CurrentPromotion/CurrentPromotion';
 
 function App() {
     const usersRoles = {
@@ -57,6 +58,7 @@ function App() {
                     <Route path="/items/:itemId" element={<ItemDescription />} />
                     <Route path="/category/:categoryId/items" element={<ListItemsByCategory />} />
                     <Route path="/contacts" element={<Contacts />} />
+                    <Route path="/current-promotion"  element={<CurrentPromotion />}/>
                     {/* --- End of Guest - public part* */}
 
                     {/* Regular user */}
