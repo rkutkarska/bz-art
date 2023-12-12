@@ -45,7 +45,7 @@ export const UpdateCategory = () => {
 
     const updateDocument = async (e) => {
         await categoriesService
-            .updateCategory(e, categoryId, categoriesData, setModalObject, setIsModalOpen);
+            .updateCategory(e, categoryId, categoriesData, imageUpload, setModalObject, setIsModalOpen);
     }
 
     // TODO drag and drop image
