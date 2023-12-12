@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getCurrentPromoItems } from "../../services/itemsService"
-import { ItemActionButtons } from "../Items/ItemActionButtons/ItemActionButtons";
-import { Spinner } from "../Spinner/Spinner";
+import { getCurrentPromoItems } from "../../../services/itemsService"
+import { ItemActionButtons } from "../../Items/ItemActionButtons/ItemActionButtons";
+import { Spinner } from "../../Spinner/Spinner";
 
 import styles from './CurrentPromotion.module.css';
 

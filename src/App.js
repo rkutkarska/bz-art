@@ -36,7 +36,7 @@ import { ShoppingCart } from './components/ShoppingCart/ShoppingCart';
 import { Favourites } from './components/Favourites/Favourites';
 import { SuccessfullOrder } from './components/Orders/SuccessfullOrder';
 import { OrdersHistory } from './components/Orders/OrdersHistory';
-import { CurrentPromotion } from './components/CurrentPromotion/CurrentPromotion';
+import { CurrentPromotion } from './components/Home/CurrentPromotion/CurrentPromotion';
 
 function App() {
     const usersRoles = {
