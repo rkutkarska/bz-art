@@ -23,11 +23,12 @@ The project uses the following Firebase back-end services: Authentication, Stora
 
 ### Firebase Authentication
 The project uses password-based accounts authentication with emails. 
-* The **Administrator** account is created manually in the database. It can change the roles of users. The administrator can give the role **Moderator** to any registered user. His login credentials are:
+* The **Administrator** account is created manually in the database. It can change the roles of users. His login credentials are:
 	* username: administrator@bz-art.com
  	* password: 123456
 * Each guest can register in the app and gets a **User** role.
-
+* The administrator can give the role **Moderator** to any registered user
+  
 For convenience there are currently 2 more accounts created:
 * **Moderator**. His login credentials are:
 	* username: moderator@bz-art.com
