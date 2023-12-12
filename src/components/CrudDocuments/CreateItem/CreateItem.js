@@ -26,6 +26,7 @@ export const CreateItem = () => {
         imageUrl: '',
         isNew: false,
         hasDiscount: false,
+        isPinnedToHome: false,
         dateCreated: {}
     });
 
@@ -219,8 +220,8 @@ export const CreateItem = () => {
                     {discountHasError && <p className="form-error">Отстъпката не може да бъде по-висока от цената!</p>}
 
 
-                    <div className={styles["home-page-pin"]}>
-                        <label htmlFor="index-label">Етикет начало:</label>
+                    <div className={styles["item-pins"]}>
+                        <label htmlFor="index-label">Етикет:</label>
                         <div>
                             <input id="isNew" className="form-check-input" type="checkbox" name="isNew" value={itemsData.isNew} onChange={handleChange} />
                             <label htmlFor="isNew">Ново</label>
@@ -230,6 +231,12 @@ export const CreateItem = () => {
                             <input id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={itemsData.hasDiscount} onChange={handleChange} />
                             <label htmlFor="hasDiscount">Промоция</label>
                         </div>
+
+                        <div>
+                            <input id="isPinnedToHome" className="form-check-input" type="checkbox" name="isPinnedToHome" value={itemsData.isPinnedToHome} onChange={handleChange} />
+                            <label htmlFor="isPinnedToHome">Закачи в начало</label>
+                        </div>
+
                     </div>
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>

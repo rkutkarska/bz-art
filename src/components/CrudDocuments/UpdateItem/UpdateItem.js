@@ -54,19 +54,30 @@ export const UpdateItem = () => {
     useEffect(() => {
         itemsService
             .getItem(itemId, setIsModalOpen, setModalObject)
-            .then((doc) => setItem(doc));
+            .then((doc) => {
+                setItem(doc)
+            });
     }, []);
 
     const handleChange = (e) => {
+        let objValue;
+        if (e.target.type === 'checkbox') {
+            objValue = e.target.checked;
+        } else if (e.target.type === 'number') {
+            objValue = Number(e.target.value.trim());
+        } else {
+            objValue = e.target.value.trim();
+        }
+
         updateValues((oldValues) => ({
             ...oldValues,
-            [e.target.name]: e.target.value.trim()
+            [e.target.name]: objValue
         }))
     }
 
     const clearImage = (e) => {
         e.preventDefault();
-        updateValues({ ...values, url: '' });
+        updateValues({ ...values, imageUrl: '' });
         e.target.previousSibling.value = '';
     };
 
@@ -120,10 +131,10 @@ export const UpdateItem = () => {
                     {itemTypeHasError && <p className="form-error">Видът на артикула трябва да е с дължина от поне 3 символа!</p>}
 
                     <label htmlFor="available-categories" className="existing-categories">Категории: </label>
-                    <select name="category" id="available-categories" value={values.categoryName} >
-                        <option defaultValue="DEFAULT" disabled={true}>-- Моля, изберете --</option>
+                    <select name="categoryName" id="available-categories">
+                        <option defaultValue={item.categoryName}>{item.categoryName}</option>
                         {
-                            categories.map((category) => (
+                            (categories.filter(x => x.categoryName !== item.categoryName)).map((category) => (
                                 <option
                                     key={category.id}
                                     value={category.categoryName}
@@ -214,22 +225,28 @@ export const UpdateItem = () => {
 
 
                     <div className={styles["form-check"]}>
-                        <label htmlFor="index-label">Етикет начало:</label>
+                        <label htmlFor="index-label">Етикет:</label>
                         <div>
-                            <input defaultChecked={item.isNew} id="isNew" className="form-check-input" type="checkbox" name="isNew" value={values.isNew} />
+                            <input defaultValue={item.isNew} id="isNew" className="form-check-input" type="checkbox" name="isNew" value={values.isNew} />
                             <label htmlFor="isNew">Ново</label>
                         </div>
 
                         <div>
-                            <input defaultChecked={item.hasDiscount} id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={values.hasDiscount} />
+                            <input defaultValue={item.hasDiscount} id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={values.hasDiscount} />
                             <label htmlFor="hasDiscount">Промоция</label>
                         </div>
+
+                        <div>
+                            <input defaultValue={item.isPinnedToHome} id="isPinnedToHome" className="form-check-input" type="checkbox" name="isPinnedToHome" value={values.isPinnedToHome} />
+                            <label htmlFor="isPinnedToHome">Закачи в начало</label>
+                        </div>
+
                     </div>
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>
                         или
                         <div className="flex-items">
-                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="url" />
+                            <input type="file" onChange={(e) => setImageUpload(e.target.files[0])} id="images" accept="image/*" name="imageUrl" />
                             <button className="button red" onClick={clearImage}><FontAwesomeIcon icon={solid('trash')} className="fa-icon" />Премахни</button>
                         </div>
                         {

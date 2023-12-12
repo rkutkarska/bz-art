@@ -1,5 +1,5 @@
 import { db, storage } from "../Firebase";
-import { collection, doc, getDoc, getDocs, addDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, where, query, orderBy } from "firebase/firestore";
 import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -106,15 +106,16 @@ export const updateItem = async (
         setModalObject({ message: 'Артикулът не е обновен! Моля попълнете коректно всички полета!', type: 'error' });
         return;
     }
+
     // TODO delete old image from firebase storage
-    if (values.url) {
+    if (values.imageUrl) {
         const imageRef = ref(storage, `images/items/${v4() + itemImageUpload.name}`);
         await uploadBytes(imageRef, itemImageUpload).then(() => {
-            getDownloadURL(imageRef).then(async (url) => {
+            getDownloadURL(imageRef).then(async (imageUrl) => {
                 try {
                     const itemDoc = doc(db, 'items', id);
-                    await updateDoc(itemDoc, { ...values, imageUrl: url });
-                    setNewImageUrl(url);
+                    await updateDoc(itemDoc, { ...values, "imageUrl": imageUrl });
+                    setNewImageUrl(imageUrl);
                     setIsModalOpen(true);
                     setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
                     return
@@ -129,7 +130,7 @@ export const updateItem = async (
 
     const itemDoc = doc(db, 'items', id);
     try {
-        await updateDoc(itemDoc, values);
+        await updateDoc(itemDoc, {...values});
         setIsModalOpen(true);
         setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
     } catch (error) {
@@ -268,3 +269,10 @@ export const validatePriceAndDiscountInUpdate = (e, setPriceHasError, setDiscoun
         setDiscountHasError(false);
     }
 }
+
+export const getCurrentPromoItems = async () => {
+    const q = query(collection(db, 'items'), where("materialName", "==", "Естествени камъни"));
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot;
+};

@@ -1,10 +1,10 @@
-.home-page-pin {
+.item-labels {
     display: flex;
     gap: 30px;
     margin-bottom: 2rem;
 }
 
-.home-page-pin label {
+.item-labels label {
     display: inline-block;
     width: 150px;
 }
