@@ -10,7 +10,7 @@ export const DiscountedItem = ({ items }) => {
             <div key={'discounted' + i} className="discounted__items">
                 {
                     items.slice(i, i + 3).map(item => (
-                        item.quantity > 0 &&
+                        ((item.quantity > 0) && (item.isPinnedToHome)) &&
                         <section key={item.id} className="discounted__item">
                             <Link to={`/items/${item.id}`}><img src={item.imageUrl} alt="ring" /></Link>
                             <div className="discounted__actions">
