@@ -15,10 +15,11 @@ export const DiscountedItems = () => {
     return (
         <article className="discounted">
             <h1 className="caption">Намаления</h1>
-                {discountedItems.length > 0
+            {
+                (discountedItems.some((x) => x.isPinnedToHome == true))
                     ? <DiscountedItem items={discountedItems} />
                     : <p className="no-discounted-items">Няма намалени артикули!</p>
-                }
+            }
         </article>
     );
 }

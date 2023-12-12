@@ -14,9 +14,11 @@ export const NewItems = () => {
     return (
         <article className="new">
             <h1 className="caption">Ново</h1>
-            {newItems.length > 0
-                ? <NewItem items={newItems} />
-                : <p className="no-new-items">Няма нови артикули!</p>
+            {
+
+                (newItems.some((x) => x.isPinnedToHome == true))
+                    ? <NewItem items={newItems} />
+                    : <p className="no-new-items">Няма нови артикули!</p>
             }
         </article>
     );
