@@ -9,7 +9,10 @@ npm i
 ```js
 npm start
 ```
-4. Navigate to http:localhost:3000 in any browser to preview the app.
+4. Navigate to the following address in any browser to preview the app:
+```
+http://localhost:3000
+```
 
 # Project Description
 ## Front end
@@ -42,6 +45,7 @@ Items collection has items unique Ids documents, each of them with fields:
 * hasDiscount (type: boolean)
 * imageUrl(type: string)
 * isNew (type: boolean)
+* isPinnedToHome (type: boolean)
 * materialName (type: string)
 * name (type: string)
 * price (type: number)
@@ -76,7 +80,7 @@ UsersItems collection has users unique Ids documents, each of them with document
 				* dateCreated (type: timestamp)
 				* totalSum (type: 52)
 	* collection: favourites
- 		*document: items ids
+ 		* document: items ids
 
 # User Roles
 ## Guest - public part
@@ -133,9 +137,7 @@ User is a registered user with a role value of 2. When it is signed in this user
 User does not have access to:
 1. The admin panel to Perform CRUD operations on users, items, item categories and item materials.
 
-
 # TODO before exam date:
-* Create component CurrentPromotion for the hero button
 * Contacts form validation
 * Responsive css design for mobile devices
 * Rewrite css in module.css style sheets for the following components:
@@ -144,8 +146,7 @@ User does not have access to:
 	* Categories;
 	* DiscountedItems;
 	* Guarantee;
-	* NewItems;
-	* ItemDescription.
+	* NewItems.
 	
 # Future work:
 * Implement reset password functionality;
