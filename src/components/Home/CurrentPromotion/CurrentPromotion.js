@@ -25,7 +25,7 @@ export const CurrentPromotion = () => {
         itemsList.push(
             <div key={'items' + i} className={styles["row-items"]}>
                 {
-                    promoItems.filter(x => (x.discount / x.price) * 100 > 50).slice(i, i + 3).map(item => (
+                    promoItems.filter(x => (x.discount / x.price) * 100 >= 50).slice(i, i + 3).map(item => (
                         (item.quantity > 0)
                             ? <section key={item.id} className={styles.items__item}>
                                 <img src={item.imageUrl} alt={item.type} />
