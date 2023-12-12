@@ -62,12 +62,24 @@ export const UpdateItem = () => {
     const handleChange = (e) => {
         let objValue;
         if (e.target.type === 'checkbox') {
-            objValue = e.target.checked;
+            return;
         } else if (e.target.type === 'number') {
             objValue = Number(e.target.value.trim());
         } else {
             objValue = e.target.value.trim();
         }
+
+
+        updateValues((oldValues) => ({
+            ...oldValues,
+            [e.target.name]: objValue
+        }))
+    }
+
+    // Patch for bypassing onChange behavior for html checkbox elements
+    const checkBoxHandleClick = (e) => {
+        let objValue;
+        objValue = e.target.checked;
 
         updateValues((oldValues) => ({
             ...oldValues,
@@ -227,17 +239,17 @@ export const UpdateItem = () => {
                     <div className={styles["form-check"]}>
                         <label htmlFor="index-label">Етикет:</label>
                         <div>
-                            <input defaultValue={item.isNew} id="isNew" className="form-check-input" type="checkbox" name="isNew" value={values.isNew} />
+                            <input onClick={checkBoxHandleClick} defaultChecked={item.isNew} id="isNew" className="form-check-input" type="checkbox" name="isNew" value={values.isNew} />
                             <label htmlFor="isNew">Ново</label>
                         </div>
 
                         <div>
-                            <input defaultValue={item.hasDiscount} id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={values.hasDiscount} />
+                            <input onClick={checkBoxHandleClick} defaultChecked={item.hasDiscount} id="hasDiscount" className="form-check-input" type="checkbox" name="hasDiscount" value={values.hasDiscount} />
                             <label htmlFor="hasDiscount">Промоция</label>
                         </div>
 
                         <div>
-                            <input defaultValue={item.isPinnedToHome} id="isPinnedToHome" className="form-check-input" type="checkbox" name="isPinnedToHome" value={values.isPinnedToHome} />
+                            <input onClick={checkBoxHandleClick} defaultChecked={item.isPinnedToHome} id="isPinnedToHome" className="form-check-input" type="checkbox" name="isPinnedToHome" value={values.isPinnedToHome} />
                             <label htmlFor="isPinnedToHome">Закачи в начало</label>
                         </div>
 
