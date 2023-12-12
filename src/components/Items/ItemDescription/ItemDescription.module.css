@@ -4,11 +4,17 @@
     display: flex;
     justify-content: center;
     gap: 3%;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .item__image {
     width: 40%;
     height: 40%;
+}
+
+.item__description {
+    width: 50%
 }
 
 .item__description h1 {
@@ -30,7 +36,7 @@
 
 .item__description .add-cart {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: baseline;
     gap: 2rem;
 }
@@ -47,4 +53,9 @@
 
 .add-cart input {
     margin-bottom: 1.5rem;
+}
+
+.actions.button {
+    display: flex;
+    align-items: end;
 }

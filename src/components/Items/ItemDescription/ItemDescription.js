@@ -9,7 +9,7 @@ import { ModalTemplate } from "../../Modals/ModalTemplate";
 
 import * as usersItemsService from "../../../services/usersItemsService";
 import * as itemsService from '../../../services/itemsService';
-import './ItemDescription.css';
+import styles from './ItemDescription.module.css'
 
 export const ItemDescription = () => {
     const [item, setItem] = useState({});
@@ -50,10 +50,10 @@ export const ItemDescription = () => {
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
             <h1>{item.type} "{item.name}"</h1>
-            <div className="item">
-                <img className="item__image" src={item.imageUrl} alt="jewellery" />
-                <div className="item__description">
-                    <div className="details">
+            <div className={styles.item}>
+                <img className={styles.item__image} src={item.imageUrl} alt="jewellery" />
+                <div className={styles.item__description}>
+                    <div className={styles.details}>
                         <h2>Категория</h2>
                         <p>{item.categoryName}</p>
                         <h2>Материал</h2>
@@ -78,67 +78,69 @@ export const ItemDescription = () => {
                         <p>{item.quantity} бр.</p>
                     </div>
 
-                    <h2>Количество</h2>
-                    <div className="add-cart">
-                        <div>
-                            <input
-                                type="number"
-                                min="1"
-                                step="1"
-                                max={item.quantity}
-                                onInput={(e) => e.target.value = (parseInt(e.target.value))}
-                                defaultValue={1}
-                                onChange={(e) => handleChange(e, item.quantity)}
-                            />
-                            {isInsufficientQty && <p className="form-error">{error}</p>}
-                        </div>
-                        {
-                            currentUser
-                                ? <button
-                                    className="button yellow same-size-large"
-                                    onClick={(e) =>
-                                        usersItemsService
-                                            .addToCart(e, currentUser.uid, itemId, desiredQty)
-                                    }
-                                    disabled={isInsufficientQty}
-                                >
-                                    <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
-                                </button>
-                                : <div className="tooltip-top">
-                                    <button
+                    <div className={styles.actions}>
+                        <h2>Количество</h2>
+                        <div className={styles["add-cart"]}>
+                            <div>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    step="1"
+                                    max={item.quantity}
+                                    onInput={(e) => e.target.value = (parseInt(e.target.value))}
+                                    defaultValue={1}
+                                    onChange={(e) => handleChange(e, item.quantity)}
+                                />
+                                {isInsufficientQty && <p className="form-error">{error}</p>}
+                            </div>
+                            {
+                                currentUser
+                                    ? <button
                                         className="button yellow same-size-large"
-                                        onClick={(e) => { navigate("/login") }}
+                                        onClick={(e) =>
+                                            usersItemsService
+                                                .addToCart(e, currentUser.uid, itemId, desiredQty)
+                                        }
                                         disabled={isInsufficientQty}
                                     >
                                         <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
                                     </button>
-                                    <span className="tooltiptext">За поръчка е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
-                                </div>
-                        }
-                    </div>
+                                    : <div className="tooltip-top">
+                                        <button
+                                            className="button yellow same-size-large"
+                                            onClick={(e) => { navigate("/login") }}
+                                            disabled={isInsufficientQty}
+                                        >
+                                            <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
+                                        </button>
+                                        <span className="tooltiptext">За поръчка е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
+                                    </div>
+                            }
+                        </div>
 
-                    <div className="favourites">
-                        <h2>Харесва ли ти?</h2>
-                        {
-                            currentUser
-                                ?
-                                <button className="button purple same-size-large"
-                                    onClick={(e) =>
-                                        usersItemsService
-                                            .addToFavorites(currentUser.uid, itemId)
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
-                                    Добави в любими
-                                </button>
-                                : <div className="tooltip-bottom">
-                                    <button className="button purple same-size-large">
+                        <div className={styles.favourites}>
+                            <h2>Харесва ли ти?</h2>
+                            {
+                                currentUser
+                                    ?
+                                    <button className="button purple same-size-large"
+                                        onClick={(e) =>
+                                            usersItemsService
+                                                .addToFavorites(currentUser.uid, itemId)
+                                        }
+                                    >
                                         <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
                                         Добави в любими
                                     </button>
-                                    <span className="tooltiptext">За добавяне на артикул в любими е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
-                                </div>
-                        }
+                                    : <div className="tooltip-bottom">
+                                        <button className="button purple same-size-large">
+                                            <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
+                                            Добави в любими
+                                        </button>
+                                        <span className="tooltiptext">За добавяне на артикул в любими е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
+                                    </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
