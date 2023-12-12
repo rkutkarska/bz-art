@@ -533,6 +533,9 @@ select.error {
     padding-top: 1rem;
 }
 
+.date-created {
+    text-align: center;
+}
 /* TODO responsive */
 
 /* Mobile: 360 x 640.

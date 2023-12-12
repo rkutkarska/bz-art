@@ -25,6 +25,7 @@ export const ReadCategory = () => {
                     ? <Spinner />
                     : <div className="form-container">
                         <h1>Преглед на категория</h1>
+                        <p className="date-created">Записът е създаден на: {category.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</p>
                         <form className={styles["category-form"]}>
                             <label>Име на категория:</label>
                             <input defaultValue={category.categoryName} type="text" disabled />

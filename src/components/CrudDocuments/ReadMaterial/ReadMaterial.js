@@ -34,6 +34,7 @@ export const ReadMaterial = () => {
                         {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
                         <h1>Преглед на материал</h1>
+                        <p className="date-created">Записът е създаден на: {material.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</p>
                         <div className="form-container">
                             <form className={styles["materials-form"]}>
                                 <label>Име:</label>

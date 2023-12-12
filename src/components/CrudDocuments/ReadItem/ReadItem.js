@@ -34,6 +34,7 @@ export const ReadItem = () => {
                         {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
                         <h1>Преглед на артикул</h1>
+                        <p className="date-created">Записът е създаден на: {item.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</p>
                         <form className="form">
                             <label>Име</label>
                             <input defaultValue={item.name} type="text" disabled />
@@ -62,7 +63,7 @@ export const ReadItem = () => {
                             </div>
 
                             <div className="form-check">
-                                <label htmlFor="index-label">Етикет начало:</label>
+                                <label htmlFor="index-label">Етикет:</label>
                                 <div>
                                     <input defaultChecked={item.isNew} className="form-check-input" type="checkbox" disabled />
                                     <label htmlFor="isNew">Ново</label>
@@ -72,6 +73,12 @@ export const ReadItem = () => {
                                     <input defaultChecked={item.hasDiscount} className="form-check-input" type="checkbox" disabled />
                                     <label htmlFor="hasDiscount">Промоция</label>
                                 </div>
+
+                                <div>
+                                    <input defaultChecked={item.isPinnedToHome} className="form-check-input" type="checkbox" disabled />
+                                    <label htmlFor="isPinnedToHome">Закачи в начало</label>
+                                </div>
+
                             </div>
                             <label>Снимка:</label>
                             <img className={styles.image__preview} src={item.imageUrl} alt={item.name} />
