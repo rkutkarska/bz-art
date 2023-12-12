@@ -1,7 +1,21 @@
-import React from "react";
+import { useState } from "react";
 import styles from './Contacts.module.css';
+import * as contactsService from "../../services/contactsService";
+
+
 
 export const Contacts = () => {
+
+    const [nameHasError, setNameHasError] = useState('');
+    const [emailHasError, setEmailHasError] = useState('');
+    const [phoneHasError, setPhoneHasError] = useState('');
+    const [messageHasError, setMessageHasError] = useState('');
+
+    const handleChange = (e) => {
+        // TODO implement send email
+        // https://onboarding.sendinblue.com/account/register
+    }
+
     return (
         <>
             <div className="container">
@@ -13,23 +27,27 @@ export const Contacts = () => {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade">
                     </iframe>
+                    <div>
+                        <form className={styles.container__form} onChange={handleChange}>
+                            <b>Ако имаш въпроси, пиши ни! Нашият екип ще се свърже с теб при първа възможност.</b>
+                            <label htmlFor="name">Имена</label>
+                            <input onBlur={(e) => contactsService.validateName(e, setNameHasError)} type="text" id="name" placeholder="Три имена" />
+                            {nameHasError && <p className="form-error">Името трябва да е с дължина от поне 3 символа!</p>}
 
-                    {/* TODO implement send email */}
-                    {/* https://onboarding.sendinblue.com/account/register */}
-                    <div className={styles.form}>
-                        <h2>Пишете ни!</h2>
-                        <p>Вашето мнение е ценно за нас. Споделете ни го, а ние ще се свържем с Вас при първа възможност.</p>
-                        <form>
-                            <label htmlFor="user-name">Имена</label>
-                            <input type="text" id="user-name" placeholder="Три имена" />
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" placeholder="example@email.bg" />
+                            <input onBlur={(e) => contactsService.validateEmail(e, setEmailHasError)} type="text" id="email" placeholder="example@email.bg" />
+                            {emailHasError && <p className="form-error">Посоченият email адрес е невалиден!</p>}
+
                             <label htmlFor="phone">Телефон</label>
-                            <input type="text" id="phone" placeholder="Телефонен номер" />
+                            <input onBlur={(e) => contactsService.validatePhone(e, setPhoneHasError)} type="text" id="phone" placeholder="0XXXXXXXXX" />
+                            {phoneHasError && <p className="form-error">Телефонният номер е невалиден!</p>}
+
                             <label htmlFor="message">Съобщение</label>
-                            <textarea name="message" id="message" rows="5" placeholder="Вашето съобщение"></textarea>
+                            <textarea onBlur={(e) => contactsService.validateMessage(e, setMessageHasError)} name="message" id="message" rows="5" placeholder="Вашето съобщение (от 20 до 500 символа)"></textarea>
+                            {messageHasError && <p className="form-error">Дължината на съобщението е невалидна!</p>}
+
                             <div className="buttons">
-                                <button className="button green large">Изпрати</button>
+                                <button onClick={(e) => e.preventDefault()} className="button green same-size-large">Изпрати</button>
                             </div>
                         </form>
                     </div>

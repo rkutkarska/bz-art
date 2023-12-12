@@ -1,32 +1,27 @@
-.contacts {
+.container__form {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    padding: 2rem;
     gap: 1rem;
+}
+
+.container__form input {
+    margin-bottom: 1rem;
 }
 
 .container__map {
     border: 0;
-    width: 50%;
+    width: 80%;
     height: 650px;
 }
 
-.form {
+.contacts {
     display: flex;
-    width: 40%;
-    flex-direction: column;
-    row-gap: 1rem;
+    gap: 5%;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.contacts .form input {
-    margin-bottom: 1.5rem;
-}
-
-.contacts .form input,
-.contacts .form textarea {
-    width: 100%;
-}
-
-.contacts .form textarea {
+.contacts textarea {
     min-width: 100%;
 }
