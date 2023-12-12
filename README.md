@@ -138,7 +138,6 @@ User does not have access to:
 1. The admin panel to Perform CRUD operations on users, items, item categories and item materials.
 
 # TODO before exam date:
-* Create component CurrentPromotion for the hero button
 * Contacts form validation
 * Responsive css design for mobile devices
 * Rewrite css in module.css style sheets for the following components:
@@ -147,8 +146,7 @@ User does not have access to:
 	* Categories;
 	* DiscountedItems;
 	* Guarantee;
-	* NewItems;
-	* ItemDescription.
+	* NewItems.
 	
 # Future work:
 * Implement reset password functionality;
