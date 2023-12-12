@@ -91,13 +91,33 @@ export const uploadCategoryImage = async (imageUpload, updateCategoriesData) => 
     });
 }
 
-export const updateCategory = async (e, id, values, setModalObject, setIsModalOpen) => {
+export const updateCategory = async (e, id, values, imageUpload, setModalObject, setIsModalOpen) => {
     e.preventDefault();
+
+    if (values.categoryImageUrl) {
+        const imageRef = ref(storage, `images/categories/${v4() + imageUpload.current.name}`);
+        await uploadBytes(imageRef, imageUpload.current).then(() => {
+            getDownloadURL(imageRef).then(async (categoryImageUrl) => {
+                console.log(categoryImageUrl);
+                try {
+                    const categoryDoc = doc(db, 'categories', id);
+                    await updateDoc(categoryDoc, { ...values, "categoryImageUrl": categoryImageUrl });
+                    setIsModalOpen(true);
+                    setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
+                    return
+                } catch (error) {
+                    setIsModalOpen(true);
+                    setModalObject({ message: 'Записът не е обновен!', type: 'error' });
+                    return;
+                }
+            });
+        });
+    }
 
     const categoryDoc = doc(db, 'categories', id);
 
     try {
-        await updateDoc(categoryDoc, values);
+        await updateDoc(categoryDoc, {...values});
         setIsModalOpen(true);
         setModalObject({ message: 'Записът е обновен успешно!', type: 'information' });
     } catch (error) {
