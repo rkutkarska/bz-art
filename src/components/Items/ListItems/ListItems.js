@@ -25,7 +25,7 @@ export const ListItems = () => {
             <div key={'items' + i} className={styles["row-items"]}>
                 {
                     items.slice(i, i + 3).map(item => (
-                        item.quantity > 0 
+                        item.quantity > 0
                             ? <section key={item.id} className={styles.items__item}>
                                 <img src={item.imageUrl} alt={item.type} />
                                 <div className="item__actions">
@@ -36,22 +36,22 @@ export const ListItems = () => {
                                     <div className={styles.item__tags}>
                                         {
                                             (item.isNew && <div className={styles["new-tag"]}>НОВО</div>)
-                                            || (item.hasDiscount && <div className="discount-tag">{`- ${((item.discount / item.price) * 100).toFixed(0)} %`}</div>)
+                                            || (((item.hasDiscount) && (item.discount > 0)) && <div className="discount-tag">{`- ${((item.discount / item.price) * 100).toFixed(0)} %`}</div>)
                                         }
                                     </div>
                                     <ItemActionButtons props={{ 'item': item, 'quantity': 1 }} />
                                 </div>
                             </section >
                             : <section key={item.id} className={styles.items__item}>
-                            <img src={item.imageUrl} alt={item.type} />
-                            <div className="item__actions">
-                                <div className={styles.item__description}>
-                                    <p className={styles["item-name"]}>{item.name}</p>
-                                    <p className={styles["item-price"]}>{item.price} лв.</p>
+                                <img src={item.imageUrl} alt={item.type} />
+                                <div className="item__actions">
+                                    <div className={styles.item__description}>
+                                        <p className={styles["item-name"]}>{item.name}</p>
+                                        <p className={styles["item-price"]}>{item.price} лв.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <h2 className="out-of-stock">Изчерпан!</h2>
-                        </section >
+                                <h2 className="out-of-stock">Изчерпан!</h2>
+                            </section >
                     ))
                 }
             </div>
