@@ -9,7 +9,7 @@ npm i
 ```js
 npm start
 ```
-4. Navigate to the following address in any browser to preview the app:
+4. Navigate to this local address in any browser to preview the app:
 ```
 http://localhost:3000
 ```
