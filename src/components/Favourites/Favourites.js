@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
-
 import styles from './Favourites.module.css';
 
 export const Favourites = () => {

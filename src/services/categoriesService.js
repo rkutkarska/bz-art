@@ -98,7 +98,6 @@ export const updateCategory = async (e, id, values, imageUpload, setModalObject,
         const imageRef = ref(storage, `images/categories/${v4() + imageUpload.current.name}`);
         await uploadBytes(imageRef, imageUpload.current).then(() => {
             getDownloadURL(imageRef).then(async (categoryImageUrl) => {
-                console.log(categoryImageUrl);
                 try {
                     const categoryDoc = doc(db, 'categories', id);
                     await updateDoc(categoryDoc, { ...values, "categoryImageUrl": categoryImageUrl });

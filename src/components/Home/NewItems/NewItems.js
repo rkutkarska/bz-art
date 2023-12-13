@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import './NewItems.css';
-import * as itemsService from '../../../services/itemsService';
+import { useEffect, useState } from "react";
 import { NewItem } from "./NewItem";
+import * as itemsService from '../../../services/itemsService';
+import './NewItems.css';
 
 export const NewItems = () => {
     const [newItems, setNewItems] = useState([]);
