@@ -99,7 +99,7 @@ export const UpdateCategory = () => {
 
                     <img src={category.categoryImageUrl} className={styles.image__preview} alt={category.categoryName} />
                     <div className={styles.buttons} >
-                        <Link to={'/crud-documents'} className={`button red ${styles.close}`}>Затвори</Link>
+                        <Link to={'admin-panel'} className={`button red ${styles.close}`}>Затвори</Link>
                         <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                     </div>
                 </form>

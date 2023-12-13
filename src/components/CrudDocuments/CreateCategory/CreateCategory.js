@@ -96,7 +96,7 @@ export const CreateCategory = () => {
                     </label>
 
                     <div className="buttons">
-                        <Link className="button red close " to="/crud-documents">Затвори</Link>
+                        <Link className="button red close " to="/admin-panel">Затвори</Link>
                         <input type="submit" className="button green create" value="Запази"
                             onClick={(e) => {
                                 categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories, setCategoryNameHasError, setIsModalOpen, setModalObject);

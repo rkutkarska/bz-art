@@ -53,7 +53,7 @@ export const ReadUser = () => {
                                 <input type="text" defaultValue={roleName} disabled />
                                 <label>Имейл</label>
                                 <input type="text" defaultValue={userData.email} disabled />
-                                <Link to="/crud-documents" className="button red">Затвори</Link>
+                                <Link to="/admin-panel" className="button red">Затвори</Link>
                             </form>
                         </div>
                     </>

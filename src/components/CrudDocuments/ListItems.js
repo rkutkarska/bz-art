@@ -7,7 +7,7 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from '../Modals/ModalTemplate';
 
 import * as adminService from '../../services/adminService';
-import styles from './CrudDocuments.module.css';
+import styles from './AdminPanel.module.css';
 
 export const ListItems = ({ documents }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,7 +56,7 @@ export const ListItems = ({ documents }) => {
                         <div>{document.categoryName}</div>
 
                         <div className={styles.row__actions}>
-                            <Link to={`/crud-documents/read-item/${document.id}`} className="button green">
+                            <Link to={`/admin-panel/read-item/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
@@ -64,7 +64,7 @@ export const ListItems = ({ documents }) => {
                             {
                                 documents.currentUserRole == 1 &&
                                 <>
-                                    <Link to={`/crud-documents/update-item/${document.id}`} className="button orange">
+                                    <Link to={`/admin-panel/update-item/${document.id}`} className="button orange">
                                         <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                         Редактирай
                                     </Link>

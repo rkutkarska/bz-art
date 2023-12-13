@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 
-import styles from './CrudDocuments.module.css';
+import styles from './AdminPanel.module.css';
 
 export const ListUsers = ({ documents }) => {
-   
+
     documents.isClicked.current = !documents.isClicked.current;
 
     return (
@@ -40,13 +40,13 @@ export const ListUsers = ({ documents }) => {
                         </div>
 
                         <div className={styles.row__actions}>
-                            <Link to={`/crud-documents/read-user/${document.id}`} className="button green">
+                            <Link to={`/admin-panel/read-user/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
                             {
                                 documents.currentUserRole === 0 &&
-                                <Link to={`/crud-documents/update-user/${document.id}`} className="button orange">
+                                <Link to={`/admin-panel/update-user/${document.id}`} className="button orange">
                                     <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                     Редактирай
                                 </Link>

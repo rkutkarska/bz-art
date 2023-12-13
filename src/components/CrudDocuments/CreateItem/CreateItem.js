@@ -247,7 +247,7 @@ export const CreateItem = () => {
                         </div>
                     </label>
                     <div className="buttons">
-                        <Link to="/crud-documents" className={`button red ${styles.close}`}>Затвори</Link>
+                        <Link to="/admin-panel" className={`button red ${styles.close}`}>Затвори</Link>
                         <input type="submit" className={`button green ${styles.create}`} value="Запиши" />
                     </div>
                 </form>

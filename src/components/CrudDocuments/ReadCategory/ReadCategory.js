@@ -31,7 +31,7 @@ export const ReadCategory = () => {
                             <input defaultValue={category.categoryName} type="text" disabled />
                             <label>Снимка:</label>
                             <img src={category.categoryImageUrl} className={styles.image__preview} alt={category.categoryName} />
-                            <Link to="/crud-documents" className="button red">Затвори</Link>
+                            <Link to="/admin-panel" className="button red">Затвори</Link>
                         </form>
                     </div>
             }

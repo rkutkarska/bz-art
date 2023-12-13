@@ -17,7 +17,7 @@ import { RequireAuth } from './components/RequireAuth/RequireAuth';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 
-import { CrudDocuments } from './components/CrudDocuments/CrudDocuments';
+import { AdminPanel } from './components/CrudDocuments/AdminPanel';
 import { CreateItem } from './components/CrudDocuments/CreateItem/CreateItem';
 import { CreateCategory } from './components/CrudDocuments/CreateCategory/CreateCategory';
 import { CreateMaterial } from './components/CrudDocuments/CreateMaterials/CreateMaterial';
@@ -73,28 +73,28 @@ function App() {
                     {/* Moderator */}
                     <Route element={<RequireAuth allowedRoles={[usersRoles.moderator]} />}>
                         <Route path="/items" element={<ListItems />} />
-                        <Route path="/crud-documents/create-item" element={<CreateItem />} />
-                        <Route path="/crud-documents/update-item/:itemId" element={<UpdateItem />} />
-                        <Route path="/crud-documents/create-category" element={<CreateCategory />} />
-                        <Route path="/crud-documents/update-category/:categoryId" element={<UpdateCategory />} />
-                        <Route path="/crud-documents/create-material" element={<CreateMaterial />} />
-                        <Route path="/crud-documents/update-material/:materialId" element={<UpdateMaterial />} />
+                        <Route path="/admin-panel/create-item" element={<CreateItem />} />
+                        <Route path="/admin-panel/update-item/:itemId" element={<UpdateItem />} />
+                        <Route path="/admin-panel/create-category" element={<CreateCategory />} />
+                        <Route path="/admin-panel/update-category/:categoryId" element={<UpdateCategory />} />
+                        <Route path="/admin-panel/create-material" element={<CreateMaterial />} />
+                        <Route path="/admin-panel/update-material/:materialId" element={<UpdateMaterial />} />
                     </Route>
                     {/* --- End of Moderator */}
 
                     {/* Moderator or Admin */}
                     <Route element={<RequireAuth allowedRoles={[usersRoles.moderator, usersRoles.admin]} />}>
-                        <Route path="/crud-documents" element={<CrudDocuments />} />
-                        <Route path="/crud-documents/read-item/:itemId" element={<ReadItem />} />
-                        <Route path="/crud-documents/read-category/:categoryId" element={<ReadCategory />} />
-                        <Route path="/crud-documents/read-material/:materialId" element={<ReadMaterial />} />
-                        <Route path="/crud-documents/read-user/:userId" element={<ReadUser />} />
+                        <Route path="/admin-panel" element={<AdminPanel />} />
+                        <Route path="/admin-panel/read-item/:itemId" element={<ReadItem />} />
+                        <Route path="/admin-panel/read-category/:categoryId" element={<ReadCategory />} />
+                        <Route path="/admin-panel/read-material/:materialId" element={<ReadMaterial />} />
+                        <Route path="/admin-panel/read-user/:userId" element={<ReadUser />} />
                     </Route>
                     {/* --- End Moderator or Admin */}
 
                     {/* Admin */}
                     <Route element={<RequireAuth allowedRoles={[usersRoles.admin]} />}>
-                        <Route path="/crud-documents/update-user/:userId" element={<UpdateUser />} />
+                        <Route path="/admin-panel/update-user/:userId" element={<UpdateUser />} />
                     </Route>
                     {/* --- End of Admin */}
 

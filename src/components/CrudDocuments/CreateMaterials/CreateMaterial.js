@@ -72,7 +72,7 @@ export const CreateMaterial = () => {
                     {materialNameHasError && <p className="form-error">Името трябва да е с дължина от поне 3 символа!</p>}
 
                     <div className="buttons">
-                        <Link to="/crud-documents" className={`button red ${styles.close}`}>Затвори</Link>
+                        <Link to="/admin-panel" className={`button red ${styles.close}`}>Затвори</Link>
                         <input type="submit"
                             className={`button green ${styles.close}`}
                             value="Запази"

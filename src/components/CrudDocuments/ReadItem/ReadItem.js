@@ -82,7 +82,7 @@ export const ReadItem = () => {
                             </div>
                             <label>Снимка:</label>
                             <img className={styles.image__preview} src={item.imageUrl} alt={item.name} />
-                            <Link to="/crud-documents" className="button red">Затвори</Link>
+                            <Link to="/admin-panel" className="button red">Затвори</Link>
                         </form>
                     </div>
             }

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { ModalTemplate } from "../Modals/ModalTemplate";
 
 import * as adminService from "../../services/adminService";
-import styles from './CrudDocuments.module.css';
+import styles from './AdminPanel.module.css';
 
 export const ListCategories = ({ documents }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,14 +56,14 @@ export const ListCategories = ({ documents }) => {
 
                         <div>{document.dateCreated.toDate().toLocaleString("bg-BG", { dateStyle: 'long', timeStyle: "short" })}</div>
                         <div className={styles.row__actions}>
-                            <Link to={`/crud-documents/read-category/${document.id}`} className="button green">
+                            <Link to={`/admin-panel/read-category/${document.id}`} className="button green">
                                 <FontAwesomeIcon icon={regular('eye')} className={`${styles.view} ${"fa-icon"}`} />
                                 Прегледай
                             </Link>
                             {
                                 documents.currentUserRole == 1 &&
                                 <>
-                                    <Link to={`/crud-documents/update-category/${document.id}`} className="button orange">
+                                    <Link to={`/admin-panel/update-category/${document.id}`} className="button orange">
                                         <FontAwesomeIcon icon={regular('pen-to-square')} className="edit fa-icon" />
                                         Редактирай
                                     </Link>

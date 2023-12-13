@@ -39,7 +39,7 @@ export const ReadMaterial = () => {
                             <form className={styles["materials-form"]}>
                                 <label>Име:</label>
                                 <input type="text" defaultValue={material.materialName} disabled />
-                                <Link to="/crud-documents" className="button red">Затвори</Link>
+                                <Link to="/admin-panel" className="button red">Затвори</Link>
                             </form>
                         </div>
                     </>

@@ -77,7 +77,7 @@ export const HeaderItems = () => {
                                         {
                                             (userData.role == 0) || (userData.role == 1)
                                                 ? <>
-                                                    <li><Link to="/crud-documents"><FontAwesomeIcon icon={solid('gear')} className="fa-icon" />Административен панел</Link></li>
+                                                    <li><Link to="/admin-panel"><FontAwesomeIcon icon={solid('gear')} className="fa-icon" />Административен панел</Link></li>
                                                 </>
                                                 : null
                                         }
@@ -99,8 +99,8 @@ export const HeaderItems = () => {
                             userData.role == 0 || userData.role == 1
                                 ? null
                                 : <><Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
-                                    <span className="items-count">5</span>
                                     {/* TODO read from db item count in the cart */}
+                                    {/* <span className="items-count">5</span> */}
                                 </>
                         }
                     </>

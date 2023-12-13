@@ -268,7 +268,7 @@ export const UpdateItem = () => {
                         }
                     </label>
                     <div className={styles.buttons}>
-                        <Link to="/crud-documents" className={`button red ${styles.close}`}>Затвори</Link>
+                        <Link to="/admin-panel" className={`button red ${styles.close}`}>Затвори</Link>
                         <button onClick={updateDocument} className={`button orange ${styles.update}`}>Обнови</button>
                     </div>
                 </form>
