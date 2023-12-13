@@ -12,7 +12,12 @@
 }
 
 .discounted__item img {
+    max-height: 250px;
+    min-height: 250px;
+    min-width: 250px;
+    max-width: 250px;
     transition: 0.6s;
+    object-fit: cover;
 }
 
 .discounted__item:hover img {
