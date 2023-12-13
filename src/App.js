@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
-import './styles/reset.css';
+import './reset.css';
 
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';

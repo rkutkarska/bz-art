@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import "../../styles/LoginRegister.css";
+import "./LoginRegister.css";
 
 // TODO implement password reset
 export const Login = () => {
