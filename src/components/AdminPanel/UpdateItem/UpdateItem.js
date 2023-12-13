@@ -263,8 +263,8 @@ export const UpdateItem = () => {
                         </div>
                         {
                             newImageUrl !== ''
-                                ? <img className={styles.image__preview} src={newImageUrl} />
-                                : (imageUpload === '' ? <img className={styles.image__preview} src={item.imageUrl} /> : null)
+                                ? <img alt={item.type} className={styles.image__preview} src={newImageUrl} />
+                                : (imageUpload === '' ? <img alt={item.type} className={styles.image__preview} src={item.imageUrl} /> : null)
                         }
                     </label>
                     <div className={styles.buttons}>
