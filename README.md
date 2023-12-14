@@ -19,16 +19,16 @@ http://localhost:3000
 This project is built using the ReactJs library. The CSS code is written by hand and does not use any external libraries with ready-to-use templates. The **App.css** and **reset.css** stylesheets are global. The file **App.css** stylesheet contains styles that apply to all components. The **reset.css** stylesheet is used to clear some of the browser's default formatting of HTML elements.
 
 ## Back end
-The project uses the following Firebase back-end services: Authentication, Storage and Firestore Database. 
+The project uses the following Firebase back-end services: Authentication, Storage and Firestore Database.
 
 ### Firebase Authentication
-The project uses password-based accounts authentication with emails. 
+The project uses password-based accounts authentication with emails.
 * The **Administrator** account is created manually in the database. It can change the roles of users. His login credentials are:
 	* username: admin@bz-art.com
  	* password: 123456
 * Each guest can register in the app and gets a **User** role.
 * The administrator can give the role **Moderator** to any registered user
-  
+
 For convenience there are currently 2 more accounts created:
 * **Moderator**. His login credentials are:
 	* username: moderator@bz-art.com
@@ -36,14 +36,14 @@ For convenience there are currently 2 more accounts created:
 * **User**. His login credentials are:
 	* username: user@bz-art.com
  	* password: 123456
-    
+
 ### Storage
 The project uses file Cloud Storage on Web for items and categories images.
 
 ### Firestore Database
 The database consist of the following collections:
 
-1. **categories**; 
+1. **categories**;
 Categories collection has categories unique Ids documents, each of them with fields:
 * categoryImageUrl (type: string)
 * categoryName (type: string)
@@ -63,7 +63,7 @@ Items collection has items unique Ids documents, each of them with fields:
 * name (type: string)
 * price (type: number)
 * quantity (type: number)
-* type (type: string) 
+* type (type: string)
 
 3. **materials**;
 Materials collection has materials unique Ids documents, each of them with fields:
@@ -79,13 +79,13 @@ Users collection has users unique Ids documents, each of them with fields:
 UsersItems collection has users unique Ids documents, each of them with documents:
 * users IDs
 	* collection: cart
-		* document: items ids 
+		* document: items ids
 			* field: quantity (type: number)
 	* collection: orders
 		* document: orders ids
 			* fields:
 				* i : object {
-					desiredQuantity (type: number), 
+					desiredQuantity (type: number),
 					id (type: string),
 					imageUrl (type: string),
 					price: (type: number)
@@ -94,6 +94,31 @@ UsersItems collection has users unique Ids documents, each of them with document
 				* totalSum (type: 52)
 	* collection: favourites
  		* document: items ids
+
+# Project Architecture
+<!-- TODO -->
+The project consist of the following folders:
+* node_modules - exteral modules that the project depends on;
+* public:
+	* favicon.ico - small icon is displayed in the browser's tab bar and bookmarks.
+	* index.html - the main HTML file that serves as the initial entry point for the React application. It contains the basic HTML structure and references the compiled JavaScript bundle.
+* src
+	* components
+	* context
+	* img
+	* services
+	* App.css
+	* App.js
+	* Firebase.js
+	* index.js
+	* reset.css
+
+and files:
+* .env
+* .gitignore
+* package-lock.json
+* package.json - contains modules listed as dependencies to install;
+* README.md
 
 # User Roles
 ## Guest - public part
@@ -168,7 +193,7 @@ User does not have access to:
 	* DiscountedItems;
 	* Guarantee;
 	* NewItems.
-	
+
 # Future work:
 * Implement reset password functionality;
 * Implement pagination;
