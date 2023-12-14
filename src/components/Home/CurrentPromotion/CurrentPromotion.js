@@ -21,7 +21,7 @@ export const CurrentPromotion = () => {
 
     let itemsList = [];
 
-    for (var i = 0; i < promoItems.length; i += 3) {
+    for (let i = 0; i < promoItems.length; i += 3) {
         itemsList.push(
             <div key={'items' + i} className={styles["row-items"]}>
                 {

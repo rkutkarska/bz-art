@@ -26,7 +26,7 @@ export const ListItemsByCategory = () => {
 
     let itemsList = [];
 
-    for (var i = 0; i < items.length; i += 3) {
+    for (let i = 0; i < items.length; i += 3) {
         itemsList.push(
             <div key={'items' + i} className={styles["row-items"]}>
                 {
