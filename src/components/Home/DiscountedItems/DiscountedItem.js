@@ -2,14 +2,13 @@ import { Link } from 'react-router-dom';
 import { ItemActionButtons } from '../../Items/ItemActionButtons/ItemActionButtons';
 
 export const DiscountedItem = ({ items }) => {
-
     let discountedItemsList = [];
 
-    for (var i = 0; i < items.length; i += 3) {
+    for (let i = 0; i < items.length; i += 3) {
         discountedItemsList.push(
             <div key={'discounted' + i} className="discounted__items">
                 {
-                    items.slice(i, i + 3).map(item => (
+                    items.filter(x => x.quantity > 0 && x.isPinnedToHome).slice(i, i + 3).map(item => (
                         ((item.quantity > 0) && (item.isPinnedToHome)) &&
                         <section key={item.id} className="discounted__item">
                             <Link to={`/items/${item.id}`}><img src={item.imageUrl} alt="ring" /></Link>

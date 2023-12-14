@@ -4,12 +4,11 @@ import { ItemActionButtons } from '../../Items/ItemActionButtons/ItemActionButto
 export const NewItem = ({ items }) => {
     let newItemsList = [];
 
-    for (var i = 0; i < items.length; i += 3) {
+    for (let i = 0; i < items.length; i += 3) {
         newItemsList.push(
             <div key={'new' + i} className="new__items">
                 {
-                    items.slice(i, i + 3).map(item => (
-                        ((item.quantity > 0) && (item.isPinnedToHome)) &&
+                    items.filter(x => x.quantity > 0 && x.isPinnedToHome).slice(i, i + 3).map(item => (
                         <section key={item.id} className="new__item">
                             <Link to={`/items/${item.id}`}><img src={item.imageUrl} alt="ring" /></Link>
                             <div className="new__actions">
