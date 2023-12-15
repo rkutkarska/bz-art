@@ -100,25 +100,42 @@ UsersItems collection has users unique Ids documents, each of them with document
 The project consist of the following folders:
 * node_modules - exteral modules that the project depends on;
 * public:
-	* favicon.ico - small icon is displayed in the browser's tab bar and bookmarks.
+	* favicon.ico - the small icon displayed in the browser's tab bar and bookmarks.
 	* index.html - the main HTML file that serves as the initial entry point for the React application. It contains the basic HTML structure and references the compiled JavaScript bundle.
 * src
-	* components
+	* components:
+		* AdminPanel - folder consisting of 11 subfolders and 30 files. It contains all the admin panel logic and components for managing and performing CRUD operations on the collections.
+		* Contacts - folder containing the Contacts component and its stylesheet. This component is used to render the contacts page.
+		* Favourites - folder containing the Favourites component and its stylesheet. This component is used to render the favourites page.
+		* Footer - folder containing the Footer component and its stylesheet. This component is used to render the footer on each page of the application.
+		* Forbidden - folder containing the Forbidden component and its stylesheet. This component is used to render the forbidden page in case of unauthorised access by a user.
+		* Header - folder consisting of 4 components. The Header component is the main component and HeaderInfo, HeaderItems and Navigation are nested within it. The Header component is used to render the whole header on each page of the application.
+		* Home - folder consisting of 5 subfolders and 15 files. It contains the hero and the current promotion within it, category list, new and discounted items pinned to the home page.
+		* Items -
+		* Login -
+		* Modals - folder containing the ModalTemplate component and its stylesheet. This component is used to render error, information and confirmation messages to users.
+		* NotFound - folder containing the NotFound component and its stylesheet. This component is used to render the page with error 404-not found in case of a non-existent path to content requested by the user.
+		* Orders -
+		* Register -
+		* RequireAuth -
+		* ShoppingCart -
+		* Spinner - folder containing the Spinner component and its stylesheet. This component is widget that indicates that an operation is in progress. It provides feedback to users while waiting for data to load or actions to complete.
 	* context
+		* AuthContext.js
 	* img
-	* services
-	* App.css
+	* services - folder consisting of 7 js files. Services are reusable functions that encapsulate a specific logic or functionality. They are used to fetch data, manipulate data, and manage state changes.
+	* App.css - global stylesheet file.
 	* App.js
 	* Firebase.js
 	* index.js
-	* reset.css
+	* reset.css - global stylesheet file.
 
 and files:
-* .env
-* .gitignore
-* package-lock.json
-* package.json - contains modules listed as dependencies to install;
-* README.md
+* .env - environment file containing the Firebase Web Application configuration variables.
+* .gitignore - this file ensures that certain files not tracked by Git remain untracked.
+* package-lock.json - lockfile that holds information on the dependencies or packages installed for a project.
+* package.json - contains modules listed as dependencies to install.
+* README.md - contains this short documentation of the project.
 
 # User Roles
 ## Guest - public part
