@@ -155,12 +155,6 @@ export const ShoppingCart = () => {
                             <h2>Общо:</h2>
                             <p className={styles.summary__count}>{userItems.length} артикула</p>
                             <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
-{/* 
-                            {
-                                   typeof(totalSum.current) == Number
-                                        ? ` ${totalSum.current.toFixed(2)} лева`
-                                        : "---,--- лева"
-                                } */}
                             <button className="button green" onClick={placeOrder} disabled={isInsufficientQty}>Поръчай</button>
                         </div>
                     </div>
