@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -60,7 +60,7 @@ export const Favourites = () => {
                                                 <FontAwesomeIcon
                                                     onClick={(e) => {
                                                         usersItemsService
-                                                        .addToCart(e, currentUser.uid, item.id, item.quantity)
+                                                        .addToCart(e, currentUser.uid, item.id, 1)
                                                         .then(() => usersItemsService.removeItemFromFavourites(item.id, currentUser.uid, favourites, setFavourites))
                                                     }}
                                                     icon={solid('shopping-cart')}
