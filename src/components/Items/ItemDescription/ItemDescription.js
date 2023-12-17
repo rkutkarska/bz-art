@@ -9,6 +9,8 @@ import { ModalTemplate } from "../../Modals/ModalTemplate";
 
 import * as usersItemsService from "../../../services/usersItemsService";
 import * as itemsService from '../../../services/itemsService';
+import { getUserData } from '../../../services/usersService';
+
 import styles from './ItemDescription.module.css'
 
 export const ItemDescription = () => {
@@ -23,6 +25,16 @@ export const ItemDescription = () => {
     const { itemId } = useParams();
     const { currentUser } = useAuth();
     const navigate = useNavigate();
+
+
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        if (currentUser) {
+            getUserData(currentUser.uid)
+                .then((res) => setUserData(res));
+        }
+    }, [])
 
     useEffect(() => {
         itemsService.getItem(itemId, setIsModalOpen, setModalObject)
@@ -77,79 +89,83 @@ export const ItemDescription = () => {
                         <h2>Наличност</h2>
                         <p>{item.quantity} бр.</p>
                     </div>
+                    {
+                        (userData.role === 2)
+                            ? <div className={styles.actions}>
+                                <h2>Количество</h2>
+                                <div className={styles["add-cart"]}>
+                                    <div>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            step="1"
+                                            max={item.quantity}
+                                            onInput={(e) => e.target.value = (parseInt(e.target.value))}
+                                            defaultValue={1}
+                                            onChange={(e) => handleChange(e, item.quantity)}
+                                        />
+                                        {isInsufficientQty && <p className="form-error">{error}</p>}
+                                    </div>
+                                    {
+                                        currentUser
+                                            ? <button
+                                                className="button yellow same-size-large"
+                                                onClick={(e) =>
+                                                    usersItemsService
+                                                        .addToCart(e, currentUser.uid, itemId, desiredQty)
+                                                        .then(() => {
+                                                            setModalObject({ message: 'Артикулът е добавен в количката!', type: 'cart' });
+                                                            setIsModalOpen(true);
+                                                        })
+                                                }
+                                                disabled={isInsufficientQty}
+                                            >
+                                                <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
+                                            </button>
 
-                    <div className={styles.actions}>
-                        <h2>Количество</h2>
-                        <div className={styles["add-cart"]}>
-                            <div>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    step="1"
-                                    max={item.quantity}
-                                    onInput={(e) => e.target.value = (parseInt(e.target.value))}
-                                    defaultValue={1}
-                                    onChange={(e) => handleChange(e, item.quantity)}
-                                />
-                                {isInsufficientQty && <p className="form-error">{error}</p>}
+                                            : <div className="tooltip-top">
+                                                <button
+                                                    className="button yellow same-size-large"
+                                                    onClick={(e) => { navigate("/login") }}
+                                                    disabled={isInsufficientQty}
+                                                >
+                                                    <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
+                                                </button>
+                                                <span className="tooltiptext">За поръчка е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
+                                            </div>
+                                    }
+                                </div>
+
+                                <div className={styles.favourites}>
+                                    <h2>Харесва ли ти?</h2>
+                                    {
+                                        currentUser
+                                            ? <button className="button purple same-size-large"
+                                                onClick={() =>
+                                                    usersItemsService
+                                                        .addToFavorites(currentUser.uid, itemId)
+                                                        .then(() => {
+                                                            setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
+                                                            setIsModalOpen(true);
+                                                        })
+                                                }
+                                            >
+                                                <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
+                                                Добави в любими
+                                            </button>
+
+                                            : <div className="tooltip-bottom">
+                                                <button className="button purple same-size-large">
+                                                    <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
+                                                    Добави в любими
+                                                </button>
+                                                <span className="tooltiptext">За добавяне на артикул в любими е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
+                                            </div>
+                                    }
+                                </div>
                             </div>
-                            {
-                                currentUser
-                                    ? <button
-                                        className="button yellow same-size-large"
-                                        onClick={(e) =>
-                                            usersItemsService
-                                                .addToCart(e, currentUser.uid, itemId, desiredQty)
-                                                .then(() => {
-                                                    setModalObject({ message: 'Артикулът е добавен в количката!', type: 'cart' });
-                                                    setIsModalOpen(true);
-                                                })
-                                        }
-                                        disabled={isInsufficientQty}
-                                    >
-                                        <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
-                                    </button>
-                                    : <div className="tooltip-top">
-                                        <button
-                                            className="button yellow same-size-large"
-                                            onClick={(e) => { navigate("/login") }}
-                                            disabled={isInsufficientQty}
-                                        >
-                                            <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Добави в количката
-                                        </button>
-                                        <span className="tooltiptext">За поръчка е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
-                                    </div>
-                            }
-                        </div>
-
-                        <div className={styles.favourites}>
-                            <h2>Харесва ли ти?</h2>
-                            {
-                                currentUser
-                                    ?
-                                    <button className="button purple same-size-large"
-                                        onClick={() =>
-                                            usersItemsService
-                                                .addToFavorites(currentUser.uid, itemId)
-                                                .then(() => {
-                                                    setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
-                                                    setIsModalOpen(true);
-                                                })
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
-                                        Добави в любими
-                                    </button>
-                                    : <div className="tooltip-bottom">
-                                        <button className="button purple same-size-large">
-                                            <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
-                                            Добави в любими
-                                        </button>
-                                        <span className="tooltiptext">За добавяне на артикул в любими е необходим акаунт. Кликни този бутон, за да се впишеш!</span>
-                                    </div>
-                            }
-                        </div>
-                    </div>
+                            : null
+                    }
                 </div>
             </div>
         </div >

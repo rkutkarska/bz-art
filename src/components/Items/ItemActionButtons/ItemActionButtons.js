@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -6,12 +6,21 @@ import { Link } from 'react-router-dom';
 import { ModalTemplate } from '../../Modals/ModalTemplate';
 
 import * as usersItemsService from "../../../services/usersItemsService";
+import { getUserData } from '../../../services/usersService';
 
 export const ItemActionButtons = ({ props }) => {
     const { currentUser } = useAuth();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        if (currentUser) {
+            getUserData(currentUser.uid)
+                .then((res) => setUserData(res));
+        }
+    }, [])
 
     return (
         <>
@@ -25,7 +34,7 @@ export const ItemActionButtons = ({ props }) => {
                     Детайли
                 </Link>
                 {
-                    currentUser &&
+                    (currentUser && userData.role === 2) &&
                     <Link
                         className="button yellow"
                         onClick={(e) => {
