@@ -93,8 +93,6 @@ export const AdminPanel = () => {
         e.target.parentElement.nextSibling.children[1].value = "DEFAULT";
         e.target.parentElement.nextSibling.nextElementSibling.children[1].value = "DEFAULT"
         e.target.parentElement.nextSibling.nextElementSibling.nextElementSibling.children[1].value = ""
-
-
     }
 
     const handleDocumentSorTypeChange = (e) => {
@@ -109,27 +107,12 @@ export const AdminPanel = () => {
         searchOption.current = e.target.value;
     }
 
-    const onSearch = () => {
-
-        if (searchOption.current === "") {
+    const validate = () => {
+        if (documentType === "") {
             setIsModalOpen(true);
-            setModalObject({ message: 'Моля, изберете опция за търсене!', type: 'alert' });
+            setModalObject({ message: 'Моля, изберете тип на документ', type: 'alert' });
             return;
         }
-
-        if (searchString.current === "") {
-            setIsModalOpen(true);
-            setModalObject({ message: 'Моля, въведете думата, която търсите!', type: 'alert' });
-            return;
-        }
-
-        const newDoc = documents.filter(document => {
-            if (((document[searchOption.current]).toLowerCase().trim()).includes(searchString.current.toLowerCase().trim())) {
-                return document;
-            }
-        })
-
-        setDocuments(newDoc);
     }
 
     const getUserData = () => {
@@ -257,9 +240,8 @@ export const AdminPanel = () => {
                     </div>
 
                     <button className={`button green ${styles["search-button"]} `} onClick={(e) => {
+                        validate();
                         getDocument();
-                        // setHidden(true);
-
                     }}
                     >
                         Търси
