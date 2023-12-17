@@ -18,9 +18,7 @@ export const ShoppingCart = () => {
     const [itemsInCart, setItemsInCart] = useState([]);
     const { currentUser } = useAuth();
 
-    const [isInsufficientQty, setIsInsufficientQty] = useState(false);
-    const [error, setError] = useState('');
-    const [desiredQty, setDesiredQty] = useState(1);
+    const isInsufficientQty = useRef(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalObject, setModalObject] = useState({});
@@ -59,37 +57,52 @@ export const ShoppingCart = () => {
     }, []);
 
     useEffect(() => {
-        if (true) {
-            let ids = userItems.map(x => x.id);
+        let ids = userItems.map(x => x.id);
 
-            itemsService.getItemsByIds(ids)
-                .then((res) => {
-                    let items = [];
-                    res.map(item => {
-                        item.desiredQuantity = userItems.find(x => x.id === item.id).quantity;
-                        totalSum.current = Number((totalSum.current + (item.price * item.desiredQuantity)));
-                        itemsCount.current = itemsCount.current + 1;
-                        items.push(item);
-                    });
-                    setItemsInCart(items);
+        itemsService.getItemsByIds(ids)
+            .then((res) => {
+                let items = [];
+                res.map(item => {
+                    item.desiredQuantity = userItems.find(x => x.id === item.id).quantity;
+                    totalSum.current = Number((totalSum.current + ((item.price - item.discount) * item.desiredQuantity)));
+                    itemsCount.current = itemsCount.current + 1;
+                    items.push(item);
                 });
+                setItemsInCart(items);
+            });
 
-        }
     }, [userItems])
 
-    const handleChange = (e, itemQuantity) => {
+    const handleChange = (e, itemQuantity, itemId) => {
+
+        let index = itemsInCart.findIndex((x) => x.id == itemId);
+        let arr = itemsInCart;
 
         if (Number(e.target.value) > Number(itemQuantity)) {
-            setIsInsufficientQty(true);
-            setError('Недостатъчна наличност!');
-        } else if (e.target.value === '' || e.target.value <= 0) {
-            setIsInsufficientQty(true);
-            setError('Невалидна стойност!')
-        } else {
-            setIsInsufficientQty(false);
-            setError('');
-            setDesiredQty(e.target.value);
+            arr[index].quantityError = true;
+
+            isInsufficientQty.current = true;
+            return setItemsInCart([...arr]);
         }
+
+        if (e.target.value === '' || Number(e.target.value) <= 0) {
+            arr[index].invalidError = true;
+
+            isInsufficientQty.current = true;
+            return setItemsInCart([...arr]);
+        }
+
+        arr[index].quantityError = false;
+        arr[index].invalidError = false;
+        changeAmount({ "id": itemId, "event": e, 'availableQuantity': itemQuantity })
+
+        if (itemsInCart.some((x) => (x.quantityError == true) || (x.invalidError == true))) {
+            isInsufficientQty.current = true;
+            return setItemsInCart([...arr]);
+        }
+
+        isInsufficientQty.current = false;
+        return setItemsInCart([...arr]);
     }
 
     return (<>
@@ -110,7 +123,7 @@ export const ShoppingCart = () => {
                                             <Link to={`/items/${item.id}`}>
                                                 <p>{item.type} {item.name}</p>
                                             </Link>
-                                            <h2>{(item.price).toFixed(2)} лв.</h2>
+                                            <h2>{(item.price - item.discount).toFixed(2)} лв.</h2>
                                             <h2>Наличност: {item.quantity} бр.</h2>
                                         </div >
                                         {
@@ -120,12 +133,11 @@ export const ShoppingCart = () => {
                                                     defaultValue={item.desiredQuantity}
                                                     min={1}
                                                     max={item.quantity}
-                                                    onChange={(e) => handleChange(e, item.quantity)}
-                                                    onInput={(e) => {
-                                                        changeAmount({ "id": item.id, "event": e, 'availableQuantity': item.quantity })
-                                                    }}
+                                                    onChange={(e) => handleChange(e, item.quantity, item.id)}
                                                 />
-                                                {isInsufficientQty && <p className={`form-error ${styles.error}`}>{error}</p>}
+
+                                                {(item.quantityError) && <p key={item.id} className={`form-error ${styles.error}`}>Недостатъчна наличност!</p>}
+                                                {(item.invalidError) && <p key={item.id} className={`form-error ${styles.error}`}>Невалидна стойност!</p>}
                                             </>
                                         }
                                         <div className={styles.item__actions}>
@@ -142,7 +154,19 @@ export const ShoppingCart = () => {
                                                 <p className={styles['hidden-text__heart']}>Добави в любими</p>
                                             </button>
                                             <button>
-                                                <FontAwesomeIcon onClick={() => usersItemsService.removeItemFromCart(item.id, currentUser.uid, itemsInCart, setItemsInCart)}
+                                                <FontAwesomeIcon
+                                                    onClick={async () => {
+                                                        await usersItemsService
+                                                            .removeItemFromCart(item.id, currentUser.uid, itemsInCart, setItemsInCart)
+                                                            .then(() => {
+                                                                totalSum.current = 0;
+                                                                usersItemsService.getItemsInCart(currentUser.uid)
+                                                                    .then(items => {
+                                                                        setUserItems(items);
+                                                                    })
+                                                            })
+                                                    }}
+
                                                     icon={solid('trash-can')}
                                                     className={`fa-icon ${styles.trash}`}
                                                 />
@@ -158,7 +182,7 @@ export const ShoppingCart = () => {
                             <h2>Общо:</h2>
                             <p className={styles.summary__count}>{userItems.length} артикула</p>
                             <p className={styles.summary__price}>{totalSum.current.toFixed(2)} лева</p>
-                            <button className="button green" onClick={placeOrder} disabled={isInsufficientQty}>Поръчай</button>
+                            <button className="button green" onClick={placeOrder} disabled={isInsufficientQty.current}>Поръчай</button>
                         </div>
                     </div>
                     :

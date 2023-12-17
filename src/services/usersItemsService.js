@@ -88,7 +88,7 @@ export const orderItems = async (userId, itemsInCart, totalSum, setItemsInCart) 
             try {
                 const itemDoc = doc(db, 'items', item.id);
                 await updateDoc(itemDoc, { quantity: availableQuantity - orderedQuantity })
-                    .then(() => removeItemFromCart(item.id, userId, itemsInCart, setItemsInCart));
+                    .then(async () => await removeItemFromCart(item.id, userId, itemsInCart, setItemsInCart));
             } catch (error) {
                 // todo
                 return;
@@ -99,18 +99,18 @@ export const orderItems = async (userId, itemsInCart, totalSum, setItemsInCart) 
     return orderId;
 }
 
-export const removeItemFromCart = (itemId, userId, itemsInCart, setItemsInCart) => {
-    const itemInCartRef = doc(db, `usersItems/${userId}/cart`, itemId);
-
-    deleteDoc(itemInCartRef)
-    deleteItem(itemId, itemsInCart, setItemsInCart);
+export const removeItemFromCart = async (itemId, userId, itemsInCart, setItemsInCart) => {
+    const itemInCartRef = doc(db, `usersItems/${userId}/cart`, itemId);    
+    // deleteItem(itemId, itemsInCart, setItemsInCart);
+    await deleteDoc(itemInCartRef)
+    
 }
 
-function deleteItem(id, itemsInCart, setItemsInCart) {
-    let items = [...itemsInCart];
-    items = items.filter((document) => document.id !== id);
-    setItemsInCart(items);
-}
+// function deleteItem(id, itemsInCart, setItemsInCart) {
+//     let items = [...itemsInCart];
+//     items = items.filter((document) => document.id !== id);
+//     setItemsInCart(items);
+// }
 
 
 export const removeItemFromFavourites = (itemId, userId, favourites, setFavourites) => {
