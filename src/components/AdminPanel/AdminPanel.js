@@ -89,7 +89,6 @@ export const AdminPanel = () => {
         searchString.current = '';
         searchOption.current = '';
 
-        // TODO set document-sort && document-search fields to DEFAULT in HTML. Hardcoded for the specific form but while loop perhaps?
         e.target.parentElement.nextSibling.children[1].value = "DEFAULT";
         e.target.parentElement.nextSibling.nextElementSibling.children[1].value = "DEFAULT"
         e.target.parentElement.nextSibling.nextElementSibling.nextElementSibling.children[1].value = ""
@@ -162,9 +161,17 @@ export const AdminPanel = () => {
                         <span>Сортирай по:</span>
                         <select className={styles["document-sort"]} defaultValue={"DEFAULT"} name="document-sort" onChange={handleDocumentSorTypeChange} required>
                             <option value="DEFAULT" disabled={true}>-- Моля, изберете --</option>
-                            {documentType == 'items' &&
 
-                                // TODO user asc desc order
+                            {documentType == 'users' &&
+                                <>
+                                    <option value="email, asc">Email A-Z</option>
+                                    <option value="email, desc">Email Z-A</option>
+                                    <option value="role, asc">Роля 0-2</option>
+                                    <option value="role, desc">Роля 2-0</option>
+                                </>
+                            }
+
+                            {documentType == 'items' &&
                                 <>
                                     <option value="name, asc">Име А-Я</option>
                                     <option value="name, desc">Име Я-А</option>
@@ -235,7 +242,7 @@ export const AdminPanel = () => {
                     </div>
 
                     <div className={styles["search-keyword"]}>
-                        <span>За:</span>
+                        <span>За ключова дума:</span>
                         <input className={styles["search-value"]} placeholder="Търсене..." type="text" onChange={handleDocumentSearch} />
                     </div>
 
