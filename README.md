@@ -167,14 +167,14 @@ The project consist of the following folders:
 	* index.html - the main HTML file that serves as the initial entry point for the React application. It contains the basic HTML structure and references the compiled JavaScript bundle.
 * src
 	* components:
-		* AdminPanel - folder consisting of 11 subfolders and 30 files. It contains all the admin panel logic and components for managing and performing CRUD operations on the collections and their stylesheets. These components interact most with the admin, categories, users, users items and materials services.
+		* AdminPanel - folder consisting of 11 subfolders and 30 files. It contains all the admin panel logic and components for managing and performing CRUD operations on the collections and their stylesheets. These components interact most with services for admin, categories, users, users items and materials.
 		* Authentication folder consisting of the following files:
 			* Login.js - this component handles user login functionalities and renders the corresponding login form. It utilizes React hooks, context, and event handlers to manage the login process and display error messages.
 			* Register.js - this component handles user registration and renders the corresponding registration form. It utilizes React hooks, context, and event handlers to manage the registration process.
 			* RequireAuth.js - this component handles user authentication and authorization for routes that require specific roles. It utilizes React hooks, context, and a service to manage user data and roles.
 			* LoginRegister.css - stylesheet for Login and Register components.
-		* Contacts - folder, which contains the Contacts component and its stylesheet. This component is used to render the contacts page.
-		* Favourites - folder, which contains the Favourites component and its stylesheet. This component is used to render the favourites page.
+		* Contacts - folder, which contains the Contacts component and its stylesheet. This component is used to render the contacts page with dynamic form.
+		* Favourites - folder, which contains the Favourites component and its stylesheet. This component is used to render the favourite items of the user and the relevant actions with added items - remove items and move items to the cart.
 		* Footer - folder, which contains the Footer component and its stylesheet. This component is used to render the footer on each page of the application.
 		* Forbidden - folder, which contains the Forbidden component and its stylesheet. This component is used to render the forbidden page in case of unauthorised access by a user.
 		* Header - folder consisting of 4 components. The Header component is the main component and HeaderInfo, HeaderItems and Navigation are nested within it. The Header component is used to render the whole header on each page of the application.
