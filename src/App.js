@@ -9,9 +9,9 @@ import { NotFound } from './components/NotFound/NotFound';
 import { Forbidden } from './components/Forbidden/Forbidden';
 
 import { AuthProvider } from './context/AuthContext';
-import { RequireAuth } from './components/RequireAuth/RequireAuth';
-import { Login } from './components/Login/Login';
-import { Register } from './components/Register/Register';
+import { RequireAuth } from './components/Authentication/RequireAuth';
+import { Login } from './components/Authentication/Login';
+import { Register } from './components/Authentication/Register';
 
 import { AdminPanel } from './components/AdminPanel/AdminPanel';
 import { CreateItem } from './components/AdminPanel/CreateItem/CreateItem';
