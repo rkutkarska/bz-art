@@ -132,8 +132,11 @@ export const ShoppingCart = () => {
                                             <button>
                                                 <FontAwesomeIcon
                                                     onClick={() => {
-                                                        setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
-                                                        setIsModalOpen(true);
+                                                        usersItemsService.addToFavorites(currentUser.uid, item.id)
+                                                            .then(() => {
+                                                                setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
+                                                                setIsModalOpen(true);
+                                                            })
                                                     }}
                                                     icon={solid('heart')} className={`fa-icon ${styles["heart"]}`} />
                                                 <p className={styles['hidden-text__heart']}>Добави в любими</p>

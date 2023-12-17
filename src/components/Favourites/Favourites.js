@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { ModalTemplate } from "../Modals/ModalTemplate";
 
 import * as usersItemsService from '../../services/usersItemsService';
 import * as itemsService from '../../services/itemsService';
@@ -13,6 +14,9 @@ export const Favourites = () => {
     const [userItems, setUserItems] = useState([]);
     const [favourites, setFavourites] = useState([]);
     const { currentUser } = useAuth();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
         usersItemsService.getFavourites(currentUser.uid)
@@ -39,6 +43,8 @@ export const Favourites = () => {
 
     return (<>
         <div className={`container ${styles.favourites}`}>
+            {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
+
             <h1>Любими артикули</h1>
             {
                 favourites.length > 0
@@ -60,9 +66,14 @@ export const Favourites = () => {
                                                 <FontAwesomeIcon
                                                     onClick={(e) => {
                                                         usersItemsService
-                                                        .addToCart(e, currentUser.uid, item.id, 1)
-                                                        .then(() => usersItemsService.removeItemFromFavourites(item.id, currentUser.uid, favourites, setFavourites))
+                                                            .addToCart(e, currentUser.uid, item.id, 1)
+                                                            .then(() => {
+                                                                usersItemsService.removeItemFromFavourites(item.id, currentUser.uid, favourites, setFavourites);
+                                                                setModalObject({ message: 'Артикулът е преместен в количката!', type: 'cart' });
+                                                                setIsModalOpen(true);
+                                                            })
                                                     }}
+
                                                     icon={solid('shopping-cart')}
                                                     className={`fa-icon ${styles["cart"]}`}
                                                 />

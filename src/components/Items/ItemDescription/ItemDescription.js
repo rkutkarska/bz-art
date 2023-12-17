@@ -100,6 +100,10 @@ export const ItemDescription = () => {
                                         onClick={(e) =>
                                             usersItemsService
                                                 .addToCart(e, currentUser.uid, itemId, desiredQty)
+                                                .then(() => {
+                                                    setModalObject({ message: 'Артикулът е добавен в количката!', type: 'cart' });
+                                                    setIsModalOpen(true);
+                                                })
                                         }
                                         disabled={isInsufficientQty}
                                     >
@@ -124,9 +128,13 @@ export const ItemDescription = () => {
                                 currentUser
                                     ?
                                     <button className="button purple same-size-large"
-                                        onClick={(e) =>
+                                        onClick={() =>
                                             usersItemsService
                                                 .addToFavorites(currentUser.uid, itemId)
+                                                .then(() => {
+                                                    setModalObject({ message: 'Артикулът е добавен в любими!', type: 'favourites' });
+                                                    setIsModalOpen(true);
+                                                })
                                         }
                                     >
                                         <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
