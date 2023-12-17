@@ -1,11 +1,9 @@
-import React from 'react';
-import './Header.css';
-
 import { useLocation } from "react-router-dom";
-
 import { HeaderInfo } from './HeaderInfo';
 import { HeaderItems } from './HeaderItems';
 import { Navigation } from './Navigation';
+
+import './Header.css';
 
 export const Header = () => {
     const { pathname } = useLocation();

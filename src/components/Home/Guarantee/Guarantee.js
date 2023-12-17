@@ -1,9 +1,8 @@
-import React from "react";
-import './Guarantee.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import yellow_blob from '../../../img/blobs/first-blob.svg';
 import purple_blob from '../../../img/blobs/second-blob.svg';
+import './Guarantee.css';
 
 export const Guarantee = () => {
     return (

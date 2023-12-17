@@ -1,8 +1,4 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import './App.css';
-import './reset.css';
 
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
@@ -38,6 +34,9 @@ import { SuccessfullOrder } from './components/Orders/SuccessfullOrder';
 import { OrdersHistory } from './components/Orders/OrdersHistory';
 import { CurrentPromotion } from './components/Home/CurrentPromotion/CurrentPromotion';
 
+import './App.css';
+import './reset.css';
+
 function App() {
     const usersRoles = {
         admin: 0,
@@ -50,6 +49,7 @@ function App() {
             <div>
                 <Header />
                 <Routes>
+                    
                     {/* Guest - public part*/}
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
