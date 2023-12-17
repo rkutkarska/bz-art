@@ -95,48 +95,6 @@ UsersItems collection has users unique Ids documents, each of them with document
 	* collection: favourites
  		* document: items ids
 
-# Project Architecture
-<!-- TODO -->
-The project consist of the following folders:
-* node_modules - exteral modules that the project depends on;
-* public:
-	* favicon.ico - the small icon displayed in the browser's tab bar and bookmarks.
-	* index.html - the main HTML file that serves as the initial entry point for the React application. It contains the basic HTML structure and references the compiled JavaScript bundle.
-* src
-	* components:
-		* AdminPanel - folder consisting of 11 subfolders and 30 files. It contains all the admin panel logic and components for managing and performing CRUD operations on the collections.
-		* Contacts - folder containing the Contacts component and its stylesheet. This component is used to render the contacts page.
-		* Favourites - folder containing the Favourites component and its stylesheet. This component is used to render the favourites page.
-		* Footer - folder containing the Footer component and its stylesheet. This component is used to render the footer on each page of the application.
-		* Forbidden - folder containing the Forbidden component and its stylesheet. This component is used to render the forbidden page in case of unauthorised access by a user.
-		* Header - folder consisting of 4 components. The Header component is the main component and HeaderInfo, HeaderItems and Navigation are nested within it. The Header component is used to render the whole header on each page of the application.
-		* Home - folder consisting of 5 subfolders and 15 files. It contains the hero and the current promotion within it, category list, new and discounted items pinned to the home page.
-		* Items -
-		* Login -
-		* Modals - folder containing the ModalTemplate component and its stylesheet. This component is used to render error, information and confirmation messages to users.
-		* NotFound - folder containing the NotFound component and its stylesheet. This component is used to render the page with error 404-not found in case of a non-existent path to content requested by the user.
-		* Orders -
-		* Register -
-		* RequireAuth -
-		* ShoppingCart -
-		* Spinner - folder containing the Spinner component and its stylesheet. This component is widget that indicates that an operation is in progress. It provides feedback to users while waiting for data to load or actions to complete.
-	* context
-		* AuthContext.js
-	* img
-	* services - folder consisting of 7 js files. Services are reusable functions that encapsulate a specific logic or functionality. They are used to fetch data, manipulate data, and manage state changes.
-	* App.css - global stylesheet file.
-	* App.js
-	* Firebase.js
-	* index.js
-	* reset.css - global stylesheet file.
-
-and files:
-* .env - environment file containing the Firebase Web Application configuration variables.
-* .gitignore - this file ensures that certain files not tracked by Git remain untracked.
-* package-lock.json - lockfile that holds information on the dependencies or packages installed for a project.
-* package.json - contains modules listed as dependencies to install.
-* README.md - contains this short documentation of the project.
-
 # User Roles
 ## Guest - public part
 Guest is every unregistered user. This user has access to:
@@ -201,17 +159,61 @@ User is a registered user with a role value of 2. When it is signed in this user
 User does not have access to:
 1. The admin panel to Perform CRUD operations on users, items, item categories and item materials.
 
+# Project Architecture
+The project consist of the following folders:
+* node_modules - exteral modules that the project depends on;
+* public:
+	* favicon.ico - the small icon displayed in the browser's tab bar and bookmarks.
+	* index.html - the main HTML file that serves as the initial entry point for the React application. It contains the basic HTML structure and references the compiled JavaScript bundle.
+* src
+	* components:
+		* AdminPanel - folder consisting of 11 subfolders and 30 files. It contains all the admin panel logic and components for managing and performing CRUD operations on the collections and their stylesheets. These components interact most with the admin, categories, users, users items and materials services.
+		* Authentication folder consisting of the following files:
+			* Login.js - this component handles user login functionalities and renders the corresponding login form. It utilizes React hooks, context, and event handlers to manage the login process and display error messages.
+			* Register.js - this component handles user registration and renders the corresponding registration form. It utilizes React hooks, context, and event handlers to manage the registration process.
+			* RequireAuth.js - this component handles user authentication and authorization for routes that require specific roles. It utilizes React hooks, context, and a service to manage user data and roles.
+			* LoginRegister.css - stylesheet for Login and Register components.
+		* Contacts - folder, which contains the Contacts component and its stylesheet. This component is used to render the contacts page.
+		* Favourites - folder, which contains the Favourites component and its stylesheet. This component is used to render the favourites page.
+		* Footer - folder, which contains the Footer component and its stylesheet. This component is used to render the footer on each page of the application.
+		* Forbidden - folder, which contains the Forbidden component and its stylesheet. This component is used to render the forbidden page in case of unauthorised access by a user.
+		* Header - folder consisting of 4 components. The Header component is the main component and HeaderInfo, HeaderItems and Navigation are nested within it. The Header component is used to render the whole header on each page of the application.
+		* Home - folder consisting of 5 subfolders and 15 files. It contains the hero and the current promotion within it, category list, new and discounted items pinned to the home page and gurantee section and their stylesheets.
+		* Items - folder, which contains 4 folders and 7 files. These components renders: items by their category in home page, the action buttons - detailes and add to cart to every item, item description detailes: price, discount, description, quantity etc. and actions like add to cart and add to favourites.
+		* Modals - folder, which contains the ModalTemplate component and its stylesheet. This component is used to render error, information and confirmation messages to users.
+		* NotFound - folder, which contains the NotFound component and its stylesheet. This component is used to render the page with error 404-not found in case of a non-existent path to content requested by the user.
+		* Orders - folder, which contains 6 files. The components have the following functionality: placing an order, information page after successfully placing an order and listing the order history for the user.
+		* ShoppingCart - folder, which contains the ShoppingCart component and its stylesheet. This component is used to render the user's shopping cart, to validate the desired quantity and render the error messages and to place an order.
+		* Spinner - folder, which contains the Spinner component and its stylesheet. This component is widget that indicates that an operation is in progress. It provides feedback to users while waiting for data to load or actions to complete.
+	* context
+		* AuthContext.js - provides a centralized way to manage authentication data and functions. It simplifies the process for other components to access and utilize authentication-related features.
+	* img - folder consisting of 8 files and 4 folders. It contains static images for the application such as: application logo, login and register cover image, 403 and 404 page error images and their Adobe Illustrator project, hero image and the vector blob images for home page Guarantee component.
+	* services - folder consisting of 7 js files. Services are reusable functions that encapsulate a specific logic or functionality. They are used to fetch data, manipulate data, and manage state changes.
+	* App.css - global stylesheet file.
+	* App.js - entry point of a React application. It initializes the React application, defines the components to render, and handles routing between pages and imports the global stylesheets.
+	* Firebase.js - initializes Firebase and provides access to the Firebase services for storage, database, and authentication, making it possible to interact with the Firebase platform from this React application.
+	* index.js - central component of a React application, responsible for bringing all the pieces together. It sets up the basic structure for a React application, uses React libraries, creates a root instance, renders the main component, and manages routing with BrowserRouter.
+	* reset.css - global stylesheet file.
+
+and files:
+* .env - environment file containing the Firebase Web Application configuration variables.
+* .gitignore - this file ensures that certain files not tracked by Git remain untracked.
+* package-lock.json - lockfile that holds information on the dependencies or packages installed for a project.
+* package.json - contains modules listed as dependencies to install.
+* README.md - contains short documentation of the project.
+
 # TODO before exam date:
-* Responsive css design for mobile devices
 * Rewrite css in module.css style sheets for the following components:
 	* Header;
 	* CreateCategory;
 	* Categories;
 	* DiscountedItems;
 	* Guarantee;
-	* NewItems.
+	* NewItems;
+	* LoginRegister.
 
 # Future work:
+* Responsive css design for mobile devices;
 * Implement reset password functionality;
 * Implement pagination;
 * Implement send email functionality in Contacts component;
