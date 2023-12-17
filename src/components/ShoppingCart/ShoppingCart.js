@@ -125,7 +125,7 @@ export const ShoppingCart = () => {
                                                         changeAmount({ "id": item.id, "event": e, 'availableQuantity': item.quantity })
                                                     }}
                                                 />
-                                                {isInsufficientQty && <p className="form-error">{error}</p>}
+                                                {isInsufficientQty && <p className={`form-error ${styles.error}`}>{error}</p>}
                                             </>
                                         }
                                         <div className={styles.item__actions}>

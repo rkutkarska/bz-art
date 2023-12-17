@@ -69,12 +69,12 @@
     color: var(--clr-red);
 }
 
-.trash:hover + .hidden-text__trash{
+.trash:hover+.hidden-text__trash {
     display: block;
     color: var(--clr-red);
 }
 
-.heart:hover + .hidden-text__heart{
+.heart:hover+.hidden-text__heart {
     display: block;
     color: var(--clr-red);
 }
@@ -115,8 +115,13 @@
     min-width: 170px;
 }
 
-.item__actions{
+.item__actions {
     position: absolute;
     top: 0px;
     right: 0px;
+}
+
+.error {
+    position: absolute!important;
+    right: 3%;
 }
