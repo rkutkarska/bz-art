@@ -178,7 +178,7 @@ The project consist of the following folders:
 		* Footer - folder, which contains the Footer component and its stylesheet. This component is used to render the footer on each page of the application.
 		* Forbidden - folder, which contains the Forbidden component and its stylesheet. This component is used to render the forbidden page in case of unauthorised access by a user.
 		* Header - folder consisting of 4 components. The Header component is the main component and HeaderInfo, HeaderItems and Navigation are nested within it. The Header component is used to render the whole header on each page of the application.
-		* Home - folder consisting of 5 subfolders and 15 files. It contains the hero and the current promotion within it, category list, new and discounted items pinned to the home page and gurantee section and their stylesheets.
+		* Home - folder consisting of 6 subfolders and 16 files. It contains the hero and the current promotion within it, category list, new and discounted items pinned to the home page and gurantee section and their stylesheets.
 		* Items - folder, which contains 4 folders and 7 files. These components renders: items by their category in home page, the action buttons - detailes and add to cart to every item, item description detailes: price, discount, description, quantity etc. and actions like add to cart and add to favourites.
 		* Modals - folder, which contains the ModalTemplate component and its stylesheet. This component is used to render error, information and confirmation messages to users.
 		* NotFound - folder, which contains the NotFound component and its stylesheet. This component is used to render the page with error 404-not found in case of a non-existent path to content requested by the user.
@@ -201,16 +201,6 @@ and files:
 * package-lock.json - lockfile that holds information on the dependencies or packages installed for a project.
 * package.json - contains modules listed as dependencies to install.
 * README.md - contains short documentation of the project.
-
-# TODO before exam date:
-* Rewrite css in module.css style sheets for the following components:
-	* Header;
-	* CreateCategory;
-	* Categories;
-	* DiscountedItems;
-	* Guarantee;
-	* NewItems;
-	* LoginRegister.
 
 # Future work:
 * Responsive css design for mobile devices;
