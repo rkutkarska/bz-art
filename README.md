@@ -47,7 +47,7 @@ The database consist of the following collections:
 Categories collection has categories unique Ids documents, each of them with fields:
 * categoryImageUrl (type: string)
 * categoryName (type: string)
-* categoryName (type: timestamp)
+* dateCreated (type: timestamp)
 
 2. **items**;
 Items collection has items unique Ids documents, each of them with fields:
