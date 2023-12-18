@@ -15,3 +15,7 @@
 .update a.close {
     width: 50%;
 }
+
+.existing-categories {
+    margin-bottom: 2rem;
+}

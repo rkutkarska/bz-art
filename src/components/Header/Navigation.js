@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import styles from './Header.module.css';
 
 export const Navigation = () => {
 
@@ -7,8 +8,8 @@ export const Navigation = () => {
     }
 
     return (
-        <nav className="navigation">
-            <ul className="navigation__links ul-clear">
+        <nav className={styles.navigation}>
+            <ul className={`${styles["navigation__links"]} ul-clear`}>
                 <li><NavLink className={setNavStyle} to="/">Начало</NavLink></li>
                 <li><NavLink className={setNavStyle} to="/items">Артикули</NavLink></li>
                 <li><NavLink className={setNavStyle} to="/contacts">Контакти</NavLink></li>

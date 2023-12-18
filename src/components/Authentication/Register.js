@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import * as userService from '../../services/usersService';
 
-import "./LoginRegister.css";
+import styles from './LoginRegister.module.css';
+
 
 export const Register = () => {
 
@@ -94,9 +95,9 @@ export const Register = () => {
     }
 
     return (
-        <div className="register-container">
-            <div className="register-container__image"></div>
-            <div className="register-container__form">
+        <div className={styles["register-container"]}>
+            <div className={styles["register-container__image"]}></div>
+            <div className={styles["register-container__form"]}>
                 <h1>Регистрация</h1>
                 <form className="form" onSubmit={handleSubmit} onChange={() => setError('')} >
                     {error && <p className="error-message fadeOut">{error}</p>}

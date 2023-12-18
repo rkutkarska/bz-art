@@ -49,7 +49,7 @@ export const UpdateMaterial = () => {
 
             <h1>Редактиране на материал</h1>
             <div className="form-container">
-                <div className="existing-materials">
+                <div className={styles["existing-materials"]}>
                     <label htmlFor="available-materials">Налични материали: </label>
                     {
                         materials.length === 0

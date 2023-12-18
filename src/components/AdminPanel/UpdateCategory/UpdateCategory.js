@@ -56,7 +56,7 @@ export const UpdateCategory = () => {
 
             <div className="form-container">
                 <h1>Редактиране на категория</h1>
-                <div className="existing-categories">
+                <div className={styles["existing-categories"]}>
                     <label htmlFor="available-categories" >Налични категории: </label>
                     {
                         categories.length === 0
@@ -77,7 +77,7 @@ export const UpdateCategory = () => {
                 </div>
 
                 <label>Име на категория:</label>
-                <form className={`category-form ${styles.update}`} onChange={handleChange}>
+                <form className={`form category-form ${styles.update}`} onChange={handleChange}>
                     <input defaultValue={category.categoryName} type="text" name="categoryName" />
                     <label htmlFor="image" className="drop-container">
                         <span className="drop-title">Провлачете снимка тук</span>

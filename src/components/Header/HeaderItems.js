@@ -6,7 +6,9 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import { ModalTemplate } from '../Modals/ModalTemplate';
 import { useAuth } from '../../context/AuthContext';
+
 import * as usersService from '../../services/usersService';
+import styles from './Header.module.css';
 
 
 export const HeaderItems = () => {
@@ -55,29 +57,42 @@ export const HeaderItems = () => {
 
     return (
 
-        <div className="header__items">
+        <div className={styles.header__items}>
+
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
-            <div className="header__buttons">
+
+            <div className={styles.header__buttons}>
                 {
                     !currentUser &&
                     <>
-                        <Link className="button yellow same-size-small" to="/login"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Вход</Link>
-                        <Link className="button yellow same-size-small" to="/register"><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Регистрация</Link>
+                        <Link className="button yellow same-size-small" to="/login">
+                            <FontAwesomeIcon icon={solid('user')} className="fa-icon" />
+                            Вход
+                        </Link>
+                        <Link className="button yellow same-size-small" to="/register">
+                            <FontAwesomeIcon icon={solid('user')} className="fa-icon" />
+                            Регистрация
+                        </Link>
                     </>
                 }
 
                 {
                     currentUser &&
                     <>
-                        <button className={`profile button yellow same-size-small ${!isHidden && "active-button"}`} onClick={() => setIsHidden(s => !s)} >
+                        <button className={`${styles.profile} button yellow same-size-small ${!isHidden && styles["active-button"]}`} onClick={() => setIsHidden(s => !s)} >
                             <FontAwesomeIcon icon={solid('user')} className="fa-icon" />Профил
                             {
                                 !isHidden ?
-                                    <ul className="profile__options ul-clear" ref={ref}>
+                                    <ul className={`${styles.profile__options} ul-clear`} ref={ref}>
                                         {
                                             (userData.role == 0) || (userData.role == 1)
                                                 ? <>
-                                                    <li><Link to="/admin-panel"><FontAwesomeIcon icon={solid('gear')} className="fa-icon" />Административен панел</Link></li>
+                                                    <li>
+                                                        <Link to="/admin-panel">
+                                                            <FontAwesomeIcon icon={solid('gear')} className="fa-icon" />
+                                                            Административен панел
+                                                        </Link>
+                                                    </li>
                                                 </>
                                                 : null
                                         }
@@ -85,12 +100,27 @@ export const HeaderItems = () => {
                                         {
                                             (userData.role == 2) &&
                                             <>
-                                                <li><Link to="/favourites"><FontAwesomeIcon icon={solid('heart')} className="fa-icon" />Любими</Link></li>
-                                                <li><Link to="/orders-history"><FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />Поръчки</Link></li>
+                                                <li>
+                                                    <Link to="/favourites">
+                                                        <FontAwesomeIcon icon={solid('heart')} className="fa-icon" />
+                                                        Любими
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/orders-history">
+                                                        <FontAwesomeIcon icon={solid('clock-rotate-left')} className="fa-icon" />
+                                                        Поръчки
+                                                    </Link>
+                                                </li>
                                             </>
                                         }
 
-                                        <li><Link onClick={handleLogOut}><FontAwesomeIcon icon={solid('user')} className="fa-icon" />Изход</Link></li>
+                                        <li>
+                                            <Link onClick={handleLogOut}>
+                                                <FontAwesomeIcon icon={solid('user')} className="fa-icon" />
+                                                Изход
+                                            </Link>
+                                        </li>
                                     </ul>
                                     : null
                             }
@@ -98,7 +128,11 @@ export const HeaderItems = () => {
                         {
                             userData.role == 0 || userData.role == 1
                                 ? null
-                                : <><Link className="button yellow same-size-small" to="/shopping-cart"><FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />Количка</Link>
+                                : <>
+                                    <Link className="button yellow same-size-small" to="/shopping-cart">
+                                        <FontAwesomeIcon icon={solid('cart-shopping')} className="fa-icon" />
+                                        Количка
+                                    </Link>
                                     {/* TODO read from db item count in the cart */}
                                     {/* <span className="items-count">5</span> */}
                                 </>
@@ -106,13 +140,13 @@ export const HeaderItems = () => {
                     </>
                 }
             </div>
-            <Link to="/"><img className="logo" src={require('../../img/logo.png')} alt="logo" /></Link>
-            <div className="header__search-bar">
+            <Link to="/"><img className={styles.logo} src={require('../../img/logo.png')} alt="logo" /></Link>
+            <div className={styles["header__search-bar"]}>
                 <form action="POST">
                     <input type="text" placeholder="Търсене..." name="search" />
                     {/* TODO search */}
                     <button onClick={(e) => e.preventDefault()}>
-                        <FontAwesomeIcon icon={solid('magnifying-glass')} className={"fa-icon fa-magnifying-glass"} />
+                        <FontAwesomeIcon icon={solid('magnifying-glass')} className={`fa-icon ${styles["fa-magnifying-glass"]}`} />
                     </button>
                 </form>
             </div>

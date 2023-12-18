@@ -7,7 +7,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { ModalTemplate } from "../../Modals/ModalTemplate";
 
 import * as categoriesService from "../../../services/categoriesService";
-import "./CreateCategory.css";
+import styles from "./CreateCategory.module.css";
 
 export const CreateCategory = () => {
     const [categoriesData, updateCategoriesData] = useState({
@@ -44,13 +44,13 @@ export const CreateCategory = () => {
     // TODO drag and drop image
     // TODO modal
     return (
-        <div className="container categories create">
+        <div className={`container ${styles.categories} ${styles.create}`}>
 
             {isModalOpen ? <ModalTemplate obj={{ modalObject, setIsModalOpen }} /> : false}
 
             <div className="form-container">
                 <h1>Създаване на категория</h1>
-                <div className="existing-categories">
+                <div className={styles["existing-categories"]}>
                     <label htmlFor="available-categories" >Налични категории: </label>
                     {
                         categories.length === 0
@@ -70,10 +70,10 @@ export const CreateCategory = () => {
                     }
                 </div>
 
-                <div className="category-label">
+                <div className={styles["category-label"]}>
                     <label htmlFor="category-name">Име на категория:</label>
                 </div>
-                <form className="category-form">
+                <form className={styles["category-form"]}>
                     <input
                         id="categoryName"
                         type="text"
@@ -95,9 +95,9 @@ export const CreateCategory = () => {
                         </div>
                     </label>
 
-                    <div className="buttons">
-                        <Link className="button red close " to="/admin-panel">Затвори</Link>
-                        <input type="submit" className="button green create" value="Запази"
+                    <div className={styles.buttons}>
+                        <Link className={`button red ${styles.close}`} to="/admin-panel">Затвори</Link>
+                        <input type="submit" className={`button green ${styles.create}`} value="Запази"
                             onClick={(e) => {
                                 categoriesService.saveCategory(e, categories, categoriesData, imageUpload, setCategories, setCategoryNameHasError, setIsModalOpen, setModalObject);
                                 !categoryNameHasError && imageUpload && (e.target.parentElement.parentElement.reset() && setImageUpload(''))

@@ -3,7 +3,7 @@ import { HeaderInfo } from './HeaderInfo';
 import { HeaderItems } from './HeaderItems';
 import { Navigation } from './Navigation';
 
-import './Header.css';
+import styles from './Header.module.css';
 
 export const Header = () => {
     const { pathname } = useLocation();

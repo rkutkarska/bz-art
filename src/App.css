@@ -301,6 +301,10 @@ a.same-size-small {
     display: inline;
 }
 
+.caption {
+    text-align: center;
+}
+
 .new__items,
 .discounted__items {
     display: flex;
@@ -536,6 +540,7 @@ select.error {
 .date-created {
     text-align: center;
 }
+
 /* TODO responsive */
 
 /* Mobile: 360 x 640.

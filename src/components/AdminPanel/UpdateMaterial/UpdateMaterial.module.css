@@ -11,3 +11,7 @@
 .materials-form button.update {
     width: 50%;
 }
+
+.existing-materials {
+    margin-bottom: 2rem;
+}

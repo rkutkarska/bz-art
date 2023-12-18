@@ -1,4 +1,4 @@
-import { Hero } from "./Hero";
+import { Hero } from "./Hero/Hero";
 import { NewItems } from "./NewItems/NewItems";
 import { Categories } from "./Categories/Categories";
 import { DiscountedItems } from "./DiscountedItems/DiscountedItems";

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import "./LoginRegister.css";
+import styles from './LoginRegister.module.css';
 
 // TODO implement password reset
 export const Login = () => {
@@ -29,9 +29,9 @@ export const Login = () => {
     }
 
     return (
-        <div className="login-container">
-            <div className="login-container__image"></div>
-            <div className="login-container__form">
+        <div className={styles["login-container"]}>
+            <div className={styles["login-container__image"]}></div>
+            <div className={styles["login-container__form"]}>
                 <h1>Вписване</h1>
                 <form className="form" onSubmit={handleSubmit} onChange={() => setError('')}>
                     {error && <p className="error-message fadeOut">{error}</p>}

@@ -2,8 +2,7 @@
 .login-container {
     display: flex;
 }
-
-.register-container label,
+    
 .login-container label {
     padding-top: 2rem;
 }
@@ -46,8 +45,4 @@
 
 .register-container__form input {
     margin-bottom: 2rem;
-}
-
-.remember-me {
-    padding: 2rem 0rem;
 }

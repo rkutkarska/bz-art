@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CategoryItems } from './CategoryItems';
 
 import * as categoriesService from '../../../services/categoriesService';
-import './Categories.css';
+import styles from './Categories.module.css';
 
 export const Categories = () => {
     const [categoryItems, setCategoryItems] = useState([]);
@@ -13,12 +13,12 @@ export const Categories = () => {
     }, []);
 
     return (
-        <article className="category">
+        <article className={styles.category}>
             <h1 className="caption">Категории</h1>
-            <div className="category__items">
+            <div className={styles.category__items}>
                 {categoryItems.length > 0
                     ? <CategoryItems categories={categoryItems} />
-                    : <p className="no-categories">Няма добавени категории!</p>
+                    : <p className={styles["no-categories"]}>Няма добавени категории!</p>
                 }
             </div>
         </article>

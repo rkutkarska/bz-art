@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NewItem } from "./NewItem";
 import * as itemsService from '../../../services/itemsService';
-import './NewItems.css';
+import styles from './NewItems.module.css';
 
 export const NewItems = () => {
     const [newItems, setNewItems] = useState([]);
@@ -12,13 +12,13 @@ export const NewItems = () => {
     }, []);
 
     return (
-        <article className="new">
+        <article className={styles.new}>
             <h1 className="caption">Ново</h1>
             {
 
                 (newItems.some((x) => x.isPinnedToHome == true))
                     ? <NewItem items={newItems} />
-                    : <p className="no-new-items">Няма нови артикули!</p>
+                    : <p className={styles["no-new-items"]}>Няма нови артикули!</p>
             }
         </article>
     );
