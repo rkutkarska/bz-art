@@ -69,7 +69,7 @@ export const orderItems = async (userId, itemsInCart, totalSum, setItemsInCart) 
 
     const orderedItems = [];
     itemsInCart.map(item => {
-        orderedItems.push({ 'id': item.id, 'desiredQuantity': item.desiredQuantity, 'imageUrl': item.imageUrl, 'price': item.price});
+        orderedItems.push({ 'id': item.id, 'desiredQuantity': item.desiredQuantity, 'imageUrl': item.imageUrl, 'price': Number(item.price - item.discount)});
     })
 
     try {
