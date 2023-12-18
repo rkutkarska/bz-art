@@ -192,14 +192,14 @@ The project consist of the following folders:
 	* App.css - global stylesheet file.
 	* App.js - entry point of a React application. It initializes the React application, defines the components to render, and handles routing between pages and imports the global stylesheets.
 	* Firebase.js - initializes Firebase and provides access to the Firebase services for storage, database, and authentication, making it possible to interact with the Firebase platform from this React application.
-	* index.js - central component of a React application, responsible for bringing all the pieces together. It sets up the basic structure for a React application, uses React libraries, creates a root instance, renders the main component, and manages routing with BrowserRouter.
+	* index.js - App main JS file (startup script). This is a central component of a React application, responsible for bringing all the pieces together. It sets up the basic structure for a React application, uses React libraries, creates a root instance, renders the main component, and manages routing with BrowserRouter.
 	* reset.css - global stylesheet file.
 
 and files:
 * .env - environment file containing the Firebase Web Application configuration variables.
 * .gitignore - this file ensures that certain files not tracked by Git remain untracked.
 * package-lock.json - lockfile that holds information on the dependencies or packages installed for a project.
-* package.json - contains modules listed as dependencies to install.
+* package.json - project configuration. Module name, dependencies, build actions.
 * README.md - contains short documentation of the project.
 
 # Future work:
